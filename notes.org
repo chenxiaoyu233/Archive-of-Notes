@@ -1,0 +1,21 @@
+#+TITLE: Notes
+#+AUTHOR: 陈小羽
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.2)
+
+** TODO 2006 - Predicting interactions in protein networks by completing defective cliques
+ :PROPERTIES:
+ :Custom_ID: Yu_2006
+  :AUTHOR: Yu, Paccanaro, Trifonov \& Gerstein
+  :JOURNAL: Bioinformatics
+  :YEAR: 2006
+  :VOLUME: 22
+  :PAGES: 823–829
+  :DOI: 10.1093/bioinformatics/btl014
+  :URL: http://dx.doi.org/10.1093/bioinformatics/btl014
+ :END:
+cite:Yu_2006
+[[file:approximate-clique/Prediction-interactions-in-protein-networks.org][Details]]
+

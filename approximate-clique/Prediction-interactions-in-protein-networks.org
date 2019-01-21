@@ -1,0 +1,27 @@
+** Center Idea
+  The central idea of the method is to search the protein interaction 
+  network for defective cliques (cliques with some edges disappear), 
+  and predict the interactions that complete them.
+** Some hypothesis
+   1) If vertices P and Q are both adjacent to each vertex in a clique K,
+   then it is likely that P and Q are adjacent to each other, if they are
+   not adjacent already.
+** Main Idea of their algorithm (the naive approch)
+   The main idea of our algorithm is based on the realization that
+   a defective clique KPQ of size n with one missing edge is the union of 
+   two (complete) cliques of size n - 1.
+*** Steps:
+	1) Find all cliques in the graph.
+	2) Find pairs of cliques overlapping on all but one node each, 
+	   and add the missing edge.
+** Improve the Algorithm
+   - modify the step 1 => only find the maximal cliques.
+	 - however => this change the output in step 2.
+   - so they relax the constraint in step 2.
+*** Steps:
+	1) Find all maximal cliques in the network.
+	2) For each pair of maximal cliques,overlapping on at least k nodes and with 
+	non-overlapping components of at most l nodes each, predict the edges 
+	between all pairs of nodes between the two non-overlapping components.
+** Result TODO
+
