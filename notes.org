@@ -19,3 +19,18 @@
 cite:Yu_2006
 [[file:approximate-clique/Prediction-interactions-in-protein-networks.org][Details]]
 
+
+** TODO 2005 - A polyhedral study of the generalized vertex packing problem
+ :PROPERTIES:
+  :Custom_ID: Sherali_2005
+  :AUTHOR: Sherali \& Cole Smith
+  :JOURNAL: Mathematical Programming
+  :YEAR: 2005
+  :VOLUME: 107
+  :PAGES: 367–390
+  :DOI: 10.1007/s10107-004-0504-0
+  :URL: http://dx.doi.org/10.1007/s10107-004-0504-0
+ :END:
+
+cite:Sherali_2005
+[[file:approximate-clique/A%20polyhedral%20study%20of%20the%20generalized%20vertex%20packing%20problem.org][Details]]

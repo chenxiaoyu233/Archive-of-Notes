@@ -1,0 +1,83 @@
+% Created 2019-01-23 Wed 00:08
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{陈小羽}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={陈小羽},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{What is vertex packing problem (VP)}
+\label{sec:orge610274}
+The traditional vertex packing problem deﬁned on an
+undirected graph identiﬁes the largest weighted independent
+set of nodes, that is, a set of nodes whose induced subgraph 
+contains no edges.
+\section{The generalized vertex packing problem (GVP-k) that this article cares about}
+\label{sec:orgb6ab1a5}
+k edges may exist within the subgraph induced by the chosen set of nodes.
+\section{Some application}
+\label{sec:orgf610b2e}
+A particular context in which such problems arise is in the national 
+airspace planning model
+\section{Introduction}
+\label{sec:org21c6bb3}
+G = (N, E), weighted c\textsubscript{j}, for j = 1, \(\cdots{}\), n.
+\subsection{Integer Programming Model (for VP)}
+\label{sec:orgeb72cf9}
+\begin{align*}
+	\mbox{Maximize: } & cx \\
+	\mbox{Subject to: } & Ax \leq e \\
+				& x \in \{0, 1\}
+\end{align*}
+\begin{enumerate}
+\item A is a p \texttimes{} n matrix a\textsubscript{hi} = 1 means vertex i \(\in\) edge h
+\item e is a all-one vector.
+\item \(\Rightarrow\) Ax \(\le\) e means that each edges 2 end-points should not
+be in the answer x simutaneously.
+\end{enumerate}
+\subsection{Prefect Graph}
+\label{sec:org0142686}
+chromatic number = maximum clique cardinality (for each G' \(\subseteq\) G)
+\subsection{Integer Programming Model (for GVP-k)}
+\label{sec:org735cb32}
+\begin{align*}
+ \mbox{Maximize: } & cx \\
+ \mbox{Subject to: } & \sum_{(i,j) \in E} z_{ij} \leq k \\
+ & z_{ij} \geq x_i + x_j - 1, z_{ij} \geq 0 \\
+ & x_j \in \{0, 1\}, \forall j \in N
+\end{align*}
+note that edge (i, j) is in the answer when \(z_{ij} = 1 = x_ix_j\)
+\section{{\bfseries\sffamily TODO} Facets and partial convex hull representations for GVP-k}
+\label{sec:org91dcc3f}
+\textbf{Proposition 1}: Consider a graph G and a subgraph \(\hat{G}\) of G. 
+If Dx \(\le\) d represents a set of valid inequalities for GVP-k deﬁned on \(\hat{G}\), 
+then Dx \(\le\) d is valid for GVP-k deﬁned on G. 
+
+\textbf{Proof}: Since GVP-k for \(\hat{G}\) is a relaxation of GVP-k deﬁned on G, 
+the \uline{restrictions} that govern a feasible generalized vertex packing
+solution on \(\hat{G}\) are a subset of those valid for G. This completes the proof.
+
+\textbf{Note}: You could use less restrictions on \(\hat{G}\) than on G (maybe a subset).
+\end{document}

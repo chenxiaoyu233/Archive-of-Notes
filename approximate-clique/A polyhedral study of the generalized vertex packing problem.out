@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{What is vertex packing problem \(VP\)}{}% 1
+\BOOKMARK [1][-]{section.2}{The generalized vertex packing problem \(GVP-k\) that this article cares about}{}% 2
+\BOOKMARK [1][-]{section.3}{Some application}{}% 3
+\BOOKMARK [1][-]{section.4}{Introduction}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Integer Programming Model \(for VP\)}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Prefect Graph}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Integer Programming Model \(for GVP-k\)}{section.4}% 7
+\BOOKMARK [1][-]{section.5}{TODO Facets and partial convex hull representations for GVP-k}{}% 8

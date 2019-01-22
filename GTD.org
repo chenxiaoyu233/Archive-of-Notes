@@ -1,0 +1,37 @@
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+ #+begin_comment
+_This file is used to record the Daily/Weekly agenda of mine._
+_This file is uesd to record some long term tasks._
+*To improve the efficiency and use of time.*
+/Any Project specific TodoList will not appear in this place but will appear in the project's folder/
+ #+end_comment
+
+
+* Tasks
+** TODO [#A] Remember English Words (100 words) 
+   DEADLINE: <2019-01-23 Wed 10:30 .+1d> SCHEDULED: <2019-01-23 Wed 10:00 .+1d>
+
+** TODO [#A] Do Some Toefl Reading (3 articles)
+   DEADLINE: <2019-01-29 Tue 00:00 .+1w> SCHEDULED: <2019-01-28 Mon 23:00 .+1w>
+
+** TODO [#A] Do Some Toefl Listening (3 articles)
+   DEADLINE: <2019-01-30 Wed 00:00 .+1w> SCHEDULED: <2019-01-29 Tue 23:00 .+1w>
+
+** TODO [#A] Do Some Toefl Speaking (3 articles)
+   DEADLINE: <2019-01-31 Thu 00:00 .+1w> SCHEDULED: <2019-01-30 Wed 23:00 .+1w>
+
+** TODO [#A] Do Some Toefl Writting (1 articles)
+   DEADLINE: <2019-01-25 Fri 00:00 .+1w> SCHEDULED: <2019-01-24 Thu 23:00 .+1w>
+
+** TODO [#B] Learning the Usage of CPLEX lib
+   DEADLINE: <2019-01-23 Wed 17:00> SCHEDULED: <2019-01-23 Wed 14:00>
+
+** TODO [#B] Implement a simple version of the IP algorithm for k-defective
+   DEADLINE: <2019-01-23 Wed 22:00> SCHEDULED: <2019-01-23 Wed 18:30>
+
+** TODO [#A] Phone to Mother
+   DEADLINE: <2019-01-23 Wed 22:30 .+1d> SCHEDULED: <2019-01-23 Wed 22:00 .+1d>
+
+** TODO [#A] Learning the Algebra (GTM Book)
+
+** TODO [#A] Learning the Graph Theory (GTM Book)
