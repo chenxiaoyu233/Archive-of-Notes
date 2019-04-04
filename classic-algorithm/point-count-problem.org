@@ -22,11 +22,11 @@
 ** n维数点问题
 *** n维数点问题的一般形式 (ND Point Count Problem $\Rightarrow$ PC)
     - input: n维空间中的两个点集, $S$, $Q$.
-    - output: 对 $\forall a \in Q$, 计算出 $\mbox{PC}(a) = |\{ b\in S| \bigwedge_{i=1}^n a_i\leq b_i\}|$.
+    - output: 对 $\forall a \in Q$, 计算出 $\mbox{PC}(a) = |\{ b\in S| \bigwedge_{i=1}^n b_i\leq a_i\}|$.
 ** n维偏序问题
 *** n维偏序问题的一般形式 (ND Partial Order Count Problem $\Rightarrow$ POC)
     - input: n维空间中的两个点集, $S$, $Q$.
-    - output: 计算出 $\mbox{POC} = |\{ (a, b) | a\in S\land b\in Q\land\bigwedge_{i=1}^n a_i\leq b_i\}|$.
+    - output: 计算出 $\mbox{POC} = |\{ (a, b) | a\in S\land b\in Q\land\bigwedge_{i=1}^n b_i\leq a_i\}|$.
 ** 数点问题和偏序问题的关系
    很容易发现, 数点问题和偏序问题存在如下关系:
    \[
