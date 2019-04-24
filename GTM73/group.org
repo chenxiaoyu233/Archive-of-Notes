@@ -55,6 +55,8 @@
    and by knowing that $(\forall x\in G)(\exists y\in G)\land xy = e$.
    we've proved that all the elements in $G$ has a inverse.
 * Homomorphism And Subgroups
+** Symbol for subgroup
+   $B < G$ means $B$ is a subgroup of $G$.
 ** Exercise 1 (P33)
    construct a monoid $G$ as follow:
    |   | a | b | e |
@@ -314,3 +316,20 @@
    so $f$ is a bijection.
    so $S\cong Z$.
    
+** Exercies 8 (P34)
+   omit
+** Exercies 9 (P34)
+   - (a) 
+     1. $\mbox{ker}f < G$:
+        - $f(e_G)f(e_G) = f(e_G) \Rightarrow f(e_G) = e_H \Rightarrow e_G\in \mbox{ker}f$.
+        - $(\forall a \in \mbox{ker}f)\to f(a)f(a^{-1}) = f(e_G) = e_H \Rightarrow f(a^{-1}) = e_H \Rightarrow a^{-1}\in \mbox{ker}f$.
+        - $(\forall a, b\in \mbox{ker}f)\to f(ab) = f(a)f(b) = e_He_H = e_H \Rightarrow ab\in\mbox{ker}f$.
+     2. $f^{-1}(B) < G$:
+        - $B < G \Rightarrow e_H\in B \Rightarrow e_G\in f^{-1}(B)$.
+        - $(\forall a\in f^{-1}(B))\to f(e_G) = f(aa^{-1}) = f(a)f(a^{-1}) = e_H \Rightarrow f(a^{-1}) = f(a)^{-1} \in B \Rightarrow f(a^{-1})\in B \Rightarrow a^{-1}\in f^{-1}(B)$.
+        - $(\forall a, b\in f^{-1}(B))\to f(ab) = f(a)f(b)\in B \Rightarrow ab\in f^{-1}(B)$.
+   - (b)
+     1. $f(A) < H$:
+        - $e_Ae_G = e_A = e_Ae_A \Rightarrow e_G = e_A \Rightarrow f(e_A) = e_H$.
+        - $(\forall a, b\in A)\to ab\in A \Rightarrow f(ab) = f(a)f(b)\in f(A)$.
+        - $(\forall a\in A)\to f(e_G) = f(aa^{-1}) = f(a)f(a^{-1}) \Rightarrow f(a^{-1}) = f(a)^{-1}\in f(A)$.

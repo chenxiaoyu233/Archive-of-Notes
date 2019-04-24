@@ -73,7 +73,7 @@
 	Let $c = \sum_{i} x_ia_i$ be the least number in $S$.
 	We claim that:
 		1. $c | a_i$ for $1 \leq i \leq n$.
-		2. $d\in Z$ and $d|a_1$ for $1\leq i\leq n$ $\to$ $d|c$.
+		2. $d\in Z$ and $d|a_i$ for $1\leq i\leq n$ $\to$ $d|c$.
 	Then $c$ is obviously a gcd for $\{a_i\}$.
 
 	- claim 1: $c | a_i$ for $1 \leq i \leq n$.
