@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgffor}
+
+\title{Exercise of Chapter 4}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 4.1 Summary}
+There is a $MC$ described below.
+\begin{enumerate}[itemsep=0mm]
+\item Select a vertex $v \in V$, u.a.r.
+\item Select a colour $c \in Q \setminus X_0(\Gamma(v))$, u.a.r.
+\item $X_1(v)\gets c$ and $X_1(u)\gets X_0(u)$ for all $u\not=v$.
+\end{enumerate}
+\section{Exercise 4.1(1)}
+Prove that the above $MC$ is irreducible (and hence ergodic) under the (stronger) assumption $q \geq \Delta + 2$. Further prove, using Lemma 3.7, that its (unique) stationary distribution is uniform over $\Omega$.
+\subsection{solution}
+To prove the irreducibility, we only need to design a procedure which transforms some coloring $X$ into another coloring $Y$ by changing the color of one vertex per step.
+
+First, we define a measure $M(X, Y) = |\{v: X(v) \not= Y(v)\}|$.
+\begin{tcolorbox}[title=The Procedure]
+ \begin{enumerate}[itemsep=0mm]
+  \item Select a vertex $v$ from $G$ where $X(v) \not= Y(v)$.
+  \item Change the color of all the vertex in $S = \{u: u\in\Gamma(v)\land X(u) = Y(v)\}$ to some color other than $Y(v)$. (this could always be achieved because $q \geq \Delta + 2$)
+  \item $X(v) \gets Y(v)$, and if $X \not= Y$ goto step 1.
+  \end{enumerate}
+\end{tcolorbox}
+\paragraph{For step 2} We could notice that:
+\[
+  X(u) \not= Y(u),\hspace{0.5cm} \forall u\in S
+\]
+Because $X(v) = Y(v)$ and $X(u) = Y(v)$, if $X(u) = Y(u)$ then we have $Y(v) = Y(u)$ which means $Y$ is an illegal coloring.
+So, the measure will not increase in step 2.
+\paragraph{And for step 3} We could easily notice that the measure will strictly decrease in step 3.
+So, the measure will strictly decrease in every 3 steps, which means the procedure will stop within $t \leq 3M(X,Y)$ steps.  In each step, the situation we want  always happens in a positive probability, so $P^t(X,Y) > 0$.
+\paragraph{Proof for uniform distribution} For $\forall X, Y\in\Omega$, if the measure $M(X,Y) \not= 1$, then $P(X, Y) = P(Y, X) = 0$. When $M(X, Y) = 1$, suppose $X(v) \not= Y(v)$, then
+\[
+  P(X,Y) = \frac{1}{n}\frac{1}{Q-|X(\Gamma(v))|}
+\] and
+\[
+  P(Y,X) = \frac{1}{n}\frac{1}{Q-|Y(\Gamma(v))|}
+\]. Because $M(X, Y) = 1$, we have $X(\Gamma(v)) = Y(\Gamma(v))$. So $P(X, Y) = P(Y, X)$.
+
+\section{Exercise 4.1(2)}
+[Alan Sokal.] Exhibit a sequence of connected graphs of increasing size, with $\Delta = 4$, such that the above $MC$ fails to be irreducible when $q = 5$. (Hint: as a starting point, construct a “frozen” 5-colouring of the infinite square lattice, i.e., the graph with vertex set $\mathbb{Z}\times\mathbb{Z}$ and edge set $(i, j), (i', j') : |i-i'|+|j-j'| = 1$. The adjective “frozen” applied to a state is intended to indicate that the only transition available from the state is a loop (with probability 1) to the same state.)
+\subsection{solution}
+Suppose there are 5 colors in $Q = \{0, 1, 2, 3, 4\}$ (actually, $Q$ could be seen as addtional group $\mathbb{Z}_5$).
+As described below, I find a coloring which is ``frozen''. Note that, if we determine the color of an arbitary vertex in the graph, then we could determine the color of the rest vertices in the graph using the rule below.
+\begin{center}
+\begin{tikzpicture}
+  [point/.style={shape=circle, minimum size = 2pt, inner sep = 1pt}]
+  \node (mid) at (0, 0) [point] {$i$};
+  \node (up) at (0, 1) [point] {$i+1$};
+  \node (down) at (0, -1) [point] {$i-1$};
+  \node (left) at (-1, 0) [point] {$i-2$};
+  \node (right) at (1, 0) [point] {$i+2$};
+  \draw (mid) to (up);
+  \draw (mid) to (down);
+  \draw (mid) to (left);
+  \draw (mid) to (right);
+\end{tikzpicture}
+\end{center}
+Clearly, for all vertex $v$, $Q\setminus X_0(\Gamma(v)) = X_0(v)$.
+So, there is a loop to the same state in this $MC$.
+
+\section{Exercise 4.1(3)}
+Design an $MC$ on q-colourings of an arbitrary graph $G$ of maximum degree $\Delta$ that is ergodic, provided only that $q \geq \Delta + 1$. The $MC$ should be easily implementable, otherwise there is no challenge! (Hint: use transitions based on edge updates rather than vertex updates.)
+\subsection{solution}
+Lets consider a $MC$ as follow:
+\begin{tcolorbox}[title = The $MC$ Designed by Me]
+  \begin{enumerate}[itemsep=0mm]
+  \item Select an edge $e = \{u, v\}\in E$, u.a.r.
+  \item Select a pair of colors $(c_u, c_v) \in S_{u,v} = \{(c_u, c_v): c_u\not=c_v \land c_u\not\in X_0(\Gamma(u)\setminus\{v\}) \land c_v\not\in X_0(\Gamma(v)\setminus\{u\})\}$, u.a.r.
+  \item $X_1(u)\gets c_u$, $X_1(v)\gets c_v$ and $X_1(w) \gets X_0(w)$ for all $w\not=v\land w\not=u$.
+  \end{enumerate}
+\end{tcolorbox}
+For any two coloring $X$ and $Y$, we want to show that they are reachable to each other by our operation (here, we only consider transforming $X$ to $Y$). For convenience, we define $G^{\oplus} = G[\{v: X(v)\not=Y(v)\}]$ as an induced subgraph of $G$. It is clear that when $G^\oplus = \emptyset$, we have $X = Y$.
+
+\begin{tcolorbox}[title = An Interesting Observation(1)]
+  \[
+    |Q\setminus X(\Gamma(u)\setminus\{v\})| \geq 2, \hspace{0.5cm} \forall \{u, v\} \in G^\oplus
+  \]
+  \tcblower
+  This is because:
+  \begin{align*}
+    |Q\setminus X(\Gamma(u)\setminus\{v\})| &= q - |X(\Gamma(u)\setminus\{v\})| \\
+    &\geq q - (|\Gamma(u)| - 1) \\
+    &\geq q - \Delta + 1 \\
+    &\geq (\Delta+1) - \Delta + 1 = 2
+  \end{align*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title = An Interesting Observation(2)]
+  If $\{u, v\} \in G^\oplus$, then:
+  \[
+    S_v(u) = |\{c_v: (c_u, c_v) \in S_{u,v}\}| \geq 2
+  \]
+  \tcblower
+  We could calculate $S_v$ explicitly:
+  \begin{align*}
+    S_v(u) &= \bigcup_{c_u\in Q\setminus X(\Gamma(u)\setminus\{v\})} Q\setminus (X(\Gamma(v)\setminus\{u\}) \cup c_u) \\
+    S_v(u) &= \bigcup_{c_u\in Q\setminus X(\Gamma(u)\setminus\{v\})} (Q\setminus X(\Gamma(v)\setminus\{u\})) \cap (Q\setminus c_u)\\
+    S_v(u) &= (Q\setminus X(\Gamma(v)\setminus\{u\})) \cap ( \bigcup_{c_u\in Q\setminus X(\Gamma(u)\setminus\{v\})} (Q\setminus c_u)) \\
+    S_v(u) &= (Q\setminus X(\Gamma(v)\setminus\{u\}))
+  \end{align*}
+  So, $|S_v(u)| \geq 2$.
+\end{tcolorbox}
+Using this observation, we could design some sequences of operations which transforms $X$ to $Y$. These operations may seem a little complex, because we need to make sure the edge number of $G^\oplus$ is strictly decrease after each operation.
+\begin{tcolorbox}[title = Eliminate all the isolated edges in $G^\oplus$]
+  Suppose $e = \{u, v\}$, then let $X(u)\gets Y(u), X(v)\gets Y(v)$, and we are done. Clearly, the edge number in $G^\oplus$ is strictly decrease in this operation.
+\end{tcolorbox}
+\begin{tcolorbox}[title = Eliminate all the $1$-degree vertices in $G^\oplus$]
+  \begin{center}
+    \begin{tikzpicture}
+    \node (v1) at (0, 0) {$v_1$};
+    \node (v2) at (1, 0.5) {$v_2$};
+    \node (v3) at (2, 0) {$v_3$};
+    \node (v4) at (2, 0.5) {};
+    \draw (v1) to (v2);
+    \draw (v2) to (v3);
+    \draw [dashed] (v2) to (v4);
+    \node (v5) at (3, 0) {};
+    \draw [dashed] (v3) to (v5);
+    \end{tikzpicture}
+  \end{center}
+  \tcblower
+Suppose $\mbox{deg}(v_1) = 1$. Lets consider the edge $\{v_1,
+v_2\}$. If $X(v_2) = Y(v_1)$, then by $|S_{v_2}(v_3)|\geq 2$, we could
+change $X(v_2)$ to some color other than $Y(v_1)$ by changing $X(v_2)$
+and $X(v_3)$ simutaneously. After that, we could change $X(v_1)$ to
+$Y(v_1)$ safely. Clearly, the edge number in $G^\oplus$ is strictly decrease in this operation.
+\end{tcolorbox}
+\begin{tcolorbox}[title=Break cycles in $G^\oplus$]
+  Once there is a cycle, we could remove a vertex from it.
+  \begin{center}
+    \begin{tikzpicture}
+      [FailMark/.style={shape = circle, draw = red, inner sep = 0mm}]
+      \node (v) at (0, 0) {$v$};
+      \node (u) at (1, 0) {$u$};
+      \draw (v) to (u);
+      \node (u1) at (2, 0) {};
+      \node (u2) at (2, 0.5) {};
+      \node (u3) at (2, -0.5) {};
+      \foreach \x in {1, 2, 3} {
+        \draw [dashed] (u) to (u\x);
+      }
+      \node (a) at (-1, 0) {$a$};
+      \node (a2) at (-1, 0.5) {};
+      \node (a3) [dashed] at (-1, -0.5) {};
+      \draw (v) to (a);
+      \draw [dashed] (v) to (a2);
+      \draw [dashed] (v) to (a3);
+      \node (b) at (-2, 0) {$b$};
+      \draw (a) to (b);
+      \node (b1) at (-2, 0.5) {};
+      \node (b2) at (-2, -0.5) {};
+      \draw [dashed] (a) to (b1);
+      \draw [dashed] (a) to (b2);
+      \node (c) at (-3, 0) {};
+      \node (c1) at (-3, 0.5) {};
+      \node (c2) at (-3, -0.5) {};
+      \draw [dashed] (b) to (c);
+      \draw [dashed] (b) to (c1);
+      \draw [dashed] (b) to (c2);
+    \end{tikzpicture}
+  \end{center}
+  \tcblower
+  Suppose we want to change $X(v)$ to $Y(v)$. If $Y(v)\not\in X(\Gamma(v)\setminus\{u\})$, then we could use edge $\{u, v\}$ to reach this target. Else if $Y(v)\in X(\Gamma(v)\setminus\{u\})$, for example $X(a) = Y(v)$, we need to change $X(a)$ to some color other than $Y(v)$ (\textcolor[rgb]{0,0,1}{Note that there may be many vertices $w\in \Gamma(v)$ such that $X(w) = Y(v)$, we need to deal with them one by one}). Note that for $a$, we could always find a vertex $b\not=v$ such that $X(b)\not=Y(b)$ because we are dealing with cycle. Because $|S_a(b)| \geq 2$, so we could change $X(a)$ to some color other than $Y(v)$ easily while making sure the edge number of $G^\oplus$ would not increase. After that, we could change $X(v)$ to $Y(v)$ using the edges $\{u, v\}$, this step will decrease the number of edges in $G^\oplus$ strictly.
+\end{tcolorbox}
+We could do this operation until $G^\oplus = \emptyset$, which lead to $X = Y$.
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

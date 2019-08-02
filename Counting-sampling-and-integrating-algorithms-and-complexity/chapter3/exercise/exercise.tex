@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
+\usepackage{graphics}
+\usepackage{tcolorbox}
+
+\title{Exercise of Chapter 3}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Exercise 3.5}
+Prove a result analogous to Proposition 3.4 with (proper vertex) $q$-colourings of a graph replacing matchings. Assume that the number of colours q is strictly greater than the maximum degree $\Delta$ of $G$. There is no need to repeat all the calculation, which is in fact identical. The key thing is to obtain an inequality akin to (3.5), but for colourings in place of matchings.
+\subsection{solution}
+We denote the number of coloring of graph $G$ by $|C(G)|$. Then we have that:
+\[
+  |C(G)| = |C(G_0)|\varrho_1\varrho_2\cdots\varrho_m
+\]
+for $\varrho_i = \frac{|C(G_i)|}{|C(G_{i-1})|}$, $|C(G_0)| = q^n$, and $G_i = G_{i+1} \cup \{e_i\}$.
+
+So, it is clearly that $C(G_i) \subseteq C(G_{i-1})$. Suppose $e_i = \{u, v\}$, then we could construct an injection from $C(G_{i-1}) \setminus C(G_i)$ to $C(G_i)$ by changing the color of $v$ to any color other than the color of $u$ (because the number of colors $q$ is strictly grater than the maximum degree $\Delta$ of $G$, we could always achieve this). So we have:
+\[
+  \frac{1}{2} \leq \varrho_i \leq 1
+\]
+Note that the rest calculation is indentical to the matching, so we do not need to repeat it here.
+
+\section{Exercise 3.10}
+Demonstrate, using Lemma 3.7, that the stationary distribution of the MC of Example 3.9 is uniform over $\mathcal{M}(G)$.
+\subsection{solution}
+For convinent, we denote the uniform distribution by $\pi$. First, it is easy to note that:
+\[
+  \sum_{x\in\mathcal{M}(G)}\pi(x) = 1
+\]. Then, we want to prove that:
+\[
+  \pi(x)P(x,y) = \pi(y)P(y, x), \hspace{0.5cm} \forall x, y\in \mathcal{M}(G) 
+\]. Because $\pi(x) = \pi(y)$, we only need to prove that:
+\[
+  P(x,y) = P(y,x), \hspace{0.5cm} \forall x, y\in \mathcal{M}(G)
+\]
+\paragraph{Case 1 ($x \oplus y \not\in E(G)$):} In this case we have:
+\[
+  P(x,y) = P(y, x) = 0
+\]
+\paragraph{Case 2 ($x \oplus y \in E(G)$):} In this case we have:
+\[
+  P(x,y) = P(y, x) = \frac{1}{2m}
+\] This is because no matter transforming from $x$ to $y$ or from $y$ to $x$, we all need the event of selecting the edge $x\oplus y$, which lead to a probability of $\frac{1}{m}$.
+\end{document}
