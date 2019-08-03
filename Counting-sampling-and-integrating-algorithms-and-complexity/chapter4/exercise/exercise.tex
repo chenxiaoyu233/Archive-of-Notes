@@ -175,6 +175,64 @@ $Y(v_1)$ safely. Clearly, the edge number in $G^\oplus$ is strictly decrease in 
   Suppose we want to change $X(v)$ to $Y(v)$. If $Y(v)\not\in X(\Gamma(v)\setminus\{u\})$, then we could use edge $\{u, v\}$ to reach this target. Else if $Y(v)\in X(\Gamma(v)\setminus\{u\})$, for example $X(a) = Y(v)$, we need to change $X(a)$ to some color other than $Y(v)$ (\textcolor[rgb]{0,0,1}{Note that there may be many vertices $w\in \Gamma(v)$ such that $X(w) = Y(v)$, we need to deal with them one by one}). Note that for $a$, we could always find a vertex $b\not=v$ such that $X(b)\not=Y(b)$ because we are dealing with cycle. Because $|S_a(b)| \geq 2$, so we could change $X(a)$ to some color other than $Y(v)$ easily while making sure the edge number of $G^\oplus$ would not increase. After that, we could change $X(v)$ to $Y(v)$ using the edges $\{u, v\}$, this step will decrease the number of edges in $G^\oplus$ strictly.
 \end{tcolorbox}
 We could do this operation until $G^\oplus = \emptyset$, which lead to $X = Y$.
+
+\section{Exercise 4.9}
+Suppose that $Q = \{0,1,...,6\}$, $X_0(\Gamma(v)) = \{3,6\}$ and $Y_0(\Gamma(v)) = \{4,5,6\}$. Thus the sets of legal colours for $v$ in $X_1$ and $Y_1$ are $c_x \in \{0,1,2,4,5\}$ and $c_y \in \{0, 1, 2, 3\}$, respectively. Construct a joint distribution for $(c_x, c_y)$ such that $c_x$ is uniform on $\{0,1,2,4,5\}$, $c_y$ is uniform on $\{0,1,2,3\}$, and $Pr[c_x = c_y] = \frac{3}{5}$. Show that your construction is optimal.
+\subsection{solution}
+Construct the distribution as follow:
+
+$Pr\{(0, 0)\} = \frac{1}{5}$
+$Pr\{(1, 1)\} = \frac{1}{5}$
+$Pr\{(2, 2)\} = \frac{1}{5}$
+
+$Pr\{(4, 0)\} = \frac{1}{40}$
+$Pr\{(4, 1)\} = \frac{1}{40}$
+$Pr\{(4, 2)\} = \frac{1}{40}$
+
+$Pr\{(5, 0)\} = \frac{1}{40}$
+$Pr\{(5, 1)\} = \frac{1}{40}$
+$Pr\{(5, 2)\} = \frac{1}{40}$
+
+$Pr\{(4, 3)\} = \frac{1}{8}$
+$Pr\{(5, 3)\} = \frac{1}{8}$
+
+\section{Exercise 4.11}
+Let $U$ be a finite set, $A,B$ be subsets of $U$, and $Z_a,Z_b$ be random variables, taking values in $U$. Then there is a joint distribution for $Z_a$ and $Z_b$ such that $Z_a$ (respectively $Z_b$) is uniform and supported on $A$ (respectively $B$) and, furthermore,
+\[
+  Pr[Z_a =Z_b]= \frac{|A\cap B|}{\max\{|A|, |B|\}}
+\]
+Prove it.
+\subsection{solution}
+Assume $|A| \geq |B|$ and denote $A\cap B = C$ for convenience.
+First we want to show that $\frac{|C|}{|A|}$ is the best value that we could expect.
+\begin{tcolorbox}[title={Observation}]
+  If $Pr[Z_a = Z_b] > \frac{|C|}{|A|}$, then there exists $x\in C$, such that $Pr[Z_a = x] > \frac{1}{|A|}$. So, the optimal solution would not exceed $\frac{|C|}{|A|}$.
+\end{tcolorbox}
+Then we want to show that we can always reach $\frac{|C|}{|A|}$.
+\begin{tcolorbox}
+\begin{enumerate}[itemsep=0mm]
+\item For all $x\in C$, let $Pr\{(x, x)\} = \frac{1}{|A|}$.
+\item For all $x\in A\setminus C, y\in C$, let $Pr\{(x, y)\} = \frac{\frac{1}{|B|} - \frac{1}{|A|}}{|A\setminus C|}$.
+\item For all $x\in A\setminus C, y\in B\setminus C$, let $Pr\{(x, y)\} = \frac{1}{|B||A\setminus C|}$.
+\item For all the other pairs of $x, y$, let $Pr\{(x, y)\} = 0$.
+\end{enumerate}
+\end{tcolorbox}
+First, its easy to see that $Pr\{Z_a = Z_b\} = \sum_{x\in C} Pr\{(x,x)\} = \frac{|C|}{|A|}$.
+
+Then:
+\begin{align*}
+  Pr\{Z_a = x\in C\} &= \frac{1}{|A|} \\
+  Pr\{Z_b = x\in C\} &= \frac{1}{|A|} + |A\setminus C| \times \frac{\frac{1}{|B|} - \frac{1}{|A|}}{|A\setminus C|} = \frac{1}{|B|}\\
+  Pr\{Z_b = x\in B\setminus C\} &= \frac{|A\setminus C|}{|B||A\setminus C|} = \frac{1}{|B|} \\
+  Pr\{Z_a = x\in A\setminus C\} &= |C|\frac{\frac{1}{|B|} - \frac{1}{|A|}}{|A\setminus C|} + \frac{|B\setminus C|}{|B||A\setminus C|} \\
+                     &= (\frac{1}{|B|}-\frac{1}{|A|})\frac{|C|}{|A| - |C|} + \frac{|B|-|C|}{|B|(|A|-|C|)}\\
+                     &= -\frac{1}{|A|}\frac{|C|}{|A| - |C|} + \frac{|B|}{|B|(|A|-|C|)} \\
+                     &= -\frac{1}{|A|}\frac{|C|}{|A| - |C|} + \frac{|A|}{|A|(|A|-|C|)} \\
+                     &= \frac{|A| - |C|}{|A|(|A|-|C|)} \\
+                     &= \frac{1}{|A|}
+\end{align*}
+Which means $Z_a$ and $Z_b$ are both in uniform distribution.
+
 \end{document}
 
 %%% Local Variables:
