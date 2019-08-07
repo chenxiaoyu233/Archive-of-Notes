@@ -1,0 +1,143 @@
+\documentclass{tufte-book}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+\usepackage{mathrsfs}
+\usepackage{pgffor}
+\usepackage{enumitem}
+\usepackage{graphics}
+\usepackage{algorithm2e}
+
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{THM}{Theorem}[section]
+\newtheorem{DEF}{Definition}[section]
+\newtheorem{LEM}{Lemma}[section]
+\newtheorem{PROP}{Proposition}[section]
+\newtheorem{CORO}{Corollary}[section]
+
+\usepackage{tcolorbox}
+\newtcolorbox{thmbox}[3][]
+{
+  colframe = #2!25,
+  colback  = #2!10,
+  coltitle = #2!20!black,  
+  title    = {#3},
+  #1,
+}
+\newenvironment{theorem}[1][]{
+  \begin{thmbox}{blue}{
+      \begin{THM}
+        #1
+      \end{THM}
+  }
+  \it
+}{
+  \end{thmbox}
+}
+\newenvironment{define}[1][]{
+  \begin{thmbox}{green}{
+      \begin{DEF}
+        #1
+      \end{DEF}
+  }
+}{
+  \end{thmbox}
+}
+\newenvironment{lemma}[1][]{
+  \begin{thmbox}{black}{
+      \begin{LEM}
+        #1
+      \end{LEM}
+  }
+  \it
+}{
+  \end{thmbox}
+}
+
+\newenvironment{proposition}[1][]{
+  \begin{thmbox}{orange}{
+      \begin{PROP}
+        #1
+      \end{PROP}
+  }
+}{
+  \end{thmbox}
+}
+\newenvironment{corollary}[1][]{
+  \begin{thmbox}{black}{
+      \begin{CORO}
+        #1
+      \end{CORO}
+  }
+}{
+  \end{thmbox}
+}
+
+
+% mark the words in tikz
+\newcommand{\MK}[3][]{
+  \tikz [remember picture, baseline, #1]
+  \node (#2) [anchor = base, minimum size = 0mm, inner sep = 0mm] {#3};
+}
+
+% mark the words in tikz in math mode
+\newcommand{\MKM}[3][]{
+  \tikz [remember picture, baseline, #1]
+  \node (#2) [anchor = base, minimum size = 0mm, inner sep = 0mm] {$#3$};
+}
+
+% mark the words in tikz (with a counter)
+\newcount\markcnt
+\markcnt=0
+\newcommand{\MKN}[2][]{
+  \advance\markcnt by 1
+  \tikz [remember picture, baseline, #1]
+  \node (\the\markcnt) [anchor = base, minimum size = 0mm, inner sep = 0mm] {#2};
+}
+% mark the words in tikz (with a counter) in math mode
+\newcommand{\MKNM}[2][]{
+  \advance\markcnt by 1
+  \tikz [remember picture, baseline, #1]
+  \node (\the\markcnt) [anchor = base, minimum size = 0mm, inner sep = 0mm] {$#2$};
+}
+
+\usepackage{makeidx}
+\makeindex
+
+\title{\Huge Notes for Jerrum Book}
+\author{Xiaoyu Chen}
+
+% add depth for table of contents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+
+% set counter for sections and theorems environment
+\setcounter{secnumdepth}{2}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Topics Related to Markov Chain}
+\clearpage
+
+% time reversible markov chain
+\input{topic/time-reversible-MC/content}
+% how to use markov chain to simulate a specific distribution
+\input{topic/MC-control-distribution/content}
+% some useful tricks for using trnasition matrix
+\input{topic/useful-tricks-for-transition-matrix/content}
+
+\chapter{Topics Related to Probability}
+\clearpage
+
+% some useful properties for expectation and variance
+\input{topic/property-for-expect-and-variance/content}
+
+\printindex
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
