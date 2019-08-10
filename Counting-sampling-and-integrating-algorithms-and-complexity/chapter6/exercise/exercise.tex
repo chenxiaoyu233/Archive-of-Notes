@@ -1,0 +1,45 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{tikz}
+
+\title{Exercise of Chapter 6}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Exercise 6.3}
+Show that the uniform distribution on $K$ is an invariant measure for the Metropolis version of the ball walk.
+\subsection{solution}
+The most interesting thing here is that the transition distribution $P(x,\cdot)$ of the Matropolis version of the ball walk is not continuous on its range $B(x,\delta)\cap K$. More specificly, for $y\in B(x,\delta)\cap K$, we have:
+\[
+  P(x, \mathrm{d}y) = \left\{
+    \begin{array}{lr}
+      \frac{\mathrm{d}y}{\mathrm{Vol}_n B(x, \delta)}, \hspace{0.5cm} & y\not= x \\
+      \frac{\mathrm{Vol}_n(B(x,\delta)\setminus K)}{\mathrm{Vol}_n B(x, \delta)}, \hspace{0.5cm} &y = x
+    \end{array}
+  \right.
+\]
+So, for any $x, y\in K$, we have:
+\[
+  P(x,\mathrm{d}y) = P(y, \mathrm{d}x)
+\]
+Suppose $X_0$ has the uniform distribution $\mu$ and let $\mu_1$ be the distribution of $X_1$, then:
+\begin{align*}
+  \mu_1(A) &= \int_A \mu_1(dy) \\
+  &= \int_A\int_K \mu(\mathrm{d}x) P(x, \mathrm{d}y) \\
+  &= \int_A\int_{B(y,\delta)\cap K} \mu(\mathrm{d}x) P(x, \mathrm{d}y), \hspace{0.5cm} \mbox{since if $x\not\in B(y,\delta)\cap K$ then $P(x,\mathrm{d}y) = 0$}\\
+  &= \int_A\int_{B(y,\delta)\cap K} \mu(\mathrm{d}x) P(y, \mathrm{d}x), \hspace{0.5cm} \mbox{since $P(x,\mathrm{d}y) = P(y,\mathrm{d}x)$} \\
+  &= \int_A\int_{B(y,\delta)\cap K} \mu(\mathrm{d}y) P(y, \mathrm{d}x), \hspace{0.5cm} \mbox{since $\mu(\mathrm{d}x) = \mu(\mathrm{d}y)$ when we let $\mathrm{Vol}_n(\mathrm{d}x) = \mathrm{Vol}_n(\mathrm{d}y)$} \\
+  &= \int_A \mu(\mathrm{d}y)\int_{B(y,\delta)\cap K}  P(y, \mathrm{d}x), \hspace{0.5cm}\\
+  &= \int_A \mu(\mathrm{d}y), \hspace{0.5cm} \mbox{since $P(y,\cdot)$ is a distribution} \\
+  &= \mu(A)
+\end{align*}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

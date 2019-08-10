@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows}
+
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+
+\title{Exercise of Chapter 5}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 5.4}
+Verify these claims about the lazy MC.
+\subsection{solution}
+\subsection{irreducibility}
+First we want to prove the irreducibility of the MC. To achieve this, we only need to find a method which could construct a path for any $X, Y\in\Omega$.
+\begin{tcolorbox}[title = {Suppose we have $X, Y\in\Omega$}]
+  We could transform $X$ to $Y$ in following steps:
+  \begin{enumerate}[itemsep=0mm]
+  \item Remove all the elements in $X$ by continuely select $e\in X$.
+  \item Add all the elements in $Y$ by continuely select $e\in Y \land e\not\in X$.
+  \end{enumerate}
+\end{tcolorbox}
+\subsection{aperiodicity}
+Note that for all state $X\in\Omega$ of the lazy MC we have: \[P^2(X,X)>0\], and \[P^3(X,X) > 0\]. Then by $\gcd(2, 3) = 1$, we know the lazy MC is aperiodic.
+
+Putting the irreducibility and aperiodicity together we could draw a conclusion that the lazy MC is ergodic.
+
+\section{Exercise 5.17}
+Show how to tighten the upper bound in Proposition 5.11 by a factor $\overline{\lambda}$. Since Claim 5.15 is essentially tight when t is troublesome, it is necessary to improve
+somehow the inequality
+\[
+  \sum_{(I,F)\in cp(t)} \pi(\eta_t(I,F)) \leq 1
+\], by studying carefully the range of $\eta_t$. See Jerrum and Sinclair [45], specifically the proof of their Proposition 12.4.
+
+\subsection{solution}
+This solution is amost a summary of my understanding for the proof in Jerrum and Sinclair [45].
+\paragraph{Case 1:} If we are not in the troublesome case:
+\begin{align*}
+  \lambda^{|I|}\lambda^{|F|} &= \lambda^{|M\cup M'|}\lambda^{|C|} \\
+  \pi(I)\pi(F) &= \pi(M\cup M')\pi(C) \\
+  &= \frac{m\pi(M\cup M')}{\min\{\pi(M), \pi(M')\}}\pi(M)P(M, M')\pi(C) \\
+  &\leq m\overline{\lambda}\pi(M)P(M, M')\pi(C) \\
+\end{align*}
+The last step is because $\min\{|M|, |M'|\} \geq |M\cup M'| - 1$.
+Then the congestion is:
+\begin{align*}
+  \varrho &= \max_{t = (M, M')} \left\{\frac{1}{\pi(M)P(M, M')}\sum_{(I,F)\in cp(t)} \pi(I)\pi(F)|\gamma_{IF}|\right\} \\
+  &\leq m\overline{\lambda}\sum_{(I,F)\in cp(t)} \pi(\eta_t(I, F))|\gamma_{IF}| \\
+  &\leq m\overline{\lambda}n\sum_{(I,F)\in cp(t)} \pi(\eta_t(I, F)) \\
+  &\leq nm\overline{\lambda}
+\end{align*}
+
+\paragraph{Case 2:} If we are in the troublesome case, which, by the definition, means $t$ is a $\leftrightarrow$ and the current component is a cycle. Then, there must be at least 2 unmatched vertices. One of them is the neighbor of start vertex in $I$, and the other is surrounded by $e$ and $e'$. 
+So, we could select a path between them in $I\oplus F$ following the cycle's orientation and augment on this path. This operation could give us another matching $\eta_t'(I, F)$. And this operation is reversible because we could find these two vertices according to $I\oplus F$ and $M\cup M'$. So, $\eta_t'$ is a injection from $cp(t)$ to $\Omega$. And we have $\lambda\pi(\eta_t(I, F)) = \pi(\eta_t'(I, F))$ since $\eta_t'(I, F)$ has one more edge than $\eta_t(I, F)$. Put them together, we have:
+\begin{align*}
+  \sum_{(I, F)\in cp(t)} \lambda\pi(\eta_t(I, F)) &= \sum_{(I, F)\in cp(t)} \pi(\eta_t'(I, F)) \leq 1 \\
+  \lambda\sum_{(I, F)\in cp(t)} \pi(\eta_t(I, F)) &\leq 1 \\
+  \sum_{(I, F)\in cp(t)} \pi(\eta_t(I, F)) &\leq \frac{1}{\lambda}
+\end{align*}
+By using the conclusion that \[\pi(I)\pi(F)\leq m\overline(\lambda)^2\pi(M)P(M, M')\pi(C)\] from the book, we could give the congestion:
+\begin{align*}
+  \varrho &= \max_{t = (M, M')} \left\{\frac{1}{\pi(M)P(M, M')}\sum_{(I,F)\in cp(t)} \pi(I)\pi(F)|\gamma_{IF}|\right\} \\
+  &\leq m\overline{\lambda}^2 \sum_{(I, F)\in cp(t)} \pi(\eta_t(I, F))|\gamma_{IF}| \\
+  &\leq nm\overline{\lambda}^2 \frac{1}{\lambda} \\
+  &\leq nm\overline{\lambda}
+\end{align*}
+
+\begin{tcolorbox}[title = {Note:}]
+  The most instresting thing of this problem is that the upper bould of the congestion is achieved by two different ways according to different cases.
+  However, Jerrum tends to use algebratic symbols to represent the graph structure. This is not very friendly for me to understand his idea behind those symbols. Because each time when a symbol appears, I have to do some examples so that I could get what he means. Though its not very easy to understand those symbols, the idea (e.g. how to construct the $\eta_t(I, F)$) behind them is very easy to understand.
+\end{tcolorbox}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
