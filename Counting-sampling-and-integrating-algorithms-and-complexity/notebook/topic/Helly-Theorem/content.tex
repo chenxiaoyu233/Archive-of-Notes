@@ -1,0 +1,34 @@
+\section{Helly's Theorem}
+\begin{theorem}[Helly's Theorem]
+  \index{helly's theorem}
+  Let $X_1, X_2, \cdots, X_n$ be a finite collection of convex subsets of $\mathbb{R}^d$, with \MKN{$n > d$}. If the intersection of every \MKN{$d+1$} of these sets is nonempty, then the whole collection has a nonempty intersection, that is:
+  \[
+    \bigcap_{j=1}^n X_j \not= \emptyset
+  \]
+\end{theorem}
+\begin{proof}
+  For convenient, we use $\mathrm{Cov}(A)$ to represent the convex of point set $A$.
+  We prove this by induction.
+  \paragraph{Base Case ($n = d+2$):} Then for every $j = 1, \cdots, n$ there is a point $x_j$ that is in the common intersection of all $X_i$ with the possible exception of $X_j$.
+  Now we apply Radon's theorem to the set $A = \{x_1, \cdots, x_n\}$, which furnishes us with disjoint subsets $A_1, A_2$ of $A$ such that
+  \[\mathrm{Cov}(A_1)\cap\mathrm{Cov}(A_2) \not= \emptyset\]
+  Suppose that $p$ is a point in the intersection of these two convex hulls. We claim that
+  \[p \in \bigcap_{i=1}^n X_j\]
+  Indeed for any $j \in \{1, \cdots, n\}$, we want to show that $p\in X_j$:
+  \begin{enumerate}
+  \item If $x_j \in X_j$ and $x_j \in \mathrm{Cov}(A_1)$, then we have $A_1\subseteq X_j$. So $p\in \mathrm{Cov}(A_1) \subseteq X_j$.
+  \item If $x_j\not\in X_j$ and $x_j\in \mathrm{Cov}(A_1)$, then we have $x_j\not\in \mathrm{Cov}(A_2)$ and $\mathrm{Cov}(A_2)\subseteq X_j$. So $p\in \mathrm{Cov}(A_2)\subseteq X_j$.
+  \end{enumerate}
+
+  Above, we have assumed that the points $x_1, \cdots, x_n$ are all distinct. If this is not the case, say $x_i = x_k$ for some $i \not= k$, then $x_i$ is in every one of the sets $X_j$, and again we conclude that the intersection is nonempty. This completes the proof in the case $n = d + 2$.
+  \paragraph{Inductive Step ($n > d+2$)} Assume the theorem is true in the case $n-1$. Note that we have $n$ sets $X_1, X_2, \cdots, X_n$ whre $n > d+2$. Actually, for every $d+2$ of these sets, we could apply the statement for the base case for them. Which turns out that the intersection for every $d+2$ sets are not empty. Then if we let $X_{n-1}\gets X_{n-1}\cap X_n$, we could get to a $n-1$ case where the intersection of every $d+1$ sets is not empty. So by our assumption, the intersection of these $n-1$ sets is not empty and thus
+  \[
+    \bigcap_{i=1}^n X_i \not= \emptyset
+  \]
+\end{proof}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

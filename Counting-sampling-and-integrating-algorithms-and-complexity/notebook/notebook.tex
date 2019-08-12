@@ -7,6 +7,14 @@
 \usepackage{enumitem}
 \usepackage{graphics}
 \usepackage{algorithm2e}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=red,
+  citecolor=green,
+  filecolor=magenta,
+  urlcolor=cyan
+}
 
 \usepackage{amsmath, amssymb, amsthm}
 \newtheorem{THM}{Theorem}[section]
@@ -14,6 +22,7 @@
 \newtheorem{LEM}{Lemma}[section]
 \newtheorem{PROP}{Proposition}[section]
 \newtheorem{CORO}{Corollary}[section]
+\newtheorem{FACT}{Fact}[section]
 
 \usepackage{tcolorbox}
 \newtcolorbox{thmbox}[3][]
@@ -68,6 +77,15 @@
       \begin{CORO}
         #1
       \end{CORO}
+  }
+}{
+  \end{thmbox}
+}
+\newenvironment{fact}[1][]{
+  \begin{thmbox}{orange}{
+      \begin{FACT}
+        #1
+      \end{FACT}
   }
 }{
   \end{thmbox}
@@ -133,6 +151,21 @@
 
 % some useful properties for expectation and variance
 \input{topic/property-for-expect-and-variance/content}
+
+% what is Gamma function and some useful tricks
+\input{topic/Gamma-function/content}
+
+\chapter{Topics Related to Geometry}
+\clearpage
+
+% Radon's Theorem
+\input{topic/Radon-Theorem/content}
+
+% Helly's Theorem
+\input{topic/Helly-Theorem/content}
+
+% Burnn-Minkowshi Theorem
+\input{topic/Brunn-Minkowski-Theorem/content}
 
 \printindex
 \end{document}

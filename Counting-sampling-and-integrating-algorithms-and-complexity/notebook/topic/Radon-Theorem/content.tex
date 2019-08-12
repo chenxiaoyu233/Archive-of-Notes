@@ -1,0 +1,25 @@
+\section{Radon's Theorem}
+\begin{theorem}[Radon's Theorem]
+  \index{radon's theorem}
+  Any set of \MKN{$d + 2$} points in $\mathbb{R}^d$ can be partitioned into two disjoint sets whose convex hulls intersect. A point in the intersection of these convex hulls is called a Radon point of the set.
+\end{theorem}
+\begin{proof}
+  Suppose there is a set $X = \{x_1, x_2, \cdots, x_{d+2}\} \subset \mathbb{R}^d$ of $d+2$ points in $d$-dimentinal space. Then there exists a set of multipliers $a_1, a_2, \cdots, a_{d+2}$, not all of which are zero, solving the system of linear equations:
+\[
+  \sum_{i=1}^{d+2}a_ix_i = 0,\hspace{0.5cm} \sum_{i=1}^{d+2} a_i = 0
+\]
+Since there are only $d+1$ equations but $d+2$ variables, there are some non-zero solutions for this system. Suppose we have already solved this system and have a non-zero answer for $a$'s. Let $I = \{x_i|a_i > 0\}$ and $J = X\setminus I$. Then we find that the convex hull of $I$ and $J$ has common point, which means there convex hulls intersect. Clearly, $I$ and $J$ must intersect, because they both contain the point:
+\[
+  p = \sum_{i\in I} \frac{a_i}{A}x_i = \sum_{j\in J} \frac{-a_j}{A} X_j
+\]
+where
+\[
+  A = \sum_{i\in I} a_i = -\sum_{j\in J} a_j
+\]
+Since the right hand side of $p$ represent a convex combination of the points in $I$ and the points in $J$, $p$ belongs to both convex hulls. This also gives us a efficient way to construct a Radon point.
+\end{proof}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:
