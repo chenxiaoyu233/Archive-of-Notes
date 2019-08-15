@@ -23,6 +23,9 @@
 \newtheorem{PROP}{Proposition}[section]
 \newtheorem{CORO}{Corollary}[section]
 \newtheorem{FACT}{Fact}[section]
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% left foot mark for math symbol
+\usepackage{leftidx}
 
 \usepackage{tcolorbox}
 \newtcolorbox{thmbox}[3][]
@@ -141,10 +144,15 @@
 
 % time reversible markov chain
 \input{topic/time-reversible-MC/content}
+
 % how to use markov chain to simulate a specific distribution
 \input{topic/MC-control-distribution/content}
+
 % some useful tricks for using trnasition matrix
 \input{topic/useful-tricks-for-transition-matrix/content}
+
+% understand canonical path and flow
+\input{topic/understand-canonical-path-and-flow/content}
 
 \chapter{Topics Related to Probability}
 \clearpage

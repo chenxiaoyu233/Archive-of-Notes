@@ -106,6 +106,18 @@ Now, we want to generize the result to any convexi point sets $A$, and $B$.
   \end{align*}
 \end{proof}
 
+Here we have an equivalent for Brunn-Minkowshi Theorem:
+\begin{corollary}
+  $\mathrm{Vol}_n (\lambda A + (1-\lambda) B)^{1/n} \geq \lambda\mathrm{Vol}_n(A)^{1/n} + (1-\lambda)\mathrm{Vol}_n (B)^{1/n}$
+\end{corollary}
+\begin{proof}
+  \begin{align*}
+    \mathrm{Vol}_n(\lambda A + (1-\lambda)B)^{1/n} &\geq \mathrm{Vol}_n(\lambda A)^{1/n} + \mathrm{Vol}_n((1-\lambda)B)^{1/n} \\
+    &= (\lambda^n\mathrm{Vol}_n(A))^{1/n} + ((1-\lambda)^n\mathrm{Vol}_n((1-\lambda)B))^{1/n} \\
+    &= \lambda\mathrm{Vol}_n(A)^{1/n} + (1-\lambda)\mathrm{Vol}_n((1-\lambda)B)^{1/n} \\
+  \end{align*}
+\end{proof}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../notebook"
