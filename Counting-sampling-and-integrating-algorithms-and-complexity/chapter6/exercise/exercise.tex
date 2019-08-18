@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{tcolorbox}
 \usepackage{tikz}
 
 \title{Exercise of Chapter 6}
@@ -37,6 +38,167 @@ Suppose $X_0$ has the uniform distribution $\mu$ and let $\mu_1$ be the distribu
   &= \mu(A)
 \end{align*}
 
+\iffalse
+\section{Exercise 6.10}
+Verify Corollary 6.8. Doing this essentially involves translating Theorem 5.6 to the setting of continuous state space. In case you skip this exercise, a full derivation may be found in §6.8.
+\subsection{solution}
+Lets assume that $f$ is a integrable function on $K$. Then we have:
+\begin{align*}
+  [P_{zz}f] (x) &= \int_K P_{zz}(x,\mathrm{d}y) f(y) \\
+  &= \int_K \frac{1}{2}(I(x,\mathrm{d}y) + P(x,\mathrm{d}y)) f(y) \\
+  &= \frac{1}{2}f(x) + \int_K \frac{1}{2} P(x,\mathrm{d}y) f(y) \\
+  &= \frac{1}{2}f(x)\int_K P(x,\mathrm{d}y) + \int_K \frac{1}{2} P(x,\mathrm{d}y) f(y) \\
+  &= \frac{1}{2} \int_K P(x,\mathrm{d}y) (f(x) + f(y))
+\end{align*}
+Since the lazy MC must be ergodic, we denote its stationary distribution by $\mu$. Then we have:
+\begin{align*}
+  \mathbb{E}_\mu f &= \int_K \mu(\mathrm{d}x)f(x) \\
+  \mathbb{E}_\mu [P_{zz}f] &= \int_K \mu(\mathrm{d}x) [P_{zz}f](x) \\
+   &= \int_K \mu(\mathrm{d}x) \int_K P_{zz}(x,\mathrm{d}y)f(y) \\
+   &= \int_K f(y) \int_K \mu(\mathrm{d}x)P_{zz}(x,\mathrm{d}y) \\
+   &= \int_K f(y) \mu(\mathrm{d}y) \\
+   &= \mathbb{E}_\mu f
+\end{align*}
+\begin{align*}
+  \mathrm{Var}_\mu (P_{zz}f) &= \int_K \mu(\mathrm{d}x) \{[P_{zz}f](x)]\}^2 - \mathbb{E}_\mu^2[P_{zz}f] \\
+  &= \frac{1}{4}\int_K \mu(\mathrm{d}x) (\int_K P(x,\mathrm{d}y)(f(x) + f(y)))^2 - \mathbb{E}_\mu^2[P_{zz}f] \\
+  &\leq \frac{1}{4}\int_K\mu(\mathrm{d}x) \int_K P(x,\mathrm{d}y) (f(x)+f(y))^2 - \mathbb{E}_\mu^2[P_{zz}f] \\
+  &= \frac{1}{4}\int_K\int_K\mu(\mathrm{d}x) P(x,\mathrm{d}y) (f(x)+f(y))^2 - \mathbb{E}_\mu^2[P_{zz}f]
+\end{align*}
+
+\begin{align*}
+  \mathrm{Var}_\mu f &= \mathbb{E}_\mu f^2 - \mathbb{E}_\mu^2f \\
+  &= \int_K \mu(\mathrm{d}x) f^2(x) - \mathbb{E}_\mu^2f \\
+  &= \frac{1}{2}\int_K \mu(\mathrm{d}x) f^2(x) + \frac{1}{2}\int_K f^2(y)\mu(\mathrm{d}y)  - \mathbb{E}_\mu^2f \\
+  &= \frac{1}{2}\int_K \mu(\mathrm{d}x) f^2(x)\int_K P(x,\mathrm{d}y) + \frac{1}{2}\int_K f^2(y)\int_K \mu(\mathrm{d}x)P(x,\mathrm{d}y)  - \mathbb{E}_\mu^2f \\
+  &= \frac{1}{2} \int_K\int_K \mu(\mathrm{d}x)P(x,\mathrm{d}y)(f^2(x) + f^2(y)) - \mathbb{E}_\mu^2f
+\end{align*}
+
+\begin{align*}
+  \mathrm{Var}_\mu f - \mathrm{Var}_\mu [P_{zz}f] &\geq \frac{1}{4}\int_K\int_K \mu(\mathrm{d}x) P(x,\mathrm{d}y) (f(x) - f(y))^2 \\
+  &= \frac{1}{2} \varepsilon_P(f,f)
+\end{align*}
+
+So, for any integrable function $f:K\to\mathbb{R}$, we have:
+\begin{align*}
+  \mathrm{Var}_\mu(P_{zz}f) &\leq \mathrm{Var}_\mu f - \frac{1}{2}\varepsilon_P(f,f) \\
+  &\leq \mathrm{Var}_\mu f - \frac{\lambda}{2}\mathrm{Var}_\mu f \\
+  &= (1-\frac{\lambda}{2})\mathrm{Var}_\mu f \\
+\end{align*}
+
+Now we want to achieve the following bound:
+\[
+  |P_{zz}^t(x,A) - \mu(A)| \leq \varepsilon,\hspace{0.5cm} \forall A\subseteq K
+\]
+We could rewrite as:
+\begin{align*}
+  |[P_{zz}^tf](x) - \mu(A)| \leq \varepsilon 
+\end{align*}
+
+\begin{align*}
+  \mathrm{Var}_\mu (P_{zz}^tf) &\geq \int_K ([P_{zz}^tf](x) - \mathbb{E}_\mu (P_{zz}f))^2 \mu(\mathrm{d}x) \\
+  &\geq \int_K ([P_{zz}^tf](x) - \mu(A))^2 \mu(\mathrm{d}x) \\
+  &\geq (\int_K ([P_{zz}^tf](x) - \mu(A)) \mu(\mathrm{d}x))^2 \\
+  &\approx \left(\frac{1}{\mathrm{Vol}_n K} \int_K ([P_{zz}^tf](x) - \mu(A))dx\right)^2
+\end{align*}
+\fi
+
+\section{Exercise 6.25}
+Flesh out the details of the above proof sketch. (Prove the Poincare inequality with out the curvatre condition. This proof will loose a factor $n$ in $\lambda$.)
+\subsection{Solution}
+\subsubsection{Flesh out the proof of Lemma 6.21.(i)}
+\begin{tcolorbox}[title={Recall It Here:}]
+  \centering $l(x)^{1/n}$ is concave over $K$
+  \tcblower
+  Where the $l(x)$ is defined as
+  \[\frac{\mathrm{Vol}_n (B(x, \delta)\cap K)}{\mathrm{Vol}_n B(x, \delta)}\]
+\end{tcolorbox}
+\begin{proof}
+  Suppose there are two points $x$ and $y$ in $K$. From (6.32) we know that
+  \[(\lambda x + (1-\lambda)y + B(0, \delta)) \cap K \supseteq \lambda((x + B(0, \delta))\cap K) + (1-\lambda)((y + B(0, \delta))\cap K)\]
+  Then, by Brunn-Minkowski theorem, we have
+  \begin{align*}
+  \mathrm{Vol}_n&[(\lambda x + (1-\lambda)y + B(0, \delta)) \cap K]^{1/n} \\
+    &\geq \lambda\mathrm{Vol}_n[(x + B(0, \delta))\cap K]^{1/n} + (1-\lambda)\mathrm{Vol}_n[(y + B(0, \delta))\cap K]^{1/n}
+  \end{align*}
+  Which means:
+  \[l(\lambda x + (1-\lambda)y)^{1/n} \geq \lambda l(x)^{1/n} + (1-\lambda)l(y)^{1/n}\]
+  So, $l(x)^{1/n}$ is concave on $K$.
+\end{proof}
+\subsubsection{Fix the upper bound of $a_{i, j}$}
+From Lemma 6.22, we know that the sequence of 
+\[\frac{1}{\mu(S_0)}, \frac{1}{\mu(S_1)},\cdots, \frac{1}{\mu(S_{m-1})}\]
+is convex.
+So we have
+\begin{align*}
+  a_{i,j} &\leq 2w_iw_j\sum_{k=i}^j \frac{1}{w_k} \\
+  &= w_iw_j \sum_{k=i}^j (\frac{1}{w_k} + \frac{1}{w_{i + j - k}}) \\
+  &\leq w_iw_j \sum_{k=1}^j (\frac{j-k}{j-i}\frac{1}{w_i} + \frac{k-i}{j-i}\frac{1}{w_j}) + (\frac{k-i}{j-i}\frac{1}{w_i} + \frac{j-k}{j-i}\frac{1}{w_j}) \\
+  &= w_iw_j \sum_{k=i}^j (\frac{1}{w_i} + \frac{1}{w_j}) \\
+  &= w_iw_j (j-i+1) (\frac{1}{w_i} + \frac{1}{w_j}) \\
+  &= (j-i+1)(w_i + w_j)
+\end{align*}
+This establishes Claim 6.16 in the absencse of the curvature condition.
+
+\subsubsection{Establish (6.29)}
+Let $\eta = c_3\delta/n$, then by Lemma 6.21.(ii) we have
+\begin{align*}
+  |\ln l(x) - \ln l(y)| &\leq \frac{n}{\delta} || x - y || \\
+  &\leq \frac{n}{\delta} (c_3\delta/n)\\
+  &= c_3
+\end{align*}
+and hence
+\begin{align*}
+  l(x)/l(y) &\leq e^{c_3} \\
+  l(x) &\leq l(y)e^{c_3} \\
+\end{align*}
+According to symmetry
+\[l(y) \leq l(x)e^{c_3}\]
+And since we could set the value of $\delta$ as we want, we may cliam that:
+\[\mathrm{Vol}_nB(x,\delta') \leq s_1\mathrm{Vol}_nB(y,\delta')\]
+where $s_1$ is some constant.
+So we have a lower bound for all $B(y,\delta')$, i.e.
+\[\frac{1}{s_1}\mathrm{Vol}_nB(x,\delta') \leq \mathrm{Vol}_nB(y,\delta')\]
+
+So, from Lemma 6.24. we have
+\begin{align*}
+  \mathrm{Vol}_n&(B(x,\delta') \cap B(y, \delta') \cap K) \\
+  &\geq \frac{1}{1 + e}\min\{\mathrm{Vol}_n(B(x, \delta')\cap K), \mathrm{Vol}_n(B(y,\delta')\cap K)\}
+\end{align*}
+and hence
+\begin{align*}
+  \mathrm{Vol}_n I \geq \frac{s_2}{1+e} \mathrm{Vol}_n (B(x,\delta')\cap K)
+\end{align*}
+where $s_2 = \min\{1, \frac{1}{s_1}\}$ is some constant.
+
+Observe that $\delta' = \delta - \varepsilon\sqrt{n}$, so if we choose $\varepsilon$ properly,
+we could make $\delta' = s_3 \delta$,
+where $0 < s_3 \leq 1$ is a constant.
+
+After that, we have
+\[\frac{\mathrm{Vol}_nB(x,\delta')}{\mathrm{Vol}_nB(x,\delta)} = \frac{1}{s_3^n}\]
+When $\frac{1}{s_3^n} = \frac{1}{2}$, we have
+\[\frac{\mathrm{Vol}_n(B(x,\delta')\cap K)}{\mathrm{Vol}_n(B(x,\delta)\cap K)} \geq \frac{1}{2}\]
+\begin{tcolorbox}[title={Some Note}]
+  Although this seems right here, and some material online says it is trivial. I still can not prove it.
+\end{tcolorbox}
+After that, we have
+\begin{align*}
+  \int_{K_0} h \mathrm{d}u &= \frac{1}{2}\int_{K_0}\int_{K_0} \mu(\mathrm{d}x) \frac{\mathrm{d}y}{\mathrm{Vol}_n (B(x, \delta)\cap K)}(f(x) - f(y))^2 \\
+  &\geq \frac{1}{2}\int_{K_0}\int_{I} \mu(\mathrm{d}x) \frac{\mathrm{d}y}{\mathrm{Vol}_n (B(x, \delta)\cap K)}(f(x) - f(y))^2 \\
+  &\geq \frac{1}{2\mathrm{Vol}_n(B(x,\delta)\cap K)} \int_{I}\mathrm{d} y\int_{K_0} \mu(\mathrm{d}x) (f(x) - f(y))^2\\
+  &\geq \frac{1}{2\mathrm{Vol}_n(B(x,\delta)\cap K)} \int_{I}\mathrm{d} y\int_{K_0} \mathrm{d}\mu (f - \overline{f})^2\\
+  &\geq \frac{\mathrm{Vol}_n I}{2\mathrm{Vol}_n(B(x,\delta)\cap K)} \int_{K_0} \mathrm{d}\mu (f - \overline{f})^2\\
+  &\geq \frac{s_2}{4(e+1)} \int_{K_0} (f - \overline{f})^2 \mathrm{d}\mu
+\end{align*}
+\subsubsection{The Order of $\lambda$}
+From (6.26) we know that
+\begin{align*}
+  \lambda \in \mathcal{O}(\frac{1}{m^2}) &=  \mathcal{O}(\frac{c_3\delta}{Dn}) \\
+  &= \mathcal{O}(\frac{c_3^2\delta^2}{D^2n^2})
+\end{align*}
+
+So, we draw a contradiction here, and fix the original proof.
 \end{document}
 
 %%% Local Variables:

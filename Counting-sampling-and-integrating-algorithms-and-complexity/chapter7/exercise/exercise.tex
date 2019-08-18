@@ -1,0 +1,99 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{algorithm2e}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+
+\newtheorem*{fact7.5}{Fact 7.5}
+
+\title{Exercise of Chapter 7}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Exercise 7.6}
+Provide a formal statement of Fact 1.5 using the notion of witness-checking predicates.
+\subsection{Solution}
+First we provide a formal version for Fact 1.5.
+\begin{fact7.5}[Formal Statement]
+  Suppose we have a witness-checking predicate $\chi: \Sigma^*\times\Sigma^*\to \{0, 1\}$,
+  from which we could define two problem $\varphi$ and $f$ such that $\forall x\in \Sigma^*$,
+  \begin{align*}
+    \varphi(x) &\Leftrightarrow \exists\omega\in\Sigma^*.\chi(x,\omega)\land|\omega|\leq P(|x|) \\
+    f(x) &= |\omega\in\Sigma^*: \chi(x,\omega)\land |w|\leq P(|x|)|
+  \end{align*}
+  Then $f$ does not admit a $FPRAS$ unless $PR = NP$.
+\end{fact7.5}
+Though the problem itself does not require a proof of this fact,
+I give one here for a better understanding.
+\begin{proof}
+  If $f$ has a $FPRAS$,
+  then we have a function $S$ such that,
+  \[\Pr[e^{-\varepsilon}f(x)\leq S(x)\leq e^\varepsilon f(x)] \geq \frac{3}{4}\]
+  which could be calculated in polynomial time.
+  So we could define a witness-checking predicate $\chi'$ for $\varphi$ as
+  \[X'(x, \omega) := [S(x) > 0]\]
+  Then we have:
+  \begin{enumerate}[itemsep=0mm]
+  \item If $\varphi(x)$, then $f(x) > 0$, then $e^{-\varepsilon}>0$ and $e^\varepsilon > 0$.
+    Thus, $\Pr[S(x) > 0] \geq \Pr[e^{-\varepsilon}f(x)\leq S(x)\leq e^{\varepsilon}] \geq \frac{3}{4}$.
+  \item If $\lnot\varphi(x)$, then $f(x) = 0$, then $e^{-\varepsilon} = e^\varepsilon = 0$.
+    Thus, $\Pr[S(x) = 0] \geq \frac{3}{4}$ and hence $\Pr[S(x) > 0]\leq \frac{1}{4}$.
+  \end{enumerate}
+  So, $\varphi$ is in BPP.
+
+  Then, to go further, we want $\varphi$ to be some practical $NPC$ problem, i.e. SAT problem.
+  (I get this idea from a online material).
+  Suppose we have a SAT problem $\phi$ which has $k$ variables $x_1, x_2, \cdots, x_k$.
+  To make things more easy, we could construct another witness-checking predicate $\chi''$ from $\chi'$ by calling $\chi'$ polynomial times, such that
+  \begin{enumerate}[itemsep=0mm]
+  \item If $\varphi(\phi)$, then $\Pr[\chi''(\phi, \omega)] \geq 1 - 2^{-m}$
+  \item If $\lnot\varphi(\phi)$, then $\Pr[\chi''(\phi, \omega)] \leq 2^{-m}$.
+  \end{enumerate}
+  We try to construct a witness-checking predicate $\chi^*$ for SAT problem.
+  \begin{algorithm}[ht]
+    witness-checking predicate $X^*(\phi, \omega)$ \Begin{
+      \If{$\lnot\chi''(\phi, \omega)$}{
+        \Return{false}
+      }
+      \For{$i$ in $[1, n]$} {
+        $x_i \gets 0$ \\
+        Get a new problem $\phi_1$ by fix variables from $x_1$ to $x_i$ \\
+        \If{$\lnot\chi''(\phi_1, \omega_1)$} {
+          \tcc{Here $\omega_1$ is some random solution for $\phi_1$}
+          $x_i \gets 1$ \tcp{also modify $x_i$ in $\phi_1$}
+        }
+      }
+      $\omega_1\gets \{x_1, x_2, \cdots, x_n\}$ \\
+      \Return{$\chi(\phi, \omega_1)$}
+    }
+  \end{algorithm}
+  
+  When $\lnot\varphi(\phi)$, if $\lnot\chi''(\phi, \omega)$, $\chi^*(\phi,\omega)$ returns \textit{false}.
+  If $\chi''(\phi,\omega)$, then $\chi^*$ will construct a solution $\omega_1$ by using $\chi''$ polynomial times.
+  And if $\lnot\chi(\phi,\omega_1)$, then $\chi^*$ will return \textit{false}.
+  So, these ensures that $\lnot\varphi(\phi) \Rightarrow \lnot\chi^*(\phi, \omega)$ for all $\omega$.
+
+  When $\varphi(\phi)$, consider the probablity for $\chi^*(\phi, \omega)$.
+  We only need to analysis the worst case for this, i.e. when there is only one $\omega$ such that $\chi(\phi,\omega)$.
+  To achieve $\chi^*(\phi,\omega)$, we need to avoid wrong choice made by $\chi''$.
+  Note that we have $k+1$ choices made by $\chi''$ and each of them have probability at less than $2^{-m}$ to be wrong.
+  So, in this case,
+    \[\Pr[\chi^*(\phi, \omega)] \geq (1-2^{-m})^{k+1} \geq \frac{1}{2}\]
+  for some appropriate $m$.
+
+  So, its clear that $\chi^*$ reaches the requirement of $RP$ and we have $\varphi$ is in $RP$,
+  which implies that $NP\subseteq RP$.
+  Together with $RP\subseteq NP$, we have $RP = NP$.
+\end{proof}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
