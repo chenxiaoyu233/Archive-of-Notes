@@ -91,6 +91,100 @@ I give one here for a better understanding.
   Together with $RP\subseteq NP$, we have $RP = NP$.
 \end{proof}
 
+\section{Exercise 7.10}
+Complete the proof of Theorem 1.9. To keep technical complexity to a minimum, assume the graph G is triangle-free, i.e., contains no cycles of length 3.
+\subsection{Solution}
+Suppose there are two states $x, y\in\Omega$, the distance $d(x, y)$ between them is defined as the hamming distance between them.
+Then, to use the path-coupling method, we need to design the coupling.
+The coupling is defined between the pairs $(X_0, Y_0)$, where $d(X_0, Y_0) = 1$.
+Since $d(X_0, Y_0) = 1$, we could assume that there exists a vertex $v$ where $X_0(v) = 0$ and $Y_0(v) = 1$ without loss of generality.
+\begin{algorithm}[ht!]
+  \tcc{Update the status of two vertices}
+  Update($X, u, w, a, b$)\Begin{
+    $X_1\gets X$, where $X_1(u) = a$ and $X_1(v) = b$ \\
+    \If{$X_1$ is a independent set}{
+      \Return{$X_1$}
+    }
+    \Return{$X$}
+  }
+  \tcc{define the coupling for $d(X_0, Y_0) = 1$}
+  Coupling$(X_0, Y_0)$\Begin{ 
+    Choose an edge $\{u, w\}\in E$, u.a.r. \\
+    \tcc{general cases for selecting $(a, b)$}
+    Select $(a, b)$ from $\{(0, 0), (0, 1), (1, 0)\}$, u.a.r. \\
+    \tcc{If $v\in \{u, w\}$, then we only select $(a, b)$ from the feasible combinations}
+    \If{$u=v\lor w=v$}{
+      \tcc{assume $u=v$, without loss of generality}
+      \If{$X_0(\mathbb{N}(w)\setminus\{u\}) = 1$} {
+        Select $(a, b)$ from $\{(0, 0), (1, 0)\}$, u.a.r. \\
+      }
+    }
+    Update$(X_1, u, w, a, b)$, Update$(Y_1, u, w, a, b)$ \\
+    \Return{$(X_1, Y_1)$}
+  }
+\end{algorithm}
+
+
+After that, we are going to analysis the value of $\mathbb{E}[d(X_1, Y_1)]$.
+Denote the neighbor of $v$ by $\mathbb{N}(v)$, and $\mathbb{N}[v] := \{v\}\cup \mathbb{N}(v)$. Then, any edge $\{u, w\}$ of $G$ must belongs to one of the following three classes.
+\begin{enumerate}[itemsep=0mm]
+\item $u\not\in\mathbb{N}[v]\land w\not\in\mathbb{N}[v]$, i.e., $v$ is not the neighbor of edge $\{u, w\}$.
+\item $u\in \mathbb{N}(v)\land w\not\in \mathbb{N}[v]$, i.e., $v$ is a neighbor of edge $\{u, w\}$.
+\item $u = v\land w\in\mathbb{N}(v)$, i.e., $v$ is an end point of edge $\{u, w\}$.
+\end{enumerate}
+Since $G$ is triangle-free, we do not need to consider the case $u\in\mathbb{N}(v)\land w\in\mathbb{N}(v)$.
+\paragraph{For the first case:}
+Note that $X_1$ and $Y_1$ will satisfies the requirement for a independent set simutaneously, because the status of all the neighbors of edge $\{u, w\}$ are the same in $X_0$ and $Y_0$. So in this case
+\[d(X_1, Y_1) = d(X_0, Y_0)\]
+\paragraph{For the second case:}
+Recall that $X_0(v) = 0$ and $Y_0(v) = 1$.
+Intuitively, we have the following circumstance
+\begin{center}
+  \begin{tikzpicture}
+    \node (v) at (0, 0) {$v$};
+    \node (u) at (1, 0) {$u$};
+    \node (w) at (2, 0) {$w$};
+    \node (r) at (4, 0) {$\mathbb{N}(w)\setminus\{u\}$};
+    \draw (v) to (u);
+    \draw (u) to (w);
+    \draw (w) to (r);
+  \end{tikzpicture}
+\end{center}
+Since $X_0(\mathbb{N}(w)\setminus\{u\}) = Y_0(\mathbb{N}(w)\setminus\{u\})$, we only need to consider whether there is any vertex in $\mathbb{N}(w)\setminus\{u\}$ in the independent set. Let $\delta = d(X_1, Y_1) - d(X_0, Y_0)$.
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    $X_0(\mathbb{N}(w)\setminus\{u\})$ & possible cases to make $\delta = -1$ & possible cases to make $\delta = 1$ \\
+    \hline
+    0 & None & $(1, 0)$ \\
+    \hline
+    1 & None & $(1, 0)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+Lets denote the number of edges belong to the second case by $n_2$, then
+\begin{align*}
+  \mathbb{E}(\delta) &= \frac{n_2}{m} \times \frac{1}{3} \\
+  &= \frac{n_2}{3m}
+\end{align*}
+
+\paragraph{For the third case:}
+Since in this case, we only select $(a, b)$ from feasible combinations, the probability of $d(X_1, Y_1) = 0$ is 1. So if we denote the number of edges belong to the second case by $n_3$, then
+\[\mathbb{E}(\delta) = \frac{-n_3}{m}\]
+
+Put all the cases together, we have
+\begin{align*}
+  \mathbb{E}(\delta) &= \frac{1}{m}(\frac{n_2}{3} - n_3) \\
+  &\leq \frac{1}{m}(\frac{3n_3}{3} - n_3), \hspace{0.5cm} \mbox{Since $n_2\leq 3n_3$} \\
+  &= 0
+\end{align*}
+
+\begin{tcolorbox}[title={Note}]
+Note that although we complete the proof on the book, it does not mean that we have proved the MC is rapidly mixing. The complete proof bases on a carefully designed distance measure function.
+\end{tcolorbox}
+
+\section{Exercise 7.12}
+
 \end{document}
 
 %%% Local Variables:
