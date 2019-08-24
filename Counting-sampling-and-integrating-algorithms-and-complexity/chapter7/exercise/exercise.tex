@@ -92,7 +92,7 @@ I give one here for a better understanding.
 \end{proof}
 
 \section{Exercise 7.10}
-Complete the proof of Theorem 1.9. To keep technical complexity to a minimum, assume the graph G is triangle-free, i.e., contains no cycles of length 3.
+Complete the proof of Theorem 7.9. To keep technical complexity to a minimum, assume the graph G is triangle-free, i.e., contains no cycles of length 3.
 \subsection{Solution}
 Suppose there are two states $x, y\in\Omega$, the distance $d(x, y)$ between them is defined as the hamming distance between them.
 Then, to use the path-coupling method, we need to design the coupling.
@@ -184,7 +184,42 @@ Note that although we complete the proof on the book, it does not mean that we h
 \end{tcolorbox}
 
 \section{Exercise 7.12}
-
+Using the same reduction, but improved estimates, show that Proposition 7.11 holds for some $\Delta$ less than 1100. (I think $\Delta = 964$ is achievable)
+\subsection{Solution}
+First, we could note that we have a loose upper bound for $|J'|$.
+Actually, we could fix this upper bound, and we have
+\[(2^r - 1)^k \leq |J'| \leq \binom{n}{k}(2^r - 1)^k\]
+Recall that we have Stirling Formula for $n!$:
+\[\sqrt{2\pi n}\left(\frac{n}{e}\right)^n \leq n! \leq 2\sqrt{2\pi n}\left(\frac{n}{e}\right)^n\]
+So
+\begin{align*}
+  \binom{n}{k} &= \frac{n!}{k!(n-k)!} \\
+  &\leq \frac{2\sqrt{2\pi n}\left(\frac{n}{e}\right)^n}{\sqrt{2\pi k}\left(\frac{k}{e}\right)^k \sqrt{2\pi(n-k)}\left(\frac{n-k}{e}\right)^{n-k}} \\
+  &\leq \frac{2\sqrt{n}n^n}{\sqrt{k}\sqrt{2\pi(n-k)}k^k (n-k)^{n-k}}\\
+  &\leq \frac{2\sqrt{4k}(4k)^{4k}}{\sqrt{k}\sqrt{2\pi(4k-k)}k^k (4k-k)^{4k-k}}, \hspace{0.5cm} \mbox{since $k \geq \frac{n}{4}$}\\
+  &= \frac{4\times 4^{4k}k^{4k}}{\sqrt{6\pi k}\times k^k 3^{3k} k^{3k}} \\
+  &= \frac{4\times 4^{4k}}{\sqrt{6\pi k}\times 3^{3k} } \\
+  &\leq \frac{4^{4k}}{3^{3k}}, \hspace{0.5cm} \mbox{since $4\leq \sqrt{6\pi k}$}
+\end{align*}
+Then we have a more tight bound for $|J'|$
+\begin{align*}
+  (2^r - 1)^k \leq |J'| \leq \binom{n}{k}(2^r - 1)^k 
+\end{align*}
+or, taking the natural logarithm,
+\begin{align*}
+  %(2^r - 1)^k \leq |J'| \leq \frac{4^{4k}}{3^{3k}}(2^r - 1)^k
+  k\ln(2^r - 1) \leq \ln|J'| \leq 4k\ln4 - 3k\ln3 + k\ln(2^r - 1)
+\end{align*}
+Consider the following estimate for $k$
+\[\hat{k} = \frac{\ln|J'|}{4\ln4 - 3\ln3 + \ln(2^r - 1)}\]
+then
+\begin{align*}
+  k(\frac{\ln(2^r - 1)}{4\ln4-3\ln3+\ln(2^r -1)}) \leq \hat{k} \leq k \\
+  k(1-\frac{4\ln4-3\ln3}{4\ln4-3\ln3+\ln(2^r -1)}) \leq \hat{k} \leq k \\
+\end{align*}
+Note that when $r = 241$,
+\[\frac{4\ln4 - 3\ln3}{4\ln4 - 3\ln3 + \ln(2^r - 1)} \leq \frac{1}{74}\]
+So, we have $\Delta = 4r = 964$.
 \end{document}
 
 %%% Local Variables:
