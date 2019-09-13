@@ -1,0 +1,237 @@
+\section{Basic Notations and Ideas}
+
+\subsection{Non-measurealbe Sets}
+Measure is very important since the integrating and probability are built on top of it.
+At the begining, the idea is very simple:
+\paragraph{}\emph{
+  The concept for the measure of length grows up naturally.
+  For a set $(a, b]\in \mathbb{R}$, the length of it is $b - a$.
+  As the interval $(a, b]$ could be seen as a subset of $\mathbb{R}$,
+  we might ask, could we define a function $f:\mathcal{P}(\mathbb{R}) \to \mathbb{R}$
+  to give a measure for all the subset of $\mathbb{R}$?
+} 
+
+\paragraph{}
+At first, some people start to find such a function $f$ on $\mathcal{P}(\mathbb{R})$.
+Ideally, if we want to define a function $\lambda$ like this, we'd like it satisfies some properties:
+\begin{itemize}[itemsep=0mm]
+\item (0) $\lambda: \mathcal{P}(\mathbb{R}) \to \mathbb{R}_{+}\cup\{+\infty\}$
+\item (1) $\lambda((a, b]) = b - a$, since we want it to remain its nature meaning.
+\item (2) $\lambda(A + x) = \lambda(A)$, since the shift should not change the volume.
+\item (3) $\lambda(\cup_{j\geq 1} A_j) = \sum_{j\geq 1} \lambda(A_j)$ for coutable  disjoint $A_j$. Since we need to add the volume for calculation.
+\end{itemize}
+
+But soon, they find it impossible, as we could prove this function could not exists.
+Otherwise, there must be a contradiction.
+\begin{theorem}
+  The function that satisfies the requirements above does not exist.
+\end{theorem}
+\begin{proof} 
+  For $x, y\in\mathbb{R}$, let $x\sim y$ if $y - x\in\mathbb{Q}$.
+  Let $[x] = \{y \in \mathbb{R} | y - x \in \mathbb{Q}\}$ be a equivalent class.
+  Let $\Lambda = \mathbb{R}|\sim$, which means the set of equivalent classes.
+  \marginnote{$\Lambda$ is uncountable, since $\mathbb{R}$ is uncountable, and any $[x]\in\Lambda$ is countable. We may use $\alpha, \beta$ to represent the point in $\Lambda$.}
+  Now, we construct a set $\Omega\in\mathbb{R}$ be the set which contains one and only one points from each equivalent class. Thus we could assume that $\Omega\subseteq(0, 1)$.
+
+\begin{claim}[For a set $\Omega\subseteq\mathbb{R}$, and $p, q\in\mathbb{R}$. Either we have $\Omega+p = \Omega+q$, eigher we have $\Omega+p$ disjoints with $\Omega+q$]
+  \begin{proof}
+    First, lets assume $(\Omega + p)\cap(\Omega+q)\not=\emptyset$.
+    Then for some $x$ in it, we have
+    \begin{align*}
+      x &= \alpha + p, \hspace{0.5cm} \alpha\in\Omega \\
+        &= \beta + q,  \hspace{0.5cm} \beta \in\Omega
+    \end{align*}
+    So we have $\alpha - \beta = q - p$.
+    From the definition of $\Omega$, we know that $p = q$ and $\alpha = \beta$.
+    So we have \[q\not= p \Rightarrow (\Omega + q)\cap(\Omega+p) = \emptyset\].
+  \end{proof}
+\end{claim}
+  By this claim, we could define a set:
+  \[ S = \sum_{\substack{q\in\mathbb{Q}\\-1 < q < 1}}(\Omega + q) \]
+  Its easy to see that for all these $q$, $\Omega + q \subseteq (-1, 2)$.
+  So we have $S\subseteq(-1, 2)$ and $\lambda(S) \leq \lambda((-1, 2)) = 3$.
+  So by property (3), we have
+  \[\sum_{\substack{q\in\mathbb{Q}\\-1<q<1}} \lambda(\Omega + q) \leq 3\]
+  And by property (2), we have $\lambda(\Omega + q) = \lambda(\Omega) = 0$.
+  \marginnote{
+    Here, since we have infinity $q$s, $\lambda(\Omega + q) = 0$. Otherwise, the sum of them could not less than $3$.
+  }
+  By observing this, we have $\lambda(S) = 0$.
+  \begin{claim}[$(0, 1) \subseteq S$]
+    \begin{proof}
+      Suppose we have $x\in(0,1)$ and $\alpha\in [x]\cap\Omega$, then we have $\alpha\in(0, 1)$ (by definition of $\Omega$). Since $\alpha$ belongs to the equivalent class of $[x]$, $\alpha - x = q\in\mathbb{Q}$. Its easy to see that $-1 < q < 1$. Which means $x=\alpha + q$ and thus $x\in\Omega + q$ for some $q\in(0,1)$. Which is exactly in $S$. So we have $(0, 1)\subseteq S$.
+    \end{proof}
+  \end{claim}
+  So far, we have find a contradiction that there is no such function which could satisfies all the properties.
+\end{proof}
+
+What can we do now? Maybe we could relax some of these properties.
+Maybe we could remove some this conditions.
+Maybe we could accept the function which is not defined on all the subsets of $\mathbb{R}$. This means there are some kinds of subsets of $\mathcal{P}$ which we could not set a measure on it, these sets are called non-measurealbe sets.
+
+\subsection{Classes of subsets, and set functions}
+\begin{define}[semi-algebra]
+  \index{semi-algebra}
+  $\mathcal{S} \subseteq \mathcal{P}(\Omega)$, is a semi-algebra if:
+  \begin{enumerate}[itemsep=0mm]
+  \item $\Omega \in \mathcal{S}$.
+  \item $A, B\in \mathcal{S} \Rightarrow A\cap B\in \mathcal{S}$. \\ (\emph{This means it is closed under finite intersections})
+  \item $\forall A\in\mathcal{S} \Rightarrow$ $\exists E_1, E_2, \cdots, E_n\in\mathcal{S}$ such that $A^c = \cup_{j=1}^n E_j$.
+  \end{enumerate}
+\end{define}
+
+\begin{define}[algebra]
+  \index{algebra (in measure theory)}
+  $\mathcal{A} \subseteq \mathcal{P}(\Omega)$, is an algebra if:
+  \begin{enumerate}[itemsep=0mm]
+  \item $\Omega \in \mathcal{A}$.
+  \item $A, B\in \mathcal{A} \Rightarrow A\cap B\in \mathcal{A}$.
+  \item $A\in\mathcal{A} \Rightarrow A^c\in\mathcal{A}$. \\ (\emph{Here is the difference between semi-algebra and algebra})
+  \end{enumerate}
+\end{define}
+
+\begin{define}[$\sigma$-algebra]
+  \index{$\sigma$-algebra}
+  $\mathcal{F} \subseteq \mathcal{P}(\Omega)$, is an algebra if:
+  \begin{enumerate}[itemsep=0mm]
+  \item $\Omega\in\mathcal{F}$.
+  \item $A_j\in\mathcal{F}$ for $j\geq 1$ $\Rightarrow$ $\cap_{j\geq 1} A_j \in \mathcal{F}$. \\ (\emph{closed under countable intersections})
+  \end{enumerate}
+\end{define}
+
+\begin{remark}
+  $\sigma$-algebra $\Rightarrow$ algebra $\Rightarrow$ seim-algebra.
+  $\sigma$-algebra asks for more constraint than algebra, and thus it is bigger than an algebra (this means you could find some algebra in $\sigma$-algebra or $\sigma$-algebra is itself an algebra).
+\end{remark}
+
+\begin{observation}
+  If $\mathcal{A}_{\alpha} \subseteq \mathcal{P}(\Omega)$ is ($\sigma$)-algebra for some $\alpha\in I$. Then we have $\mathcal{A} = \cap_{\alpha\in I} \mathcal{A}_\alpha$ is a ($\sigma$)-algebra.
+\end{observation}
+we can use these fact to introduce the notion of the algebra generated by the classes of sets.
+\begin{define}
+  The algebra generated by class $\mathcal{C}\subseteq\mathcal{P}(\Omega)$ is denoted by $\mathcal{A}(\mathcal{C})$. And $\mathcal{A}(\mathcal{C})$ satisfies:
+  \begin{itemize}
+  \item $\mathcal{C}\subseteq\mathcal{A}(\mathcal{C})$, $\mathcal{A}(\mathcal{C})$ is algebra.
+  \item \[
+      \left\{
+        \begin{array}{l}
+          \mathcal{C} \subseteq \mathcal{B} \\
+          \mathcal{B} \mbox{ is algebra} 
+        \end{array}
+      \right. \Rightarrow \mathcal{A}(\mathcal{C})\subseteq \mathcal{B}
+    \]
+  \end{itemize}
+\end{define}
+Let $\mathcal{A}_\alpha$ be all the algebra that contains $\mathcal{C}$.
+Then it is easy to verify that
+\[\mathcal{A}(\mathcal{C}) = \bigcap_\alpha \mathcal{A}_\alpha\].
+
+\begin{lemma}
+  $\mathcal{S}\subseteq\mathcal{P}(\Omega)$ is a semi-algebra, $\mathcal{A}$ is the algebra generated by $\mathcal{S}$. Then
+  \[A\in\mathcal{A} \Leftrightarrow \substack{\exists E_j, i\leq j\leq n, E_j \in \mathcal{S}\\A=\sum_{j=1}^n E_j}\]
+\end{lemma}
+\begin{proof}
+  \emph{($\Leftarrow$):} This is obvious from the definition of $\mathcal{A}$.
+
+  \emph{($\Rightarrow$):} Define a new class
+  \[\mathcal{B} = \{\sum_{j=1}^n F_j, F_j\in\mathcal{S}\}\].
+  We will prove that: \[
+    \left\{
+      \begin{array}{l}
+        \mbox{(1) $\mathcal{B}$ is an algebra} \\
+        \mbox{(2) }\mathcal{S} \subseteq \mathcal{B}
+      \end{array}
+    \right. \Rightarrow \mathcal{A} \subseteq \mathcal{B}
+  \]
+  Note that (2) is trivial since every element in $\mathcal{S}$ could be written in the form of $\sum_{j=1}^n F_j$.
+  
+  Now we prove the (1).
+  \begin{enumerate}
+  \item $\Omega\in\mathcal{B}$. (this is trivial, since $\Omega\in\mathcal{S}\subseteq\mathcal{B}$).
+  \item $A,B\in\mathcal{B}\Rightarrow A\cap B\in\mathcal{B}$. (easy to verify)
+  \item $A\in\mathcal{B}\Rightarrow A^c\in\mathcal{B}$. \\
+    Let $A\in\mathcal{B}$ and $A = \sum_{j=1}^n E_j, E_j\in\mathcal{S}$.
+    Then $A^c = (\sum_{j=1}^n E_j)^c = E_1^c \cap E_2^c \cap \cdots \cap E_n^c$.
+    And $E_i^c = \sum_{k_i = 1}^{l_i} F_{i, k_i}, F_{i, j} \in \mathcal{S}$ (This is by the definition of semi-algebra).
+    So,
+    \begin{align*}
+    A^c &= (\sum_{k_1=1}^{l_1}F_{1,k_1})\cap(\sum_{k_2=1}^{l_2}F_{2,k_2})\cap\cdots\cap(\sum_{k_n=1}^{l_n}F_{n,k_n}) \\
+    &= \sum_{k_1=1}^{l_1}\sum_{k_2=1}^{l_2}\cdots\sum_{k_n=1}^{l_n} (F_{1,k_1}\cap F_{2,k_2}\cap\cdots\cap F_{n,k_n})
+    \end{align*}
+    So, $A^c\in\mathcal{B}$.
+  \end{enumerate}
+  Since $\mathcal{B}$ is an algebra, and it contains $\mathcal{S}$, so $\mathcal{A}\subseteq{S}$.
+\end{proof}
+
+Now we investigate functions defined on these sets.
+\begin{define}[addtive function]
+  \index{additive function}
+  For some $\mathcal{C}\subseteq\mathcal{P}(\Omega)$ where $\emptyset\in\mathcal{C}$. we could define a function $\mu:\mathcal{C}\to\mathbb{R}_+\cup\{+\infty\}$.
+  Then $\mu$ is additive when:
+  \begin{enumerate}
+  \item $\mu(\emptyset) = 0$.
+  \item $\substack{E_1, E_2, \cdots E_n\in\mathcal{C}\\E = \sum_{j=1}^n E_jj} \Rightarrow \mu(E) = \sum_{j = 1}^n \mu(E_j)$ \\
+    (defined on finite disjoint union) \\
+  \end{enumerate}
+\end{define}
+
+\begin{observation}
+  If $E\subseteq F\subseteq \mathcal{C}C$ and $\mu:\mathcal{C} \to \mathbb{R}_+\cup \{+\infty\}$ is addtive, then
+  \begin{enumerate}
+  \item $\mu(E) = +\infty \Rightarrow \mu(F) = +\infty$.
+  \item $\mu(E) < +\infty \Rightarrow \mu(F) = \mu(E) + \mu(F\setminus E)$.
+  \end{enumerate}
+  So, $\mu(E)\leq \mu(F)$ and when $\mu(E)$ is finite, then
+  \[\mu(F\setminus E) = \mu(F) - \mu(E)\]
+\end{observation}
+
+\begin{define}[$\sigma$-addtive function]
+  \index{$\sigma$-addtive function}
+  For some $\mathcal{C}\subseteq\mathcal{P}(\Omega)$, where $\emptyset\in\mathcal{C}$. We could define a function $\mu:\mathcal{C}\to\mathbb{R}_+\cup\{+\infty\}$.
+  Then $\mu$ is $\sigma$-additive when:
+  \begin{enumerate}
+  \item $\mu(\emptyset) = 0$.
+  \item $\substack{E_j\in\mathcal{C}, j\geq 1\\E_j \cap E_k = \emptyset \\ E = \sum_{j\geq 1} E_j} \Rightarrow \mu(E) = \sum_{j\geq 1}\mu(E_j)$ \\
+    (defined on countable disjoint union)
+  \end{enumerate}
+\end{define}
+
+From the definition above, we could define what is a continuous measure (note that a measure is actually a function)
+
+\begin{define}[continuous from below]
+  \index{continuous from below}
+  Suppose we have
+  \[\substack{
+      \mathcal{C}\subseteq\mathcal{P}(\Omega) \\
+      \mu:\mathcal{C} \to \mathbb{R}_+\cup\{+\infty\} \\
+      E\in\mathcal{C}
+  }\],
+  then when we say $\mu$ continuous from below at $E$, we means:
+  \[\forall \{E_n\}_{n\geq 1} , \substack{E_n\in\mathcal{C}\\E_n\uparrow E} \Rightarrow \mu(E_n)\uparrow\mu(E)\] 
+\end{define}
+  \marginnote[-1cm]{
+    Here, when we say $E_n\uparrow E$, we means $E_n\subseteq E_{n+1}$ and $\bigcup_{n\geq 1} E_n = E$.
+  }
+
+\begin{define}[continuous from above]
+  Suppose we have
+  \[\substack{
+      \mathcal{C} \subseteq \mathcal{P}(\Omega) \\
+      \mu : \mathcal{C} \to \mathbb{R}_+ \cup \{+\infty\} \\
+      E \in \mathcal{C} 
+    }\],
+  then when we say $\mu$ continuous from above at $E$, we means:
+  \[
+    \forall \{E_n\}_{n\geq 1} , \substack{E_n \in\mathcal{C} \\ E_n\downarrow E \\ \exists n_0, \mu(n_0) \leq +\infty} \Rightarrow \mu(E_n)\downarrow\mu(E)
+  \] \\
+  (Note that here, there must exists some $n_0$ for $\mu(n_0)\leq +\infty$.
+  In my mind, this is because, $+\infty$ is outside of $\mathbb{R}$, but we could only perform analysis inside $\mathbb{R}$.
+  So, we need some tools to pull us back.)
+\end{define}
+  \marginnote[-3cm]{
+    Here, when we say $E_n\downarrow E$, we means $E_n\supseteq E_{n+1}$ and $\bigcap_{n\geq 1} E_n = E$.
+  }
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

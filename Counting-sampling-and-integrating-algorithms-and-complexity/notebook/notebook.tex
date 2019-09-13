@@ -16,6 +16,10 @@
   urlcolor=cyan
 }
 
+\usepackage{color}
+\definecolor{mybackground}{RGB}{204, 232, 207}
+\pagecolor{mybackground}
+
 \usepackage{amsmath, amssymb, amsthm}
 \newtheorem{THM}{Theorem}[section]
 \newtheorem{DEF}{Definition}[section]
@@ -23,6 +27,9 @@
 \newtheorem{PROP}{Proposition}[section]
 \newtheorem{CORO}{Corollary}[section]
 \newtheorem{FACT}{Fact}[section]
+\newtheorem{CLAIM}{Claim}[section]
+\newtheorem{OBSER}{Observation}[section]
+\newtheorem{remark}{Remark}[section]
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 % left foot mark for math symbol
 \usepackage{leftidx}
@@ -94,6 +101,25 @@
   \end{thmbox}
 }
 
+\newenvironment{claim}[1][]{
+  \begin{thmbox}{black}{
+      \begin{CLAIM}
+        #1
+      \end{CLAIM}
+  }
+}{
+  \end{thmbox}
+}
+
+\newenvironment{observation}[1][]{
+  \begin{thmbox}{blue}{
+      \begin{OBSER}
+        #1
+      \end{OBSER}
+  }
+}{
+  \end{thmbox}
+}
 
 % mark the words in tikz
 \newcommand{\MK}[3][]{
@@ -180,6 +206,11 @@
 
 % Burnn-Minkowshi Theorem
 \input{topic/Brunn-Minkowski-Theorem/content}
+
+\chapter{Topics in Measure Theory}
+\clearpage
+
+\input{measure-theory/basic-notation-and-idea/content}
 
 \printindex
 \end{document}
