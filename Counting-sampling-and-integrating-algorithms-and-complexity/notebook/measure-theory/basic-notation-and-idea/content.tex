@@ -228,9 +228,167 @@ From the definition above, we could define what is a continuous measure (note th
   In my mind, this is because, $+\infty$ is outside of $\mathbb{R}$, but we could only perform analysis inside $\mathbb{R}$.
   So, we need some tools to pull us back.)
 \end{define}
-  \marginnote[-3cm]{
-    Here, when we say $E_n\downarrow E$, we means $E_n\supseteq E_{n+1}$ and $\bigcap_{n\geq 1} E_n = E$.
+\marginnote[-3cm]{
+Here, when we say $E_n\downarrow E$, we means $E_n\supseteq E_{n+1}$ and $\bigcap_{n\geq 1} E_n = E$.
+}
+
+\begin{define}
+  If a function continuous from both above and below, then we call it continuous.
+\end{define}
+
+\begin{lemma}
+  Suppose we have \[\substack{
+    \mathcal{A}\subseteq \mathcal{P}(\Omega), \mbox{ algebra} \\
+    \mu : \mathcal{A} \to \mathbb{R}_+\cup\{+\infty\}, \mbox{ additive}
+  }\],
+  then we have:
+  \begin{enumerate}
+  \item $\mu$ is $\sigma$-additive $\Rightarrow$ $\mu$ is continuous at $E, \forall E\in \mathcal{A}$.
+  \item $\mu$ is continuous from below $\Rightarrow$ $\mu$ is $\sigma$-additive.
+  \item $\substack{
+      \mbox{$\mu$ is continuous from above at $\emptyset$}\\
+      \mbox{$\mu$ is finite ($\mu(\Omega) < +\infty$)}
+    } \Rightarrow \mbox{$\mu$ is $\sigma$-additive.}$
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \emph{(1) ($\mu$ is $\sigma$-additive $\Rightarrow$ $\mu$ is continuous at $E, \forall E\in\mathcal{A}$ from \underline{below}):} \\
+  Since we have $E_n\uparrow E$, then we define $F_n = E_n\setminus E_{n-1}$.
+  Its clear that $F_k$ is disjoint and $\cup_{n\geq 1} E_n = \cup_{k\geq 1} F_k, \sum_{k=1}^n F_k = E_n$.
+  So, using the $\sigma$-additive of $\mu$, we have
+  \begin{align*}
+    \mu(E) = \sum_{k\geq 1} F_k &= \lim_{n\to\infty} \sum_{k=1}^n \mu(F_k) \\
+    &= \lim_n \mu(\sum_{k=1}^n F_k), \hspace{0.5cm} \mbox{using additive} \\
+    &= \lim \mu(E_n)
+  \end{align*}
+
+  \emph{(1) ($\mu$ is $\sigma$-additive $\Rightarrow$ $\mu$ is continuous at $E, \forall E\in\mathcal{A}$ from \underline{above}):} \\
+  Recall what we have: \[
+    \left\{
+      \begin{array}{l}
+        E\in\mathcal{A} \\
+        E_n \in \mathcal{A}, E_n\downarrow E \\
+        \mu(E_{n_0}) < +\infty
+      \end{array}
+    \right.
+  \]
+  Lets define $G_k = E_{n_0}\setminus E_{n_0+k}$.
+  Since $E_{n_0+1}, E_{n_0+2}, \cdots$ is getting smaller and smalller,
+  we have $G_k\uparrow E_{n_0} \setminus E$.
+  Thus, as we have proved above, $\mu(G_k)\uparrow \mu(E_{n_0}\setminus E)$.
+  Since $\mu(E_{n_0})$ is finite, we have 
+  \begin{align*}
+    \mu(E_{n_0}\setminus E) &= \lim_k \mu(E_{n_0}\setminus E_{n_0+k}) \\
+    \mu(E_{n_0}) - \mu(E) &= \lim_k (\mu(E_{n_0}) - \mu(E_{n_0+k})) \\
+    \mu(E) &= \lim_k E_{n_0+k} \\
+    \mu(E) &= \lim E_n
+  \end{align*}
+
+  \emph{(2) ($\mu$ is continuous from below $\Rightarrow$ $\mu$ is $\sigma$-additive):} \\
+  Suppose we have $E = \sum_{k\geq 1} E_k (E, E_k\in\mathcal{A})$, we want to prove that $\mu(E) = \sum_{k\geq 1} \mu(E_k)$.
+  \marginnote[-1cm]{
+    Here, the notation \[\sum_{k\geq 1}\] could be seen as an abbreviate of
+    \[\lim_{n\to+\infty}\sum_{k=1}^n\]
+    (this is sometimes called infinity sum)
   }
+  Let $F_n = \sum_{k=1}^n E_k$, then $F_n \uparrow E$.
+  Since $\mu$ is continuous from below, we have $\mu(F_n)\uparrow \mu(E)$.
+  And by additive $\sum_{k=1}^n \mu(E_k) \uparrow \mu(E)$.
+  If we write this limit in infinity sum form we have
+  \begin{align*}
+    \lim_{n\to+\infty}\sum_{k=1}^n \mu(E_k) = \mu(E) \\
+    \lim_{k\geq 1} \mu(E_k) = \mu(E)
+  \end{align*}
+
+  \emph{(3) (
+    $\substack{
+      \mbox{$\mu$ is continuous from above at $\emptyset$} \\
+      \mbox{$\mu$ is finite, which means $\mu(\Omega)<+\infty$}
+    } \Rightarrow \mbox{$\mu$ is $\sigma$-additive}
+  $):} \\
+  Suppose we have $E = \sum_{k\geq 1} E_k, (E, E_k\in\mathcal{A})$, we want to show that $\mu(E) = \sum_{k\geq 1} \mu(E_k)$.
+  Let $F_n = \sum_{k\geq n} E_k = E\setminus \sum_{j=1}^{n-1}E_j \in \mathcal{A}$.
+  So we have $F_n\downarrow \emptyset$.
+
+  Since we have $\substack{F_n\in\mathcal{A} \\ F_n\downarrow\emptyset\\ \mu(F_n)<+\infty}$, by the definition of continuous from above at $\emptyset$,
+  we have $\mu(F_n)\downarrow \mu(\emptyset) = 0$.
+  Thus, we have
+  \begin{align*}
+    \mu(E) &= \mu(\sum_{k=1}^{n} E_k \cup \sum_{k > n} E_k) \\
+    &= \sum_{k=1}^n \mu(E_k) + \mu(F_{n+1}), \hspace{0.5cm} \mbox{by additive} \\
+    &= \lim_{n\to+\infty} (\sum_{k=1}^n \mu(E_k) + \mu(F_{n+1})), \hspace{0.5cm} \mbox{since the above equality holds for all $n$} \\
+    &= \lim_{n\to+\infty} (\sum_{k=1}^n \mu(E_k)) + 0 \\
+    &= \sum_{k\geq 1} \mu(E_k)
+  \end{align*}
+\end{proof}
+
+Having these definitions and properties, we could start our extension.
+\begin{theorem}[extension semi-algebra to algebra with ($\sigma$)-additive reserved]
+  If $\mathcal{S}\subseteq\mathcal{P}(\Omega)$\\
+  $\mu : \mathcal{S} \to \mathbb{R}_+\cup\{+\infty\}$, ($\sigma$)-additive.
+
+  Then $\exists \nu : \mathcal{A}(\mathcal{S}) \to \mathbb{R}_+\cup\{+\infty\}$, such that:
+  \begin{enumerate}
+  \item $\nu$ is ($\sigma$)-additive.
+  \item $\nu(A) = \mu(A), \forall A\in\mathcal{S}$.
+  \item $\nu$ is unique. Which means:\\
+  \( \substack{
+      \nu_1, \nu_2 : \mathcal{A}(\mathcal{S}) \to \mathbb{R}_+\cup\{+\infty\} \\
+      \nu_1(A) = \nu_2(A), \forall A\in \mathcal{S}
+  } \Rightarrow \nu_1(E) = \nu_2(E), \forall E\in\mathcal{A}(\mathcal{S})\)
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Since any $A\in\mathcal{A}(\mathcal{S})$ could be written in the form
+  \[A = \sum_{j=1}^n E_j, \hspace{0.5cm} E_j\in\mathcal{S}\]
+  (note that this property only exists between semi-algebra and algebra)
+  So, to remains additive, we could define
+  \[\nu(A) \overset{add}{=\joinrel=} \sum_{j=1}^n \nu(E_j) \overset{ext}{=\joinrel=} \sum_{j=1}^n \mu(E_j)\]
+
+  \emph{(1) ($\nu$ is well-defined):} \\
+  Suppose $A$ has two representations
+  \[A = \sum_{j=1}^n E_j = \sum_{k=1}^m F_k, \hspace{0.5cm} E_j, F_k \in\mathcal{S}\]
+  By additive, we have
+  \begin{align*}
+    \sum_{j=1}^n E_j &= \sum_{j=1}^n E_j \cap A \\
+    &= \sum_{j=1}^n E_j \cap (\sum_{k=1}^m F_k) \\
+    &= \sum_{j=1}^n\sum_{k=1}^m E_j\cap F_k \\
+    \sum_{j=1}^n \mu(E_j) &= \sum_{j=1}^n\sum_{k=1}^m \mu(E_j\cap F_k)
+  \end{align*}
+  Similarly,
+  \[\sum_{k=1}^m \mu(F_k) = \sum_{j=1}^n\sum_{k=1}^m \mu(E_j\cap F_k)\]
+
+  \emph{(2) ($\nu$ is additive):} \\
+  Say we have \[
+    \begin{array}{l}
+      A = \sum_{j=1}^n E_j, \hspace{0.5cm} E_j\in \mathcal{S} \\
+      B = \sum_{k=1}^m F_k, \hspace{0.5cm} F_k\in \mathcal{S}
+    \end{array}
+  \]
+  and $A\cap B = \emptyset$.
+  We want to prove that $\nu(A\cup B) = \nu(A) + \nu(B)$.
+  Trivially,
+  \begin{align*}
+    A \cup B &= \sum_{j=1}^n E_j + \sum_{k=1}^m F_k \\
+    \nu(A\cup B) &= \nu(\sum_{j=1}^nE_j) + \nu(\sum_{k=1}^m F_k) \\
+    &= \nu(A) + \nu(B)
+  \end{align*}
+  
+  \emph{(3) ($\nu$ is unique):}
+  Recall that we have: \[
+    \left\{
+      \begin{array}{l}
+        \nu_1, \nu_2 : \mathcal{A}(\mathcal{S}) \to \mathbb{R}_+\{+\infty\} \\
+        \nu_1(A) = \nu_2(A), \hspace{0.5cm} \forall A \in \mathcal{S} \\
+        \nu_1, \nu_2 \mbox{ additive}
+      \end{array}
+    \right.
+  \], and we want to prove $\nu_1(B) = \nu_2(B)$ forall $B\in\mathcal{A}(\mathcal{S})$.
+  But this is actually very trivial, since for all $B\in\mathcal{A}(\mathcal{S})$ we have $B = \sum_{j=1}^n E_j$ for some $E_j\in\mathcal{S}$.
+  \[\nu_1(B) \overset{add}{=\joinrel=} \sum_{j=1}^n \mu(E_j) \overset{add}{=\joinrel=} \nu_2(B)\]
+\end{proof}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../notebook"
