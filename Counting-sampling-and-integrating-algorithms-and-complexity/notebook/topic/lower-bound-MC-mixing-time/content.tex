@@ -1,0 +1,121 @@
+\section{Lower Bound of Markov Chains Mixing Time}
+This section summaries some techniques to analysis the lower bound of a Markov Chains' mixing time.
+\subsection{Counting Bound}
+Counting bound is form by a simple intuition:
+
+\emph{If the possible locations of a chain after $t$ steps do not form a significant \textbf{fraction} of the state space, then the distribution of the chain at time $t$ cannot be close to uniform.}
+
+\emph{If we seen the state space $\mathcal{X}$ as a graph $G$. Then we could give a lower bound for this \textbf{fraction} by using the relationship between the size $n$ of the graph and the maximum degree $\Delta$ of this graph.}
+
+\marginnote[-1cm]{
+  Let
+  \[\mbox{deg}(v) := |\{u|P(v,u) > 0\}|\]
+  then
+  \[\Delta = \max_{x\in\mathcal{X}} \mbox{deg}(x)\]
+}
+
+\begin{define}
+Let $\mathcal{X}_t^x$ be the states that could be reached from $x$ in exactly $t$ steps.
+Its quite easy for us to note that $|\mathcal{X}_t^x|\leq \Delta^t$.
+\end{define}
+If $\Delta^t< (1-\varepsilon)|\mathcal{X}|$, and $\pi$ is the uniform distribution, then we have
+\begin{align*}
+  ||P^t(x,\cdot) - \pi||_{TV} &\geq P^t(x,\mathcal{X}_t^x)  - \pi(\mathcal{X}_t^x) \\
+  &= 1 - \frac{\Delta^t}{|\mathcal{X}|} \\
+  &> \varepsilon
+\end{align*}
+So, we know that if $\Delta^t < (1-\varepsilon)|\mathcal{X}|$, then the total variansion distance does not reach the target $\varepsilon$ as we want.
+Which means we have
+\begin{align*}
+  \Delta^{t_{mix}(\varepsilon)} &\geq (1-\varepsilon)|\mathcal{X}| \\
+  t_{mix}(\varepsilon) &\geq \frac{\log(|\mathcal{X}|(1-\varepsilon))}{\log\Delta}
+\end{align*}
+
+\subsection{Diameter Bound}
+For convenience, we define some notations here.
+\begin{define}
+  \begin{align*}
+    d(t) &:= \max_{x\in\mathcal{X}}||P^t(x, \cdot) - \pi(x)||_{TV} \\
+    \overline{d}(t) &:= \max_{x,y\in\mathcal{X}}||P^t(x,\cdot) - P^t(y,\cdot)||_{TV}
+  \end{align*}
+\end{define}
+
+\begin{lemma}
+  \[d(t) \leq \overline{d}(t) \leq 2d(t)\]
+\end{lemma}
+\begin{proof}
+  \emph{(1) ($\overline{d}(t) \leq 2d(t)$):} \\
+  By triangle inequality (Proposition \ref{prop:triangle-inequality}), we have
+  \begin{align*}
+    \overline{d}(t) &= \max_{x,y\in\mathcal{X}}||P^t(x, \cdot) - P^t(y,\cdot)||_{TV} \\
+                    &= ||P^t(x_0, \cdot) - P^t(y_0,\cdot)||_{TV} \\
+                    &\leq ||P^t(x_0,\cdot) - \pi||_{TV} + ||P^t(y_0,\cdot) - \pi||_{TV},\hspace{0.5cm} \mbox{triangle inequality} \\
+                    &\leq \max_{x\in\mathcal{X}}||P^t(x,\cdot) - \pi||_{TV} + \max_{y\in\mathcal{X}}||P^t(y,\cdot) - \pi||_{TV} \\
+                    &= 2d(t)
+  \end{align*}
+
+  \emph{(2) ($d(t)\leq \overline{d}(t)$):}\\
+  \begin{align*}
+    d(t) &= ||P^t(x,\cdot) - \pi||_{TV} \\
+         &= \max_{A\subseteq \mathcal{X}} |P^t(x, A) - \pi(A)| \\
+         &= |P^t(x, A) - \pi(A)|,\hspace{0.5cm}\mbox{for some $A$} \\
+         &\mbox{since $\pi P^t = \pi$, we have $\pi(A) = \sum_{y\in\mathcal{X}} \pi(y)P^t(y,A)$} \\
+         &= \sum_{y\in\mathcal{X}} \pi(y) |P^t(x, A) - P^t(y, A)| \\
+         &\leq \sum_{y\in\mathcal{X}} \pi(y) ||P^t(x, \cdot) - P^t(y,\cdot)||_{TV} \\
+         &\leq ||P^t(x, \cdot) - P^t(y,\cdot)||_{TV} \qedhere
+  \end{align*}
+\end{proof}
+
+In a graph $G$ formed by a state space $\Omega$,
+if $\mbox{dis}(x,y) = L$, then $P^{\lfloor(L-1)/2\rfloor}(x, \cdot)$ and $P^{\lfloor(L-1)/2\rfloor}(y, \cdot)$ are possible on disjoint vertex sets.
+More precisely,
+\[||P^{\lfloor(L-1)/2\rfloor}(x,\cdot) - P^{\lfloor(L-1)/2\rfloor}(y,\cdot)||_{TV} = 1\]
+So if $L$ is the diameter of the whole graph, we have
+\begin{align*}
+  d(\lfloor(L-1)/2\rfloor) \leq \overline{d}(\lfloor(L-1)/2\rfloor) = 1 \leq 2 d(\lfloor(L-1)/2\rfloor)
+\end{align*}
+So we have
+\[d(\lfloor(L-1)/2\rfloor)\geq \frac{1}{2}\]
+So, if $\varepsilon < \frac{1}{2}$, by
+\begin{align*}
+  t_{mix}(\varepsilon) &= \min\{t: d(t) < \varepsilon\}
+\end{align*}
+we have
+\[t_{mix}(\varepsilon) \geq \frac{L}{2}\]
+\subsection{Bottleneck Ratio}
+A bottleneck makes portions of $\mathcal{X}$ difficult to reach from some starting locations, limiting the speed of convergence.
+\begin{define}[Bottleneck Ratio]
+  \begin{align*}
+    Q(x, y) &:= \pi(x)P(x, y)  & \mbox{edegs measure}\\
+    Q(A, B) &:= \sum_{x\in A, y\in B} \pi(x)P(x, y) & \\
+    \Phi(S) &:= \frac{Q(S, S^c)}{\pi(S)} & \mbox{bottleneck ratio of $S$}\\
+    \Phi_* &:= \min_{S:\pi(S)\leq \frac{1}{2}} \Phi(S) & \mbox{bottleneck ratio of whole chain}
+  \end{align*}
+\end{define}
+\begin{theorem}
+  \[t_{mix}(1/4) \geq \frac{1}{4\Phi_*}\]
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    P_{\pi}\{X_0\in A, X_t\in A^c\} &\leq \sum_{r=1}^t P_{\pi} \{X_{r-1}\in A, X_r\in A^c\}, \hspace{0.5cm} \mbox{all $X_r$ has distribution $\pi$} \\
+                                    &= tP_{\pi}\{X_0\in A, X_1\in A^c\} \\
+                                    &= tQ(A, A^c) \\
+    P_{\pi}\{X_t\in A^c | X_0\in A\} &\leq t\Phi(A) 
+  \end{align*}
+  So, we have
+  \[P_{\pi}\{X_t\in A | X_0\in A\} \geq 1 - t\Phi(A)\]
+  So, there exists $x$ whit $P^t(x, A) \geq 1 - t\Phi(A)$.
+  Therefore
+  \[d(t) \geq 1 - t\Phi(A) - \pi(A)\]
+  If $\pi(A) \leq 1/2$ and $t < 1/[4\Phi(A)]$, then $d(t) > 1/4$.
+  So
+  \[t_{mix} < 1/[4\Phi(A)]\].
+  Maximizing over $A$ with $\pi(A)\leq 1/2$ completes the proof.
+\end{proof}
+
+\subsection{Distinguishing Statistics}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

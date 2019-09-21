@@ -1,0 +1,50 @@
+\section{Chebyshev Inequality}
+We have encountered with this inequality for many times.
+We used to it without understanding it.
+Today, we are going depth, and we want to find out how it works.
+\begin{theorem}[Chebyshev Inequality (form 1)]
+  \[\Pr[|X - \mathbb{E}[X]| \geq \epsilon] \leq \mathrm{Var}[X]/\epsilon^2\]
+\end{theorem}
+\begin{proof}
+  \emph{(we only prove this in the continuous condition)}\\
+  For convenience, let $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}[X]$.
+  Then by the definition of $\mathrm{Var}[X]$, we have
+  \begin{align*}
+    \sigma^2 &= \int_{-\infty}^{+\infty} (t - \mu)^2f(t)\mathrm{d}t, \hspace{0.5cm} \mbox{$f$ is the dense of the probability} \\
+    &\geq \int_{-\infty}^{\mu-\epsilon} (t - \mu)^2f(t)\mathrm{d}t + \int_{\mu+\epsilon}^{+\infty} (t-\mu)^2f(t)\mathrm{d}t
+  \end{align*}
+  Then, in the above expression, we have $|t - \mu|\geq \epsilon$.
+  And thus we have $(t - \mu)^2 \geq \epsilon^2$.
+  So
+  \begin{align*}
+    \sigma^2 &\geq \int_{-\infty}^{\mu-\epsilon}\epsilon^2f(t)\mathrm{d}t + \int_{\mu+\epsilon}^{+\infty} \epsilon^2f(t)\mathrm{d}t \\
+    &= \epsilon^2\left(\int_{-\infty}^{\mu-\epsilon}f(t)\mathrm{d}t + \int_{\mu+\epsilon}^{+\infty} f(t)\mathrm{d}t\right)\\
+    &= \epsilon^2\Pr\{\mbox{$X\leq \mu - \epsilon$ or $X \geq \mu + \epsilon$}\} \\
+    &= \epsilon^2\Pr[|X - \mu| \geq \epsilon] \qedhere
+  \end{align*}
+\end{proof}
+\begin{theorem}[Chebyshev Inequality (form 2)]
+  \[\Pr[X - \mathbb{E}[X] \geq \epsilon] \leq \mathrm{Var}[X]/(\mathrm{Var}[X] + \epsilon^2)\]
+\end{theorem}
+\begin{proof}
+  \emph{(we only prove this in the continuous condition)}\\
+  For convenience, let $\sigma^2 = \mathrm{Var}[X]$ and $\mu = \mathbb{E}[X]$.
+  Then
+  \begin{align*}
+    \sigma^2 &= \int_{-\infty}^{\mu+\epsilon} (t-\mu)^2f(t)\mathrm{d}t + \int_{\mu+\epsilon}(t - \mu)^2f(t)\mathrm{d}t \\
+    &\geq \int_{-\infty}^{\mu} (t-\mu)^2f(t)\mathrm{d}t + \int_{\mu+\epsilon}^{+\infty}\epsilon^2f(t)\mathrm{d}t
+  \end{align*}
+  Since $\int_{-\infty}^\mu f(t)\mathrm{d}t = 1/2$, we have
+  \[\int_{-\infty}^\mu (t-\mu)^2f(t)\mathrm{d}t = \frac{1}{2}\sigma^2\]
+  So
+  \begin{align*}
+    \sigma^2 &\geq \frac{1}{2}\sigma^2 + \int_{\mu+\epsilon}^{+\infty}\epsilon^2f(t)\mathrm{d}t \\
+    &= \sigma^2\Pr[X\geq \mu] + \epsilon^2\Pr[X\geq \mu+\epsilon] \\
+    &\geq \sigma^2\Pr[X\geq \mu+\epsilon] + \epsilon^2\Pr[X\geq \mu+\epsilon] \\
+    &= (\sigma^2 + \epsilon^2)\Pr[X - \mu\geq \epsilon] \qedhere
+  \end{align*}
+\end{proof}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:
