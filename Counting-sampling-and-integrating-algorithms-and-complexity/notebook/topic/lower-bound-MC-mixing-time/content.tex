@@ -115,6 +115,44 @@ A bottleneck makes portions of $\mathcal{X}$ difficult to reach from some starti
 
 \subsection{Distinguishing Statistics}
 
+\begin{fact}
+  If $X$ is a random variable on $\mathcal{X}$ with distribution $\mu$,
+  then for some function $f:\mathcal{X}\to\Lambda$,
+  $f(X)$ is a random variable on $\Lambda$ with distribution $\mu f^{-1}$.
+\end{fact}
+
+\begin{lemma}
+  Let $\mu$ and $\nu$ be probability distributions on $\mathcal{X}$, and let $f: \mathcal{X} \to \Lambda$ be a function on $\mathcal{X}$, where $\Lambda$ is a finite set. Then
+  \[||\mu - \nu||_{TV} \geq ||\mu f^{-1} - \nu f^{-1}||_{TV}\]
+\end{lemma}
+\begin{proof}
+  Obviously, we have
+  \[\max_{B\subset\Lambda} |\mu f^{-1}(B) - \nu f^{-1}(B)| \leq \max_{A\subset\mathcal{X}} |\mu(A) - \nu(A)|\]
+  since if $B\subset\Lambda$, then $f^{-1}(B)\subset\mathcal{X}$.
+\end{proof}
+
+\begin{theorem}
+  For $f:\mathcal{X} \to \mathbb{R}$, define $\sigma_*^2 = \max\{\mathrm{Var}_\mu(f), \mathrm{Var}_\nu(f)\}$.
+  If
+  \[|\mathbb{E}_\mu(f) - \mathbb{E}_\nu(f)|\geq r\sigma_*^2\]
+  then
+  \[||\mu-\nu||_{TV}\geq 1 - \frac{8}{r^2}\]
+  \tcblower
+  In particular, if for a Markov chain $(X_t)$ with transition matrix $P$ the function $f$ satisfies
+  \[|\mathbb{E}_x[f(X_t)] - \mathbb{E}_\pi(f)| \geq r\sigma_*^2\]
+  then
+  \[||P^t(x, \cdot) - \pi||_{TV}\geq 1-\frac{8}{r^2}\]
+\end{theorem}
+\begin{proof}
+  Assume that $\mathbb{E}_\mu(f) \leq \mathbb{E}_\nu(f)$.
+  Let $A = (\mathbb{E}_\mu(f) + r\sigma_*^2/2, +\infty)$ be an interval.
+  Then by Chebyshev inequality (see Theorem \ref{theorem:Chebyshev_Ineq_Form1}) we have
+  \[\mbox{$\mu f^{-1}(A) \leq \frac{4}{r^2}$ and $\nu f^{-1} (A) \geq 1 - \frac{4}{r^2}$}\]
+  hence
+  \[||\mu f^{-1} - \nu f^{-1}||_{TV} \geq 1 - \frac{8}{r^2}\].
+  And by using the lemma we have proved above, we could finish our proof.
+\end{proof}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../notebook"
