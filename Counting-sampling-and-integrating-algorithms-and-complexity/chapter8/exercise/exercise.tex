@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{tikz}
+\usepackage{graphics}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -143,6 +144,49 @@ Then
   &= \pi(\Omega_0)\pi(\Omega_0)(\E_{\pi_a}\varphi - \E_{\pi_b}\varphi)^2 \\
   &= \Var_\pi \overline{\varphi}
 \end{align*}
+
+\section{Exercise 8.13}
+Prove Lemma 8.12.
+
+\subsection{solution}
+
+\begin{proof}
+  
+For convenience, let $\delta(A, B)$ be the cut between $A$  and $B$.
+Let $\Omega_0 = \mathcal{B}_{\overline{e}} = A\cup B$ and $\Omega_1 = \mathcal{B}_e = C\cap D$.
+Let $\pi_0 = \pi/\pi(\Omega_0)$ and $\pi_1 = \pi/\pi(\Omega_1)$.
+Since $\delta(s, \Omega\setminus \{s\}) = 1$,
+
+\paragraph{}
+So, we only need to prove that there does not exist a cut which is less than $1$.
+Thus this cut should not contains any unbounded edge in the middle.
+This case is showed in the picture below.
+
+\begin{center}
+\scalebox{0.7}{\input{pic/flow.tex}}
+\end{center}
+
+Let $\delta^* = \delta(\{s\}\cup B\cup D, \{t\}\cup A\cup C)$.
+If $\delta^* < 1$, then
+\begin{align*}
+    \pi_0(A) + \pi_1(D) &< 1 \\
+    \pi_1(D) &< 1 - \pi_0(A) \\
+    \pi_1(D) &< \pi_0(B)
+\end{align*}
+
+And we have $D = \Gamma_e(B)$, since otherwise, $\Gamma_e(B)\cap C\not= \emptyset$, and the cut is unbounded.
+So
+\begin{align*}
+  \pi_1(\Gamma_e(B)) &< \pi_0(B) \\
+  \frac{\Gamma_e(B)}{|\mathcal{B}_e|} &< \frac{B}{|\mathcal{B}_{\overline{e}}|}, \hspace{0.5cm} B\subseteq \mathcal{B}_{\overline{e}}
+\end{align*}
+
+But this contradicts with Lemma 8.8, so we could draw a conclusion that $\delta^* \geq 1$.
+Which means the minimum cut in this graph is $1$.
+By applying the Max-flow, min-cut Theorem, we know that this graph has a flow of value $1$.
+Hence, the properties asked by Lemma 8.12 is obvious.
+\end{proof}
+
 \end{document}
 
 %%% Local Variables:
