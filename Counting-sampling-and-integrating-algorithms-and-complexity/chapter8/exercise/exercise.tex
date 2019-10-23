@@ -14,6 +14,7 @@
 
 \title{Exercise of Chapter 8}
 \author{Xiaoyu Chen}
+\date{}
 
 \begin{document}
 \maketitle
@@ -186,6 +187,97 @@ Which means the minimum cut in this graph is $1$.
 By applying the Max-flow, min-cut Theorem, we know that this graph has a flow of value $1$.
 Hence, the properties asked by Lemma 8.12 is obvious.
 \end{proof}
+
+\section{Exercies 8.17}
+Proving that class of orientable matroids is the same as the class of regular matroids requires familiarity with matroid theory. However, the weaker claim that the cycle matroid of any graph is orientable is an exercise in straight combinatorics. Prove the claim.
+\subsection{solution}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width = \textwidth]{pic/cut-cycle.png}
+  
+  \caption{
+    A cut intersects with a cycle.
+    If we make all the edges of the cycle in conterclockwise direction.
+    Then, it is easy for us to find that the number of edges from $B$ to $A$ (the \textcolor{green}{green} edges)
+    is equal to the number of edegs from $A$ to $B$ (the \textcolor{red}{red} edges).
+  }
+  \label{fig:cut-cycle}
+\end{figure}
+\paragraph{}
+Intuitively, as in Figure \ref{fig:cut-cycle}, if a cut intersects $D$ with a cycle $C$,
+then the number of green edges is equal to the number of red edges.
+Using this phenomenon, we could construct proper $\gamma$ and $\delta$.
+
+\paragraph{}
+Formally, consider a graphic matroid $\mathcal{B}$ of a graph $G$.
+Let $\mathcal{C}$ and $\mathcal{D}$ be the set of all the cycles and the set of all the cuts in $\mathcal{B}$.
+First, give each edge $e = \{u, v\} \in G$ a fixed direction $O_G(e)$.
+Then we could define $\gamma$ and $\delta$ based on this direction.
+
+\paragraph{}
+For each cycle $C\in\mathcal{C}$,
+we give edge $e\in C$ another direction $O_C(e)$ which is determined by an arbitrary traveling through $C$.
+Then:
+\begin{align}
+  \label{align:C}
+  \gamma(C, g) := \left\{
+  \begin{array}{rl}
+    0, \hspace{0.5cm} &\mbox{if $g\not\in C$} \\
+    1, \hspace{0.5cm} &\mbox{if $g\in C$ and $O_C(g) = O_G(g)$} \\
+    -1,\hspace{0.5cm} &\mbox{if $g\in C$ and $O_C(g)\not= O_G(g)$}
+  \end{array}
+  \right.
+\end{align}
+
+\paragraph{}
+For each cut $D\in\mathcal{D}$ where $G\setminus D = (A, B)$,
+we give edge $e\in D$ another direction $O_D(e)$ which is determined by the order of $A$ and $B$.
+Then:
+\begin{align}
+  \label{align:D}
+  \delta(D, g) := \left\{
+  \begin{array}{rl}
+    0, \hspace{0.5cm} &\mbox{if $g\not\in D$} \\
+    1, \hspace{0.5cm} &\mbox{if $g\in C$ and $O_D(g) = O_G(g)$} \\
+    -1,\hspace{0.5cm} &\mbox{if $g\in C$ and $O_D(g)\not= O_G(g)$}
+  \end{array}
+  \right.
+\end{align}
+
+\paragraph{}
+Then for any cycle $C$, cut $D$ and an edge $g$, we have
+\begin{align*}
+  \gamma(C, g)\delta(D, g) = \left\{
+  \begin{array}{rl}
+    0, \hspace{0.5cm} &\mbox{if $g$ is not in $C$ or $D$} \\
+    1, \hspace{0.5cm} &\mbox{if $g$ is in $C$ and $D$ and $O_C(g) = O_D(g)$ $\Rightarrow$ \textcolor{red}{red} edge} \\
+    -1, \hspace{0.5cm} &\mbox{if $g$ is in $C$ and $D$ and $O_C(g)\not= O_D(g)$ $\Rightarrow$ \textcolor{green}{green} edge}
+  \end{array}
+  \right.
+\end{align*}
+Since the number of green edges and the number of red edges are equal, we have
+\begin{align}
+  \label{align:All}
+  \sum_{g\in E} \gamma(C, g)\delta(D, g) = 0
+\end{align}
+Together with Equation (\ref{align:C}) (\ref{align:D}) (\ref{align:All}), we know that $\mathcal{B}$ is an orientable matroid.
+
+\section{Exercies 8.18}
+Another way to demonstrate that all graphic matroids are balanced is via the theory of electrical networks. Regard a graph $G = (V, E)$ as an electrical network, with vertices as terminals and edegs as unit resistors. The key facts are: (1) For any edge $e = {u,v}$, the effective between vertices u and v is equal to $\tau(G/e)/\tau(G)$, where $\tau(G)$ is the number of spanning trees in $G$, and $\tau(G/e)$ is the number of spanning trees in $G$ that include the edge $e$. This result is essentially due to Kirchhoff; see Van Lint and Wilson [79, Thm. 34.3]. (2) If the resistance of some edge of a network is decreased, the effective resistance between any two terminals does not increase. This is “Rayleigh’s Monotonicity Principle”; see Doyle and Snell [25].
+
+\subsection{solution}
+Let $\mathcal{B}$ be the graphic matroid of $G$.
+The effective resistance of $e$ in $G$ is $\frac{|\mathcal{B}_e(M)|}{|\mathcal{B}(M)|}$.
+Consider an edge $f\in E$, changing the resistance of $f = \{u, v\}$ from 1 to 0 is equivalent to shrink $f$
+and make $u, v$ the same point in the network. And if we do so, the effective resistance of $e$ in the new graph is
+$\frac{|\mathcal{B}_e(M/f)|}{|\mathcal{B}(M/f)|}$
+And we know that
+\begin{align*}
+  \frac{|\mathcal{B}_e(M/f)|}{|\mathcal{B}(M/f)|} &\leq \frac{|\mathcal{B}_e(M)|}{|\mathcal{B}(M)|} \\
+  \frac{|\mathcal{B}_{ef}(M)|}{|\mathcal{B}_f(M)|} &\leq \frac{|\mathcal{B}_e(M)|}{|\mathcal{B}(M)|} \\
+  \Pr(e|f) &\leq \Pr(e)
+\end{align*}
+So, graphic matroid is balanced.
 
 \end{document}
 

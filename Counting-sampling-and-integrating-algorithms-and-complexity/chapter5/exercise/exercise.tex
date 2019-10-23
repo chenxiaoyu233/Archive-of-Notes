@@ -77,6 +77,62 @@ By using the conclusion that \[\pi(I)\pi(F)\leq m\overline(\lambda)^2\pi(M)P(M, 
   However, Jerrum tends to use algebratic symbols to represent the graph structure. This is not very friendly for me to understand his idea behind those symbols. Because each time when a symbol appears, I have to do some examples so that I could get what he means. Though its not very easy to understand those symbols, the idea (e.g. how to construct the $\eta_t(I, F)$) behind them is very easy to understand.
 \end{tcolorbox}
 
+\clearpage
+\section{Exercise 5.18}
+Follow through in detail the calculations sketched above.
+
+\subsection{solution}
+\def\wP{\widetilde{P}}
+Let $Q = P - I$ and $\wP = e^Q$, then we have:
+\begin{align*}
+  \mathrm{Var}_\pi (\wP^t f) &= \sum_{x\in \Omega} \pi(x) \{[\wP^tf](x,y)\}^2 \\
+  &= \sum_{x\in \Omega} \{\sum_{y\in\Omega} \wP^t(x, y) f(y)\}^2 \\
+  &= \sum_{x\in \Omega} \{\sum_{y\in\Omega} [\sum_{k=0}^\infty \frac{t^kQ^k(x, y)}{k!}] f(y)\}^2 \\
+  \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{Var}_\pi &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)\{[\wP^tf](x)\}'\\
+  &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)\{\sum_{y\in\Omega}[\sum_{k=1}^\infty \frac{t^{k-1}Q^k(x, y)}{(k-1)!}]f(y)\} \\
+  &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)\{\sum_{y\in\Omega}[\sum_{k=0}^\infty \frac{t^{k}Q^{k+1}(x, y)}{k!}]f(y)\} \\
+  &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)\{\sum_{y\in\Omega}Q\cdot e^{tQ}(x, y)f(y)\} \\
+  &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)Q\wP^tf(x)\\
+  &= \sum_{x\in\Omega} 2\pi(x)[\wP^tf](x)\sum_{y\in\Omega} Q(x, y) [\wP^tf](y) \\
+  &= 2\sum_{x\in\Omega} \pi(x) Q(x, y) [\wP^tf](x)[\wP^tf](y)
+\end{align*}
+So, when $t = 0$, we have:
+\begin{align*}
+  \left.\frac{\mathrm{d}}{\mathrm{d}t} \mathrm{Var}_\pi(\wP^tf) \right|_{t=0} &= 2\sum_{x, y\in\Omega} \pi(x)[P(x,y)  - I(x, y)]f(x)f(y) \\
+  &= 2\sum_{x, y\Omega} \pi(x)P(x, y)f(x)f(y) - 2\sum_{x\in\Omega}\pi(x)f^2(x) \\
+ &= 2\sum_{x, y\Omega} \pi(x)P(x, y)f(x)f(y) - (\sum_{x\in\Omega}\pi(x)f^2(x) + \sum_{y\in\Omega} \pi(y)f^2(y)) \\
+ &=  2\sum_{x, y\Omega} \pi(x)P(x, y)f(x)f(y) - (\sum_{x,y\in\Omega}\pi(x)f^2(x)P(x,y) + \sum_{x,y\in\Omega} \pi(x)P(x, y)f^2(y)) \\
+ &=  2\sum_{x, y\in\Omega} \pi(x)P(x, y)f(x)f(y) - (\sum_{x,y\in\Omega}\pi(x)P(x,y)(f^2(x) + f^2(y))) \\
+ &=  -\sum_{x, y\in\Omega} \pi(x)P(x, y) (f(x) - f(y))^2 \\
+ &= -2\mathcal{E}_P(f, f) \\
+\end{align*}
+Actually, we could know more from above:
+\begin{align*}
+  \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{Val}_\pi(\wP^tf) &= -2\mathcal{E}_P(\wP^tf, \wP^tf) \\
+  &\leq -\frac{2}{\rho} \mathrm{Var}_\pi(\wP^tf)
+\end{align*}
+In the worst case, we have:
+\begin{align*}
+  \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{Val}_\pi(\wP^tf) &= -\frac{2}{\rho} \mathrm{Var}_\pi(\wP^tf)
+\end{align*}
+Let $v = \wP^tf$, then we have:
+\begin{align*}
+  \frac{\mathrm{d}v}{\mathrm{d}t} &= -\frac{2}{\rho}v \\
+  \frac{\mathrm{d}v}{v} &= -\frac{2}{\rho}\mathrm{d}t \\
+  \int \frac{\mathrm{d}v}{v} &= \int -\frac{2}{\rho}\mathrm{d}t \\
+  \log(v) + C_1 &= -\frac{2}{\rho}t + C_2 \\
+  v(t) &= \exp\{-\frac{2}{\rho}t\} \cdot C_3 \\
+\end{align*}
+To determinate $C_3$, consider the situation where $t = 0$, then
+\begin{align*}
+  v(0) = \mathrm{Val}_\pi(f) = C_3
+\end{align*}
+So, we have
+\begin{align*}
+  \mathrm{Val}_\pi(\wP^tf) \leq \exp\{-\frac{2}{\rho}t\} \mathrm{Var}_\pi(f)
+\end{align*}
+
+
 \end{document}
 
 %%% Local Variables:
