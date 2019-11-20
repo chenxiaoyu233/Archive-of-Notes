@@ -1,0 +1,335 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsmath, amssymb, amsthm}
+\everymath{\displaystyle}
+
+\newtheorem{exercise}{习题}
+\newenvironment{solve}{{\flushleft\textit{解.}}}{\hfill $\blacksquare$}
+
+\title{第二章习题}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+  若 $E\subset \mathbb{R}$, $m^*E = 0$, 证明 $\{x^2|x\in E\}$ 的外测度是 $0$.
+\end{exercise}
+\begin{proof}
+  不妨来讨论 $E\subset \mathbb{R}^+$. 令 $\forall l\in \mathbb{N}^+, E_l = E\cap (l-1, l]$, 显然 $E_l \subset E$, 所以 $m^* E_l \leq m^* E = 0$. 所以, 我们可以给所有 $E_l$ 找到一个 L 覆盖 $\{I_{li}\}$, 满足下面的条件:
+  \[\sum_{i = 0}^\infty |I_{li}| < m^* E_l + \frac{\varepsilon}{2l}\cdot \frac{1}{2^l}\]
+  当 $E_l$ 中的 $x$ 全部变成 $x^2$ 时, 我们可以把 $\{I_{li}\}$ 中的开区间 $(a, b)$ 全部变成 $(a^2, b^2)$, 这样之后得到一个新的对 $x^2$ 的覆盖 $\{I_{li}^2\}$. 不难发现,
+  开区间的长度由 $b - a$ 变为 $b^2 - a^2 = (b - a) (a + b) \leq (b - a) \cdot 2l$.
+  所以我们有:
+  \[\sum_{i=0}^\infty |I_{li}^2| \leq \sum_{i=0}^\infty |I_{li}| \cdot 2l < m^*E_l + \frac{\varepsilon}{2^l}\]
+  而所有的 $I_{li}^2$ 显然构成一个 $\{x^2 | x\in E\}$ 的 L 覆盖, 所以我们有:
+  \begin{align*}
+    m^* \{x^2|x\in E\} &\leq \sum_{l=1}^\infty \sum_{i=0}^\infty |I_{li}^2| \\
+    &< \sum_{l=1}^\infty m^* E_l + \frac{\varepsilon}{2^l} \\
+    &= \sum_{l=1}^\infty \frac{\varepsilon}{2^l} = \varepsilon \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{exercise}
+  若 $A, B$ 都是 $\mathbb{R}^n$ 中的开集, 且 $A$ 是 $B$ 的真子集, 试问是否必定有 $mA < mB$? 若 $A, B$ 都是闭集, 问是否一定 $mA < mB$? 又若 $A, B$ 一开一闭, 结果又怎样?
+\end{exercise}
+\begin{solve}
+  \begin{enumerate}
+  \item 不一定, 设 $B$ 是某个测度不为 $0$ 的开集, 然后 $A$ 为 $B$ 去掉其内部的一个点 $x$. 我们知道 一个点 $x$ 一定是一个闭集, 所以 $A = B\setminus \{x\} = B\cap \{x\}^c$.
+    所以 $\{x\}^c$ 是一个开集, 所以 $A$ 是一个开集. 这个时候 $m^* A = m^* B - m^*\{x\} = m^*B$.
+  \item 不一定, 考虑测度不为0的闭集 $A$, 我们再它的外部加一个孤立点, 得到 $B = A\cup \{x\}$. 这个时候显然 $mA = mB$, 且 $B$ 也是闭集.
+  \item 不一定, 参考闭矩体 $B$ 和它对应的开矩体 $A$. 显然有 $mA = mB$.
+  \end{enumerate}
+\end{solve}
+\begin{exercise}
+  设 $E\subset [0, 1]$为可测集, 若 $mE = 1$, 试证 $\overline{E} = [0, 1]$.
+  若 $mE = 0$, 试证 $E^0 = \emptyset$.
+\end{exercise}
+\begin{solve}
+  \emph{(1):} 首先, 可以发现, 对于任何 $x\in [0, 1]\cap E^c$, 都存在 $\delta > 0$, 满足 $(x - \delta, x + \delta) \subset [0, 1]$, 且满足 $(x - \delta, x + \delta) \setminus \{x\} \subset E$. 因为否则, $(x - \delta, x + \delta) \setminus \{x\} \subset [0, 1] \setminus E$. 这样的话:
+  \begin{align*}
+  m^*([0, 1]) &= m^*([0,1]\cap E) + m^*([0, 1] \cap E^c) \\
+              &\geq m^*E + m^*E^c \\
+    &\geq 1 + 2\delta > 1
+  \end{align*}
+  这样就产生了矛盾. 所以我们可以知道, 对于任何 $x\in [0, 1]\cap E^c$, $x$ 都是 $E$ 的聚点, 这样 $\overline{E} = E\cup E'$ 自然就是 $[0, 1]$ 了. \\
+  \emph{(2):} 首先可以很容易发现, 对于任何 $x \in E$, 都不存在 $\delta > 0$, 使得 $(x - \delta, x + \delta)\setminus \{x\} \subset E$. 不然, 根据外测度的单调性, 我们就有 $2\delta = m^*((x - \delta, x + \delta)\setminus\{x\}) \leq m^*E$, 这就产生了一个矛盾.
+  所以, 我们可以发现, $E$ 是没有内点的, i.e. $E^0 = \emptyset$.
+\end{solve}
+
+\begin{exercise}
+  $m^*A = 0$, 试证明对于任意集 $B$, 都有 $m^*(A\cup B) = m^*B$.
+\end{exercise}
+\begin{proof}
+  由次加性: $m^*(A\cup B) \leq m^*(B) + m^*(A) = m^*(B)$
+  由单调性: $ m^*B \leq m^*(A\cap B)$
+\end{proof}
+
+\begin{exercise}
+  设 $A$ 为任意集, $B$ 为 $A$ 的可测子集, 证明 $m^*A = mB + m^*(A\setminus B)$.
+\end{exercise}
+\begin{proof}
+  因为 $B$ 可测, 所以我们有:
+  \begin{align*}
+  m^*A &= m^*(A\cap B) + m^*(A\cap B^c) \\
+   &= m^*B + m^*(A\setminus B) \qedhere 
+  \end{align*}
+\end{proof}
+\begin{exercise}
+  设 $E_1\subset E_2\subset \mathbb{R}^n$ 且 $E_1$ 可测, 又有 $mE_1 = m^*E_2$, 试证明 $E_2$ 可测.
+\end{exercise}
+\begin{proof}
+  因为 $E_1$ 可测, 我们有:
+  \begin{align*}
+    m^*E_2 &= m^*(E_2\cap E_1) + m^*(E_2\cap E_1^c) \\
+    &= m^*E_1 + m^*(E_2 \setminus E_1)
+  \end{align*}
+  又有, $m^*E_1 = m^*E_2$, 所以我们知道 $m^*(E_2 \setminus E_1) = 0$, 这样一来,  $E_2 \setminus E_1$ 就是可测的了. 所以 $E_2 = E_1 \cup (E_2 \setminus E_1)$ 就是可测的了.
+\end{proof}
+
+\begin{exercise}
+  证明有界集$E$可测的充分必要条件是, 对任意开集 $G$ 有:
+  $mG = m^*(G\cap E) + m^*(G\setminus E)$.
+\end{exercise}
+\begin{proof}
+  ($\Leftarrow$:) 任意开集可以, 所以任意开矩体可以, 所以$E$可测. \\
+  ($\Rightarrow$:) $E$可测, 则任意集合可以, 则任意开集可以.
+\end{proof}
+
+\begin{exercise}
+  证明对于 $\mathbb{R}^n$ 中任意两个外测度有限的点集 $A$ 与 $B$, 都有:
+  \[|m^*A - m^*B| \leq m^*(A\setminus B) + m^*(B\setminus A)\]
+\end{exercise}
+\begin{proof}
+  \begin{align*}
+    m^*A &\leq m^*(A\cap B) + m^*(A\setminus B) \\
+    m^*(A\cap B) &\leq m^*(B) + m^*(B\setminus A)
+  \end{align*}
+  所以:
+  \begin{align*}
+    m^*(A) - m^*(B) \leq m^*(A\setminus B) + m^*(B\setminus A)
+  \end{align*}
+  同理我们有:
+  \begin{align*}
+    m^*(B) - m^*(A) \leq m^*(A\setminus B) + m^*(B\setminus A)
+  \end{align*}
+  所以, 综上我们有:
+  \begin{align*}
+    |m^*(B) - m^*(A)| \leq m^*(A\setminus B) + m^*(B\setminus A)
+  \end{align*}
+\end{proof}
+
+\begin{exercise}
+  设 $A, B\subset \mathbb{R}^n$ 且 $A$ 可测, $m^*B < \infty$, 证明:
+  \[m^*(A\cap B) + m^*(A\cup B) = m^*A + m^*B\]
+\end{exercise}
+\begin{proof}
+  因为$A$是可测的, 所以我们有:
+  \begin{align*}
+    m^*B &= m^*(B\cap A) + m^*(B\setminus A) \\
+    m^*(A\cup B) &= m^*((A\cup B)\cap A) + m^*((A\cup B)\setminus A) \\
+    &= m^*A + m^*(A\setminus B)
+  \end{align*}
+  将上面两个式子加起来, 可以得到:
+  \[m^*B + m^*A + m^*(A\setminus B) = m^*(B\cap A) + m^*(B\setminus A) + m^*(A\cup B)\]
+  两边消掉 $m^*(A\cup B)$ 即可得证.
+\end{proof}
+\begin{exercise}
+  证明下列(1)和(2)都是点集$E$可测的充分必要条件:
+  \begin{enumerate}
+  \item 对于任何给定的$\varepsilon > 0$, 存在开集 $G$ 和 闭集 $F$, 使得 \\
+    $F\subset E \subset G$ 且 $m(G\setminus F) < \varepsilon$
+  \item 对于任何给定的$\varepsilon > 0$, 存在开集 $G_1, G_2: G_1\supset E, G_2\supset E^c$, 使得\\ $m(G_1\cap G_2) < \varepsilon$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}[证明(1小问)]
+  ($\Leftarrow$): 如果对于任何给定的 $\varepsilon$, 都存在这样的 $G$ 和 $F$, 那么
+  $G\setminus E\subset G\setminus F$, 所以 $m^*(G\setminus E) \leq  m^*(G\setminus F) = \varepsilon$. 所以由定理2.8, 我们可以知道 $E$ 是可测的. \\
+  ($\Rightarrow$): 如果$E$是可测的, 则由定理2.6, 我们知道:
+  \begin{itemize}
+  \item 存在开集 $G \supset E$, 且 $m(G\setminus E) < \frac{\varepsilon}{2}$.
+  \item 存在闭集 $F \subset E$, 且 $m(E\setminus F) < \frac{\varepsilon}{2}$.
+  \end{itemize}
+  再因为 $(G\setminus E) \cap (E\setminus F) = \emptyset$, 所以由测度的可数可加性, 我们就知道 $m(G\setminus F) = m(G\setminus E) + m(E\setminus F) < \varepsilon$.
+\end{proof}
+\begin{proof}[证明(2小问)]
+  我们将第一小问中的 $G$ 换成 $G_1$, $F^c$ 换成 $G_2$.
+  然后就有 $G\setminus F = G_1 \cap G_2$.
+\end{proof}
+\begin{exercise}
+  设 $A, B \subset \mathbb{R}^n$都是可测集, 试证明 $m(A\cup B) = mA + mB$的充分必要条件是: $A\cap B$ 是零测集.
+\end{exercise}
+\begin{proof}
+  由测度的可列可加性, 我们知道 $m(A\cup B) = m(A) + m(B\setminus A)$.
+  然而我们又有 $m(A\cup B) = mA + mB$. 所以, 我们可以得到 $mB = m(B\setminus A)$.
+  又由可列可加性, 我们知道 $mB = m(B\setminus A) + m(B\cap A)$, 所以可以推知 $m(B\cap A) = 0$. 不难发现, 这个逻辑过程是可逆的.
+\end{proof}
+\begin{exercise}
+  设 $f$ 是定义在 $\mathbb{R}$ 上的实值连续函数, 证明它的图像 $\{(x, y)\in \mathbb{R}^2 | y = f(x), x\in \mathbb{R}\}$ 是 $\mathbb{R}^2$ 内的零测集.
+\end{exercise}
+\begin{proof}
+  令 $(l, r]$ 表示 $\{(x,y)\in\mathbb{R}^2| l < x \leq r\}$. 当 $0 < r - l < \infty$, 我们可以构造两个辅助函数 $g = f + \frac{\varepsilon}{2}, h = f - \frac{\varepsilon}{2}$.
+  由 $f$ 在 $\mathbb{R}$ 连续我们可以知道 $f, g, h$ 在 $\mathbb{R}$ 可积. 只考虑 $(l, r]$ 这个区间内的话, 我们可以发现当 $\lambda$ 足够小的时候, $g - h$ 的黎曼和即可刻画出$f$图像在 $(l, r]$ 的一个 L 覆盖, 即
+  \[\int_l^r (h(x) - g(x)) \mathrm{d}x = \lim_{\lambda \to 0}\sum_{i} [g(xi_i) - h(xi_i)]\Delta_i\]
+  可以看作一个 $f \cap (l, r]$ 的一个 L 覆盖. 而不难发现, 这个积分的值在 $\varepsilon \to 0$ 的极限值就是 0. 所以我们有 $m^*(f \cap (l, r]) = 0$.
+  不难发现, 我们通过可数个形如 $(l, r]$ 的互不相交的半开区间即可覆盖住整个 $\mathbb{R}$. 所以由测度的可数可加性, $m^*f = \sum_{(l_i, r_i]} m^*(f\cap (l_i, r_i]) = \sum 0 = 0$.
+\end{proof}
+\begin{exercise}
+  (1) 若 $E$ 是直线上的有界可测集, 实数 $\alpha$ 满足 $0 \leq \alpha \leq mE$, 证明存在 $E$ 的可测子集, 使得 $mE_\alpha = \alpha$. \\
+  (2) 叙述并证明 (1) 在高维空间中的推广.
+\end{exercise}
+\begin{solve}
+  我们直接来叙述这个定理在高维空间中的推广:
+  \paragraph{}\emph{$E$ 是 $\mathbb{R}^n$ 中的有界可测集, 实数 $\alpha$ 满足 $0\leq \alpha\leq mE$, 证明存在$E$ 的可测子集, 使得 $mE_\alpha = \alpha$} 
+  \begin{proof}
+    因为 $E$ 是有界的, 所以不妨我们来考虑这个 $n$ 维空间的第一维, 这个时候一定能够在这一维找到一个闭区间 $[l, r]$, 使得$E$ 整个落在这个区间中.
+    然后我们来考虑 第一维的一个函数, $f(x) = m(E\setminus [x, r])$.
+    因为对于$x, y \in [l, r]$(不妨 $x \leq y$), 有 $(E\setminus[y, r]) \setminus (E\setminus[x, r]) = E\cap [x, y)$.
+    \begin{align*}
+      f(y) - f(x) &= m(E\setminus[y, r]) - m(E\setminus [x, r]) \\
+      &= m(E\cap [x, y)) \leq m([x, y))
+    \end{align*}
+    因为 $E$ 是有界的, 所以我们一定能找到一个开矩体$S$将 $E$ 包住, 不妨设这个开矩体在第一维的上下界分别是 $l, r$.
+    现在我们知道 $m([x, y)] = (y - x) \times H$. 其中 $H$ 是 $S$ 在其他维度上的边长的乘积. 所以对于任意小的 $\varepsilon > 0$, 都存在 $\delta < \varepsilon / H$, 使得当 $|x - y| < \delta$ 时, 都有 $m([x, y)) < \varepsilon$. 所以 $f$ 在 $[l, r]$ 上连续.
+    因为 $0 = f(l) \leq \alpha \leq f(r) = mE$, 根据闭区间上连续函数的介值定理, 我们知道, 一定存在 $\xi\in [l, r]$ 使得 $f(\xi) = \alpha$. 这个时候 $E_\alpha = E\setminus [\xi, r]$.
+  \end{proof}
+\end{solve}
+\begin{exercise}
+  设 $\{E_k\}$ 是 $\mathbb{R}$ 中的集列, 满足 $\sum_{k=1}^\infty m^*E_k < \infty$, 试证明 $ \lim_{\overline{k\to\infty}} E_k$ 和 $ \overline{\lim_{k\to\infty}} E_k$ 都是零测集.
+\end{exercise}
+\begin{proof}
+  因为级数 $\sum_{k=1}^\infty m^*E_k$ 收敛, 所以由柯西收敛原理可知: 
+
+  \emph{对于任意的 $\varepsilon$,  都存在 $N$, 使得 $\forall n > N, p > 0$ 都有 $\sum_{k = n+1}^{n+p} m^*E_k < \varepsilon$} 
+
+  因为这个不等式对于所有的 $p > 0$ 都是满足的, 所以我们令 $p\to \infty$, 再由极限不等式, 就有 $\sum_{k = n+1}^\infty m^*E_k \leq \varepsilon$.
+  再根据 $\lim_{\overline{k\to\infty}}E_k , \overline{\lim_{k\to\infty}}E_k$ 的定义, 我们有:
+  \[\lim_{\overline{k\to\infty}}E_k \subset \overline{\lim_{k\to\infty}}E_k \subset \bigcup_{l=n+1}^\infty E_l\]
+  所以:
+  \begin{align*}
+    m^*(\lim_{\overline{k\to\infty}}E_k) \leq m^*(\overline{\lim_{k\to\infty}}E_k) \leq \sum_{l=n+1}^\infty m^*(E_l) \leq \varepsilon
+  \end{align*}
+  令 $\varepsilon\to 0$, 根据极限不等式, 就有:
+  \[m^*(\lim_{\overline{k\to\infty}}E_k) \leq m^*(\overline{\lim_{k\to\infty}}E_k) \leq 0\]
+\end{proof}
+
+\begin{exercise}
+  \begin{enumerate}
+  \item 设 $\{E_k\}$ 是 区间 $[0, 1]$ 中的可测集列, $mE_k = 1 (k = 1, 2, \cdots)$, 试证明 $m(\bigcap_{k=1}^\infty E_k) = 1$.
+  \item 若 $E_k \subset [0, 1], mE_k > \frac{n-1}{n} (k = 1, 2, \cdots, n)$, 试证 $m(\bigcap_{k=1}^n E_k) > 0$
+  \item 若 $E_k \subset [0, 1], 1 > mE_k > \alpha_k > 0 (k = 1, 2, \cdots)$, 试问 $\{\alpha_k\}$ 满足什么条件能使 $m(\bigcap_{k=1}^\infty E_k) > 0$ ? 又若要使 $m(\bigcap_{k=1}^\infty E_k) > 1 - \delta$ ($\delta$ 是一个充分小的正数), $\{\alpha_k\}$ 应该如何?
+  \end{enumerate}
+\end{exercise}
+\begin{solve}
+  \begin{proof}[(1) 证:]
+  因为 $E_1 \cap E_k$ 一定是可测集, 所以我们有:
+  \begin{align*}
+    m[0, 1] &= m([0,1] \cap (E_1\cap E_k)) + m([0, 1] \setminus (E_1\cap E_k)) \\
+            &= m(E_1\cap E_k) + m(([0,1] \setminus E_1) \cup ([0, 1] \setminus E_k)) \\
+    &\leq m(E_1\cap E_k) + m([0, 1] \setminus E_1) + m([0, 1] \setminus E_k)
+  \end{align*}
+  因为 $E_1 \subset [0, 1]$, 所以 $m([0, 1]\setminus E_1) = m([0, 1]) - m(E_1) = 0$. 同理 $m([0, 1]\setminus E_2) = 0$. 所以, 上面的式子可以继续写成: $m[0, 1] \leq m(E_1 \cap E_k) \leq m[0, 1]$. 所以 $m(E_1\cap E_k) = 1$.
+
+  这个时候, 因为 $E_k$ 可测: $mE_1 = m(E_1\cap E_k) + m(E_1\setminus E_k)$. 而 $mE_1 = m(E_1\cap E_k) = 1$, 所以 $m(E_1\setminus E_k) = 0$.
+  又因为 $E_1$ 可测, 所以我们有:
+  \begin{align*}
+    m(E_1) &= m(E_1\cap \bigcap_{k=1}^\infty E_k) + m(E_1\setminus \bigcap_{k=1}^\infty E_k)\\
+           &= m(\bigcap_{k=1}^\infty E_k) + m(\bigcup_{k=1}^\infty (E_1\setminus E_k)) \\
+           &\leq m(\bigcap_{k=1}^\infty E_k) + \sum_{k=1}^\infty m(E_1\setminus E_k) \\
+    &= m(\bigcap_{k=1}^\infty E_k)
+  \end{align*}
+  这个时候我们就能很容易地发现:
+  \[1 = m(E_1) \leq m(\bigcap_{k=1}^\infty E_k) \leq m(E_1) = 1\]
+  这里, 后一个不等号由单调性而来. 这就说明了 $m(\bigcap_{k=1}^\infty E_k) = 1$.
+\end{proof}
+\begin{proof}[(2) 证:]
+  和上题类似, 我们可以:
+  \begin{align*}
+    m[0, 1] &= m([0, 1] \cap \bigcap_{k=1}^n E_k) + m([0, 1] \setminus \bigcap_{k=1}^n E_k) \\
+    &\leq m(\bigcap_{k=1}^n E_k) + \sum_{k=1}^n m([0, 1] \setminus E_k)
+  \end{align*}
+  然后, 因为 $E_k \in [0, 1]$, 所以 $m([0, 1]\setminus E_k) = m([0, 1]) - m(E_k) < \frac{1}{n}$. 所以
+  \begin{align*}
+    m[0, 1] &< m(\bigcap_{k=1}^n E_k) + \sum_{k=1}^n \frac{1}{n} \\
+    0 &< m(\bigcap_{k=1}^n E_k) \qedhere
+  \end{align*}
+\end{proof}
+\emph{(3):} 由前两题的结论, 如果要使得 $m(\bigcap_{k=1}^\infty E_k) > 0$, 只要使得
+\begin{align*}
+  \sum_{k=1}^\infty 1 - \alpha_k   < 1
+\end{align*}
+
+如果要使 $m(\bigcap_{k=1}^\infty E_k) > 1 - \delta$, 只需要使得
+\begin{align*}
+  \sum_{k=1}^\infty 1 - \alpha_k  < \delta
+\end{align*}
+\end{solve}
+\begin{exercise}
+  若对于 $\mathbb{R}^n$ 中的任意点集 $A, B$, 定义他们之间的距离为 $d(A, B) = \inf\{d(x, y) | x\in A, y\in B\}$. 现在设 $A, B$ 满足 $d(A, B) > 0$, 证明 $m^*(A\cup B) = m^*A + m^*B$.
+\end{exercise}
+\begin{proof}
+  首先令 $m^*(A) < \infty, m^*(B) < \infty$, 否则等式直接成立. 不妨 $d(A, B) = \delta  0$, $B(x, r)$ 表示以 $x$ 为 中心 半径为 $r$ 的开球. 然后我们构造 $\hat{A} = \{B(x, \delta/3) | x\in A\}$. 很容易可以发现 $A \subset \hat{A}, b\not\subset \hat{A}$. 由定理 1.17, 可以知道任意个开集的并集仍然是开集, 所以 $\hat{A}$ 是开集, 所以 $\hat{A}$ 可测, 所以很简单的有:
+  \begin{align*}
+    m^*(A\cup B) &= m^*(A\cup B\cap \hat{A}) + m^*(A\cup B\setminus \hat{A}) \\
+    &= m^*A + m^*B \qedhere
+  \end{align*}
+\end{proof}
+\begin{exercise}
+  试从可测集的定义直接证明: 若$E_1, E_2$可测, 则$E_1\cap E_2$可测.
+\end{exercise}
+\begin{proof}
+  \begin{align*}
+    m^*&(T\cap(E_1\cap E_2)) + m^*(T\cap(E_1\cap E_2)^c) \\
+       &\leq m^*(T\cap E_1\cap E_2) + m^*(T\cap E_1^c \cap E_2^c) + m^*(T\cap E_1\cap E_2^c) + m(T\cap E_1^c \cap E_2) \\
+       &= m^*(T\cap E_2) + m^*(T\cap E_2^c)\\
+    &= m^*(T) \qedhere
+  \end{align*}
+\end{proof}
+\begin{exercise}
+  证明: $\mathbb{R}^n$ 中任意集 $E$ 可测的充分必要条件是 $E\cap \partial E$ ($\partial E$ 是 $E$ 的边界) 可测
+\end{exercise}
+\begin{proof}
+  首先, 根据内点和边界点的定义, 我们可以发现对于任意 $ E\subset \mathbb{R}^n$, 其实有 $E = E^0 \cup (\partial E \cap E)$. 这是因为 $E$ 中的点都满足对于任意的 $\delta > 0$, 都有 $B(x, \delta) \cap E \not=\emptyset$. 这样的话, 如果对于 $x$ 来说, 存在 $\varepsilon > 0$, 使得 $B(x, \varepsilon) \subset E$, 那么 $x \in E^0$. 否则, 对于所有的 $\delta > 0$, 都有 $E\cap B(x,\delta) \not=\emptyset$ 且 $E^c\cap B(x,\delta) \not= \emptyset$, 这个时候 $x \in \partial E\cap E$.
+
+  我们还能知道的是 $E^0$ 要么是个空集, 要么是个开集, 两种情况下$E^0$都是可测的. 下面来说明如果 $x$ 是 $E$ 的内点, 那么 $x$ 同样是 $E^0$ 的内点. 根据定义, 如果 $x$ 是 $E$ 的内点, 那么存在$\varepsilon > 0$ 使得 $B(x,\varepsilon) \subset E$. 这个时候观察开球 $B(x, \varepsilon)$ 内的任意点 $y$, 显然 $y$ 是 $B(x,\varepsilon)$ 的内点, 自然也就是  $E$ 的内点, 这样我们可以说明 $B(x, \varepsilon) \subset E^0$. 所以 $x$ 在 $E^0$ 中同样也是内点. 做好铺垫之后, 下面我们来开始证明.
+
+  ($\Rightarrow$): 首先 $E$ 可测, 然后 $E^0$ 可测, 所以 $\partial E = E\setminus E^0$ 可测.
+  
+  ($\Leftarrow$): 因为 $E^0$ 可测, $\partial E$ 可测, 所以 $E = E^0\cup \partial E$ 可测.
+\end{proof}
+
+\clearpage
+\begin{exercise}
+  证明: 设  $f$ 是区间 $[0, 1]$ 上的可微函数, 令 $E_0 = \{x\in [0, 1] | f'(x) = 0\}$, 证明 $m(f(E_0)) = 0$.
+\end{exercise}
+\begin{proof}
+  考虑 $\overline{E}_0$, $\overline{E}_0$ 可以看成一些不相交的闭区间, 下面我们来说明 $\overline{E}_0$ 中的闭区间数量是可数个的. 我们从 $C = [0,1] \setminus \overline{E}_0$ 是一些不相交的长度不为$0$的开区间说起(如果一个开区间可以任意短的话, 那么它其中的点应该都是$E_0$的聚点, 应该都在 $\overline{E}_0$中). 不难发现, $C$ 的每个开区间中, 都一定至少有一个有理数, 所以 $C$ 是可数的. 从而我们知道 $\overline{E}_0$ 是可数的.
+
+  下面来说明, $\overline{E}_0$ 中的任一闭区间 $[l, r]$ 中, $f$ 都取相同的函数值.
+  考虑定积分
+  \[\int_{l}^x f'(x)\mathrm{d}x = f(x) - f(l)\]
+  因为 $f$ 显然就是 $f'$ 的原函数, 所以 $f'$ 在 $[l, r]$ 可积.
+  做这个定积分的黎曼和
+  \begin{align*}
+    \int_l^xf'(x)\mathrm{d}x = \lim_{\lambda\to 0} \sum_{i=1}^n f'(\xi_i)\Delta_i
+  \end{align*}
+  由于已经知道了可积, 所以我们可以自主设计选择$\xi$ 的方法.
+  考虑$\overline{E}_0$的构造方法, 可以发现, 如果$f'$ 的某个非 0点 $x$ 在 $[l, r]$ 中,
+  则 $x$ 的某一侧一定是 $f'$ 取 0 的点, 意味着 $f'$ 的非0点在 $[l, r]$ 中不是稠密分布的.
+  也就是说, 对于某个 $\Delta_i$, 我们总能在其中选出 一个 $\xi_i$, 使得 $f(\xi) = 0$. 所以最终:
+  \begin{align*}
+    \int_l^xf'(x)\mathrm{d}x = 0 = f(x) - f(l)
+  \end{align*}
+  所以, $\forall x\in[l, r], f(x) = f(l)$.
+
+  最后由外测度的次可加性, 有:
+  \begin{align*}
+    m(f(E_0)) \leq m(f(\overline{E}_0)) &\leq \sum_{[l,r]\in \overline{E}_0} m(f([l, r])) \\
+    &= \sum_{[l, r]\in \overline{E}_0} 0 = 0
+  \end{align*}
+\end{proof}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

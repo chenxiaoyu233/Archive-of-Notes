@@ -1,0 +1,15 @@
+*
+
+!*/
+!*.tex
+!*.txt
+!*.cpp
+!*.py
+!*.org
+!*.c
+!*.h
+!*.hpp
+!*.md
+!*.hs
+!*.pdf
+!.gitignore
