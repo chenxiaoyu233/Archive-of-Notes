@@ -1,0 +1,186 @@
+\documentclass{article}
+\usepackage{geometry}
+\geometry{a4paper, scale = 0.8}
+
+\usepackage{ctex}
+\usepackage{amsmath, amssymb, amsthm}
+\everymath{\displaystyle}
+\newtheorem{define}{Define}
+\newtheorem{fact}{Fact}
+\newtheorem{property}{Property}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\usepackage{tabularx}
+
+\title{Some Notes For Inner Products}
+\author{Xiaoyu Chen}
+\date{}
+
+% 简化书写
+\def\<{\langle}
+\def\>{\rangle}
+
+\begin{document}
+\maketitle
+\begin{define}[Inner Products]
+  对于一个定义在域$\mathbb{F}$($\mathbb{F}$ 可以是 $\mathbb{R}, \mathbb{C}$)上的向量空间$V$. 如果函数 $\< \cdot, \cdot \>: V\times V \to \mathbb{F}$ 对于 $\forall x, y, z\in V$ 和 $\forall c\in \mathbb{F}$ 都满足:
+
+  \begin{tabularx}{0.9\textwidth}{llXr}
+    (1) & $\< x, x \> \geq 0$ && 非负性 (Nonnegativity) \\
+    (1a) & $\< x, x \> = 0$ iff $x = 0$ && 正性 (Positivity) \\
+    (2) & $\< x + y, z \> = \< x, z \> + \< y, z \>$ && 可加性 (Additivity) \\
+    (3) & $\< cx, y \> = c\< x, y \>$ && 齐次性 (Homogeneity) \\
+    (4) & $\< x , y \> = \overline{\< y, x \>}$ && 共轭对称性 (Hermitian Property) \\
+  \end{tabularx}
+
+  $\Rightarrow$ 则$\< \cdot, \cdot \>$ 是一个\textbf{内积} (inner product). 
+  
+  $\Rightarrow$ 如果不考虑(1a), 我们称 $\<\cdot, \cdot\>$ 是一个\textbf{半内积} (semi-inner product). 所以内积当然也是半内积.
+
+  $\triangle$ 上面这些性质有些时候也被称为内积的\textbf{公理}.
+\end{define}
+
+\begin{fact}
+  $\< x, y \> := y^*x$ 是一个内积
+\end{fact}
+
+\begin{fact}
+  对于函数 $(\cdot, \cdot): V\times V \to \mathbb{F}$.
+  $(x, y) := y^*Dx$, 其中 $D = \mathrm{diag}(d_1, \cdots, d_n) \in M_n(\mathbb{F})$, 有:
+
+  \begin{tabular}{l@{ $\Leftarrow$ }l}
+    (1) & 如果$D$满足$d_i \geq 0, \forall i\in [n]$ \\
+    (1a) & 如果$D$满足$d_i > 0, \forall i \in [n]$ \\
+    (2) & $\forall D$ \\
+    (3) & $\forall D$ \\
+    (4) & $D = D^*$, i.e. $D$ 是 Hermitian 阵
+  \end{tabular}
+
+  特别的, 如果 $D$ 实对角阵, 且对角元全部 $> 0$, 则 $(\cdot, \cdot)$ 是一个内积.
+\end{fact}
+
+\begin{property}
+通过内积的定义, 可以导出如下性质:
+
+\begin{tabular}{ll}
+  (a) & $\< x, cy \> = \overline{c}\< x, y\>$ \\
+  (b) & $\< x, y + z \> = \< x, y \> + \< x, z \>$ \\
+  (c) & $\< ax + by, cw + dz \> = a\overline{c}\<x, w\> + a\overline{d}\<x, z\> + b\overline{c}\<y, w\> + b\overline{d}\<y, z\>$ \\
+  (d) & $\< x, \<x, y\>y\> = \<x, y\>\overline{\< x, y\>} = |\<x, y\>|^2$ \\
+  (e) & $\<x, y\> = 0, \forall y \in V$ iff $x = 0$
+\end{tabular}
+
+这里只有(e)的证明需要用到(1)和(1a).
+\end{property}
+
+\begin{theorem}[Cauchy–Schwarz inequality]
+  对于任意的半内积$\<\cdot,\cdot\>: V\times V\to \mathbb{F}$, 我们都有:
+  \[|\<x, y\>|^2 \leq \<x, x\>\<y, y\>, \hspace{0.5cm} \forall x, y\in V\]
+\end{theorem}
+\begin{proof}[proof.(半内积).]
+  考虑一个多项式$p(t) = \<tx - e^{i\theta}y, tx - e^{i\theta}y\>, \forall t, \theta\in\mathbb{R}, x, y\in V$, 这时有:
+  \begin{align*}
+    p(t) &= (tx - e^{i\theta}y)^*(tx - e^{i\theta}y) \\
+         &= (tx^* - e^{-i\theta}y^*)(tx - e^{i\theta}y) \\
+         &= t^2\<x, x\> - te^{i\theta}\<y, x\> - te^{-i\theta}\<x, y\> + \<y,y\> \\
+         &= t^2\<x,x\> - \overline{te^{-i\theta}\<x, y\>}  - te^{-i\theta}\<x, y\> + \<y, y\> \\
+    &= t^2\<x, x\> - 2\mathrm{Re}\left[te^{-i\theta}\<x, y\>\right] + \<y, y\>
+  \end{align*}
+  这个时候, 我们将 $\theta$ 取定, 使其满足 $e^{-i\theta} \<x, y\> = |\<x, y\>|$, 因为 $\<x, y\> \in \mathbb{F} \subset \mathbb{C}$, 所以这样的 $\theta$ 一定存在.
+  所以, 这时我们有 $p(t) = t^2\<x,x\> - 2t|\<x, y\>| + \<y, y\>$.
+  
+  这个时候, 如果 $\<x, x\> = 0 \land \<x, y\> \not= 0$, 则 $p(t) = -2t|\<x, y\>| + \<y, y\>$那么当 $t$ 足够大的时候, $p(t) < 0$, 这不满足\textbf{公理(1)}.
+  所以当 $\<x, x\> = 0$ 时, $\<x, y\> = 0$, $|\<x, y\>|^2 \leq \<x,x\>\<y,y\>$自然满足.
+
+  如果 $\<x, x\> \not= 0$. 则我们可以令 $t_0 = \frac{|\<x, y\>|}{\<x,x\>}$.
+  则:
+  \begin{displaymath}
+  \begin{array}{rl}
+    p(t_0) &= \frac{|\<x,y\>|^2}{\<x,x\>} - 2\frac{|\<x,y\>|^2}{\<x,x\>} + \<y,y\> \\
+           & \begin{array}{lrl}
+                = & -\frac{|\<x,y\>|^2}{\<x,x\>} + \<y, y\> &\geq 0 \\
+                \Rightarrow & \<y, y\> &\geq \frac{|\<x,y\>|^2}{\<x,x\>} \\
+                & \<x, x\>\<y, y\> &\geq |\<x, y\>|^2 
+              \end{array} 
+  \end{array}
+\end{displaymath}
+\end{proof}
+上面这个证明对于内积和半内积都是有效的.
+不过, 如果只关注内积, 还有一个更加简单的证明方法.
+\begin{proof}[proof.(内积).]
+  考虑 $v = \<y, y\>x - \<x, y\> y$. 则
+  \begin{align*}
+    0 &\leq \<v,v\> \\
+      &= \<\<y, y\>x - \<x, y\> y, \<y, y\>x - \<x, y\> y\> \\
+      &= \<y,y\>^2\<x,x\> - \<y,y\>\overline{\<x,y\>}\<x,y\> \underbrace{-\<x,y\>\<y,y\>\<y,x\> + \<x,y\>\overline{\<x,y\>}\<y,y\>}_{0} \\
+      &= \<y,y\>^2\<x,x\> - \<y,y\>\overline{\<x,y\>}\<x,y\> \\
+    &= \<y, y\> (\<y, y\>\<x, x\> - \overline{\<x, y\>}\<x, y\>)
+  \end{align*}
+  
+  如果 $\<y, y\> = 0$, 则 $y = 0$, 则 $\<x, y\> = 0$, 结论显然成立.
+
+  另一方面, 如果 $\<y, y\> \not= 0$, 则我们知道:
+  \begin{align*}
+    0 \leq \<y, y\>\<x, x\> - \overline{\<x, y\>}\<x, y\> \\
+    |\<x, y\>|^2 \leq \<x,x\>\<y,y\>
+  \end{align*}
+  这种证明方式还告诉我们, \textbf{考虑内积时}, 柯西不等式取等的条件是:
+  \begin{align*}
+    v &= 0 \\
+    \<y,y\>x &= \<x, y\>y \\
+    x &= \frac{\<x, y\>}{\<y,y\>}y
+  \end{align*}
+  即 $x$ 和 $y$ 线性相关 (平行).
+\end{proof}
+\begin{define}[范数(norm)]
+  令 $V$ 是 $\mathbb{F}$ ($\mathbb{R}$ 或 $\mathbb{C}$) 上的一个向量空间.
+  一个函数 $||\cdot||: V\to \mathbb{F}$ 如果对于 $\forall x, y\in V, \forall c\in \mathbb{F}$ 满足:
+  
+  \begin{tabularx}{0.9\textwidth}{llXr}
+    (1) & $||x|| > 0$ && 非负性 (Nonnegativity) \\
+    (1a) & $||x|| = 0$ iff $x = 0$ && 正性 (Positivity) \\
+    (2) & $||cx|| = c||x||$ && 齐次性 (Homogeneity) \\
+    (3) & $||x + y || \leq ||x|| + ||y||$ && 三角形不等式 (Triangle Inequality)
+  \end{tabularx}
+
+  $\Rightarrow$ 则称 $||\cdot||$ 是一个\textbf{范数}(norm).
+  
+  $\Rightarrow$ 如果 不考虑 (1a), 则称 $||\cdot||$ 是一个 \textbf{半范数} (semi-norm).
+\end{define}
+\begin{lemma}
+  $||\cdot||$ 是一个在 $\mathbb{F}$ 上的半范数, 则 
+  \[|\,||x|| - ||y||\,| \leq ||x - y||\]
+\end{lemma}
+\begin{proof}[proof]
+  因为 $x = y + (x  - y)$ 所以根据三角形不等式, 有
+  \begin{align*}
+    ||x|| &\leq ||y|| + ||x - y|| \\
+    ||x|| - ||y|| &\leq ||x - y||
+  \end{align*}
+  同理, 可以得到 $||y|| - ||x|| \leq ||x - y||$.
+\end{proof}
+
+\begin{fact}
+  如果有一个(半)内积$\<\cdot, \cdot\>: V\times V\to\mathbb{F}$, 则我们可以通过$||x||:= \<x,x\>^{1/2}$ 来定义出一个(半)范数.
+\end{fact}
+\begin{proof}
+  (1), (1a), (2) 都很好验证, 下面来说明如何验证 (3).
+  \begin{align*}
+    ||x + y||^2 &= \<x + y, x + y\> \\
+                &= \<x, x\> + \<x, y\> + \<y, x\> + \<y, y\> \\
+                &= ||x||^2 + ||y||^2 + \<x, y\> + \<y, x\> \\
+                &= ||x||^2 + ||y||^2 + 2\mathrm{Re}\left[\<x, y\>\right] \\
+                &\leq ||x||^2 + ||y||^2 + 2|\<x, y\>| \\
+                &\leq ||x||^2 + ||y||^2 + 2\<x,x\>^{1/2}\<y,y\>^{1/2} \\
+                &= ||x||^2 + ||y||^2 + 2||x||\,||y|| \\
+                &= (||x|| + ||y||)^2 \qedhere
+  \end{align*}
+\end{proof}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
