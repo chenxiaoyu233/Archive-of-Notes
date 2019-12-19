@@ -591,6 +591,50 @@
     所以
     \[A\preccurlyeq \frac{ww^T}{\sum_i w_i}\]
 \end{proof}
+
+\subsection{$d$-homogeneous multiaffine polynomial}
+
+$\triangle$ 注: 这里的 $d$ 不是在说变量的个数, 而是在说次数, 变量的个数一般设为 $n$.
+
+\begin{define}[log-concave polynomial]
+  一个多项式 $p(x)$ 是 log-concave 的, 如果 $\log p(x)$ 是 concave 的.
+\end{define}
+$d$-homogeneous multiaffine polynomial 有一堆性质:
+\begin{fact}
+  如果 $p(x)$ 是 $d$-homogeneous multiaffine polynomial, 则
+  \[d \cdot p(x) = \sum_{k=1}^n x_k\partial_kp(x)\]
+
+  $\triangle$ 注: 不难发现, 这里的 $x_k\partial_kp(x)$ 相当于将 多项式中所有包含 $x_k$ 的项 相加. 这样将所有变量 $x_k$ 枚举完之后, 不难发现, $p(x)$中的每一项被加了 $d$ 次.
+  上面的式子还可以写得更加简洁
+  \[d\cdot p = x^T(\nabla p)\]
+\end{fact}
+\begin{fact}
+  \[(d-1)\cdot \nabla p = \sum_{k=1}^n x_k \cdot \nabla(\partial_kp) = \nabla^2p\cdot x\]
+\end{fact}
+\begin{fact}
+  \[(d-2)\cdot \nabla^2p = \sum_{k=1}^n x_k\cdot \nabla^2(\partial_kp)\]
+\end{fact}
+$\triangle$ 注: 要理解上面的等式, 只需注意到 $d$-homogeneous multiaffine polynomial 求偏导之后, 仍然是 $(d-1)$-homogeneous multiaffine polynomial.
+\begin{fact}
+  \[\nabla^2 \log p = \frac{p\cdot \nabla^2p - (\nabla p)(\nabla p)^T}{p^2}\]
+\end{fact}
+\begin{proof}[proof]
+  \begin{align*}
+    \partial_i\partial_jp &= \partial_j(\frac{\partial_i p}{p}) \\
+    &= \frac{\partial_i\partial_j p \cdot p - \partial_ip\cdot \partial_jp}{p^2} \qedhere
+  \end{align*}
+\end{proof}
+  $\triangle$ 注: 因为 $p$ 是 log-concave 的, 所以 $\log p$ 是 concave 的, 也就是说
+  \[\nabla^2\log p \preccurlyeq 0\]
+  不妨假设 $p$ 的所有变量都取正数, 就有:
+  \[\nabla^2p \preccurlyeq \frac{(\nabla p)(\nabla p)^T}{p}\]
+  根据我们之前的结论, $vv^T, \forall v\in \mathbb{R}^n$ 最多有一个正特征值, 所以 $\nabla^2 p$ 最多有一个正特征值.
+\subsection{Matroid}
+ 比较熟悉, 略.
+\subsection{Simplicial Complexes}
+
+\section{正文}
+
 \end{document}
 
 %%% Local Variables:
