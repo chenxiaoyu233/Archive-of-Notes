@@ -157,6 +157,51 @@ The authors in \cite{cryan2019modified} use a more explicit but less elegant met
   So, $P$ has $n$ orthonormal eigenvectors which could be used as a basis of $\mathbb{R}^n$.
 \end{fact}
 
+\begin{fact}
+  If $P$ is a real symmetry matrix, and $g_i, i\in [n]$ is the orthonormal eigenvectors of $P$, then we have:
+  \[P = \sum_{i=1}^n \lambda_i g_i g_i^T\]
+\end{fact}
+\begin{proof}
+  First, note that $P$ could be diagonalize, since $P$ is a real symmetry matrix.
+  Particularly, if $G = [g_1, g_2, \cdots g_n]$, then
+  \[\Lambda = G^TPG\]
+  So, at the same time, we have:
+  \begin{align*}
+    P
+    &= G\Lambda G^T \\
+    &= \sum_i G\Lambda_i G^T, \hspace{0.5cm} \Lambda_i = \left[
+      \begin{array}{ccc}
+        \ddots & & \\
+               &\lambda_i& \\
+               & & \ddots
+      \end{array}
+    \right] \\
+    &= \sum_i
+      \left[
+      \begin{array}{ccc}
+        \cdots & g_i(1)& \cdots \\
+        \vdots & \vdots& \vdots \\
+        \cdots & g_i(n)& \cdots
+      \end{array}
+       \right]
+       \left[
+      \begin{array}{ccc}
+        \ddots & &  \\
+         & \lambda_i&  \\
+         & & \ddots
+      \end{array}
+       \right]
+      \left[
+      \begin{array}{ccc}
+        \ddots & &  \\
+        g_i(1) & \cdots& g_i(n) \\
+         & & \ddots
+      \end{array}
+             \right] \\
+    &= \sum_i \lambda_i g_i g_i^T \qedhere
+  \end{align*}
+\end{proof}
+
 \subsection{Application}
 Just like above:
 \begin{enumerate}
