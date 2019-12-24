@@ -2,6 +2,7 @@
 
 !*/
 !*.tex
+!*.bib
 !*.txt
 !*.cpp
 !*.py
@@ -12,4 +13,5 @@
 !*.md
 !*.hs
 !*.pdf
+!*.docx
 !.gitignore
