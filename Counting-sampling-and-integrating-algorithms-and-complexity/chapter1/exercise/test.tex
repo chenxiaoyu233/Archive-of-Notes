@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+%\usepackage{luacode}
+%\usepackage{enumitem}
+
+%\title{Exercise of Chapter 1}
+%\author{Xiaoyu Chen}
+%\date{}
+
+\begin{document}
+%\maketitle
+%\section{Exercise 1.15}
+%In the physics community, perfect matchings are sometimes known as ``dimer covers.'' It is of some interest to know the number of dimer covers of a graph $G$ when $G$ has a regular structure that models, for example, a crystal lattice. Let $\Lambda$ to be the $L\times L$ square lattice, with vertex set $V(\Lambda) = \{(i,j) : 0 \leq i,j < L\}$ and edge set $E(\Lambda) = \{(i, j), (i', j')\} : |i - i'| + |j - j'| = 1$. Exhibit a (nicely structured!) Pfaffian orientation of $\Lambda$.
+%\subsection{solution}
+%\begin{luacode*}
+%  function LLGrid(L)
+%    for x = 1, L do
+%      for y = 1, L do
+%        tex.print(string.format('\\node (p%d%d) at (%d, %d) [point] {};', x, y, x, y))
+%      end
+%    end
+%    for x = 1, L do
+%      for y = 1, L-1 do
+%        tex.print(string.format('\\draw [->, semithick] (p%d%d) -- (p%d%d);', x, y+1, x, y))
+%      end
+%    end
+%    for x = 1, L-1 do
+%      for y = 1, L do
+%        s = '->'
+%        if y % 2 == 0 then s = '<-' end
+%        tex.print(string.format('\\draw [%s, semithick] (p%d%d) -- (p%d%d);', s, x, y, x+1, y))
+%      end
+%    end
+%  end
+%\end{luacode*}
+%The Pfaffian orientation of $\Lambda$ could be constructed using the following rules:
+%\begin{enumerate}[nosep]
+%    \item Make all the edges on the column point down.
+%    \item Make all the edges on the odd row point right.
+%    \item Make all the edges on the even row point left.
+%\end{enumerate}
+%\begin{center}
+%  \begin{tikzpicture}
+%  [point/.style={shape=circle, minimum size=1pt, inner sep=0pt, minimum size=5pt, fill}]  
+%  \luadirect{LLGrid(5)}
+%  \end{tikzpicture}
+%\end{center}
+%It is easy to see that all the faces in this grid has odd number of edges oriented clockwise.
+\end{document}
