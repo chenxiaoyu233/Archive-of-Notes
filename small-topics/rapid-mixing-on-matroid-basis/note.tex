@@ -44,7 +44,7 @@ Nima在讲座上从人的正常思维的顺序给出了证明rapid mixing的思�
    (2) & $\displaystyle D_f(\nu\parallel\mu) := \E_{S\~\mu}{f(\frac{\nu(S)}{\mu(S)})} - f\left(\E_{S\~\mu}{\frac{\nu(S)}{\mu(S)}}\right)$
  \end{tabular}
 
-  Since $f$ is convex , by Jenson's Inequality, we have
+  Since $f$ is convex , by Jensen's Inequality, we have
   \[D_f(\nu\parallel\mu) \geq 0, \hspace{0.5cm} \forall \nu, \mu\]
 \end{define}
 
@@ -68,7 +68,7 @@ Nima在讲座上从人的正常思维的顺序给出了证明rapid mixing的思�
   \begin{align*}
     \E_{S\~\mu P}{f(\frac{\nu P(S)}{\mu P(S)})}
     &= \E_{S\~\mu P}{f(\E_{x\~\pi}{\frac{\nu(x)}{\mu(x)}})} \\
-    &\leq \E_{S\~\mu P}{\E_{x\~\pi}{f(\frac{\nu(x)}{\mu(x)})}}, \hspace{0.5cm} \mbox{Jenson's Inequality} \\
+    &\leq \E_{S\~\mu P}{\E_{x\~\pi}{f(\frac{\nu(x)}{\mu(x)})}}, \hspace{0.5cm} \mbox{Jensen's Inequality} \\
     &= \sum_{S} \mu P(S) \sum_{x} \frac{\mu(x)P(x,S)}{\mu P(S)} f(\frac{\nu(x)}{\mu(x)}) \\
     &= \E_{x\~\mu}{f(\frac{\nu(x)}{\mu(x)})} \qedhere
   \end{align*}
