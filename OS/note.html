@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-24 Wed 21:48 -->
+<!-- 2019-06-25 Tue 09:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -261,206 +261,338 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3b2f79a">1. 操作系统的目标与功能</a>
+<li><a href="#org202717c">1. <code>1 概论</code></a></li>
+<li><a href="#org1fbbffe">2. 操作系统的目标与功能</a>
 <ul>
-<li><a href="#org4b710cd">1.1. 定义</a></li>
-<li><a href="#org2a9499d">1.2. 目标</a></li>
-<li><a href="#org6e784eb">1.3. 基本功能/提供的服务</a></li>
+<li><a href="#org7cdbb2c">2.1. 定义</a></li>
+<li><a href="#orgd9f7343">2.2. 目标</a></li>
+<li><a href="#org230a2d7">2.3. 基本功能/提供的服务</a></li>
 </ul>
 </li>
-<li><a href="#orga0649c7">2. 操作系统的发展过程</a>
+<li><a href="#orge02189a">3. 操作系统的发展过程</a>
 <ul>
-<li><a href="#org646c964">2.1. 串行处理</a></li>
-<li><a href="#orgfc223c1">2.2. 简单批处理系统</a></li>
-<li><a href="#orgd0b69f7">2.3. 多道批处理系统</a>
+<li><a href="#orge951302">3.1. 串行处理</a></li>
+<li><a href="#org08b1b88">3.2. 简单批处理系统</a></li>
+<li><a href="#org015b517">3.3. 多道批处理系统</a>
 <ul>
-<li><a href="#org3cfbea3">2.3.1. 并发 vs 并行</a></li>
+<li><a href="#org3bee394">3.3.1. 并发 vs 并行</a></li>
 </ul>
 </li>
-<li><a href="#org08b6545">2.4. 分时系统</a></li>
-<li><a href="#org59c405f">2.5. 实时系统</a></li>
+<li><a href="#org7493e55">3.4. 分时系统</a></li>
+<li><a href="#org7fb9179">3.5. 实时系统</a></li>
 </ul>
 </li>
-<li><a href="#orgef02439">3. 操作系统的主要成就</a></li>
-<li><a href="#orgeb106f1">4. 操作系统的基本特征</a>
+<li><a href="#org428f7ee">4. 操作系统的主要成就</a></li>
+<li><a href="#org2ac975e">5. 操作系统的基本特征</a>
 <ul>
-<li><a href="#org51dc20b">4.1. 并发性</a>
+<li><a href="#org84f8ff1">5.1. 并发性</a>
 <ul>
-<li><a href="#org29fd8c7">4.1.1. 并发 vs 并行</a></li>
+<li><a href="#org0a8b9c8">5.1.1. 并发 vs 并行</a></li>
 </ul>
 </li>
-<li><a href="#org623ca02">4.2. 共享</a></li>
-<li><a href="#org045ca48">4.3. 虚拟性</a></li>
-<li><a href="#orgcb24915">4.4. 异步性(不确定性)</a></li>
+<li><a href="#org3976627">5.2. 共享</a></li>
+<li><a href="#org48a3f52">5.3. 虚拟性</a></li>
+<li><a href="#org760b434">5.4. 异步性(不确定性)</a></li>
 </ul>
 </li>
-<li><a href="#orgc9b719a">5. 操作系统的体系结构</a>
+<li><a href="#org62308e1">6. 操作系统的体系结构</a>
 <ul>
-<li><a href="#org07ec66a">5.1. 层次化</a></li>
-<li><a href="#org8ca043a">5.2. 单体内核</a></li>
-<li><a href="#org4e4258d">5.3. 微内核</a></li>
-<li><a href="#org2bd54cd">5.4. 模块化</a></li>
+<li><a href="#org242b925">6.1. 层次化</a>
+<ul>
+<li><a href="#org5eabf9f">6.1.1. 优点</a></li>
+<li><a href="#org1fc13e8">6.1.2. 缺点</a></li>
 </ul>
 </li>
-<li><a href="#org259e92d">6. 进程定义</a>
+<li><a href="#orgec5f594">6.2. 单体内核</a></li>
+<li><a href="#org747afc5">6.3. 微内核</a>
 <ul>
-<li><a href="#org8dfd77b">6.1. 典型的定义</a></li>
-<li><a href="#org4291bf0">6.2. 组成</a></li>
-<li><a href="#org77a257c">6.3. 基本特征</a></li>
+<li><a href="#org0cb7679">6.3.1. 优点</a></li>
+<li><a href="#org15f689e">6.3.2. 缺点</a></li>
 </ul>
 </li>
-<li><a href="#orgcecac23">7. 进程状态</a>
-<ul>
-<li><a href="#orgdebd41c">7.1. 进程轨迹(trace)</a></li>
-<li><a href="#org25d06a3">7.2. 进程状态</a>
-<ul>
-<li><a href="#org8526a42">7.2.1. 三状态模型 {就绪, 执行, 阻塞}</a></li>
-<li><a href="#org7b78995">7.2.2. 五状态模型 {执行, 阻塞, 就绪, 新建, 终止}</a></li>
-<li><a href="#orgcf89950">7.2.3. 考虑挂起进程模型</a></li>
+<li><a href="#org3849dfe">6.4. 模块化</a></li>
 </ul>
 </li>
+<li><a href="#orgf921c8c">7. <code>2 进程管理</code></a></li>
+<li><a href="#org42556d4">8. 进程定义</a>
+<ul>
+<li><a href="#orgd3aaf22">8.1. 典型的定义</a></li>
+<li><a href="#org79a54ea">8.2. 组成</a></li>
+<li><a href="#org66ff9fa">8.3. 基本特征</a></li>
+<li><a href="#orge5b1e30">8.4. 进程VS程序</a></li>
 </ul>
 </li>
-<li><a href="#orgac61181">8. 进程描述</a>
+<li><a href="#orgde0e1e9">9. 进程状态</a>
 <ul>
-<li><a href="#orgd8c207e">8.1. 进程控制结构</a>
+<li><a href="#orga9486a5">9.1. 进程轨迹(trace)</a></li>
+<li><a href="#org1b6086a">9.2. 进程状态</a>
 <ul>
-<li><a href="#org31ee5c6">8.1.1. 进程的物理存在 &#x2013; 进程印像(Process Image)</a></li>
-<li><a href="#org66c6577">8.1.2. PCB</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org8d65b54">9. 内核功能和执行模式</a>
-<ul>
-<li><a href="#orge0dfde3">9.1. 内核功能</a>
-<ul>
-<li><a href="#org9714ac0">9.1.1. 资源管理功能</a></li>
-<li><a href="#org8ffefee">9.1.2. 支撑功能</a></li>
-</ul>
-</li>
-<li><a href="#org3fdcdcd">9.2. 执行模式 {内核, 用户}</a></li>
-</ul>
-</li>
-<li><a href="#org2c3678d">10. 进程控制</a>
-<ul>
-<li><a href="#orgf6d9988">10.1. 内容</a></li>
-<li><a href="#orga9ca4e7">10.2. 实现</a>
-<ul>
-<li><a href="#org6fd33d3">10.2.1. 原语 (Primitive)</a></li>
-</ul>
-</li>
-<li><a href="#orge53b60e">10.3. Unix 进程控制</a></li>
-</ul>
-</li>
-<li><a href="#org70727b2">11. 线程</a>
-<ul>
-<li><a href="#orgdf627d6">11.1. 提出</a>
-<ul>
-<li><a href="#org1f8b293">11.1.1. 区分</a></li>
-<li><a href="#org1612631">11.1.2. 一些术语</a></li>
-<li><a href="#org2f18935">11.1.3. 例子</a></li>
-</ul>
-</li>
-<li><a href="#orgbe207bb">11.2. 多线程环境, 用到的资源和保护</a></li>
-<li><a href="#orgd43225d">11.3. 每个线程的内容</a></li>
-<li><a href="#orga141cca">11.4. 线程状态变化的基本操作</a></li>
-<li><a href="#org753aa78">11.5. 线程的优点</a></li>
-<li><a href="#org5db9c23">11.6. 线程分类</a></li>
-</ul>
-</li>
-<li><a href="#orgb911a20">12. 进程调度</a>
-<ul>
-<li><a href="#orgd78e730">12.1. 背景</a>
-<ul>
-<li><a href="#orgb93442d">12.1.1. 定义</a></li>
-</ul>
-</li>
-<li><a href="#org08f248e">12.2. 类型</a>
-<ul>
-<li><a href="#org1565eb7">12.2.1. 长程调度</a></li>
-<li><a href="#orgd1081fe">12.2.2. 中程调度</a></li>
-<li><a href="#org3cd7bcb">12.2.3. 短程调度</a></li>
-</ul>
-</li>
-<li><a href="#orgfa01e10">12.3. 概念</a>
-<ul>
-<li><a href="#orgf55b206">12.3.1. 响应时间</a></li>
-<li><a href="#org47cf6f3">12.3.2. 周转时间(驻留时间)</a></li>
-<li><a href="#org0cd550f">12.3.3. 截止时间</a></li>
-<li><a href="#org3bb4ea8">12.3.4. 系统吞吐量</a></li>
-<li><a href="#orga677863">12.3.5. 处理器利用率</a></li>
-<li><a href="#org7b06877">12.3.6. 平均周转时间</a></li>
-<li><a href="#org43ecfe0">12.3.7. 带权周转时间</a></li>
-<li><a href="#orgcfb1497">12.3.8. 平均带权周转时间</a></li>
-</ul>
-</li>
-<li><a href="#org6c6f9ee">12.4. 调度规则设计的出发点</a>
-<ul>
-<li><a href="#org44f20d3">12.4.1. 分类</a></li>
-<li><a href="#org991dcc7">12.4.2. 通过分类来选择优化的目标函数</a></li>
-<li><a href="#org5bf8196">12.4.3. 进程的决策模式</a></li>
-<li><a href="#orgaad5926">12.4.4. 调度选择函数</a></li>
-<li><a href="#org9462e46">12.4.5. 一些调度算法</a></li>
-</ul>
-</li>
-<li><a href="#org4be7dac">12.5. 实时系统与实时调度</a>
-<ul>
-<li><a href="#org33b4a47">12.5.1. 定义</a></li>
-<li><a href="#orgf155ac4">12.5.2. 实时任务分类</a></li>
-<li><a href="#org8e85859">12.5.3. 实时操作系统特点</a></li>
-<li><a href="#org39ecb8b">12.5.4. 实时进程的抢占方式</a></li>
-<li><a href="#org505c382">12.5.5. 实时进程的调度方法分类</a></li>
-<li><a href="#orged56721">12.5.6. 限期 (deadline) 调度</a></li>
+<li><a href="#orgd094e66">9.2.1. 三状态模型 {就绪, 执行, 阻塞}</a></li>
+<li><a href="#orgf417d54">9.2.2. 五状态模型 {执行, 阻塞, 就绪, 新建, 终止}</a></li>
+<li><a href="#org5dfeedf">9.2.3. 考虑挂起进程模型</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org10efa76">13. 同步</a>
+<li><a href="#orgcd0a97c">10. 进程描述</a>
 <ul>
-<li><a href="#orgfee1e51">13.1. 相关术语</a></li>
-<li><a href="#org90da7cc">13.2. 进程间的关系</a></li>
-<li><a href="#orge981b32">13.3. 互斥的要求 (访问临界区的原则)</a></li>
-<li><a href="#org1769e4d">13.4. 互斥: 软件方法</a>
+<li><a href="#org46e33cc">10.1. 进程控制结构</a>
 <ul>
-<li><a href="#orge0e0a49">13.4.1. 评价</a></li>
+<li><a href="#org9903ad6">10.1.1. 进程的物理存在 &#x2013; 进程映像(Process Image)</a></li>
+<li><a href="#org83ad7ff">10.1.2. PCB</a></li>
 </ul>
 </li>
-<li><a href="#org4fb6e44">13.5. 互斥: 硬件方法</a>
-<ul>
-<li><a href="#org3b6c71d">13.5.1. 屏蔽中断</a></li>
-<li><a href="#org833642f">13.5.2. 机器专用指令</a></li>
 </ul>
 </li>
-<li><a href="#org5b53a63">13.6. 信号量</a>
+<li><a href="#org75d925f">11. 内核功能和执行模式</a>
 <ul>
-<li><a href="#org11b378f">13.6.1. 实现</a></li>
-<li><a href="#org10b7b14">13.6.2. 常见模型</a></li>
-<li><a href="#org5d2bb50">13.6.3. 管程</a></li>
-<li><a href="#orgfa9167c">13.6.4. 消息传递</a></li>
+<li><a href="#org5a51177">11.1. 内核定义</a></li>
+<li><a href="#org2ab5b99">11.2. 内核功能</a>
+<ul>
+<li><a href="#org33b2d66">11.2.1. 资源管理功能</a></li>
+<li><a href="#org1848c0e">11.2.2. 支撑功能</a></li>
 </ul>
 </li>
+<li><a href="#org7735514">11.3. 执行模式 {内核, 用户}</a></li>
+<li><a href="#orgdfbf464">11.4. 模式切换的原因</a></li>
+<li><a href="#orgf755762">11.5. 模式切换vs进程切换</a></li>
+</ul>
+</li>
+<li><a href="#orgf039caf">12. 进程控制</a>
+<ul>
+<li><a href="#org7ef892e">12.1. 内容</a></li>
+<li><a href="#orge20d7ed">12.2. 实现</a>
+<ul>
+<li><a href="#orgb931399">12.2.1. 原语 (Primitive)</a></li>
+</ul>
+</li>
+<li><a href="#orgac0416a">12.3. Unix 进程控制</a></li>
+<li><a href="#orgd476386">12.4. 进程切换</a></li>
+<li><a href="#orgaa17187">12.5. 进程切换的原因</a></li>
+<li><a href="#orge90bcb9">12.6. 进程切换的步骤</a></li>
+</ul>
+</li>
+<li><a href="#org916b099">13. 线程</a>
+<ul>
+<li><a href="#org31b5ce5">13.1. 提出</a>
+<ul>
+<li><a href="#org8097ba8">13.1.1. 区分</a></li>
+<li><a href="#org1738e6d">13.1.2. 一些术语</a></li>
+<li><a href="#org7def928">13.1.3. 例子</a></li>
+</ul>
+</li>
+<li><a href="#org59e0c8c">13.2. 多线程环境, 用到的资源和保护</a></li>
+<li><a href="#org7177806">13.3. 每个线程的内容</a></li>
+<li><a href="#org9635143">13.4. 线程状态变化的基本操作</a></li>
+<li><a href="#orga92aa27">13.5. 线程的优点</a></li>
+<li><a href="#org5ca40a6">13.6. 线程分类</a></li>
+</ul>
+</li>
+<li><a href="#orgb2a4100">14. <code>2.1 进程调度</code></a></li>
+<li><a href="#orgb8580a1">15. 进程调度</a>
+<ul>
+<li><a href="#org92a73d6">15.1. 背景</a>
+<ul>
+<li><a href="#orgf8871cc">15.1.1. 定义</a></li>
+</ul>
+</li>
+<li><a href="#orgc8aedb6">15.2. 类型</a>
+<ul>
+<li><a href="#org7a1751c">15.2.1. 长程调度</a></li>
+<li><a href="#orgd03bfee">15.2.2. 中程调度</a></li>
+<li><a href="#org0a37787">15.2.3. 短程调度</a></li>
+</ul>
+</li>
+<li><a href="#org3724746">15.3. 概念</a>
+<ul>
+<li><a href="#org3b355a0">15.3.1. 响应时间</a></li>
+<li><a href="#org352487f">15.3.2. 周转时间(驻留时间)</a></li>
+<li><a href="#org24f87f2">15.3.3. 截止时间</a></li>
+<li><a href="#org051d1e9">15.3.4. 系统吞吐量</a></li>
+<li><a href="#org010200d">15.3.5. 处理器利用率</a></li>
+<li><a href="#orgf58cf5a">15.3.6. 平均周转时间</a></li>
+<li><a href="#org10afef7">15.3.7. 带权周转时间</a></li>
+<li><a href="#org1faa1cb">15.3.8. 平均带权周转时间</a></li>
+</ul>
+</li>
+<li><a href="#orga31422a">15.4. 调度规则设计的出发点</a>
+<ul>
+<li><a href="#org1425c6c">15.4.1. 分类</a></li>
+<li><a href="#orgbe7d7f4">15.4.2. 通过分类来选择优化的目标函数</a></li>
+<li><a href="#org2b4714a">15.4.3. 进程的决策模式</a></li>
+<li><a href="#orgc04ddc6">15.4.4. 调度选择函数</a></li>
+<li><a href="#org37fc892">15.4.5. 一些调度算法</a></li>
+</ul>
+</li>
+<li><a href="#orgca0b6a8">15.5. 实时系统与实时调度</a>
+<ul>
+<li><a href="#orgc0c5639">15.5.1. 定义</a></li>
+<li><a href="#org429a24d">15.5.2. 实时任务分类</a></li>
+<li><a href="#orga2e5c4f">15.5.3. 实时操作系统特点</a></li>
+<li><a href="#org5ba38bf">15.5.4. 实时进程的调度方法(基于抢占方式分类)</a></li>
+<li><a href="#org8310941">15.5.5. 实时进程的调度方法分类</a></li>
+<li><a href="#orgd958610">15.5.6. 限期 (deadline) 调度</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org62c18a2">16. <code>2.2 同步</code></a></li>
+<li><a href="#orgd5c4060">17. 同步</a>
+<ul>
+<li><a href="#orgabbb7c6">17.1. 相关术语</a></li>
+<li><a href="#org02cee0d">17.2. 进程间的关系</a></li>
+<li><a href="#org72ae793">17.3. 互斥的要求 (访问临界区的原则)</a></li>
+<li><a href="#orgff75eee">17.4. 互斥: 软件方法</a>
+<ul>
+<li><a href="#orge110b3f">17.4.1. 评价</a></li>
+</ul>
+</li>
+<li><a href="#orgadcca18">17.5. 互斥: 硬件方法</a>
+<ul>
+<li><a href="#org803a6ce">17.5.1. 屏蔽中断</a></li>
+<li><a href="#org2e71ca1">17.5.2. 机器专用指令</a></li>
+</ul>
+</li>
+<li><a href="#orga234bcf">17.6. 信号量</a>
+<ul>
+<li><a href="#org1e3e083">17.6.1. 实现</a></li>
+<li><a href="#org02a64e5">17.6.2. 常见模型</a></li>
+<li><a href="#org9adf765">17.6.3. 管程</a></li>
+<li><a href="#org50e1fe3">17.6.4. 消息传递</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org2001f09">18. <code>2.3 死锁</code></a></li>
+<li><a href="#org46652c7">19. 死锁</a>
+<ul>
+<li><a href="#org94daca1">19.1. 定义</a></li>
+<li><a href="#orgc18bdb8">19.2. 资源分类</a></li>
+<li><a href="#org215bf8f">19.3. 死锁的条件</a></li>
+<li><a href="#org54d1297">19.4. 死锁的解决</a>
+<ul>
+<li><a href="#org5716903">19.4.1. 死锁预防</a></li>
+<li><a href="#orgce170a2">19.4.2. 死锁避免</a></li>
+<li><a href="#orge5a6e2e">19.4.3. 死锁检测与解除</a></li>
+<li><a href="#orgd27c47e">19.4.4. 哲学家就餐问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6449b20">20. <code>3.1 基本内存管理</code></a>
+<ul>
+<li><a href="#org87ab79c">20.1. 程序加载与链接</a>
+<ul>
+<li><a href="#org3fff2b2">20.1.1. 编译</a></li>
+<li><a href="#org777a2de">20.1.2. 链接</a></li>
+<li><a href="#org3c88df9">20.1.3. 加载</a></li>
+<li><a href="#org529af4e">20.1.4. 链接</a></li>
+</ul>
+</li>
+<li><a href="#orgad2a625">20.2. 内存管理的需求</a>
+<ul>
+<li><a href="#org150d297">20.2.1. 重定位</a></li>
+<li><a href="#org9222036">20.2.2. 保护</a></li>
+<li><a href="#org7b30762">20.2.3. 共享</a></li>
+<li><a href="#org40f6301">20.2.4. 逻辑组织</a></li>
+<li><a href="#orgd2419d0">20.2.5. 物理组织</a></li>
+</ul>
+</li>
+<li><a href="#orge0a5a39">20.3. 内存分区</a>
+<ul>
+<li><a href="#org566de72">20.3.1. 固定分区</a></li>
+<li><a href="#org0d05b8d">20.3.2. 动态分区</a></li>
+<li><a href="#orgb8a0650">20.3.3. 地址类型</a></li>
+<li><a href="#org04e6417">20.3.4. 分页</a></li>
+<li><a href="#org818c350">20.3.5. 分段</a></li>
+<li><a href="#org52deb49">20.3.6. 分段 VS 分页</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgea5f513">21. <code>3.2 虚拟内存管理</code></a>
+<ul>
+<li><a href="#org91373c1">21.1. 术语</a></li>
+<li><a href="#org785c8d0">21.2. 分页</a></li>
+<li><a href="#org5cac9f5">21.3. 分段</a></li>
+<li><a href="#org1031782">21.4. 段页式</a></li>
+<li><a href="#org30b1fca">21.5. 读取策略</a></li>
+<li><a href="#org73c801e">21.6. 放置策略</a></li>
+<li><a href="#org6bd05f7">21.7. 置换策略</a>
+<ul>
+<li><a href="#orgf793769">21.7.1. 置换算法</a></li>
+<li><a href="#org330dcdd">21.7.2. 页缓冲</a></li>
+<li><a href="#org61f01fd">21.7.3. 驻留集管理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org0447dc4">22. <code>4 IO</code></a>
+<ul>
+<li><a href="#orgf0e740f">22.1. IO功能的三种控制方式</a></li>
+<li><a href="#orge0628fa">22.2. IO功能层次模型</a>
+<ul>
+<li><a href="#orga58c5d2">22.2.1. Framework</a></li>
+<li><a href="#org319d1cf">22.2.2. 设备独立性/设备无关性</a></li>
+</ul>
+</li>
+<li><a href="#org2b38efc">22.3. 缓冲</a>
+<ul>
+<li><a href="#orgc345510">22.3.1. 缓冲的作用</a></li>
+</ul>
+</li>
+<li><a href="#org37439d6">22.4. SPOOLing技术</a></li>
+<li><a href="#org5e26bc7">22.5. 磁盘</a>
+<ul>
+<li><a href="#org035a380">22.5.1. 概念</a></li>
+<li><a href="#org3ac51c2">22.5.2. 时间</a></li>
+<li><a href="#orgaae75b0">22.5.3. 磁盘调度策略</a></li>
+<li><a href="#org7cdb18d">22.5.4. RAID</a></li>
+<li><a href="#org7d86c88">22.5.5. 磁盘高速缓存</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgd0e80f7">23. <code>5 文件系统</code></a>
+<ul>
+<li><a href="#orgc69de9f">23.1. 概念</a></li>
+<li><a href="#orgee0b406">23.2. 文件组织和访问</a></li>
+<li><a href="#orgd411297">23.3. 记录组块</a></li>
+<li><a href="#org0d42c5e">23.4. 文件分配</a>
+<ul>
+<li><a href="#orgfad9d95">23.4.1. 分配策略</a></li>
+<li><a href="#org0f78a12">23.4.2. 空闲空间管理</a></li>
+</ul>
+</li>
+<li><a href="#org8f51669">23.5. 文件共享</a></li>
+<li><a href="#orgd2c0160">23.6. 卷</a></li>
+<li><a href="#org13d043d">23.7. UNIX文件管理</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3b2f79a" class="outline-2">
-<h2 id="org3b2f79a"><span class="section-number-2">1</span> 操作系统的目标与功能</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org202717c" class="outline-2">
+<h2 id="org202717c"><span class="section-number-2">1</span> <code>1 概论</code></h2>
 </div>
-<div id="outline-container-org4b710cd" class="outline-3">
-<h3 id="org4b710cd"><span class="section-number-3">1.1</span> 定义</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org1fbbffe" class="outline-2">
+<h2 id="org1fbbffe"><span class="section-number-2">2</span> 操作系统的目标与功能</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org7cdbb2c" class="outline-3">
+<h3 id="org7cdbb2c"><span class="section-number-3">2.1</span> 定义</h3>
+<div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>控制应用程序执行的程序</li>
 <li>应用程序和计算机硬件之间的接口</li>
+<li>操作系统是一组控制和管理计算机硬件和软件资源，
+合理地对各类作业进行调度，以及方便用户使用的程序的集合</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2a9499d" class="outline-3">
-<h3 id="org2a9499d"><span class="section-number-3">1.2</span> 目标</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orgd9f7343" class="outline-3">
+<h3 id="orgd9f7343"><span class="section-number-3">2.2</span> 目标</h3>
+<div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>方便 (使用)</li>
 <li>有效 (资源)</li>
@@ -468,9 +600,9 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-org6e784eb" class="outline-3">
-<h3 id="org6e784eb"><span class="section-number-3">1.3</span> 基本功能/提供的服务</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org230a2d7" class="outline-3">
+<h3 id="org230a2d7"><span class="section-number-3">2.3</span> 基本功能/提供的服务</h3>
+<div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>程序开发</li>
 <li>程序运行</li>
@@ -479,37 +611,38 @@ for the JavaScript code in this tag.
 <li>系统访问 (资源保护/资源竞争)</li>
 <li>错误检测和响应</li>
 <li>记账</li>
+<li>资源管理 (*)</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-orga0649c7" class="outline-2">
-<h2 id="orga0649c7"><span class="section-number-2">2</span> 操作系统的发展过程</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orge02189a" class="outline-2">
+<h2 id="orge02189a"><span class="section-number-2">3</span> 操作系统的发展过程</h2>
+<div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org646c964" class="outline-3">
-<h3 id="org646c964"><span class="section-number-3">2.1</span> 串行处理</h3>
+<div id="outline-container-orge951302" class="outline-3">
+<h3 id="orge951302"><span class="section-number-3">3.1</span> 串行处理</h3>
 </div>
-<div id="outline-container-orgfc223c1" class="outline-3">
-<h3 id="orgfc223c1"><span class="section-number-3">2.2</span> 简单批处理系统</h3>
+<div id="outline-container-org08b1b88" class="outline-3">
+<h3 id="org08b1b88"><span class="section-number-3">3.2</span> 简单批处理系统</h3>
 </div>
-<div id="outline-container-orgd0b69f7" class="outline-3">
-<h3 id="orgd0b69f7"><span class="section-number-3">2.3</span> 多道批处理系统</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-org015b517" class="outline-3">
+<h3 id="org015b517"><span class="section-number-3">3.3</span> 多道批处理系统</h3>
+<div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org3cfbea3" class="outline-4">
-<h4 id="org3cfbea3"><span class="section-number-4">2.3.1</span> 并发 vs 并行</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-org3bee394" class="outline-4">
+<h4 id="org3bee394"><span class="section-number-4">3.3.1</span> 并发 vs 并行</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <ul class="org-ul">
-<li>并发: 两个或多个事件在同一事件间隔内发生</li>
+<li>并发: 两个或多个事件在同一时间隔内发生</li>
 <li>并行: 两个或多个事件在同一时刻发生</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org08b6545" class="outline-3">
-<h3 id="org08b6545"><span class="section-number-3">2.4</span> 分时系统</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-org7493e55" class="outline-3">
+<h3 id="org7493e55"><span class="section-number-3">3.4</span> 分时系统</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 使用了和多道处理系统相似的技术, 但是目标是减少响应时间(一般来自用户).
 一般是为了方便支持多个用户使用同一台计算机.
@@ -517,19 +650,20 @@ for the JavaScript code in this tag.
 </p>
 </div>
 </div>
-<div id="outline-container-org59c405f" class="outline-3">
-<h3 id="org59c405f"><span class="section-number-3">2.5</span> 实时系统</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-org7fb9179" class="outline-3">
+<h3 id="org7fb9179"><span class="section-number-3">3.5</span> 实时系统</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
-目标是使系统能够及时的响应外部事件的请求. 能够在规定时间内开始或完成对该事件的处理.
+目标是使系统能够及时的响应外部事件的请求. 
+能够在规定时间内开始或完成对该事件的处理.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgef02439" class="outline-2">
-<h2 id="orgef02439"><span class="section-number-2">3</span> 操作系统的主要成就</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org428f7ee" class="outline-2">
+<h2 id="org428f7ee"><span class="section-number-2">4</span> 操作系统的主要成就</h2>
+<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>进程</li>
 <li>内存管理</li>
@@ -538,20 +672,20 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgeb106f1" class="outline-2">
-<h2 id="orgeb106f1"><span class="section-number-2">4</span> 操作系统的基本特征</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org2ac975e" class="outline-2">
+<h2 id="org2ac975e"><span class="section-number-2">5</span> 操作系统的基本特征</h2>
+<div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org51dc20b" class="outline-3">
-<h3 id="org51dc20b"><span class="section-number-3">4.1</span> 并发性</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org84f8ff1" class="outline-3">
+<h3 id="org84f8ff1"><span class="section-number-3">5.1</span> 并发性</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 最重要, 是其他特性的前提.
 </p>
 </div>
-<div id="outline-container-org29fd8c7" class="outline-4">
-<h4 id="org29fd8c7"><span class="section-number-4">4.1.1</span> 并发 vs 并行</h4>
-<div class="outline-text-4" id="text-4-1-1">
+<div id="outline-container-org0a8b9c8" class="outline-4">
+<h4 id="org0a8b9c8"><span class="section-number-4">5.1.1</span> 并发 vs 并行</h4>
+<div class="outline-text-4" id="text-5-1-1">
 <ul class="org-ul">
 <li>并发: 两个或多个事件在同一事件间隔内发生</li>
 <li>并行: 两个或多个事件在同一时刻发生</li>
@@ -559,26 +693,25 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-
-<div id="outline-container-org623ca02" class="outline-3">
-<h3 id="org623ca02"><span class="section-number-3">4.2</span> 共享</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org3976627" class="outline-3">
+<h3 id="org3976627"><span class="section-number-3">5.2</span> 共享</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 系统资源可供多个并发执行的进程共同使用
 </p>
 </div>
 </div>
-<div id="outline-container-org045ca48" class="outline-3">
-<h3 id="org045ca48"><span class="section-number-3">4.3</span> 虚拟性</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org48a3f52" class="outline-3">
+<h3 id="org48a3f52"><span class="section-number-3">5.3</span> 虚拟性</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 对物理实体进程抽象
 </p>
 </div>
 </div>
-<div id="outline-container-orgcb24915" class="outline-3">
-<h3 id="orgcb24915"><span class="section-number-3">4.4</span> 异步性(不确定性)</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-org760b434" class="outline-3">
+<h3 id="org760b434"><span class="section-number-3">5.4</span> 异步性(不确定性)</h3>
+<div class="outline-text-3" id="text-5-4">
 <p>
 指程序执行过程中的异步性. 即, 我们不能确定:
 </p>
@@ -590,45 +723,88 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc9b719a" class="outline-2">
-<h2 id="orgc9b719a"><span class="section-number-2">5</span> 操作系统的体系结构</h2>
-<div class="outline-text-2" id="text-5">
-</div>
-<div id="outline-container-org07ec66a" class="outline-3">
-<h3 id="org07ec66a"><span class="section-number-3">5.1</span> 层次化</h3>
-</div>
-<div id="outline-container-org8ca043a" class="outline-3">
-<h3 id="org8ca043a"><span class="section-number-3">5.2</span> 单体内核</h3>
-</div>
-<div id="outline-container-org4e4258d" class="outline-3">
-<h3 id="org4e4258d"><span class="section-number-3">5.3</span> 微内核</h3>
-</div>
-<div id="outline-container-org2bd54cd" class="outline-3">
-<h3 id="org2bd54cd"><span class="section-number-3">5.4</span> 模块化</h3>
-<div class="outline-text-3" id="text-5-4">
-</div>
-</div>
-</div>
-<div id="outline-container-org259e92d" class="outline-2">
-<h2 id="org259e92d"><span class="section-number-2">6</span> 进程定义</h2>
+<div id="outline-container-org62308e1" class="outline-2">
+<h2 id="org62308e1"><span class="section-number-2">6</span> 操作系统的体系结构</h2>
 <div class="outline-text-2" id="text-6">
-<p>
-为了控制多道程序能够正确的并发执行, 所以引入进程.
-</p>
 </div>
-<div id="outline-container-org8dfd77b" class="outline-3">
-<h3 id="org8dfd77b"><span class="section-number-3">6.1</span> 典型的定义</h3>
+<div id="outline-container-org242b925" class="outline-3">
+<h3 id="org242b925"><span class="section-number-3">6.1</span> 层次化</h3>
 <div class="outline-text-3" id="text-6-1">
+</div>
+<div id="outline-container-org5eabf9f" class="outline-4">
+<h4 id="org5eabf9f"><span class="section-number-4">6.1.1</span> 优点</h4>
+<div class="outline-text-4" id="text-6-1-1">
 <ul class="org-ul">
-<li>一个正在执行的程序</li>
-<li>能分配给处理器并由处理器执行的实体</li>
-<li>{指令, 当前状态, 相关系统资源表征} (活动单元)</li>
+<li>易于保证正确性</li>
+<li>易于理解和维护</li>
+<li>易于扩充</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4291bf0" class="outline-3">
-<h3 id="org4291bf0"><span class="section-number-3">6.2</span> 组成</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org1fc13e8" class="outline-4">
+<h4 id="org1fc13e8"><span class="section-number-4">6.1.2</span> 缺点</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<ul class="org-ul">
+<li>系统效率低</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgec5f594" class="outline-3">
+<h3 id="orgec5f594"><span class="section-number-3">6.2</span> 单体内核</h3>
+</div>
+<div id="outline-container-org747afc5" class="outline-3">
+<h3 id="org747afc5"><span class="section-number-3">6.3</span> 微内核</h3>
+<div class="outline-text-3" id="text-6-3">
+</div>
+<div id="outline-container-org0cb7679" class="outline-4">
+<h4 id="org0cb7679"><span class="section-number-4">6.3.1</span> 优点</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<ul class="org-ul">
+<li>提高了可扩展性</li>
+<li>提高了可靠性</li>
+<li>可移植性好</li>
+<li>支持分布式系统</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org15f689e" class="outline-4">
+<h4 id="org15f689e"><span class="section-number-4">6.3.2</span> 缺点</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<ul class="org-ul">
+<li>运行效率低</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3849dfe" class="outline-3">
+<h3 id="org3849dfe"><span class="section-number-3">6.4</span> 模块化</h3>
+</div>
+</div>
+
+<div id="outline-container-orgf921c8c" class="outline-2">
+<h2 id="orgf921c8c"><span class="section-number-2">7</span> <code>2 进程管理</code></h2>
+</div>
+<div id="outline-container-org42556d4" class="outline-2">
+<h2 id="org42556d4"><span class="section-number-2">8</span> 进程定义</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+为了控制多道程序能够正确的并发执行, 所以引入进程. (并发基于进程)
+</p>
+</div>
+<div id="outline-container-orgd3aaf22" class="outline-3">
+<h3 id="orgd3aaf22"><span class="section-number-3">8.1</span> 典型的定义</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>一个正在执行的程序</li>
+<li>能分配给处理器并由处理器执行的实体</li>
+<li>{指令, 当前状态, 相关系统资源} -表征的-&gt; (活动单元)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org79a54ea" class="outline-3">
+<h3 id="org79a54ea"><span class="section-number-3">8.2</span> 组成</h3>
+<div class="outline-text-3" id="text-8-2">
 <ul class="org-ul">
 <li>程序代码</li>
 <li>相关数据</li>
@@ -678,9 +854,9 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-org77a257c" class="outline-3">
-<h3 id="org77a257c"><span class="section-number-3">6.3</span> 基本特征</h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-org66ff9fa" class="outline-3">
+<h3 id="org66ff9fa"><span class="section-number-3">8.3</span> 基本特征</h3>
+<div class="outline-text-3" id="text-8-3">
 <ul class="org-ul">
 <li>动态性 (本质)
 存在生命周期</li>
@@ -688,18 +864,22 @@ for the JavaScript code in this tag.
 可以和其他进程一起向前推进</li>
 <li>独立性
 各个进程地址空间相互独立</li>
-<li>异步性</li>
+<li>异步性
+各自按照独立的, 不可预知的速度向前推进</li>
 </ul>
 </div>
 </div>
+<div id="outline-container-orge5b1e30" class="outline-3">
+<h3 id="orge5b1e30"><span class="section-number-3">8.4</span> 进程VS程序</h3>
 </div>
-<div id="outline-container-orgcecac23" class="outline-2">
-<h2 id="orgcecac23"><span class="section-number-2">7</span> 进程状态</h2>
-<div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orgdebd41c" class="outline-3">
-<h3 id="orgdebd41c"><span class="section-number-3">7.1</span> 进程轨迹(trace)</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-orgde0e1e9" class="outline-2">
+<h2 id="orgde0e1e9"><span class="section-number-2">9</span> 进程状态</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-orga9486a5" class="outline-3">
+<h3 id="orga9486a5"><span class="section-number-3">9.1</span> 进程轨迹(trace)</h3>
+<div class="outline-text-3" id="text-9-1">
 <p>
 列出进程执行的指令序列, 可以描述单个进程的行为, 
 这样的序列称为 <code>进程轨迹(trace)</code>.
@@ -708,13 +888,13 @@ for the JavaScript code in this tag.
 </p>
 </div>
 </div>
-<div id="outline-container-org25d06a3" class="outline-3">
-<h3 id="org25d06a3"><span class="section-number-3">7.2</span> 进程状态</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org1b6086a" class="outline-3">
+<h3 id="org1b6086a"><span class="section-number-3">9.2</span> 进程状态</h3>
+<div class="outline-text-3" id="text-9-2">
 </div>
-<div id="outline-container-org8526a42" class="outline-4">
-<h4 id="org8526a42"><span class="section-number-4">7.2.1</span> 三状态模型 {就绪, 执行, 阻塞}</h4>
-<div class="outline-text-4" id="text-7-2-1">
+<div id="outline-container-orgd094e66" class="outline-4">
+<h4 id="orgd094e66"><span class="section-number-4">9.2.1</span> 三状态模型 {就绪, 执行, 阻塞}</h4>
+<div class="outline-text-4" id="text-9-2-1">
 
 <div class="figure">
 <p><img src="pic/3-state.png" alt="3-state.png" />
@@ -722,9 +902,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-org7b78995" class="outline-4">
-<h4 id="org7b78995"><span class="section-number-4">7.2.2</span> 五状态模型 {执行, 阻塞, 就绪, 新建, 终止}</h4>
-<div class="outline-text-4" id="text-7-2-2">
+<div id="outline-container-orgf417d54" class="outline-4">
+<h4 id="orgf417d54"><span class="section-number-4">9.2.2</span> 五状态模型 {执行, 阻塞, 就绪, 新建, 终止}</h4>
+<div class="outline-text-4" id="text-9-2-2">
 
 <div class="figure">
 <p><img src="pic/5-state.png" alt="5-state.png" />
@@ -744,8 +924,8 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org8e0cbb3"></a>阻塞队列<br />
-<div class="outline-text-5" id="text-7-2-2-1">
+<li><a id="orgbc53bbe"></a>阻塞队列<br />
+<div class="outline-text-5" id="text-9-2-2-1">
 <ul class="org-ul">
 <li>{单阻塞, 单就绪} 队列</li>
 <li>{多阻塞, 单就绪} 队列</li>
@@ -754,21 +934,34 @@ for the JavaScript code in this tag.
 </li>
 </ol>
 </div>
-<div id="outline-container-orgcf89950" class="outline-4">
-<h4 id="orgcf89950"><span class="section-number-4">7.2.3</span> 考虑挂起进程模型</h4>
-<div class="outline-text-4" id="text-7-2-3">
+<div id="outline-container-org5dfeedf" class="outline-4">
+<h4 id="org5dfeedf"><span class="section-number-4">9.2.3</span> 考虑挂起进程模型</h4>
+<div class="outline-text-4" id="text-9-2-3">
 </div>
 <ol class="org-ol">
-<li><a id="org8dbc311"></a>为什么要挂起<br />
-<div class="outline-text-5" id="text-7-2-3-1">
+<li><a id="orga1b4490"></a>挂起的原因<br />
+<div class="outline-text-5" id="text-9-2-3-1">
 <ul class="org-ul">
-<li>内存资源紧张</li>
-<li>希望能够容纳尽量多的进程, 防止所有进程都被阻塞的情况发生.</li>
+<li>进程全部阻塞</li>
+<li>交换, 内存空间紧张</li>
+<li>操作系统的需要</li>
+<li>终端用户请求</li>
+<li>父进程请求</li>
 </ul>
 </div>
 </li>
-<li><a id="org9042989"></a>解决方案 &#x2013; 交换技术(Swapping)<br />
-<div class="outline-text-5" id="text-7-2-3-2">
+<li><a id="orgd3b65fa"></a>挂起的特征<br />
+<div class="outline-text-5" id="text-9-2-3-2">
+<ul class="org-ul">
+<li>不能马上执行</li>
+<li>挂起条件独立于阻塞条件</li>
+<li>使之挂起的进程: 自身/OS/父进程</li>
+<li>激活挂起进程的进程: OS/实施挂起操作的进程</li>
+</ul>
+</div>
+</li>
+<li><a id="org2012dfb"></a>解决方案 &#x2013; 交换技术(Swapping)<br />
+<div class="outline-text-5" id="text-9-2-3-3">
 <p>
 被交换到外存的进程, 状态变为 <code>挂起</code>.
 于是{就绪, 阻塞}变为了{就绪, 阻塞, 就绪/挂起, 阻塞/挂起}
@@ -781,37 +974,37 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgac61181" class="outline-2">
-<h2 id="orgac61181"><span class="section-number-2">8</span> 进程描述</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgcd0a97c" class="outline-2">
+<h2 id="orgcd0a97c"><span class="section-number-2">10</span> 进程描述</h2>
+<div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-orgd8c207e" class="outline-3">
-<h3 id="orgd8c207e"><span class="section-number-3">8.1</span> 进程控制结构</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-org46e33cc" class="outline-3">
+<h3 id="org46e33cc"><span class="section-number-3">10.1</span> 进程控制结构</h3>
+<div class="outline-text-3" id="text-10-1">
 </div>
-<div id="outline-container-org31ee5c6" class="outline-4">
-<h4 id="org31ee5c6"><span class="section-number-4">8.1.1</span> 进程的物理存在 &#x2013; 进程印像(Process Image)</h4>
-<div class="outline-text-4" id="text-8-1-1">
+<div id="outline-container-org9903ad6" class="outline-4">
+<h4 id="org9903ad6"><span class="section-number-4">10.1.1</span> 进程的物理存在 &#x2013; 进程映像(Process Image)</h4>
+<div class="outline-text-4" id="text-10-1-1">
 <ul class="org-ul">
 <li>程序段 + 数据段 + PCB + 栈</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org66c6577" class="outline-4">
-<h4 id="org66c6577"><span class="section-number-4">8.1.2</span> PCB</h4>
-<div class="outline-text-4" id="text-8-1-2">
+<div id="outline-container-org83ad7ff" class="outline-4">
+<h4 id="org83ad7ff"><span class="section-number-4">10.1.2</span> PCB</h4>
+<div class="outline-text-4" id="text-10-1-2">
 </div>
 <ol class="org-ol">
-<li><a id="orge74c31a"></a>作用<br />
-<div class="outline-text-5" id="text-8-1-2-1">
+<li><a id="org3c57eac"></a>作用<br />
+<div class="outline-text-5" id="text-10-1-2-1">
 <ul class="org-ul">
 <li>进程存在的唯一标志
 PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org4926c66"></a>内容<br />
-<div class="outline-text-5" id="text-8-1-2-2">
+<li><a id="org1bdfc8c"></a>内容<br />
+<div class="outline-text-5" id="text-10-1-2-2">
 <ul class="org-ul">
 <li>进程标识 {PID, 父进程PID, 用户ID}</li>
 <li>处理机状态 {通用寄存器, 控制和状态寄存器, 栈指针}</li>
@@ -823,17 +1016,26 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org8d65b54" class="outline-2">
-<h2 id="org8d65b54"><span class="section-number-2">9</span> 内核功能和执行模式</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org75d925f" class="outline-2">
+<h2 id="org75d925f"><span class="section-number-2">11</span> 内核功能和执行模式</h2>
+<div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-orge0dfde3" class="outline-3">
-<h3 id="orge0dfde3"><span class="section-number-3">9.1</span> 内核功能</h3>
-<div class="outline-text-3" id="text-9-1">
+<div id="outline-container-org5a51177" class="outline-3">
+<h3 id="org5a51177"><span class="section-number-3">11.1</span> 内核定义</h3>
+<div class="outline-text-3" id="text-11-1">
+<ul class="org-ul">
+<li>操作系统的核心(包含重要系统功能)</li>
+<li>常驻内存, 便于提高操作系统的运行效能</li>
+</ul>
 </div>
-<div id="outline-container-org9714ac0" class="outline-4">
-<h4 id="org9714ac0"><span class="section-number-4">9.1.1</span> 资源管理功能</h4>
-<div class="outline-text-4" id="text-9-1-1">
+</div>
+<div id="outline-container-org2ab5b99" class="outline-3">
+<h3 id="org2ab5b99"><span class="section-number-3">11.2</span> 内核功能</h3>
+<div class="outline-text-3" id="text-11-2">
+</div>
+<div id="outline-container-org33b2d66" class="outline-4">
+<h4 id="org33b2d66"><span class="section-number-4">11.2.1</span> 资源管理功能</h4>
+<div class="outline-text-4" id="text-11-2-1">
 
 <div class="figure">
 <p><img src="pic/ziyuan.png" alt="ziyuan.png" />
@@ -841,9 +1043,9 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org8ffefee" class="outline-4">
-<h4 id="org8ffefee"><span class="section-number-4">9.1.2</span> 支撑功能</h4>
-<div class="outline-text-4" id="text-9-1-2">
+<div id="outline-container-org1848c0e" class="outline-4">
+<h4 id="org1848c0e"><span class="section-number-4">11.2.2</span> 支撑功能</h4>
+<div class="outline-text-4" id="text-11-2-2">
 
 <div class="figure">
 <p><img src="pic/zhicheng.png" alt="zhicheng.png" />
@@ -852,23 +1054,39 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org3fdcdcd" class="outline-3">
-<h3 id="org3fdcdcd"><span class="section-number-3">9.2</span> 执行模式 {内核, 用户}</h3>
-<div class="outline-text-3" id="text-9-2">
+<div id="outline-container-org7735514" class="outline-3">
+<h3 id="org7735514"><span class="section-number-3">11.3</span> 执行模式 {内核, 用户}</h3>
+<div class="outline-text-3" id="text-11-3">
 <ul class="org-ul">
 <li>原因: 保护操作系统的数据结构不被破坏</li>
 <li>实现: IA-64体系结构处理器中的PSR寄存器中存在指示执行模式的位</li>
 </ul>
 </div>
 </div>
+<div id="outline-container-orgdfbf464" class="outline-3">
+<h3 id="orgdfbf464"><span class="section-number-3">11.4</span> 模式切换的原因</h3>
+<div class="outline-text-3" id="text-11-4">
+<ul class="org-ul">
+<li>系统调用/中断</li>
+</ul>
 </div>
-<div id="outline-container-org2c3678d" class="outline-2">
-<h2 id="org2c3678d"><span class="section-number-2">10</span> 进程控制</h2>
-<div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-orgf6d9988" class="outline-3">
-<h3 id="orgf6d9988"><span class="section-number-3">10.1</span> 内容</h3>
-<div class="outline-text-3" id="text-10-1">
+<div id="outline-container-orgf755762" class="outline-3">
+<h3 id="orgf755762"><span class="section-number-3">11.5</span> 模式切换vs进程切换</h3>
+<div class="outline-text-3" id="text-11-5">
+<ul class="org-ul">
+<li>模式切换不一定会导致进程切换</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf039caf" class="outline-2">
+<h2 id="orgf039caf"><span class="section-number-2">12</span> 进程控制</h2>
+<div class="outline-text-2" id="text-12">
+</div>
+<div id="outline-container-org7ef892e" class="outline-3">
+<h3 id="org7ef892e"><span class="section-number-3">12.1</span> 内容</h3>
+<div class="outline-text-3" id="text-12-1">
 <ul class="org-ul">
 <li>{创建, 撤销}</li>
 <li>{阻塞, 唤醒}</li>
@@ -877,16 +1095,16 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga9ca4e7" class="outline-3">
-<h3 id="orga9ca4e7"><span class="section-number-3">10.2</span> 实现</h3>
-<div class="outline-text-3" id="text-10-2">
+<div id="outline-container-orge20d7ed" class="outline-3">
+<h3 id="orge20d7ed"><span class="section-number-3">12.2</span> 实现</h3>
+<div class="outline-text-3" id="text-12-2">
 <p>
 进程控制由原语实现.
 </p>
 </div>
-<div id="outline-container-org6fd33d3" class="outline-4">
-<h4 id="org6fd33d3"><span class="section-number-4">10.2.1</span> 原语 (Primitive)</h4>
-<div class="outline-text-4" id="text-10-2-1">
+<div id="outline-container-orgb931399" class="outline-4">
+<h4 id="orgb931399"><span class="section-number-4">12.2.1</span> 原语 (Primitive)</h4>
+<div class="outline-text-4" id="text-12-2-1">
 <p>
 用于完成一定功能的过程. 
 原子操作, 不允许被中断. 
@@ -895,9 +1113,9 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 
-<div id="outline-container-orge53b60e" class="outline-3">
-<h3 id="orge53b60e"><span class="section-number-3">10.3</span> Unix 进程控制</h3>
-<div class="outline-text-3" id="text-10-3">
+<div id="outline-container-orgac0416a" class="outline-3">
+<h3 id="orgac0416a"><span class="section-number-3">12.3</span> Unix 进程控制</h3>
+<div class="outline-text-3" id="text-12-3">
 <p>
 <img src="pic/unix-state.png" alt="unix-state.png" />
 <span class="underline">注意fork()</span>: 
@@ -908,39 +1126,72 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-</div>
-<div id="outline-container-org70727b2" class="outline-2">
-<h2 id="org70727b2"><span class="section-number-2">11</span> 线程</h2>
-<div class="outline-text-2" id="text-11">
-</div>
-<div id="outline-container-orgdf627d6" class="outline-3">
-<h3 id="orgdf627d6"><span class="section-number-3">11.1</span> 提出</h3>
-<div class="outline-text-3" id="text-11-1">
+<div id="outline-container-orgd476386" class="outline-3">
+<h3 id="orgd476386"><span class="section-number-3">12.4</span> 进程切换</h3>
+<div class="outline-text-3" id="text-12-4">
 <p>
-操作系统应该能够分别处理 <code>资源问题</code> 和 <code>调度问题</code>
+调度另一个就绪进程占用处理器执行
 </p>
 </div>
-<div id="outline-container-org1f8b293" class="outline-4">
-<h4 id="org1f8b293"><span class="section-number-4">11.1.1</span> 区分</h4>
-<div class="outline-text-4" id="text-11-1-1">
+</div>
+<div id="outline-container-orgaa17187" class="outline-3">
+<h3 id="orgaa17187"><span class="section-number-3">12.5</span> 进程切换的原因</h3>
+<div class="outline-text-3" id="text-12-5">
+<ul class="org-ul">
+<li>时钟中断</li>
+<li>IO中断</li>
+<li>内存失效</li>
+<li>陷阱(指令执行错误/异常)</li>
+<li>系统调用(处理机进入内核模式)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge90bcb9" class="outline-3">
+<h3 id="orge90bcb9"><span class="section-number-3">12.6</span> 进程切换的步骤</h3>
+<div class="outline-text-3" id="text-12-6">
+<ul class="org-ul">
+<li>保存上下文 (保存各种寄存器的值)</li>
+<li>更新当前进程PCB</li>
+<li>将当前进程的PCB移动至相应队列</li>
+<li>选择另外一个进程执行</li>
+<li>更新这个进程的控制块</li>
+<li>恢复这个进程的上下文</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org916b099" class="outline-2">
+<h2 id="org916b099"><span class="section-number-2">13</span> 线程</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-org31b5ce5" class="outline-3">
+<h3 id="org31b5ce5"><span class="section-number-3">13.1</span> 提出</h3>
+<div class="outline-text-3" id="text-13-1">
+<p>
+操作系统应该能够独立处理 <code>资源问题</code> 和 <code>调度问题</code>
+</p>
+</div>
+<div id="outline-container-org8097ba8" class="outline-4">
+<h4 id="org8097ba8"><span class="section-number-4">13.1.1</span> 区分</h4>
+<div class="outline-text-4" id="text-13-1-1">
 <ul class="org-ul">
 <li>进程: 资源分配的基本单位</li>
 <li>线程: 调度和分派的基本单位</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1612631" class="outline-4">
-<h4 id="org1612631"><span class="section-number-4">11.1.2</span> 一些术语</h4>
-<div class="outline-text-4" id="text-11-1-2">
+<div id="outline-container-org1738e6d" class="outline-4">
+<h4 id="org1738e6d"><span class="section-number-4">13.1.2</span> 一些术语</h4>
+<div class="outline-text-4" id="text-13-1-2">
 <p>
 <i>多线程(multithreading): 指操作系统在 <span class="underline">单个</span> 进程内支持多个并发路径的能力</i>
 <i>单线程方法:每个进程中只有一个线程在执行的方法</i>
 </p>
 </div>
 </div>
-<div id="outline-container-org2f18935" class="outline-4">
-<h4 id="org2f18935"><span class="section-number-4">11.1.3</span> 例子</h4>
-<div class="outline-text-4" id="text-11-1-3">
+<div id="outline-container-org7def928" class="outline-4">
+<h4 id="org7def928"><span class="section-number-4">13.1.3</span> 例子</h4>
+<div class="outline-text-4" id="text-13-1-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -974,18 +1225,18 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbe207bb" class="outline-3">
-<h3 id="orgbe207bb"><span class="section-number-3">11.2</span> 多线程环境, 用到的资源和保护</h3>
-<div class="outline-text-3" id="text-11-2">
+<div id="outline-container-org59e0c8c" class="outline-3">
+<h3 id="org59e0c8c"><span class="section-number-3">13.2</span> 多线程环境, 用到的资源和保护</h3>
+<div class="outline-text-3" id="text-13-2">
 <ul class="org-ul">
 <li>容纳进程映像的虚拟地址空间</li>
 <li>对{CPU, 其他进程, 文件, I/O}的受保护访问.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd43225d" class="outline-3">
-<h3 id="orgd43225d"><span class="section-number-3">11.3</span> 每个线程的内容</h3>
-<div class="outline-text-3" id="text-11-3">
+<div id="outline-container-org7177806" class="outline-3">
+<h3 id="org7177806"><span class="section-number-3">13.3</span> 每个线程的内容</h3>
+<div class="outline-text-3" id="text-13-3">
 
 <div class="figure">
 <p><img src="pic/threadVSprocess.png" alt="threadVSprocess.png" />
@@ -998,20 +1249,20 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga141cca" class="outline-3">
-<h3 id="orga141cca"><span class="section-number-3">11.4</span> 线程状态变化的基本操作</h3>
-<div class="outline-text-3" id="text-11-4">
+<div id="outline-container-org9635143" class="outline-3">
+<h3 id="org9635143"><span class="section-number-3">13.4</span> 线程状态变化的基本操作</h3>
+<div class="outline-text-3" id="text-13-4">
 <ul class="org-ul">
 <li>派生</li>
 <li>阻塞</li>
-<li>接触阻塞</li>
+<li>解除阻塞</li>
 <li>结束</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org753aa78" class="outline-3">
-<h3 id="org753aa78"><span class="section-number-3">11.5</span> 线程的优点</h3>
-<div class="outline-text-3" id="text-11-5">
+<div id="outline-container-orga92aa27" class="outline-3">
+<h3 id="orga92aa27"><span class="section-number-3">13.5</span> 线程的优点</h3>
+<div class="outline-text-3" id="text-13-5">
 <ul class="org-ul">
 <li>创建时间小于进程</li>
 <li>终止时间小于进程</li>
@@ -1020,15 +1271,15 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5db9c23" class="outline-3">
-<h3 id="org5db9c23"><span class="section-number-3">11.6</span> 线程分类</h3>
-<div class="outline-text-3" id="text-11-6">
+<div id="outline-container-org5ca40a6" class="outline-3">
+<h3 id="org5ca40a6"><span class="section-number-3">13.6</span> 线程分类</h3>
+<div class="outline-text-3" id="text-13-6">
 </div>
 <ol class="org-ol">
-<li><a id="org86411d1"></a>用户级 (ULT: User-Level Thread)<br />
+<li><a id="orga1451c7"></a>用户级 (ULT: User-Level Thread)<br />
 <ol class="org-ol">
-<li><a id="org4483664"></a>优点<br />
-<div class="outline-text-6" id="text-11-6-0-1-1">
+<li><a id="orga4b541d"></a>优点<br />
+<div class="outline-text-6" id="text-13-6-0-1-1">
 <ul class="org-ul">
 <li>可以运行在任何操作系统上</li>
 <li>调度策略因应用程序而不同</li>
@@ -1036,8 +1287,8 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org97fe486"></a>缺点<br />
-<div class="outline-text-6" id="text-11-6-0-1-2">
+<li><a id="orgec257e1"></a>缺点<br />
+<div class="outline-text-6" id="text-13-6-0-1-2">
 <ul class="org-ul">
 <li>一个线程阻塞, 则系统会阻塞这个进程下的所有线程 -&gt; 解决办法 {
   将可能产生阻塞的系统调用转化为一个非阻塞的系统调用:
@@ -1051,10 +1302,10 @@ PCB 常驻内存 (不会被换出)</li>
 </li>
 </ol>
 </li>
-<li><a id="orgee3b3b5"></a>内核级 (KLT: Kernel-Level Thread)<br />
+<li><a id="org434a511"></a>内核级 (KLT: Kernel-Level Thread)<br />
 <ol class="org-ol">
-<li><a id="orgcf1833f"></a>优点<br />
-<div class="outline-text-6" id="text-11-6-0-2-1">
+<li><a id="org4e7a5cb"></a>优点<br />
+<div class="outline-text-6" id="text-13-6-0-2-1">
 <ul class="org-ul">
 <li>内核可以把同一个进程内的多个线程调度到多处理器上</li>
 <li>一个线程阻塞, 内核可以调度同一进程内的其他线程</li>
@@ -1062,8 +1313,8 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="orge534ba7"></a>缺点<br />
-<div class="outline-text-6" id="text-11-6-0-2-2">
+<li><a id="orgd49f8a0"></a>缺点<br />
+<div class="outline-text-6" id="text-13-6-0-2-2">
 <ul class="org-ul">
 <li>线程切换需要切换到内核模式</li>
 </ul>
@@ -1071,8 +1322,8 @@ PCB 常驻内存 (不会被换出)</li>
 </li>
 </ol>
 </li>
-<li><a id="org75455f8"></a>混合方法<br />
-<div class="outline-text-5" id="text-11-6-0-3">
+<li><a id="org791f4f6"></a>混合方法<br />
+<div class="outline-text-5" id="text-13-6-0-3">
 <ul class="org-ul">
 <li>线程创建在用户空间完成</li>
 <li>线程同步由应用程序完成</li>
@@ -1083,121 +1334,156 @@ PCB 常驻内存 (不会被换出)</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb911a20" class="outline-2">
-<h2 id="orgb911a20"><span class="section-number-2">12</span> 进程调度</h2>
-<div class="outline-text-2" id="text-12">
+
+<div id="outline-container-orgb2a4100" class="outline-2">
+<h2 id="orgb2a4100"><span class="section-number-2">14</span> <code>2.1 进程调度</code></h2>
 </div>
-<div id="outline-container-orgd78e730" class="outline-3">
-<h3 id="orgd78e730"><span class="section-number-3">12.1</span> 背景</h3>
-<div class="outline-text-3" id="text-12-1">
+<div id="outline-container-orgb8580a1" class="outline-2">
+<h2 id="orgb8580a1"><span class="section-number-2">15</span> 进程调度</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-org92a73d6" class="outline-3">
+<h3 id="org92a73d6"><span class="section-number-3">15.1</span> 背景</h3>
+<div class="outline-text-3" id="text-15-1">
 <p>
-有多个进程(线程)竞争CPU, 需要选择下一个要运行的进程(线程)
+有多个进程(线程)竞争CPU, 需要选 <span class="underline">择下一个要运行的进程(线程)</span>
 </p>
 </div>
-<div id="outline-container-orgb93442d" class="outline-4">
-<h4 id="orgb93442d"><span class="section-number-4">12.1.1</span> 定义</h4>
-<div class="outline-text-4" id="text-12-1-1">
-<p>
-用来完成这部分工作的算法称为调度算法
-</p>
+<div id="outline-container-orgf8871cc" class="outline-4">
+<h4 id="orgf8871cc"><span class="section-number-4">15.1.1</span> 定义</h4>
+<div class="outline-text-4" id="text-15-1-1">
+<ul class="org-ul">
+<li>用来完成这部分工作的程序成为调度程序</li>
+<li>调度程序使用的算法称为调度算法</li>
+</ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org08f248e" class="outline-3">
-<h3 id="org08f248e"><span class="section-number-3">12.2</span> 类型</h3>
-<div class="outline-text-3" id="text-12-2">
+<div id="outline-container-orgc8aedb6" class="outline-3">
+<h3 id="orgc8aedb6"><span class="section-number-3">15.2</span> 类型</h3>
+<div class="outline-text-3" id="text-15-2">
 
 <div class="figure">
 <p><img src="pic/long-mid-short.png" alt="long-mid-short.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org1565eb7" class="outline-4">
-<h4 id="org1565eb7"><span class="section-number-4">12.2.1</span> 长程调度</h4>
+<div id="outline-container-org7a1751c" class="outline-4">
+<h4 id="org7a1751c"><span class="section-number-4">15.2.1</span> 长程调度</h4>
+<div class="outline-text-4" id="text-15-2-1">
+<ul class="org-ul">
+<li>new, exit</li>
+<li>决定哪个程序可以进入系统中处理</li>
+<li>决定了系统的并发度</li>
+</ul>
 </div>
-<div id="outline-container-orgd1081fe" class="outline-4">
-<h4 id="orgd1081fe"><span class="section-number-4">12.2.2</span> 中程调度</h4>
 </div>
-<div id="outline-container-org3cd7bcb" class="outline-4">
-<h4 id="org3cd7bcb"><span class="section-number-4">12.2.3</span> 短程调度</h4>
+<div id="outline-container-orgd03bfee" class="outline-4">
+<h4 id="orgd03bfee"><span class="section-number-4">15.2.2</span> 中程调度</h4>
+<div class="outline-text-4" id="text-15-2-2">
+<ul class="org-ul">
+<li>suspend</li>
+<li>交换功能的一部分</li>
+<li>是否换入取决于并发度的需求(有些要考虑进程的存储需求)</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-orgfa01e10" class="outline-3">
-<h3 id="orgfa01e10"><span class="section-number-3">12.3</span> 概念</h3>
-<div class="outline-text-3" id="text-12-3">
+<div id="outline-container-org0a37787" class="outline-4">
+<h4 id="org0a37787"><span class="section-number-4">15.2.3</span> 短程调度</h4>
+<div class="outline-text-4" id="text-15-2-3">
+<ul class="org-ul">
+<li>running,  blocked, ready</li>
+<li>分派程序, 决定下次执行哪个进程</li>
+<li>导致当前进程阻塞或者抢占当前运行进程的事件发生时, 调用短程调度程序.
+<ul class="org-ul">
+<li>事件: (1) 时钟中断 (2) I/O中断 (3) 系统调用 (4) 信号(信号量)</li>
+</ul></li>
+</ul>
 </div>
-<div id="outline-container-orgf55b206" class="outline-4">
-<h4 id="orgf55b206"><span class="section-number-4">12.3.1</span> 响应时间</h4>
-<div class="outline-text-4" id="text-12-3-1">
+</div>
+</div>
+<div id="outline-container-org3724746" class="outline-3">
+<h3 id="org3724746"><span class="section-number-3">15.3</span> 概念</h3>
+<div class="outline-text-3" id="text-15-3">
+</div>
+<div id="outline-container-org3b355a0" class="outline-4">
+<h4 id="org3b355a0"><span class="section-number-4">15.3.1</span> 响应时间</h4>
+<div class="outline-text-4" id="text-15-3-1">
 <p>
 提交一个请求, 到收到响应之间的时间间隔
 </p>
+<ul class="org-ul">
+<li>响应时间 = 输入传送时间 + 处理时间 + 响应传送时间</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org47cf6f3" class="outline-4">
-<h4 id="org47cf6f3"><span class="section-number-4">12.3.2</span> 周转时间(驻留时间)</h4>
-<div class="outline-text-4" id="text-12-3-2">
+<div id="outline-container-org352487f" class="outline-4">
+<h4 id="org352487f"><span class="section-number-4">15.3.2</span> 周转时间(驻留时间)</h4>
+<div class="outline-text-4" id="text-15-3-2">
 <p>
 一个进程从提交到完成之间的时间间隔, \(T_i\)
 </p>
+<ul class="org-ul">
+<li>构成: 等待资源时间 + 执行时间</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org0cd550f" class="outline-4">
-<h4 id="org0cd550f"><span class="section-number-4">12.3.3</span> 截止时间</h4>
-<div class="outline-text-4" id="text-12-3-3">
+<div id="outline-container-org24f87f2" class="outline-4">
+<h4 id="org24f87f2"><span class="section-number-4">15.3.3</span> 截止时间</h4>
+<div class="outline-text-4" id="text-15-3-3">
 <p>
 某任务必须{开始/完成}的最迟时间
 </p>
 </div>
 </div>
-<div id="outline-container-org3bb4ea8" class="outline-4">
-<h4 id="org3bb4ea8"><span class="section-number-4">12.3.4</span> 系统吞吐量</h4>
-<div class="outline-text-4" id="text-12-3-4">
+<div id="outline-container-org051d1e9" class="outline-4">
+<h4 id="org051d1e9"><span class="section-number-4">15.3.4</span> 系统吞吐量</h4>
+<div class="outline-text-4" id="text-15-3-4">
 <p>
 单位时间内, 系统完成的进程数 
 </p>
 </div>
 </div>
-<div id="outline-container-orga677863" class="outline-4">
-<h4 id="orga677863"><span class="section-number-4">12.3.5</span> 处理器利用率</h4>
-<div class="outline-text-4" id="text-12-3-5">
+<div id="outline-container-org010200d" class="outline-4">
+<h4 id="org010200d"><span class="section-number-4">15.3.5</span> 处理器利用率</h4>
+<div class="outline-text-4" id="text-15-3-5">
 <p>
 处理器处于忙状态的时间百分比
 </p>
 </div>
 </div>
-<div id="outline-container-org7b06877" class="outline-4">
-<h4 id="org7b06877"><span class="section-number-4">12.3.6</span> 平均周转时间</h4>
-<div class="outline-text-4" id="text-12-3-6">
+<div id="outline-container-orgf58cf5a" class="outline-4">
+<h4 id="orgf58cf5a"><span class="section-number-4">15.3.6</span> 平均周转时间</h4>
+<div class="outline-text-4" id="text-15-3-6">
 <p>
 \(T = \frac{1}{n}\sum_{i=1}^n T_i\)
 </p>
 </div>
 </div>
-<div id="outline-container-org43ecfe0" class="outline-4">
-<h4 id="org43ecfe0"><span class="section-number-4">12.3.7</span> 带权周转时间</h4>
-<div class="outline-text-4" id="text-12-3-7">
+<div id="outline-container-org10afef7" class="outline-4">
+<h4 id="org10afef7"><span class="section-number-4">15.3.7</span> 带权周转时间</h4>
+<div class="outline-text-4" id="text-15-3-7">
 <p>
 \(W_i = \frac{T_i}{T_{si}}\). \(T_{si}\) 表示系统为该进程提供服务的时间
 </p>
 </div>
 </div>
-<div id="outline-container-orgcfb1497" class="outline-4">
-<h4 id="orgcfb1497"><span class="section-number-4">12.3.8</span> 平均带权周转时间</h4>
-<div class="outline-text-4" id="text-12-3-8">
+<div id="outline-container-org1faa1cb" class="outline-4">
+<h4 id="org1faa1cb"><span class="section-number-4">15.3.8</span> 平均带权周转时间</h4>
+<div class="outline-text-4" id="text-15-3-8">
 <p>
 \(T = \frac{1}{n}\sum_{i=1}^n W_i\)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6c6f9ee" class="outline-3">
-<h3 id="org6c6f9ee"><span class="section-number-3">12.4</span> 调度规则设计的出发点</h3>
-<div class="outline-text-3" id="text-12-4">
+<div id="outline-container-orga31422a" class="outline-3">
+<h3 id="orga31422a"><span class="section-number-3">15.4</span> 调度规则设计的出发点</h3>
+<div class="outline-text-3" id="text-15-4">
 </div>
-<div id="outline-container-org44f20d3" class="outline-4">
-<h4 id="org44f20d3"><span class="section-number-4">12.4.1</span> 分类</h4>
-<div class="outline-text-4" id="text-12-4-1">
+<div id="outline-container-org1425c6c" class="outline-4">
+<h4 id="org1425c6c"><span class="section-number-4">15.4.1</span> 分类</h4>
+<div class="outline-text-4" id="text-15-4-1">
 <ul class="org-ul">
 <li>用户 &#x2013; 系统
 <img src="pic/user-system.png" alt="user-system.png" /></li>
@@ -1206,9 +1492,9 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org991dcc7" class="outline-4">
-<h4 id="org991dcc7"><span class="section-number-4">12.4.2</span> 通过分类来选择优化的目标函数</h4>
-<div class="outline-text-4" id="text-12-4-2">
+<div id="outline-container-orgbe7d7f4" class="outline-4">
+<h4 id="orgbe7d7f4"><span class="section-number-4">15.4.2</span> 通过分类来选择优化的目标函数</h4>
+<div class="outline-text-4" id="text-15-4-2">
 
 <div class="figure">
 <p><img src="pic/object-function.png" alt="object-function.png" />
@@ -1216,18 +1502,18 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org5bf8196" class="outline-4">
-<h4 id="org5bf8196"><span class="section-number-4">12.4.3</span> 进程的决策模式</h4>
-<div class="outline-text-4" id="text-12-4-3">
+<div id="outline-container-org2b4714a" class="outline-4">
+<h4 id="org2b4714a"><span class="section-number-4">15.4.3</span> 进程的决策模式</h4>
+<div class="outline-text-4" id="text-15-4-3">
 <ul class="org-ul">
-<li>抢占</li>
-<li>非抢占</li>
+<li>抢占 (新进程到达, 一个被阻塞的进程变为就绪态, 周期性时钟中断都有可能导致当前进程释放处理机).</li>
+<li>非抢占 (执行进程只有执行完毕, 或引发了一些阻塞自己的事件时才释放处理机)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaad5926" class="outline-4">
-<h4 id="orgaad5926"><span class="section-number-4">12.4.4</span> 调度选择函数</h4>
-<div class="outline-text-4" id="text-12-4-4">
+<div id="outline-container-orgc04ddc6" class="outline-4">
+<h4 id="orgc04ddc6"><span class="section-number-4">15.4.4</span> 调度选择函数</h4>
+<div class="outline-text-4" id="text-15-4-4">
 
 <div class="figure">
 <p><img src="pic/selection-function.png" alt="selection-function.png" />
@@ -1235,17 +1521,17 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org9462e46" class="outline-4">
-<h4 id="org9462e46"><span class="section-number-4">12.4.5</span> 一些调度算法</h4>
-<div class="outline-text-4" id="text-12-4-5">
+<div id="outline-container-org37fc892" class="outline-4">
+<h4 id="org37fc892"><span class="section-number-4">15.4.5</span> 一些调度算法</h4>
+<div class="outline-text-4" id="text-15-4-5">
 <p>
 <img src="pic/dispatch-algo.png" alt="dispatch-algo.png" />
 <img src="pic/FB.png" alt="FB.png" />
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgdf408f2"></a>注意事项<br />
-<div class="outline-text-5" id="text-12-4-5-1">
+<li><a id="org1876b04"></a>注意事项<br />
+<div class="outline-text-5" id="text-15-4-5-1">
 <ul class="org-ul">
 <li>图中标注的非抢占有两重意义
 <ol class="org-ol">
@@ -1255,36 +1541,36 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org1e39072"></a>评价中出现的一些定义<br />
-<div class="outline-text-5" id="text-12-4-5-2">
+<li><a id="orgb231baa"></a>评价中出现的一些定义<br />
+<div class="outline-text-5" id="text-15-4-5-2">
 <ul class="org-ul">
 <li>有利: 带权周转时间 \(W_i\) 比其他进程大</li>
 <li>不利: 带权周转时间 \(W_i\) 比其他进程小</li>
 </ul>
 </div>
 </li>
-<li><a id="org3a6a337"></a>评价<br />
-<div class="outline-text-5" id="text-12-4-5-3">
+<li><a id="org7335acb"></a>评价<br />
+<div class="outline-text-5" id="text-15-4-5-3">
 <ul class="org-ul">
-<li>FCFS (先来先服务)
+<li>FCFS (先来先服务) (非抢占)
 <ul class="org-ul">
 <li>{长进程有利, 短进程不利}</li>
 <li>{CPU型有利, I/O型不利}</li>
 </ul></li>
-<li>RR (时间片轮转)
+<li>RR (时间片轮转) (抢占, 时间片完)
 <ul class="org-ul">
 <li>{CPU型有利, I/O型不利} -&gt; VRR算法</li>
 </ul></li>
-<li>SPN (短进程优先)
+<li>SPN (短进程优先) (非抢占)
 <ul class="org-ul">
 <li>长进程饥饿</li>
 </ul></li>
-<li>SRT (剩余时间最短优先) &lt;- 在SPN的基础上增加了剥夺机制
+<li>SRT (剩余时间最短优先) &lt;- 在SPN的基础上增加了剥夺机制 (抢占, 到达时)
 <ul class="org-ul">
 <li>长进程饥饿</li>
 </ul></li>
-<li>HRRN (响应比高者优先) &lt;- 综合了一下FCFS和SPN</li>
-<li>FB (反馈法)
+<li>HRRN (响应比高者优先) &lt;- 综合了一下FCFS和SPN (非抢占)</li>
+<li>FB (反馈法) (抢占, 时间片完)
 <ul class="org-ul">
 <li>长进程饥饿</li>
 </ul></li>
@@ -1294,13 +1580,13 @@ PCB 常驻内存 (不会被换出)</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org4be7dac" class="outline-3">
-<h3 id="org4be7dac"><span class="section-number-3">12.5</span> 实时系统与实时调度</h3>
-<div class="outline-text-3" id="text-12-5">
+<div id="outline-container-orgca0b6a8" class="outline-3">
+<h3 id="orgca0b6a8"><span class="section-number-3">15.5</span> 实时系统与实时调度</h3>
+<div class="outline-text-3" id="text-15-5">
 </div>
-<div id="outline-container-org33b4a47" class="outline-4">
-<h4 id="org33b4a47"><span class="section-number-4">12.5.1</span> 定义</h4>
-<div class="outline-text-4" id="text-12-5-1">
+<div id="outline-container-orgc0c5639" class="outline-4">
+<h4 id="orgc0c5639"><span class="section-number-4">15.5.1</span> 定义</h4>
+<div class="outline-text-4" id="text-15-5-1">
 
 <div class="figure">
 <p><img src="pic/shishidef.png" alt="shishidef.png" />
@@ -1308,9 +1594,9 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf155ac4" class="outline-4">
-<h4 id="orgf155ac4"><span class="section-number-4">12.5.2</span> 实时任务分类</h4>
-<div class="outline-text-4" id="text-12-5-2">
+<div id="outline-container-org429a24d" class="outline-4">
+<h4 id="org429a24d"><span class="section-number-4">15.5.2</span> 实时任务分类</h4>
+<div class="outline-text-4" id="text-15-5-2">
 
 <div class="figure">
 <p><img src="pic/shishifenlei.png" alt="shishifenlei.png" />
@@ -1318,22 +1604,22 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org8e85859" class="outline-4">
-<h4 id="org8e85859"><span class="section-number-4">12.5.3</span> 实时操作系统特点</h4>
-<div class="outline-text-4" id="text-12-5-3">
+<div id="outline-container-orga2e5c4f" class="outline-4">
+<h4 id="orga2e5c4f"><span class="section-number-4">15.5.3</span> 实时操作系统特点</h4>
+<div class="outline-text-4" id="text-15-5-3">
 <p>
 <img src="pic/shishitedian.png" alt="shishitedian.png" />
 可确定, 可响应, 用户控制, 可靠, 失效弱化
 </p>
 </div>
 </div>
-<div id="outline-container-org39ecb8b" class="outline-4">
-<h4 id="org39ecb8b"><span class="section-number-4">12.5.4</span> 实时进程的抢占方式</h4>
-<div class="outline-text-4" id="text-12-5-4">
+<div id="outline-container-org5ba38bf" class="outline-4">
+<h4 id="org5ba38bf"><span class="section-number-4">15.5.4</span> 实时进程的调度方法(基于抢占方式分类)</h4>
+<div class="outline-text-4" id="text-15-5-4">
 </div>
 <ol class="org-ol">
-<li><a id="orgd703edb"></a>基于时间片的轮转抢占式调度<br />
-<div class="outline-text-5" id="text-12-5-4-1">
+<li><a id="org3bc0e11"></a>基于时间片的轮转抢占式调度<br />
+<div class="outline-text-5" id="text-15-5-4-1">
 
 <div class="figure">
 <p><img src="pic/rts1.png" alt="rts1.png" />
@@ -1341,8 +1627,8 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </li>
-<li><a id="org6cbb382"></a>基于优先级的非抢占式调度<br />
-<div class="outline-text-5" id="text-12-5-4-2">
+<li><a id="orgda2a45b"></a>基于优先级的非抢占式调度<br />
+<div class="outline-text-5" id="text-15-5-4-2">
 
 <div class="figure">
 <p><img src="pic/rts2.png" alt="rts2.png" />
@@ -1350,8 +1636,8 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </li>
-<li><a id="orgcaf2b78"></a>基于优先级的抢占点抢占调度<br />
-<div class="outline-text-5" id="text-12-5-4-3">
+<li><a id="org32ecf3f"></a>基于优先级的抢占点抢占调度<br />
+<div class="outline-text-5" id="text-15-5-4-3">
 
 <div class="figure">
 <p><img src="pic/rts3.png" alt="rts3.png" />
@@ -1359,8 +1645,8 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </li>
-<li><a id="orgb4f1579"></a>立即抢占式调度<br />
-<div class="outline-text-5" id="text-12-5-4-4">
+<li><a id="org8ed18a2"></a>立即抢占式调度<br />
+<div class="outline-text-5" id="text-15-5-4-4">
 
 <div class="figure">
 <p><img src="pic/rts4.png" alt="rts4.png" />
@@ -1370,13 +1656,13 @@ PCB 常驻内存 (不会被换出)</li>
 </li>
 </ol>
 </div>
-<div id="outline-container-org505c382" class="outline-4">
-<h4 id="org505c382"><span class="section-number-4">12.5.5</span> 实时进程的调度方法分类</h4>
-<div class="outline-text-4" id="text-12-5-5">
+<div id="outline-container-org8310941" class="outline-4">
+<h4 id="org8310941"><span class="section-number-4">15.5.5</span> 实时进程的调度方法分类</h4>
+<div class="outline-text-4" id="text-15-5-5">
 </div>
 <ol class="org-ol">
-<li><a id="orgbcd00f9"></a>静态表驱动调度法<br />
-<div class="outline-text-5" id="text-12-5-5-1">
+<li><a id="orge83c149"></a>静态表驱动调度法<br />
+<div class="outline-text-5" id="text-15-5-5-1">
 <ul class="org-ul">
 <li>用于周期性实时任务</li>
 <li>按照一些参数制定调度表, 然后按调度表执行调度</li>
@@ -1384,23 +1670,23 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="orgdbbd153"></a>静态优先级抢占调度法<br />
-<div class="outline-text-5" id="text-12-5-5-2">
+<li><a id="orgcbe87a5"></a>静态优先级抢占调度法<br />
+<div class="outline-text-5" id="text-15-5-5-2">
 <ul class="org-ul">
 <li>多用于非实时多道程序系统</li>
 <li>利用一些参数确定优先级</li>
 </ul>
 </div>
 </li>
-<li><a id="orgcb27a9e"></a>基于动态规划的调度法 (动态调度表)<br />
-<div class="outline-text-5" id="text-12-5-5-3">
+<li><a id="org4f350a4"></a>基于动态规划的调度法 (动态调度表)<br />
+<div class="outline-text-5" id="text-15-5-5-3">
 <ul class="org-ul">
 <li>系统为新到达的任务和老任务重算一张调度表</li>
 </ul>
 </div>
 </li>
-<li><a id="org57046a3"></a>动态尽力调度法 (也是基于优先级, 但是是动态的)<br />
-<div class="outline-text-5" id="text-12-5-5-4">
+<li><a id="org61c19ce"></a>动态尽力调度法 (也是基于优先级, 但是是动态的)<br />
+<div class="outline-text-5" id="text-15-5-5-4">
 <ul class="org-ul">
 <li>广泛用于非周期性实时任务调度</li>
 <li>总是尽最大努力尽早调度紧迫任务</li>
@@ -1409,13 +1695,13 @@ PCB 常驻内存 (不会被换出)</li>
 </li>
 </ol>
 </div>
-<div id="outline-container-orged56721" class="outline-4">
-<h4 id="orged56721"><span class="section-number-4">12.5.6</span> 限期 (deadline) 调度</h4>
-<div class="outline-text-4" id="text-12-5-6">
+<div id="outline-container-orgd958610" class="outline-4">
+<h4 id="orgd958610"><span class="section-number-4">15.5.6</span> 限期 (deadline) 调度</h4>
+<div class="outline-text-4" id="text-15-5-6">
 </div>
 <ol class="org-ol">
-<li><a id="orgf2a784c"></a>定义<br />
-<div class="outline-text-5" id="text-12-5-6-1">
+<li><a id="orgb60bc49"></a>定义<br />
+<div class="outline-text-5" id="text-15-5-6-1">
 
 <div class="figure">
 <p><img src="pic/dd-def.png" alt="dd-def.png" />
@@ -1423,8 +1709,15 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </li>
-<li><a id="org170a9f5"></a>使用什么抢占方式<br />
-<div class="outline-text-5" id="text-12-5-6-2">
+<li><a id="org1e9b569"></a>下次调度哪个任务<br />
+<div class="outline-text-5" id="text-15-5-6-2">
+<p>
+选择deadline最早的任务调度.
+</p>
+</div>
+</li>
+<li><a id="org194087c"></a>使用什么抢占方式<br />
+<div class="outline-text-5" id="text-15-5-6-3">
 <ul class="org-ul">
 <li>启动期限明确: 用非抢占方式 (如基于优先级的非抢占式调度)
 完成自身必要部分之后阻塞自己, 使其他进程能够启动</li>
@@ -1432,8 +1725,8 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org745460b"></a>使用什么调度方式<br />
-<div class="outline-text-5" id="text-12-5-6-3">
+<li><a id="orgb576144"></a>使用什么调度方式<br />
+<div class="outline-text-5" id="text-15-5-6-4">
 <ul class="org-ul">
 <li>具有 <span class="underline">完成期限</span> 的 <span class="underline">周期性</span> 实时任务 : EDF算法 (最早截止时间优先调度)</li>
 <li>具有 <span class="underline">开始期限</span> 的 <span class="underline">非周期性</span> 实时任务: 
@@ -1453,8 +1746,8 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org053dcfe"></a>实时系统处理能力的限制<br />
-<div class="outline-text-5" id="text-12-5-6-4">
+<li><a id="org9e121fe"></a>实时系统处理能力的限制<br />
+<div class="outline-text-5" id="text-15-5-6-5">
 <p>
 假定系统有 \(m\) 个周期性硬实时任务, 任务 \(i\) 的处理时间为 \(C_i\), 周期为 \(P_i\).
 则在单处理机的情况下, 必须满足下面的限制条件:
@@ -1462,8 +1755,8 @@ PCB 常驻内存 (不会被换出)</li>
 </p>
 </div>
 </li>
-<li><a id="org54aba00"></a>优先级反转<br />
-<div class="outline-text-5" id="text-12-5-6-5">
+<li><a id="org39d0f78"></a>优先级反转<br />
+<div class="outline-text-5" id="text-15-5-6-6">
 <p>
 一个高优先级的任务, 简洁被一个低优先级的任务所抢先, 使得两个任务的优先级被倒置.
 <img src="pic/%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC.png" alt="%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC.png" />
@@ -1475,22 +1768,26 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org10efa76" class="outline-2">
-<h2 id="org10efa76"><span class="section-number-2">13</span> 同步</h2>
-<div class="outline-text-2" id="text-13">
+
+<div id="outline-container-org62c18a2" class="outline-2">
+<h2 id="org62c18a2"><span class="section-number-2">16</span> <code>2.2 同步</code></h2>
 </div>
-<div id="outline-container-orgfee1e51" class="outline-3">
-<h3 id="orgfee1e51"><span class="section-number-3">13.1</span> 相关术语</h3>
-<div class="outline-text-3" id="text-13-1">
+<div id="outline-container-orgd5c4060" class="outline-2">
+<h2 id="orgd5c4060"><span class="section-number-2">17</span> 同步</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-orgabbb7c6" class="outline-3">
+<h3 id="orgabbb7c6"><span class="section-number-3">17.1</span> 相关术语</h3>
+<div class="outline-text-3" id="text-17-1">
 <p>
 <img src="pic/%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD.png" alt="%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD.png" />
 <img src="pic/%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD(1).png" alt="%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD(1).png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org90da7cc" class="outline-3">
-<h3 id="org90da7cc"><span class="section-number-3">13.2</span> 进程间的关系</h3>
-<div class="outline-text-3" id="text-13-2">
+<div id="outline-container-org02cee0d" class="outline-3">
+<h3 id="org02cee0d"><span class="section-number-3">17.2</span> 进程间的关系</h3>
+<div class="outline-text-3" id="text-17-2">
 <ul class="org-ul">
 <li>竞争</li>
 <li>通过共享合作</li>
@@ -1498,9 +1795,9 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge981b32" class="outline-3">
-<h3 id="orge981b32"><span class="section-number-3">13.3</span> 互斥的要求 (访问临界区的原则)</h3>
-<div class="outline-text-3" id="text-13-3">
+<div id="outline-container-org72ae793" class="outline-3">
+<h3 id="org72ae793"><span class="section-number-3">17.3</span> 互斥的要求 (访问临界区的原则)</h3>
+<div class="outline-text-3" id="text-17-3">
 <ul class="org-ul">
 <li>空闲让进: 如临界区空闲, 则有进程申请就立即进入</li>
 <li>忙则等待: 每次只允许一个进程处于临界区</li>
@@ -1509,9 +1806,9 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1769e4d" class="outline-3">
-<h3 id="org1769e4d"><span class="section-number-3">13.4</span> 互斥: 软件方法</h3>
-<div class="outline-text-3" id="text-13-4">
+<div id="outline-container-orgff75eee" class="outline-3">
+<h3 id="orgff75eee"><span class="section-number-3">17.4</span> 互斥: 软件方法</h3>
+<div class="outline-text-3" id="text-17-4">
 <ul class="org-ul">
 <li>初步设想: 轮换使用临界区 -&gt; 慢</li>
 <li>第一次改进: 设置临界区状态标志 -&gt; 不互斥</li>
@@ -1521,9 +1818,9 @@ PCB 常驻内存 (不会被换出)</li>
 <li>Peterson: 和Dekker等价, 但是更简洁了</li>
 </ul>
 </div>
-<div id="outline-container-orge0e0a49" class="outline-4">
-<h4 id="orge0e0a49"><span class="section-number-4">13.4.1</span> 评价</h4>
-<div class="outline-text-4" id="text-13-4-1">
+<div id="outline-container-orge110b3f" class="outline-4">
+<h4 id="orge110b3f"><span class="section-number-4">17.4.1</span> 评价</h4>
+<div class="outline-text-4" id="text-17-4-1">
 <ul class="org-ul">
 <li>不能解决忙等现象</li>
 <li>难实现多个进程互斥</li>
@@ -1531,46 +1828,47 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org4fb6e44" class="outline-3">
-<h3 id="org4fb6e44"><span class="section-number-3">13.5</span> 互斥: 硬件方法</h3>
-<div class="outline-text-3" id="text-13-5">
+<div id="outline-container-orgadcca18" class="outline-3">
+<h3 id="orgadcca18"><span class="section-number-3">17.5</span> 互斥: 硬件方法</h3>
+<div class="outline-text-3" id="text-17-5">
 </div>
-<div id="outline-container-org3b6c71d" class="outline-4">
-<h4 id="org3b6c71d"><span class="section-number-4">13.5.1</span> 屏蔽中断</h4>
-<div class="outline-text-4" id="text-13-5-1">
+<div id="outline-container-org803a6ce" class="outline-4">
+<h4 id="org803a6ce"><span class="section-number-4">17.5.1</span> 屏蔽中断</h4>
+<div class="outline-text-4" id="text-17-5-1">
 <ul class="org-ul">
 <li>执行效率下降</li>
 <li>无法工作在多处理器环境</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org833642f" class="outline-4">
-<h4 id="org833642f"><span class="section-number-4">13.5.2</span> 机器专用指令</h4>
-<div class="outline-text-4" id="text-13-5-2">
+<div id="outline-container-org2e71ca1" class="outline-4">
+<h4 id="org2e71ca1"><span class="section-number-4">17.5.2</span> 机器专用指令</h4>
+<div class="outline-text-4" id="text-17-5-2">
 <ul class="org-ul">
 <li>exchange</li>
 <li>compare&amp;swap</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="orgd960592"></a>评价:<br />
-<div class="outline-text-5" id="text-13-5-2-1">
+<li><a id="orgce0b123"></a>评价:<br />
+<div class="outline-text-5" id="text-17-5-2-1">
 <ul class="org-ul">
 <li>优点: {支持多处理机, 简单易证明, 支持多临界区}</li>
 <li>缺点: 可能{忙等, 饥饿, 死锁}</li>
+<li>Q: 为什么会死锁?</li>
 </ul>
 </div>
 </li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org5b53a63" class="outline-3">
-<h3 id="org5b53a63"><span class="section-number-3">13.6</span> 信号量</h3>
-<div class="outline-text-3" id="text-13-6">
+<div id="outline-container-orga234bcf" class="outline-3">
+<h3 id="orga234bcf"><span class="section-number-3">17.6</span> 信号量</h3>
+<div class="outline-text-3" id="text-17-6">
 </div>
-<div id="outline-container-org11b378f" class="outline-4">
-<h4 id="org11b378f"><span class="section-number-4">13.6.1</span> 实现</h4>
-<div class="outline-text-4" id="text-13-6-1">
+<div id="outline-container-org1e3e083" class="outline-4">
+<h4 id="org1e3e083"><span class="section-number-4">17.6.1</span> 实现</h4>
+<div class="outline-text-4" id="text-17-6-1">
 
 <div class="figure">
 <p><img src="pic/%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%AE%9E%E7%8E%B0.png" alt="%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%AE%9E%E7%8E%B0.png" />
@@ -1578,13 +1876,13 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org10b7b14" class="outline-4">
-<h4 id="org10b7b14"><span class="section-number-4">13.6.2</span> 常见模型</h4>
-<div class="outline-text-4" id="text-13-6-2">
+<div id="outline-container-org02a64e5" class="outline-4">
+<h4 id="org02a64e5"><span class="section-number-4">17.6.2</span> 常见模型</h4>
+<div class="outline-text-4" id="text-17-6-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgd85b16c"></a>生产者/消费者<br />
-<div class="outline-text-5" id="text-13-6-2-1">
+<li><a id="orge67fa64"></a>生产者/消费者<br />
+<div class="outline-text-5" id="text-17-6-2-1">
 
 <div class="figure">
 <p><img src="pic/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.png" alt="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.png" />
@@ -1592,27 +1890,162 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </li>
-<li><a id="org20460b3"></a>读者/写者<br />
-<div class="outline-text-5" id="text-13-6-2-2">
+<li><a id="orgb5d0194"></a>读者/写者<br />
+<div class="outline-text-5" id="text-17-6-2-2">
 
 <div class="figure">
 <p><img src="pic/%E8%AF%BB%E8%80%85%E5%86%99%E8%80%85.png" alt="%E8%AF%BB%E8%80%85%E5%86%99%E8%80%85.png" />
 </p>
 </div>
 <ul class="org-ul">
-<li>读者优先
-<img src="pic/%E8%AF%BB%E8%80%85%E4%BC%98%E5%85%88.png" alt="%E8%AF%BB%E8%80%85%E4%BC%98%E5%85%88.png" /></li>
-<li>公平优先
-<img src="pic/%E5%85%AC%E5%B9%B3%E4%BC%98%E5%85%88.png" alt="%E5%85%AC%E5%B9%B3%E4%BC%98%E5%85%88.png" /></li>
-<li>写者优先
-<img src="pic/%E5%86%99%E8%80%85%E4%BC%98%E5%85%88.png" alt="%E5%86%99%E8%80%85%E4%BC%98%E5%85%88.png" /></li>
-<li>写者优先改进
-<img src="pic/%E5%86%99%E8%80%85%E4%BC%98%E5%85%88%E6%94%B9%E8%BF%9B.png" alt="%E5%86%99%E8%80%85%E4%BC%98%E5%85%88%E6%94%B9%E8%BF%9B.png" /></li>
+<li><p>
+读者优先
+<img src="pic/%E8%AF%BB%E8%80%85%E4%BC%98%E5%85%88.png" alt="%E8%AF%BB%E8%80%85%E4%BC%98%E5%85%88.png" />
+</p>
+<div class="org-src-container">
+<pre class="src src-C++">readercount = 0; wsem; x;
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">reader</span>() {
+    <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+        P(x);
+        readercount ++;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 1) P(wsem);
+        V(x);
+        READ;
+        P(x);
+        readercount ++;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 0) P(wsem);
+        V(x);
+    }
+}
+
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span>() {
+    P(wsem);
+    WRITE;
+    V(wsem);
+}
+</pre>
+</div></li>
+<li><p>
+公平优先
+<img src="pic/%E5%85%AC%E5%B9%B3%E4%BC%98%E5%85%88.png" alt="%E5%85%AC%E5%B9%B3%E4%BC%98%E5%85%88.png" />
+</p>
+<div class="org-src-container">
+<pre class="src src-C++">readercount = 0; wsem; wrsem; x;
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">reader</span>() {
+    <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+        P(wrsem);
+        P(x);
+        readercount++;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 1) P(wsem);
+        V(x);
+        P(wrsem);
+        READ;
+        p(x);
+        readercount--;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 0) V(wsem);
+        v(x);
+    }
+}
+
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span>() {
+    <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+        P(wrsem);
+        P(wsem);
+        WRITE;
+        V(wsem);
+        V(wrsem);
+    }
+}
+</pre>
+</div></li>
+<li><p>
+写者优先
+<img src="pic/%E5%86%99%E8%80%85%E4%BC%98%E5%85%88.png" alt="%E5%86%99%E8%80%85%E4%BC%98%E5%85%88.png" />
+</p>
+<div class="org-src-container">
+<pre class="src src-C++">readercount = 0; writercount = 0; x; y; wsem; rsem;
+
+  <span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">reader</span>() {
+      <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+          P(rsem);
+          P(x);
+          readercount++;
+          <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 1) P(wsem);
+          V(x);
+          P(rsem);
+          READ;
+          P(x);
+          readercount--;
+          <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 0) V(wsem);
+          V(x);
+      }
+  }
+
+  <span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span>() {
+      <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+          P(y);
+          writercount ++;
+          <span style="color: #4f97d7; font-weight: bold;">if</span> (writercount == 1) P(rsem);
+          V(y);
+          P(wsem);
+          WRITE;
+          V(wsem);
+          P(y);
+          writercount --;
+          <span style="color: #4f97d7; font-weight: bold;">if</span> (writercount == 0) V(rsem);
+          V(y);
+      }
+  }
+</pre>
+</div></li>
+<li><p>
+写者优先改进
+<img src="pic/%E5%86%99%E8%80%85%E4%BC%98%E5%85%88%E6%94%B9%E8%BF%9B.png" alt="%E5%86%99%E8%80%85%E4%BC%98%E5%85%88%E6%94%B9%E8%BF%9B.png" />
+</p>
+<div class="org-src-container">
+<pre class="src src-C++">readercount = 0; writercount = 0; x; y; wsem; rsem; z;
+
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">reader</span>() {
+    <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+        P(z);
+        P(rsem);
+        P(x);
+        readercount++;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 1) P(wsem);
+        V(x);
+        P(rsem);
+        v(Z);
+        READ;
+        P(x);
+        readercount--;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (readercount == 0) V(wsem);
+        V(x);
+    }
+}
+
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span>() {
+    <span style="color: #4f97d7; font-weight: bold;">while</span>(1) {
+        P(y);
+        writercount ++;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (writercount == 1) P(rsem);
+        V(y);
+        P(wsem);
+        WRITE;
+        V(wsem);
+        P(y);
+        writercount --;
+        <span style="color: #4f97d7; font-weight: bold;">if</span> (writercount == 0) V(rsem);
+        V(y);
+    }
+}
+
+</pre>
+</div></li>
 </ul>
 </div>
 </li>
-<li><a id="orga92860f"></a>两种模型比较<br />
-<div class="outline-text-5" id="text-13-6-2-3">
+<li><a id="orgcfb515e"></a>两种模型比较<br />
+<div class="outline-text-5" id="text-17-6-2-3">
 
 <div class="figure">
 <p><img src="pic/%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83.png" alt="%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83.png" />
@@ -1622,30 +2055,34 @@ PCB 常驻内存 (不会被换出)</li>
 </li>
 </ol>
 </div>
-<div id="outline-container-org5d2bb50" class="outline-4">
-<h4 id="org5d2bb50"><span class="section-number-4">13.6.3</span> 管程</h4>
-<div class="outline-text-4" id="text-13-6-3">
+<div id="outline-container-org9adf765" class="outline-4">
+<h4 id="org9adf765"><span class="section-number-4">17.6.3</span> 管程</h4>
+<div class="outline-text-4" id="text-17-6-3">
 <p>
 有自己局部变量(static), 每个时刻只能有一个进程在管程中.
 <i>感觉管程有点像一个类, 但是保证一次只能一个进程在调接口</i>
 </p>
+<ul class="org-ul">
+<li>cwait(c): 等待条件c成立(阻塞在条件c上)</li>
+<li>csignal(c): 恢复在条件c上阻塞的一个进程(如果条件c上没有这样的进程, 则什么都不做)</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-orgfa9167c" class="outline-4">
-<h4 id="orgfa9167c"><span class="section-number-4">13.6.4</span> 消息传递</h4>
-<div class="outline-text-4" id="text-13-6-4">
+<div id="outline-container-org50e1fe3" class="outline-4">
+<h4 id="org50e1fe3"><span class="section-number-4">17.6.4</span> 消息传递</h4>
+<div class="outline-text-4" id="text-17-6-4">
 </div>
 <ol class="org-ol">
-<li><a id="org1df562a"></a>实现<br />
-<div class="outline-text-5" id="text-13-6-4-1">
+<li><a id="orgb0a68ac"></a>实现<br />
+<div class="outline-text-5" id="text-17-6-4-1">
 <ul class="org-ul">
 <li>send 原语</li>
 <li>receive 原语</li>
 </ul>
 </div>
 </li>
-<li><a id="org534d019"></a>三种同步方式<br />
-<div class="outline-text-5" id="text-13-6-4-2">
+<li><a id="org2cf3d27"></a>三种同步方式<br />
+<div class="outline-text-5" id="text-17-6-4-2">
 <ul class="org-ul">
 <li>阻塞发送, 阻塞接受</li>
 <li>不阻塞发送, 阻塞接受</li>
@@ -1653,8 +2090,8 @@ PCB 常驻内存 (不会被换出)</li>
 </ul>
 </div>
 </li>
-<li><a id="org990087b"></a>消息寻址方式<br />
-<div class="outline-text-5" id="text-13-6-4-3">
+<li><a id="org3f76f4d"></a>消息寻址方式<br />
+<div class="outline-text-5" id="text-17-6-4-3">
 <ul class="org-ul">
 <li>直接</li>
 <li>间接 (利用一个公共的数据结构 &#x2013; 信箱)
@@ -1668,10 +2105,669 @@ PCB 常驻内存 (不会被换出)</li>
 </div>
 </div>
 </div>
+
+<div id="outline-container-org2001f09" class="outline-2">
+<h2 id="org2001f09"><span class="section-number-2">18</span> <code>2.3 死锁</code></h2>
+</div>
+<div id="outline-container-org46652c7" class="outline-2">
+<h2 id="org46652c7"><span class="section-number-2">19</span> 死锁</h2>
+<div class="outline-text-2" id="text-19">
+</div>
+<div id="outline-container-org94daca1" class="outline-3">
+<h3 id="org94daca1"><span class="section-number-3">19.1</span> 定义</h3>
+<div class="outline-text-3" id="text-19-1">
+<ul class="org-ul">
+<li><b>一组相互竞争系统资源或进行通信的进程间的永久阻塞</b></li>
+<li>当一组进程中的每个进程都在等待某事件, 而只有同组进程中阻塞的其他进程能够促发该事件时, 死锁发生</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc18bdb8" class="outline-3">
+<h3 id="orgc18bdb8"><span class="section-number-3">19.2</span> 资源分类</h3>
+<div class="outline-text-3" id="text-19-2">
+<ul class="org-ul">
+<li>可重用资源: 一次仅供一个进程安全使用且不因使用而耗尽的资源</li>
+<li>可消耗资源: 可消耗资源是指可被创建（生产）和销毁（消耗）的资源</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org215bf8f" class="outline-3">
+<h3 id="org215bf8f"><span class="section-number-3">19.3</span> 死锁的条件</h3>
+<div class="outline-text-3" id="text-19-3">
+<p>
+<img src="pic/%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6.png" alt="%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6.png" />
+只要是死锁, 一定三个必要调价都是满足的.
+</p>
+</div>
+</div>
+<div id="outline-container-org54d1297" class="outline-3">
+<h3 id="org54d1297"><span class="section-number-3">19.4</span> 死锁的解决</h3>
+<div class="outline-text-3" id="text-19-4">
+
+<div class="figure">
+<p><img src="pic/%E6%AD%BB%E9%94%81%E8%A7%A3%E5%86%B3.png" alt="%E6%AD%BB%E9%94%81%E8%A7%A3%E5%86%B3.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org5716903" class="outline-4">
+<h4 id="org5716903"><span class="section-number-4">19.4.1</span> 死锁预防</h4>
+<div class="outline-text-4" id="text-19-4-1">
+<ul class="org-ul">
+<li>互斥必须支持</li>
+<li>防止占有且等待: 一次性请求所有资源</li>
+<li>防止不可抢占: 申请资源如被拒绝, 则释放之前占有的资源</li>
+<li>防止循环等待: 定义一个资源请求顺序</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgce170a2" class="outline-4">
+<h4 id="orgce170a2"><span class="section-number-4">19.4.2</span> 死锁避免</h4>
+<div class="outline-text-4" id="text-19-4-2">
+<p>
+<img src="pic/%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D.png" alt="%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D.png" />
+优缺点:
+<img src="pic/%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D%E4%BC%98%E7%BC%BA%E7%82%B9.png" alt="%E6%AD%BB%E9%94%81%E9%81%BF%E5%85%8D%E4%BC%98%E7%BC%BA%E7%82%B9.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orge5a6e2e" class="outline-4">
+<h4 id="orge5a6e2e"><span class="section-number-4">19.4.3</span> 死锁检测与解除</h4>
+<div class="outline-text-4" id="text-19-4-3">
+<p>
+<img src="pic/%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B.png" alt="%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B.png" />
+<img src="pic/%E6%AD%BB%E9%94%81%E8%A7%A3%E9%99%A4.png" alt="%E6%AD%BB%E9%94%81%E8%A7%A3%E9%99%A4.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orgd27c47e" class="outline-4">
+<h4 id="orgd27c47e"><span class="section-number-4">19.4.4</span> 哲学家就餐问题</h4>
+<div class="outline-text-4" id="text-19-4-4">
+<ul class="org-ul">
+<li>资源分级: 2种方法</li>
+<li>服务生方法: 鸽笼原理</li>
+<li>管程方法</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6449b20" class="outline-2">
+<h2 id="org6449b20"><span class="section-number-2">20</span> <code>3.1 基本内存管理</code></h2>
+<div class="outline-text-2" id="text-20">
+</div>
+<div id="outline-container-org87ab79c" class="outline-3">
+<h3 id="org87ab79c"><span class="section-number-3">20.1</span> 程序加载与链接</h3>
+<div class="outline-text-3" id="text-20-1">
+</div>
+<div id="outline-container-org3fff2b2" class="outline-4">
+<h4 id="org3fff2b2"><span class="section-number-4">20.1.1</span> 编译</h4>
+</div>
+<div id="outline-container-org777a2de" class="outline-4">
+<h4 id="org777a2de"><span class="section-number-4">20.1.2</span> 链接</h4>
+</div>
+<div id="outline-container-org3c88df9" class="outline-4">
+<h4 id="org3c88df9"><span class="section-number-4">20.1.3</span> 加载</h4>
+<div class="outline-text-4" id="text-20-1-3">
+</div>
+<ol class="org-ol">
+<li><a id="org14221f5"></a>加载的任务<br />
+<div class="outline-text-5" id="text-20-1-3-1">
+<ul class="org-ul">
+<li>可加载模块装入内存</li>
+<li>执行文件中的逻辑地址转化为内存物理地址</li>
+</ul>
+</div>
+</li>
+<li><a id="org2061d4b"></a>加载方式<br />
+<div class="outline-text-5" id="text-20-1-3-2">
+<ul class="org-ul">
+<li>绝对加载 (逻辑地址与实际内存地址相同, 地址转换在编译时完成)
+<ul class="org-ul">
+<li>优点: 简单</li>
+<li>缺点: (1) 每次加载到的内存区域相同 (2) 程序员必须了解内存的使用情况 (3) 不适用于多到程序系统</li>
+</ul></li>
+<li>可重定位加载(静态重定位)
+<ul class="org-ul">
+<li>编译时使用相对地址, 在加载时将相对地址转化为实际的物理地址</li>
+<li>程序在加载时必须使用重定位</li>
+<li>优点: 不需要硬件支持</li>
+<li>缺点: 程序重定位后不能移动, 不能重新分配内存, 不利于内存的有效利用</li>
+</ul></li>
+<li>运行时加载(动态重定位)
+<ul class="org-ul">
+<li>优点: (1) 程序不用连续, 可移动 (2) 便于共享 (3) 有利于紧凑, 解决碎片问题 (4) 主流</li>
+<li>缺点: (1) 需要硬件支持 (2) 同一地址, 需要多次转换</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org529af4e" class="outline-4">
+<h4 id="org529af4e"><span class="section-number-4">20.1.4</span> 链接</h4>
+<div class="outline-text-4" id="text-20-1-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgf84f942"></a>链接的含义<br />
+<div class="outline-text-5" id="text-20-1-4-1">
+<ul class="org-ul">
+<li>将一组目标模块链接, 产生一个包含完整程序和数据的加载模块</li>
+</ul>
+</div>
+</li>
+<li><a id="org923c564"></a>链接方式<br />
+<div class="outline-text-5" id="text-20-1-4-2">
+<ul class="org-ul">
+<li>静态链接
+<ul class="org-ul">
+<li>缺点: (1) 不利于代码共享 (2) 不利于模块的独立升级 (3) 链接一些不会执行的模块, 浪费存储空间和处理机时间</li>
+</ul></li>
+<li>加载时动态链接
+<ul class="org-ul">
+<li>优点: (1) 便于各个模块独立升级 (2) 便于实现各个模块的共享</li>
+<li>缺点: (1) 可能链接一些不会执行的模块 (2) 浪费空间和处理机时间 (3) 模块加载后不能移动位置</li>
+</ul></li>
+<li>运行时动态链接
+<ul class="org-ul">
+<li>优点: (1) 未被使用过的模块不会被链接, 省空间/时间 (2) 支持分段系统</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgad2a625" class="outline-3">
+<h3 id="orgad2a625"><span class="section-number-3">20.2</span> 内存管理的需求</h3>
+<div class="outline-text-3" id="text-20-2">
+</div>
+<div id="outline-container-org150d297" class="outline-4">
+<h4 id="org150d297"><span class="section-number-4">20.2.1</span> 重定位</h4>
+</div>
+<div id="outline-container-org9222036" class="outline-4">
+<h4 id="org9222036"><span class="section-number-4">20.2.2</span> 保护</h4>
+</div>
+<div id="outline-container-org7b30762" class="outline-4">
+<h4 id="org7b30762"><span class="section-number-4">20.2.3</span> 共享</h4>
+</div>
+<div id="outline-container-org40f6301" class="outline-4">
+<h4 id="org40f6301"><span class="section-number-4">20.2.4</span> 逻辑组织</h4>
+<div class="outline-text-4" id="text-20-2-4">
+<ul class="org-ul">
+<li>内存被组织成为线性地址空间</li>
+<li>程序按照模块组织</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd2419d0" class="outline-4">
+<h4 id="orgd2419d0"><span class="section-number-4">20.2.5</span> 物理组织</h4>
+<div class="outline-text-4" id="text-20-2-5">
+<ul class="org-ul">
+<li>交给OS</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge0a5a39" class="outline-3">
+<h3 id="orge0a5a39"><span class="section-number-3">20.3</span> 内存分区</h3>
+<div class="outline-text-3" id="text-20-3">
+</div>
+<div id="outline-container-org566de72" class="outline-4">
+<h4 id="org566de72"><span class="section-number-4">20.3.1</span> 固定分区</h4>
+<div class="outline-text-4" id="text-20-3-1">
+<ul class="org-ul">
+<li>分区数量固定</li>
+<li>每个进程占用一个分区</li>
+<li>划分分区方式: (1) 大小相等 (2) 大小不等</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0d05b8d" class="outline-4">
+<h4 id="org0d05b8d"><span class="section-number-4">20.3.2</span> 动态分区</h4>
+<div class="outline-text-4" id="text-20-3-2">
+<ul class="org-ul">
+<li>分区大小/数量不固定</li>
+<li>分配与进程需求完全一致的空闲内存空间</li>
+<li>外部碎片 \(\to\) 紧凑</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org725a179"></a>动态分区算法<br />
+<div class="outline-text-5" id="text-20-3-2-1">
+<ul class="org-ul">
+<li>首次匹配(First Fit)</li>
+<li>下次匹配(Next Fit)</li>
+<li>最佳匹配(Best Fit)</li>
+<li>最差匹配(Worst Fit)</li>
+<li>伙伴系统</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgb8a0650" class="outline-4">
+<h4 id="orgb8a0650"><span class="section-number-4">20.3.3</span> 地址类型</h4>
+<div class="outline-text-4" id="text-20-3-3">
+<ul class="org-ul">
+<li>逻辑地址</li>
+<li>相对地址</li>
+<li>物理地址</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org04e6417" class="outline-4">
+<h4 id="org04e6417"><span class="section-number-4">20.3.4</span> 分页</h4>
+<div class="outline-text-4" id="text-20-3-4">
+<ul class="org-ul">
+<li>页号: \(P = \lfloor \frac{A}{L} \rfloor\), 页内偏移: \(d = A \mod L\)</li>
+<li>优点: (1) 存在页内碎片, 但相对较小, 内存利用率较高 (2) 实现了离散分配 (3) 无外部碎片</li>
+<li>缺点: (1) 需要专门的硬件支持, 尤其是块表 (2) 不支持动态链接, 不易实现共享</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org818c350" class="outline-4">
+<h4 id="org818c350"><span class="section-number-4">20.3.5</span> 分段</h4>
+<div class="outline-text-4" id="text-20-3-5">
+<ul class="org-ul">
+<li>分段在进行地址转换的时候, 多了一步判越界</li>
+<li>优点: (1) 便于程序模块化设计 (2) 便于动态链接 (3) 便于保护和共享 (4) 无内部碎片</li>
+<li>缺点: (1) 地址转换需要硬件的支持 &#x2013; 段表寄存器 (2) 分段的最大尺寸收到主存可用空间的限制 (3) 有外部碎片</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org52deb49" class="outline-4">
+<h4 id="org52deb49"><span class="section-number-4">20.3.6</span> 分段 VS 分页</h4>
+<div class="outline-text-4" id="text-20-3-6">
+<ul class="org-ul">
+<li>页是系统管理的需要, 段是用户需要</li>
+<li>页的大小固定, 由系统决定, 段的长度不固定</li>
+<li>页是一维的, 段是二维的</li>
+<li>分页不易实现共享和运行时动态链接, 分段却易于实现</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea5f513" class="outline-2">
+<h2 id="orgea5f513"><span class="section-number-2">21</span> <code>3.2 虚拟内存管理</code></h2>
+<div class="outline-text-2" id="text-21">
+</div>
+<div id="outline-container-org91373c1" class="outline-3">
+<h3 id="org91373c1"><span class="section-number-3">21.1</span> 术语</h3>
+<div class="outline-text-3" id="text-21-1">
+<ul class="org-ul">
+<li>虚拟内存</li>
+<li>虚拟地址(逻辑地址)</li>
+<li>虚拟地址空间: 分配给进程的虚拟存储</li>
+<li>地址空间: 用于某进程的内存地址范围</li>
+<li>实地址: 内存中存储位置的地址</li>
+<li>驻留集: 任何时刻, 进程驻留在内存中的部分</li>
+<li>内存失效: 访问一个不在内存中的地址时, 称为内存失效</li>
+<li>局部性原理: 存储器的访问呈簇性, 在很长一段时间内, 使用的簇会发生变化, 但是在很短的时间内, 处理器基本上只与固定的簇打交道</li>
+<li>抖动: 将要用到的块被换出, 系统又得很快将它取回, 导致页面被频繁地换入和换出, 缺页率极具增加.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org785c8d0" class="outline-3">
+<h3 id="org785c8d0"><span class="section-number-3">21.2</span> 分页</h3>
+<div class="outline-text-3" id="text-21-2">
+<ul class="org-ul">
+<li>CPU在处理完缺页中断之后, 会重新检查TLB.</li>
+<li>页表项: P|M|其他控制位|页框号</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5cac9f5" class="outline-3">
+<h3 id="org5cac9f5"><span class="section-number-3">21.3</span> 分段</h3>
+<div class="outline-text-3" id="text-21-3">
+<ul class="org-ul">
+<li>段表项: P|M|其他控制位|长度|段基址</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1031782" class="outline-3">
+<h3 id="org1031782"><span class="section-number-3">21.4</span> 段页式</h3>
+<div class="outline-text-3" id="text-21-4">
+<ul class="org-ul">
+<li>段表项: 控制位|长度|页表基址</li>
+<li>页表项: P|M|其他控制位|页框号</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org30b1fca" class="outline-3">
+<h3 id="org30b1fca"><span class="section-number-3">21.5</span> 读取策略</h3>
+<div class="outline-text-3" id="text-21-5">
+<ul class="org-ul">
+<li>请求调页</li>
+<li>预调页</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org73c801e" class="outline-3">
+<h3 id="org73c801e"><span class="section-number-3">21.6</span> 放置策略</h3>
+</div>
+<div id="outline-container-org6bd05f7" class="outline-3">
+<h3 id="org6bd05f7"><span class="section-number-3">21.7</span> 置换策略</h3>
+<div class="outline-text-3" id="text-21-7">
+<ul class="org-ul">
+<li>页框锁定: 锁定之后的页框不能被置换(系统里面的一些重要信息)</li>
+</ul>
+</div>
+<div id="outline-container-orgf793769" class="outline-4">
+<h4 id="orgf793769"><span class="section-number-4">21.7.1</span> 置换算法</h4>
+<div class="outline-text-4" id="text-21-7-1">
+<ul class="org-ul">
+<li>最佳</li>
+<li>LRU</li>
+<li>FIFO</li>
+<li>时钟</li>
+<li>时钟(改进): 多分出来一个m位表示是否修改过, 和没有修改过的形成优先级关系.
+当访问标志都为0的时候, 要先考虑没有修改过的, 再是修改过的.
+访问标志为1的暂时不考虑</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org330dcdd" class="outline-4">
+<h4 id="org330dcdd"><span class="section-number-4">21.7.2</span> 页缓冲</h4>
+</div>
+<div id="outline-container-org61f01fd" class="outline-4">
+<h4 id="org61f01fd"><span class="section-number-4">21.7.3</span> 驻留集管理</h4>
+<div class="outline-text-4" id="text-21-7-3">
+<ul class="org-ul">
+<li>页框分配: 给每个活动进程分配多少页框</li>
+<li>置换范围: 计划置换的页集局限于缺页的进程还是内存里面所有进程</li>
+
+<li>固定分配: 为进程提供固定个数的页框</li>
+<li>可变分配: 允许分配给进程的页框数在进程的生命周期内变化</li>
+<li>置换范围和分配方式可以有不同组合, (注意没有固定分配+全局置换)</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgb669e3d"></a>工作集<br />
+<div class="outline-text-5" id="text-21-7-3-1">
+<ul class="org-ul">
+<li>\(W(t, \Delta)\), 表示页面在过去 \(\Delta\) 个时间单位中访问到的页集合.</li>
+<li>可以用工作集指导驻留集管理, 但不好实际应用</li>
+</ul>
+</div>
+</li>
+<li><a id="org59c3f76"></a>清除策略<br />
+<div class="outline-text-5" id="text-21-7-3-2">
+<ul class="org-ul">
+<li>按需清除</li>
+<li>预清除</li>
+<li>结合页缓冲技术</li>
+</ul>
+</div>
+</li>
+<li><a id="orgf9bf43a"></a>加载控制<br />
+<div class="outline-text-5" id="text-21-7-3-3">
+<ul class="org-ul">
+<li>决定驻留在内存中的进程数量, 称为多道程序度/进程并发度</li>
+<li>LS准则: 发生缺页的平均时间L = 处理缺页故障的平均时间S, 处理器利用率最大</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0447dc4" class="outline-2">
+<h2 id="org0447dc4"><span class="section-number-2">22</span> <code>4 IO</code></h2>
+<div class="outline-text-2" id="text-22">
+</div>
+<div id="outline-container-orgf0e740f" class="outline-3">
+<h3 id="orgf0e740f"><span class="section-number-3">22.1</span> IO功能的三种控制方式</h3>
+<div class="outline-text-3" id="text-22-1">
+<ul class="org-ul">
+<li>程序IO</li>
+<li>中断
+<ul class="org-ul">
+<li>应用: 鼠标, 键盘(字符设备)</li>
+</ul></li>
+<li>DMA
+<ul class="org-ul">
+<li>应用: 磁盘(块设备)</li>
+</ul></li>
+<li>IO通道/IO处理机
+<ul class="org-ul">
+<li>DMA VS IO通道:
+<ul class="org-ul">
+<li>DMA: CPU控制, CPU一条指令, 传送一个数据块</li>
+<li>IO通道: 有自己的指令集(可以执行通道程序), 可以完成一组数据块的传输, 可以和CPU, IO设备并行操作</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge0628fa" class="outline-3">
+<h3 id="orge0628fa"><span class="section-number-3">22.2</span> IO功能层次模型</h3>
+<div class="outline-text-3" id="text-22-2">
+</div>
+<div id="outline-container-orga58c5d2" class="outline-4">
+<h4 id="orga58c5d2"><span class="section-number-4">22.2.1</span> Framework</h4>
+<div class="outline-text-4" id="text-22-2-1">
+<ul class="org-ul">
+<li>用户进程 -&gt; 逻辑IO -&gt; 设备IO -&gt; 调度和控制 -&gt; 硬件</li>
+<li>用户进程 -&gt; 通信架构 -&gt; 设备IO -&gt; 调度和控制 -&gt; 硬件</li>
+<li>例子: 文件系统</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org319d1cf" class="outline-4">
+<h4 id="org319d1cf"><span class="section-number-4">22.2.2</span> 设备独立性/设备无关性</h4>
+<div class="outline-text-4" id="text-22-2-2">
+<ul class="org-ul">
+<li>应用程序独立于具体使用的物理设备</li>
+<li>逻辑IO模块, 允许使用设备的逻辑名, 通过简单的设备操作指令和设备打交道</li>
+<li>设备IO模块, 将逻辑IO操作转化为对应的物理设备的IO访问控制</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2b38efc" class="outline-3">
+<h3 id="org2b38efc"><span class="section-number-3">22.3</span> 缓冲</h3>
+<div class="outline-text-3" id="text-22-3">
+<ul class="org-ul">
+<li>T: 传输时间, C: 计算时间, M: 移动时间(系统缓存 -&gt; 程序内存空间)</li>
+<li>CM一定不能同时运行, 但是CT, MT都是可以的</li>
+<li>无缓冲 (T + C)</li>
+<li>单缓冲 \(\max\{T, C\} + M\)</li>
+<li>双缓冲 \(\max\{T, M+C\} \approx \max\{T, C\}\)</li>
+<li>循环缓冲</li>
+</ul>
+</div>
+<div id="outline-container-orgc345510" class="outline-4">
+<h4 id="orgc345510"><span class="section-number-4">22.3.1</span> 缓冲的作用</h4>
+<div class="outline-text-4" id="text-22-3-1">
+<p>
+(1) 缓解IO设备的速度与CPU速度不匹配的矛盾
+(2) 多道程序环境中, 当存在多种IO活动和多种进程活动时, 缓冲可以提高操作系统的效率.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org37439d6" class="outline-3">
+<h3 id="org37439d6"><span class="section-number-3">22.4</span> SPOOLing技术</h3>
+<div class="outline-text-3" id="text-22-4">
+<p>
+将与IO设备交互要用到的数据暂存在磁盘中, 可以将IO设备模拟成为多个虚拟设备, 然后给多个不同的饿用户使用.
+(在磁盘中维护一个操作队列).
+</p>
+</div>
+</div>
+<div id="outline-container-org5e26bc7" class="outline-3">
+<h3 id="org5e26bc7"><span class="section-number-3">22.5</span> 磁盘</h3>
+<div class="outline-text-3" id="text-22-5">
+</div>
+<div id="outline-container-org035a380" class="outline-4">
+<h4 id="org035a380"><span class="section-number-4">22.5.1</span> 概念</h4>
+<div class="outline-text-4" id="text-22-5-1">
+<ul class="org-ul">
+<li>存储面</li>
+<li>磁道</li>
+<li>扇区</li>
+<li>柱面</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3ac51c2" class="outline-4">
+<h4 id="org3ac51c2"><span class="section-number-4">22.5.2</span> 时间</h4>
+<div class="outline-text-4" id="text-22-5-2">
+<ul class="org-ul">
+<li>\(T_s\) 寻道时间</li>
+<li>\(T_r = \frac{1}{2r}\) 旋转延时</li>
+<li>\(T_t = \frac{b}{rN}\) 传输时间</li>
+<li>\(T_a = T_s + T_r + T_t\) 磁盘访问时间</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaae75b0" class="outline-4">
+<h4 id="orgaae75b0"><span class="section-number-4">22.5.3</span> 磁盘调度策略</h4>
+<div class="outline-text-4" id="text-22-5-3">
+<ul class="org-ul">
+<li>FIFO</li>
+<li>PRI(优先级)</li>
+<li>LIFO(后进先出)</li>
+<li>SSTF(最短寻道时间优先)</li>
+<li>SCAN(电梯算法), 不停内外扫描</li>
+<li>C-SCAN, 只朝一个方向扫描</li>
+<li>SSTF, SCAN, C-SCAN都有粘着现象</li>
+<li>N-step-SCAN, 一次只处理一个长度为N的队列.</li>
+<li>FSCAN, 一次性将队列清空扫描一次, 之后加进来的暂时不管</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7cdb18d" class="outline-4">
+<h4 id="org7cdb18d"><span class="section-number-4">22.5.4</span> RAID</h4>
+<div class="outline-text-4" id="text-22-5-4">
+<p>
+0 -&gt; 6
+</p>
+</div>
+</div>
+<div id="outline-container-org7d86c88" class="outline-4">
+<h4 id="org7d86c88"><span class="section-number-4">22.5.5</span> 磁盘高速缓存</h4>
+<div class="outline-text-4" id="text-22-5-5">
+<ul class="org-ul">
+<li>加速磁盘访问</li>
+<li>在内存中</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org1576e9a"></a>调度方式<br />
+<div class="outline-text-5" id="text-22-5-5-1">
+<ul class="org-ul">
+<li>LRU</li>
+<li>LFU</li>
+<li>分区LFU</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd0e80f7" class="outline-2">
+<h2 id="orgd0e80f7"><span class="section-number-2">23</span> <code>5 文件系统</code></h2>
+<div class="outline-text-2" id="text-23">
+</div>
+<div id="outline-container-orgc69de9f" class="outline-3">
+<h3 id="orgc69de9f"><span class="section-number-3">23.1</span> 概念</h3>
+<div class="outline-text-3" id="text-23-1">
+<ul class="org-ul">
+<li>域 (some value)</li>
+<li>记录 (a row of value)</li>
+<li>文件 (a column of records)</li>
+<li>数据库 (a set of files)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgee0b406" class="outline-3">
+<h3 id="orgee0b406"><span class="section-number-3">23.2</span> 文件组织和访问</h3>
+<div class="outline-text-3" id="text-23-2">
+<ul class="org-ul">
+<li>堆</li>
+<li>顺序文件</li>
+<li>索引顺序文件</li>
+<li>索引文件</li>
+<li>直接或散列文件</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd411297" class="outline-3">
+<h3 id="orgd411297"><span class="section-number-3">23.3</span> 记录组块</h3>
+<div class="outline-text-3" id="text-23-3">
+<ul class="org-ul">
+<li>定长</li>
+<li>变长非跨越式</li>
+<li>变长跨越式</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0d42c5e" class="outline-3">
+<h3 id="org0d42c5e"><span class="section-number-3">23.4</span> 文件分配</h3>
+<div class="outline-text-3" id="text-23-4">
+<p>
+文件由许多块组成, 给文件分配的是一些分区(分区: 一些连续的已分配的块).
+</p>
+</div>
+<div id="outline-container-orgfad9d95" class="outline-4">
+<h4 id="orgfad9d95"><span class="section-number-4">23.4.1</span> 分配策略</h4>
+<div class="outline-text-4" id="text-23-4-1">
+
+<div class="figure">
+<p><img src="pic/%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E6%96%B9%E6%B3%95.png" alt="%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E6%96%B9%E6%B3%95.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0f78a12" class="outline-4">
+<h4 id="org0f78a12"><span class="section-number-4">23.4.2</span> 空闲空间管理</h4>
+<div class="outline-text-4" id="text-23-4-2">
+<ul class="org-ul">
+<li>位示图</li>
+<li>链接空闲分区</li>
+<li>索引</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org8f51669" class="outline-3">
+<h3 id="org8f51669"><span class="section-number-3">23.5</span> 文件共享</h3>
+<div class="outline-text-3" id="text-23-5">
+<ul class="org-ul">
+<li>软连接</li>
+<li>硬链接</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd2c0160" class="outline-3">
+<h3 id="orgd2c0160"><span class="section-number-3">23.6</span> 卷</h3>
+<div class="outline-text-3" id="text-23-6">
+<ul class="org-ul">
+<li>卷是逻辑磁盘, 是一组可寻址的扇区的集合</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org13d043d" class="outline-3">
+<h3 id="org13d043d"><span class="section-number-3">23.7</span> UNIX文件管理</h3>
+<div class="outline-text-3" id="text-23-7">
+<ul class="org-ul">
+<li>Unix文件系统驻留在单个逻辑磁盘或磁盘分区</li>
+<li>Boot Block|Super Block|Inode Table|Data Blocks</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: 陈小羽</p>
-<p class="date">Created: 2019-04-24 Wed 21:48</p>
+<p class="date">Created: 2019-06-25 Tue 09:14</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
