@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{ctex}
+
+\usepackage{amsmath, amssymb, amsthm}
+\newtheorem{problem}{习题}
+\newtheorem{solution}{解}
+\everymath{\displaystyle}
+
+\usepackage{geometry}
+\geometry{scale = 0.7}
+
+\title{实变函数简明教程第三章习题解答}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{problem}
+  证明: 可测集$E$上的可测函数在其任何子集上可测.
+\end{problem}
+\begin{solution}
+  \begin{proof}
+    考虑$E$上的可测函数$f$, 因为 $f$ 可测, 我们可以知道对于 $\forall a\in \mathbb{R}$, 都有 $E(f > a)$ 可测.
+    对于任何 $E$ 的可测子集 $E_0$, $E_0(f > a) = E_0 \cap E(f > a)$.
+    因为可测集的交集也是可测的, 所以容易发现 $E(f > a)$ 对于所有 $a \in \mathbb{R}$ 都是可测的.
+    所以 $f$ 在 $E_0$ 上可测.
+  \end{proof}
+\end{solution}
+
+\hrule
+
+\begin{problem}
+  证明: 若函数$f(x)$在$E_1, E_2\subset \mathbb{R}^n$ 上可测, 又若 $f$ 分别作为 $E_1, E_2$ 上的函数, 在 $x\in E_1\cap E_2$ 上的值相同, 则 $f$ 在 $E_1\cup E_2$, $E_1\setminus E_2$, $E_1\cap E_2$ 可测.
+\end{problem}
+\begin{solution}
+  \begin{proof}
+    $f$ 在 $E_1, E_2$ 上可测 $\Rightarrow$ $\forall a \in \mathbb{R}$, $E_1(f > a), E_2(f > a)$ 都可测. \\
+    所以
+    \begin{align*}
+      E_1(f > a) \cap E_2(f > a) \\
+      E_1(f > a) \cup E_2(f > a) \\
+      E_1(f > a) \setminus E_2(f > a )
+    \end{align*}
+    都是可测的.
+  \end{proof}
+\end{solution}
+
+\hrule
+
+\begin{problem}
+  若每个 $f_k(x), (k = 1, 2, \cdots)$ 在可测集 $E \subset \mathbb{R}^n$ 上几乎处处连续 (间断点构成零测集), 极限 $f(x) = \lim_{k\to\infty}f_k(x)$ 在 $E$ 上几乎处处有意义, 证明 $f(x)$ 在 $E$ 可测.
+\end{problem}
+\begin{solution}
+\end{solution}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

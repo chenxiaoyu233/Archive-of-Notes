@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsmath, amssymb, amsthm}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\everymath{\displaystyle}
+
+\usepackage{geometry}
+\geometry{scale = 0.8}
+
+\title{Egorov Theorem and F. Riesz Theorem}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+这个内容来自于 <<实变函数简明教程第三章>>.
+这两个定理的证明中间出现了一些之前没见过的想法, 所以在这个地方单独做一个整理.
+
+在学习这两个定理的证明的过程中, 我终于弄懂了如何将集合的逻辑表示快速的转换成为集合的运算(并/交/补)的形式.
+在测度理论中, 通过这个方法, 有可能可以将一个大集合拆成一些可测的小集合, 从而完成证明.
+有些证明中, 可以将集列的极限转换为集合的运算, 从而可以证明可测或者对集合进行进一步的拆分.
+所以, 不难发现, 将用逻辑语句描述的集合快速的转换成为一些小集合的运算的形式是非常有用的, 他们常常是一些证明中间的桥梁.
+
+这种方法我不好给出严格的证明, 这里只能当作一种经验(直觉)来使用, 下面给出两个书上的例子.
+\begin{lemma}
+  设 $f$ 和 $f_1, f_2, \cdots$ 都是定义在 $\mathbb{R}^n$ 的实值函数, 则
+  \begin{align*}
+    \{x | \lim_{k\to\infty} f_k(x) = f(x)\}
+    &= \{x | \forall l \;.\; \exists j \;.\; \forall k \geq j \;.\; |f_k(x) - f(x)| < \frac{1}{l}\} \\
+    &= \bigcap_{l=1}^\infty \bigcup_{j=1}^\infty \bigcap_{k = j}^\infty \{x| |f_k(x) - f(x)| < \frac{1}{l}\}
+  \end{align*}
+  这里 $\{x | \lim_{k\to\infty} f_k(x) = f(x)\}$ 描述了逐点收敛的收敛域.
+\end{lemma}
+\begin{lemma}
+  \label{lem:A}
+  设 $f$ 和 $f_1, f_2, \cdots$ 都是定义在 $\mathbb{R}^n$ 的实值函数.
+  $\{f_k\}$ 在 $A$ 上一致收敛到 $f$, 则
+  \begin{align*}
+    A \not= \{x | \forall l \;.\; \exists k_l \;.\; \forall k \geq k_l \;.\; |f_k(x) - f(x)| < \frac{1}{l}\}
+  \end{align*}
+  这样写是错误的, 因为后面的条件是针对一个特定的 $x$ 的, 而 $k_l$ 应该是 $x$ 无关的.
+  
+  实际上, $A$上一致收敛等价于下面叙述:
+  \begin{align*}
+    \exists\{k_i\in\mathbb{N}\}_{i=1}^\infty &\;.\; \forall l \in \mathbb{N} \;.\; \forall k \geq k_l \;.\; \forall x\in A \;.\; |f_k(x) - f(x)| < \frac{1}{l} \\
+    \Leftrightarrow \exists\{k_i\in\mathbb{N}\}_{i=1}^\infty &\;.\; A = \{\forall x\in A | \forall l \in \mathbb{N} \;.\; \forall k \geq k_l \;.\; |f_k(x) - f(x)| < \frac{1}{l}\} \\
+    \Leftrightarrow \exists\{k_i\in\mathbb{N}\}_{i=1}^\infty &\;.\; A \subset \{x| \forall l \in \mathbb{N} \;.\; \forall k \geq k_l \;.\; |f_k(x) - f(x)| < \frac{1}{l}\} \\
+    \Leftrightarrow \exists\{k_i\in\mathbb{N}\}_{i=1}^\infty &\;.\; A \subset \bigcap_{l=1}^\infty \bigcap_{k=k_l}^\infty \{x| |f_k(x) - f(x)| < \frac{1}{l}\} 
+  \end{align*}
+  不过, 这里我们不能像前一个Lemma一样直接写出$A$, 应该这样说:
+
+  $\{f_k\}$ 在 $A$ 上 一致收敛到 $f$ 当且仅当 存在数列 $\{k_l\}$, 使得 
+  \[A \subset \bigcap_{l=1}^\infty \bigcap_{k=k_l}^\infty \{x| |f_k(x) - f(x)| < \frac{1}{l}\} \]
+\end{lemma}
+虽然我不能给出这种方法的严格证明, 不过通过这种方法得到结论之后, 再通过集合相等的定义补上严格的证明确实很简单的.
+
+下面来用这种技术证明一个关于逐点收敛的等价表述.
+\begin{lemma}
+  \label{lem:equal}
+  $\{f_k\}$与$f$在$E$几乎处处有限 (这里0测集不影响证明, 可以直接将$f, f_k$看成实值函数), 则
+  \[\mbox{$\{f_k\}$ 几乎处处收敛到$f$ $\Leftrightarrow$ }
+  \forall l, \lim_{j\to\infty} m(\bigcup_{k=j}^\infty\{x\in E| |f_k(x) - f(x)| \geq \frac{1}{l}\}) = 0\]
+\end{lemma}
+\begin{proof}
+  $\Rightarrow$:
+  $\{f_k\}$ 几乎处处收敛到 $f$.
+  说明 $E = E_1 \cup E_0$, $f$ 在 $E_1$ 逐点收敛到 $f$, 在 $E_0$ 则不, 且 $m E_0 = 0$.
+  因为最后可以直接把 $m E_0$ 加入答案, 不会影响结果, 所以这里可以直接假设 $\{f_k\}$ 在$E$逐点收敛到 $f$
+  于是
+  \begin{align*}
+    \mbox{$f_k$ 在 $E$ 逐点收敛到 $f$} 
+    &\Leftrightarrow \bigcup_{l=1}^\infty\bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \} = \emptyset \\
+    &\Leftrightarrow \bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x | |f_k(x) - f(x)| \geq \frac{1}{l} \} = \emptyset
+  \end{align*}
+  故
+  \begin{displaymath}
+    \left\uparrow
+  \begin{array}{rl}
+    m (\bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) &= 0 \\
+    \Leftrightarrow m (\lim_{j\to\infty}\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) &= 0, \mbox{渐缩集列} \\
+    \Leftrightarrow \lim_{j\to\infty} m (\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) &= 0, \mbox{渐缩集列} \\
+  \end{array}
+\right\downarrow
+\begin{array}{l}
+    \mbox{这个方向需要加上} \\
+    m E < \infty \\
+    \mbox{这个条件}
+\end{array}
+\end{displaymath}
+需要加 $mE < \infty$ 的原因是, 如果 $m(\lim_{k\to\infty} A_k) = 0$, 不能保证存在一个具体的 $k_0$ 使得 $m(A_{k_0}) < \infty$, 就会有问题 (另一个方向不存在这个问题). 一个典型的例子是 $A_k = [k, \infty)$.
+
+  $\Leftarrow$: 由 $\Rightarrow$ 的证明过程, 我们可以发现
+  \begin{align*}
+   & \lim_{j\to\infty} m (\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) = 0 \\
+   \Leftrightarrow &\ m (\bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) = 0 
+  \end{align*}
+  故
+  \begin{align*}
+    m(\{x&|\lim_{k\to\infty} f_k(x) \not= f(x)\}) \\
+    &= m(\bigcup_{l=1}^\infty\bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) \\
+   &\leq \sum_{l=1}^\infty m(\bigcap_{j=1}^\infty\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l} \}) \\
+   &= 0  \qedhere
+  \end{align*}
+\end{proof}
+\begin{theorem}[Egorov Theorem]
+  设 $E\subset \mathbb{R}^n$ 可测且 $mE < \infty$, $\{f_k\}$ 是在 $E$ 上几乎处处有限又处处收敛的可测函数列,
+  并且他的极限 $f$ 在 $E$ 也是几乎处处有限的. 则对于任意正数 $\delta$, 存在 $E$ 的一个可测子集 $E_\delta$,
+  满足 $mE_\delta < \delta$, 而 $\{f_k\}$ 在 $E\setminus E_\delta$ 上一致收敛于 $f$.
+
+  $\delta$: 这里 $f$, $f_k$ 都是扩展实值函数.
+\end{theorem}
+\begin{proof}
+  不妨假设 $f_k$ 在 $E$ 上处处有限(是实值函数)并处处收敛, $f$ 在 $E$ 上处处有限, 因为可以直接将不满足的点击放到 $E_\delta$ 中而不影响结果.
+  由Lemma \ref{lem:A}可知, 
+  $\{f_k\}$ 在 $A$ 上 一致收敛到 $f$ 当且仅当 存在数列 $\{k_l\}$, 使得 
+  \[A \subset \bigcap_{l=1}^\infty \bigcap_{k=k_l}^\infty \{x| |f_k(x) - f(x)| < \frac{1}{l}\} \]
+  这里, 我们取最大的情况即可取出 $f_k$ 在 $E$ 上所有一致收敛的点集
+  \[A = \bigcap_{l=1}^\infty \bigcap_{k=k_l}^\infty \{x| |f_k(x) - f(x)| < \frac{1}{l}\} \]
+  这个时候, 所有不一致收敛的点集就为:
+  \[E_\delta' = \bigcup_{l=1}^\infty\bigcup_{k=k_l}^\infty \{x| |f_k(x) - f(x)| \geq \frac{1}{l}\}\]
+  由 $f_k$ 在 $E$ 上收敛到 $f$ 且 $mE < \infty$ 又可知 (by Lemma \ref{lem:equal}):
+  \[\forall l, \lim_{j\to\infty} m(\bigcup_{k=j}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l}\}) = 0\]
+  故取定 $\delta > 0$, 对于任意 $l$, 存在 $k_l$, 使得
+  \[m (\bigcup_{k=k_l}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l}\}) < \frac{\delta}{2^l}\]
+  故
+  \begin{align*}
+    E_\delta' = m(\bigcup_{l=1}^\infty\bigcup_{k=k_l}^\infty \{x| |f_k(x) - f(x)| \geq \frac{1}{l}\}) 
+    &\leq \sum_{l=1}^\infty m (\bigcup_{k=k_l}^\infty\{x| |f_k(x) - f(x)| \geq \frac{1}{l}\}) \\
+    &< \sum_{l=1}^\infty \frac{\delta}{2^l} = \delta
+  \end{align*}
+\end{proof}
+下面的定理算是Egorov定理的一个推论, 可以让我们理解清楚依测度收敛和一致收敛的区别.
+\begin{theorem}
+  若 $f, f_k$ 是在 $E$ 上几乎处处有限的可测函数, $mE < \infty$, 并且 $f_k(x) \to f(x)$, a.e. 于 $E$,
+  则在 $E$ 上 $\{f_k\}$ 依测度收敛于 $f$.
+\end{theorem}
+\begin{proof}
+  由 Egorov定理, $\forall \delta > 0$, $\exists E_\delta \subset E$, 使得 $mE_\delta < \delta$ 且 $\{f_k\}$ 在 $E\setminus E_\delta$ 上一致收敛到 $f$.
+  这说明, $\forall \varepsilon > 0$, 
+  \[\{x\in E\setminus E_\delta | |f_k(x) - f(x)| \geq \varepsilon\} = \emptyset\]
+  而
+  \[m\{x\in E_\delta | |f_k(x) - f(x)| \geq \varepsilon\} \leq  mE_\delta < \delta\]
+  所以
+  \[\lim_{k\to\infty} m\{x| |f_k(x) - f(x)| \geq \varepsilon\} = 0\] (因为 $\delta$ 可以任取)
+\end{proof}
+
+\begin{theorem}[F. Riesz Theorem]
+  若 $\{f_k\}$ 在  $E$ 上依测度收敛于 $f$, 则必有子序列 $\{f_{k_i}\}$ 在 $E$ 几乎处处收敛到 $f$.
+\end{theorem}
+\begin{proof}
+  $\{f_k\}$ 在 $E$ 上依测度收敛到 $f$, 按照定义有:
+  \begin{align*}
+    \forall l, \lim_{k\to\infty}m\{x | |f_k(x) - f(x)| \geq \frac{1}{l}\} = 0
+  \end{align*}
+  $\{f_{k_i}\}$ 在 $E$ 几乎处处收敛到 $f$ 的充分必要条件是:
+  \begin{align*}
+    \forall l, \lim_{j\to\infty} m(\bigcup_{i=j}^\infty\{x| |f_{k_i}(x) - f(x)| \geq \frac{1}{l}\}) = 0
+  \end{align*}
+  在 $j$ 固定时, 这个式子可以打开,
+  \begin{align*}
+     m(\bigcup_{i=j}^\infty\{x| |f_{k_i}(x) - f(x)| \geq \frac{1}{l}\}) &\leq \sum_{i=j}^\infty m\{x| |f_{k_i}(x) - f(x)| \geq \frac{1}{l}\}
+  \end{align*}
+  这里, 对某个 $i$, 选取合适的 $k_i$, 使得 $m\{x | |f_{k_i}(x) - f(x)| \geq \frac{1}{i}\} < \frac{1}{2^i}$.
+  这样对于任意的 $l$, 当 $j$ 足够大之后, 总有
+  \begin{align*}
+     \sum_{i=j}^\infty m\{x| |f_{k_i}(x) - f(x)| \geq \frac{1}{l}\}
+    &\leq \sum_{i=j}^\infty m\{x| |f_{k_i}(x) - f(x)| \geq \frac{1}{i}\} \\
+    &< \sum_{i=j}^\infty \frac{1}{2^i} = \frac{1}{2^{j-1}}
+  \end{align*}
+  所以$\forall l$, $m(\bigcup_{i=j}^\infty\{x| |f_k(x) - f(x)|\geq \frac {1}{l}\}) \to 0 (j \to \infty)$.
+\end{proof}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

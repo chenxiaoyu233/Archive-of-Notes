@@ -98,7 +98,7 @@ Nima在讲座上从人的正常思维的顺序给出了证明rapid mixing的思�
 \begin{align*}
   D_f(\nu_r \parallel \mu_r)
   &= \E_{S\~\mu_r}{f(\frac{\nu_r(S)}{\mu_r(S)})} - f(1) \\
-  &= \sum_{i=1}^r \E_{S\~\mu_i}{f(\frac{\nu_i(S)}{\mu_i(S)})} - \E_{S\~\mu_{i-1}}{f(\frac{\nu_{i-1}(S)}{\mu_{i-1}(S)})}
+  &= \sum_{i=1}^r (\E_{S\~\mu_i}{f(\frac{\nu_i(S)}{\mu_i(S)})} - \E_{S\~\mu_{i-1}}{f(\frac{\nu_{i-1}(S)}{\mu_{i-1}(S)})})
 \end{align*}
 方便起见, 不妨令
 \[A_i = \underbrace{\E_{S\~\mu_i}{f(\frac{\nu_i(S)}{\mu_i(S)})}}_{a_i} - \underbrace{\E_{S\~\mu_{i-1}}{f(\frac{\nu_{i-1}(S)}{\mu_{i-1}(S)})}}_{a_{i-1}}\]
