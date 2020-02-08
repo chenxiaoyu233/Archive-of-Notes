@@ -10,6 +10,8 @@
 \usepackage{geometry}
 \geometry{scale = 0.8}
 
+\usepackage{color}
+
 \title{Egorov Theorem and F. Riesz Theorem}
 \author{Xiaoyu Chen}
 \date{}
@@ -110,7 +112,9 @@
   并且他的极限 $f$ 在 $E$ 也是几乎处处有限的. 则对于任意正数 $\delta$, 存在 $E$ 的一个可测子集 $E_\delta$,
   满足 $mE_\delta < \delta$, 而 $\{f_k\}$ 在 $E\setminus E_\delta$ 上一致收敛于 $f$.
 
-  $\delta$: 这里 $f$, $f_k$ 都是扩展实值函数.
+  {\color{blue}$\Delta$: 这里 $f$, $f_k$ 都是扩展实值函数.
+
+  $\Delta$: 这里注意 $f_k$ 可测, $E$ 可测的条件, 不要这个条件的话, 最后构造出来的 $E_\delta$ 可能是不可测的, 最后定理的陈述就没有意义了.}
 \end{theorem}
 \begin{proof}
   不妨假设 $f_k$ 在 $E$ 上处处有限(是实值函数)并处处收敛, $f$ 在 $E$ 上处处有限, 因为可以直接将不满足的点击放到 $E_\delta$ 中而不影响结果.
@@ -136,6 +140,8 @@
 \begin{theorem}
   若 $f, f_k$ 是在 $E$ 上几乎处处有限的可测函数, $mE < \infty$, 并且 $f_k(x) \to f(x)$, a.e. 于 $E$,
   则在 $E$ 上 $\{f_k\}$ 依测度收敛于 $f$.
+
+  $\Delta:$ 因为Egorov定理要求 $f, f_k, E$ 可测, 所以这里也要求可测.
 \end{theorem}
 \begin{proof}
   由 Egorov定理, $\forall \delta > 0$, $\exists E_\delta \subset E$, 使得 $mE_\delta < \delta$ 且 $\{f_k\}$ 在 $E\setminus E_\delta$ 上一致收敛到 $f$.
