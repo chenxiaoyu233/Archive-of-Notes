@@ -14,6 +14,7 @@
 \newtheorem{proposition}{Proposition}
 
 \usepackage{tabularx}
+\usepackage{xcolor}
 
 \title{Some Notes For Inner Products}
 \author{Xiaoyu Chen}
@@ -199,7 +200,7 @@
 \begin{define}[Change of Basis]
   $V$ 中一组相互正交的单位向量 $\mathcal{B} = \{v_1, v_2, \cdots, v_n\}$ 可以作为 $V$ 这个空间的一组基.
   对于 $\forall x\in V$, 我们可以通过 $\mathcal{B}$ 来表示出 $x$.
-  如果 $x = \alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_nv_n$, 则
+  如果 $x = \alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_nv_n$ (\textcolor{red}{这里的$\alpha_i$可以由不同的内积得出}), 则
   \[[x]_{\mathcal{B}} = \left[
       \begin{array}{c}
         \alpha_1 \\
@@ -404,7 +405,7 @@ self-adjoint 的矩阵的特征向量有很有用的性质.
   所以 $L$ 的所有特征向量一定可以关于 $\<\cdot, \cdot\>$ 构成一个 $V$ 的基.
 \end{proof}
 \begin{remark}
-  这个定理, 会导致本来只在一般inner product上成立的Courant-Fischer Theorem]在任意self-adjoint上成立.
+  这个定理, 会导致本来只在一般inner product上成立的[Courant-Fischer Theorem]在任意self-adjoint上成立.
 \end{remark}
 \end{document}
 
