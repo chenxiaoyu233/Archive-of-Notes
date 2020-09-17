@@ -1,0 +1,860 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+\usetheme[compress]{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+\usefonttheme{serif}
+
+%\setbeamertemplate{theorems}[numbered] % number the theorems
+
+\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{\insertslidenavigationsymbol} % To remove the navigation symbols from the bottom of all slides uncomment this line
+
+\setbeamertemplate{headline}{
+  \vspace{0.3cm}
+}
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tabularx}
+\usepackage{amsmath, amssymb, amsthm, bbold}
+\everymath{\displaystyle}
+\newtheorem{define}{Definition}
+\newtheorem{fac}{Fact}
+\newtheorem{property}{Property}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+
+% 简化书写
+\def\<{\langle}
+\def\>{\rangle}
+\def\Var{\mathrm{Var}}
+\def\E{\mathbb{E}}
+
+\usepackage{tikzit}
+\input{style.tikzstyles}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Short title]{Eigenvalues \& Mixing Time} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Xiaoyu Chen} % Your name
+%\institute[UCLA] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+%{
+%\\ % Your institution for the title page
+%\medskip
+%\textit{john@smith.com} % Your email address
+%}
+\date{} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{navigation symbols}{\vspace{0.3cm}\insertslidenavigationsymbol} 
+
+%------------------------------------------------
+\section[Preliminaries]{Preliminaries} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+\scriptsize
+
+\begin{frame}
+  \frametitle{Inner Product}
+  \begin{define}
+  \only<1->{
+  Let $V$ be a vector space over the field \only<1>{$\mathbb{F}$ ($\mathbb{F} = \mathbb{R}$ or $\mathbb{C}$)} \only<2->{$\mathbb{R}$}. \\
+  A function $\<\cdot, \cdot\> : V \times V \to \mathbb{F}$ is an inner product if for all $x, y, z \in V$
+  and all $c \in \mathbb{F}$,
+  \vspace{1mm}
+  \hrule
+  \vspace{1mm}
+  }
+  \begin{tabularx}{0.9\textwidth}{llXr}
+    (1) & $\< x, x \> \geq 0$ && Nonnegativity \\
+    (1a) & $\< x, x \> = 0$ iff $x = 0$ && Positivity \\
+    (2) & $\< x + y, z \> = \< x, z \> + \< y, z \>$ && Additivity \\
+    (3) & $\< cx, y \> = c\< x, y \>$ && Homogeneity \\
+    (4) & $\< x , y \> = \only<1>{\overline{\< y, x \>}} \only<2->{\<y, x\>}$ && Hermitian Property \\
+  \end{tabularx}
+  \end{define}
+  \visible<3->{
+    \begin{property}
+    (a) $\<x, cy\> = c\<x, y\>$ \\
+    (b) $\<x, y + z\> = \<x, y\> + \<x, z\>$ \\
+    (c) $\<ax + by, cw + dz\> = ac\<x, w\> + bc\<y, w\> + ad\<x, z\> + bd\<y, z\>$ \\
+    (d) $\<x, \<x, y\> y\> = \<x, y\>^2$ \\
+    (e) $\<x, y\> = 0$ for all $y \in V$ iff $x = 0$
+  \end{property}
+  }
+  \visible<4->{
+  \begin{block}{Cauchy-Schwarz Inequality}
+    \centering $\only<1>{|\<x, y\>|^2} \only<2->{\<x, y\>^2} \leq \<x, x\>\<y, y\>$ for all $x, y \in V$.
+  \end{block}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Self-Adjoint Operator}
+  \begin{define}
+    $A : V\to V$ is a self-adjoint operator of $\<\cdot, \cdot\>$ if, \\
+    \centering $\<Ax, y\> = \<x, Ay\>$ forall $x, y \in V$.
+  \end{define}
+  \visible<2->{
+  \begin{thm}
+    \label{thm:eigenbasis}
+     $A: V\to V$ is a self-adjoint operator of $\<\cdot, \cdot\>$ iff $A$ admits an orthonormal eigenbasis with real eigenvalues.
+  \end{thm}
+    \visible<3>{
+      \begin{proof}[Proof of $\Rightarrow$ (high level)]
+        Let $B$ be the collection of all the eigenvectors of $A$, $\mathcal{S} := B^{\perp}$.
+        Then for all $x\in B, y \in \mathcal{S}$, we have \\
+        \begingroup
+        \centering $\<x, Ay\> = \<Ax, y\> = \lambda\<x, y\> = 0$. \\
+        \endgroup
+        So, $A$ is a $\mathcal{S}\to \mathcal{S}$ operator, and it should have at least one eigenfunction in $\mathcal{S}$.
+      \end{proof}
+    }
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Total Variation Distance}
+  \begin{define}
+    Suppose $\mu$ and $\nu$ are two distributions on $\mathcal{X}$, then \\
+    \centering $\parallel \mu - \nu \parallel_{TV} := \max_{A\subseteq \mathcal{X}} |\mu(A) - \nu(A)|$
+  \end{define}
+  \visible<2->{
+  \begin{fac}
+    \centering $\parallel \mu - \nu \parallel_{TV} = \frac{1}{2}\sum_{x\in\mathcal{X}} |\mu(x) - \nu(x)|$
+  \end{fac}
+  }
+  \visible<3->{
+    \begin{example}
+    \centering \includegraphics[width=.6\textwidth]{TV-sample}
+    \end{example}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Mixing Time}
+  \begin{example}[Markov Chain]
+    \begin{columns}
+      \begin{column}{0.35\textwidth}
+        \centering \tikzfig{example-mc}
+      \end{column}
+      \vrule
+      \begin{column}{0.65\textwidth}
+        \[P =\left[
+            \begin{array}{cc}
+              0.8 & 0.2 \\
+              0.6 & 0.4 
+            \end{array}
+          \right],
+          \pi = \left[
+            \begin{array}{c}
+              0.75 \\
+              0.25
+            \end{array}
+          \right]\]
+      \end{column}
+    \end{columns} 
+    \hspace{2mm}
+    \hrule
+    \[\pi P = \pi\]
+  \end{example}
+  \begin{define}
+    \centering $d(t) := \max_{x\in\mathcal{X}} \parallel P^t(x, \cdot) - \pi \parallel_{TV}$
+  \end{define}
+  \begin{define}[Mixing Time]
+    \centering $t_{\mathrm{mix}}(\varepsilon) := \min\{t: d(t) \leq \varepsilon\}$
+  \end{define}
+\end{frame}
+
+
+
+%------------------------------------------------
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{define}[$\ell^p(\pi)$ norm]
+    Given a distribution $\pi$ on $\mathcal{X}$ and $1 \leq p \leq \infty$,
+    the $\ell^p(\pi)$ norm of a function $f : \mathcal{X} \to \mathbb{R}$ is defined as:
+    $ \parallel f \parallel_p := \left\{
+      \begin{array}{ll}
+        \left[\sum_{y\in\mathcal{X}} |f(y)|^p \pi(y)\right]^{\frac{1}{p}} & 1 \leq p < \infty, \\
+        \max_{y\in\mathcal{X}} |f(y)| & p = \infty
+      \end{array}
+      \right.
+    $
+  \end{define}
+  \begin{fact}[non-decreasing]
+    For any $f: \mathcal{X} \to \mathbb{R}$, $\parallel f \parallel_p$ is non-decreasing.
+  \end{fact}
+  \begin{proof}
+    Recall Jenson's Inequality: $\E_\pi[g(X)] \leq g(\E_\pi[X])$ for all concave $g: \mathcal{X}\to\mathbb{R}$.
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    Suppose $p < r$, then $x\mapsto x^{p/r}$ is a concave funcion,\\
+    $ \E_{\pi}\left[|f(x)|^p\right] = \E_\pi\left[(|f(x)|^r)^{\frac{p}{r}}\right] \leq (\E_\pi \left[|f(x)|^r\right])^{\frac{p}{r}}$
+  \end{proof}
+  \begin{define}
+    For functions $f, g : \mathcal{X} \to \mathbb{R}$, define $\<\cdot, \cdot\>_\pi$ as, \\
+    \begingroup
+    \centering $\<f, g\>_\pi := \sum_{x\in\mathcal{X}} f(x)g(x)\pi(x)$ \\
+    \endgroup
+    where $\pi$ is some distribution over $\mathcal{X}$.
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    $\<f, f\>_\pi = \parallel f \parallel_2^2, \<f, 1\>_\pi = \parallel f \parallel_1 = \E_\pi [f]$
+  \end{define}
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \frametitle{$\ell^p$ distance and $\ell^p$ mixing}
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{define}
+        \centering $q_t(x,y) := \frac{P^t(x, y)}{\pi(y)}$
+      \end{define}
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \begin{define}[$\ell^p$ distance]
+        \centering $d^{(p)}(t) := \max_{x\in\mathcal{X}}\parallel q_t(x, \cdot) - 1 \parallel_p$
+      \end{define}
+    \end{column}
+  \end{columns}
+  \only<2>{
+  \begin{define}[$\ell^p$ mixing time]
+    \centering $t^{(p)}_{\mathrm{mix}}(\varepsilon) := \inf\{t\geq 0: d^{(p)}(t) \leq \varepsilon\}$
+  \end{define}
+  \begin{fac}[non-decreasing]
+    \centering $d^{(p)}(t) \leq d^{(p+1)}(t)$
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    \centering $2d(t) = d^{(1)}(t) \leq d^{(2)}(t) \leq d^{(\infty)}(t)$
+  \end{fac}
+  }
+  \only<3->{
+    \begin{proposition}
+      For a reversible Markov chain, \\
+      \centering $d^{(\infty)}(2t) = [d^{(2)}(t)]^2 = \max_{x\in\mathcal{X}}q_{2t}(x,x) - 1$
+    \end{proposition}
+  }
+  \only<4->{
+    \begin{proof}
+      $q_{2t}(x, y)
+      \only<4>{= \sum_{z\in\mathcal{X}}\frac{P^t(x,z)P^t(z,y)}{\pi(y)}}
+      \only<5>{= \sum_{z\in\mathcal{X}}\frac{P^t(x,z)}{\pi(z)}\frac{P^t(z,y)}{\pi(y)} \pi(z)}
+      \only<6->{= \sum_{z\in\mathcal{X}}\frac{P^t(x,z)}{\pi(z)}\frac{P^t(y,z)}{\pi(z)} \pi(z)}
+      \only<7->{= \<q_t(x,\cdot), q_t(y,\cdot)\>_\pi}
+      $ \\
+      \visible<8->{
+      $\<q_t(x, \cdot), 1\>\pi = 1$ $\Rightarrow$
+      $\<q_t(x, \cdot) - 1, q_t(y, \cdot) - 1\>_\pi = q_{2t}(x, y) - 1$ \\
+      }
+      \visible<9->{
+      $[d^{(2)}(t)]^2 = \max_x\parallel q_t(x, \cdot) - 1\parallel_2^2 = \max_x\<q_t(x,\cdot)-1, q_t(x,\cdot)-1\>_\pi = \max_xq_{2t}(x,x)-1$ \\
+      }
+      \visible<10->{
+      By Cauchy-Schwarz Inequality: \\
+      $ \begin{array}[c]{rl}
+          \<q_t(x, \cdot) - 1, q_t(y, \cdot) - 1\>_\pi^2 &\leq \<q_t(x, \cdot) - 1, q_t(x, \cdot)-1\>_\pi\<q_t(y, \cdot) - 1, q_t(y, \cdot)-1\>_\pi \\
+          |q_{2t}(x, y) - 1| & \leq \sqrt{q_{2t}(x,x) - 1}\sqrt{q_{2t}(y,y)-1} \\
+        \end{array} $
+        $d^{(\infty)}(2t) = \max_{x,y\in\mathcal{X}}|q_{2t}(x, y) - 1| = \max_{x\in\mathcal{X}} q_{2t}(x,x) - 1$
+      }
+    \end{proof}
+  }
+\end{frame}
+
+\section[Eigenvalues and Mixing]{Eigenvalues and Mixing}
+\begin{frame}[t]
+  \begin{lem}
+    Let $P$ be the transition matrix of a finite Markov chain.
+    \begin{enumerate}
+    \item If $\lambda$ is an eigenvalue of $P$, then $|\lambda| \leq 1$.
+    \item If $P$ is irreducible, $P\mathbb{1} = \mathbb{1}$.
+    \item If $P$ is irreducible and aperiodic, then $-1$ is not an eigenvalue of $P$.
+    \end{enumerate}
+  \end{lem}
+  \begin{proof}<2>[Proof of (1)]
+    $Pf(x) = \sum_y P(x, y)f(x) \leq \max_x f(x)$
+  \end{proof}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Reversible Chain}
+  Suppose we have a Markov chain $\mathcal{M}$ with transition matrix $P$ and some distribution $\pi$.
+  \begin{define}[detailed balance equation]
+    \centering $\pi(x)P(x, y) = \pi(y)P(y,x)$ for all $x, y \in \mathcal{X}$.
+  \end{define}
+  \only<2>{
+  \begin{example}[stationary distribution]
+    \centering $\pi P(x) = \sum_y \pi(y)P(y, x) = \sum_y \pi(x)P(x, y) = \pi(x)$
+  \end{example}
+  \begin{example}[reversibility]
+    $
+    \begin{array}{rl}
+       &\pi(x_0)P(x_0, x_1)P(x_1, x_2)P(x_2, x_3)\cdots P(x_{n-1}, x_n) \\
+      =&P(x_1, x_0)\pi(x_1)P(x_1, x_2)P(x_2, x_3)\cdots P(x_{n-1}, x_n) \\
+      =&\pi(x_n)P(x_n, x_{n-1})\cdots P(x_3, x_2)P(x_2, x_1)P(x_1, x_0)
+    \end{array}
+     $
+  \end{example}
+  }
+  \only<3->{
+  \begin{fac}[self adjoint]
+    \begin{align*}
+      \<f, Pg\>_\pi
+      &= \sum_x f(x) Pg(x)\pi(x) = \sum_x \sum_y f(x)P(x, y)g(y)\pi(x) \\
+      &= \sum_x \sum_y f(x)P(y, x)g(y)\pi(y) \\
+      &= \sum_y \sum_x g(y) P(y, x) f(x) \pi(y) = \<Pf, g\>_\pi
+    \end{align*}
+  \end{fac}
+  }
+\end{frame}
+
+\begin{frame}[t]
+  %\tiny
+  %\footnotesize
+  \scriptsize
+  \frametitle{Eigenbasis of Reversible Chain}
+  \begin{lem}
+    Let $P$ be reversible w.r.t $\pi$, then,
+    \begin{enumerate}
+    \item The inner product space $(\mathbb{R}^{\mathcal{X}}, \<\cdot, \cdot\>_\pi)$ has an orthonormal basis of real-valued eigenfunctions $\{f_j\}^{|\mathcal{X}|}_{j=1}$ corresponding to real eigenvalues $\{\lambda_j\}$.
+    \item $q_t(x, y) = \frac{P^t(x, y)}{\pi(y)} = \sum_{j=1}^{|\mathcal{X}|}f_j(x)f_j(y)\lambda_j^t
+           = 1 + \sum_{j=2}^{|\mathcal{X}|}f_j(x)f_j(y)\lambda_j^t$
+    \end{enumerate}
+  \end{lem}
+  \only<2-3>{
+    (1) is a corollary of theorem \ref{thm:eigenbasis}.
+    \begin{example}[how to find such basis]
+      Since $\only<2>{\pi(x)P(x, y) = \pi(y)P(y, x)}\only<3>{\pi(x)^{1/2}P(x,y)\pi(y)^{-1/2}=\pi(y)^{1/2}P(y,x)\pi(x)^{-1/2}}$. \\
+        Let $D = \mathrm{diag(\pi)}$, then $A = D^{\frac{1}{2}}PD^{-\frac{1}{2}}$ is a real symmetric matrix $\Rightarrow \{\phi_i\}$. \\
+        $PD^{-\frac{1}{2}} \phi_i = D^{-\frac{1}{2}}(D^{\frac{1}{2}}PD^{-\frac{1}{2}})\phi_i = \lambda_i D^{-\frac{1}{2}}\phi_i \Rightarrow D^{-\frac{1}{2}}\phi_i$ is an eigenfunction of $P$. \\
+        For $i\not= j$: $\<D^{-\frac{1}{2}}\phi_i, D^{-\frac{1}{2}}\phi_j\>_\pi = \<\phi_i,\phi_j\> = 0$ $\Rightarrow$ $D^{-\frac{1}{2}}\phi_i \perp_\pi D^{-\frac{1}{2}}\phi_j$. \\
+        Finally, normalize each $\phi_i$ to make sure that $\<\phi_i, \phi_i\>_\pi = 1$.
+    \end{example}
+  }
+  \only<4-5>{
+    %\begin{example}
+    %  $\left\<\frac{P^t(x,\cdot)}{\pi} - \mathbb{1}, \mathbb{1}\right\>_\pi = 2\parallel P^t(x, \cdot) - \pi \parallel_{TV} = \left\<\sum_{j=2}^{|\mathcal{X}|}f_j(x)\lambda_j^t f_j, \mathbb{1}\right\>_\pi$
+    %\end{example}
+    \begin{proof}[Proof of (2)]
+      $\delta_x (y) = \left\{
+        \begin{array}{ll}
+          1 & y = x \\
+          0 & y\not= x
+        \end{array}
+      \right.$, then $P(x, y) = P\delta_y (x)$. \\
+      $\delta_y = \sum_{j=1}^{|\mathcal{X}|} \<\delta_y, f_j\>_\pi f_j = \sum_{j=1}^{|\mathcal{X}|} \pi(y)f_j(y)f_j$. \\
+      $P^t\delta_y\only<5>{(x)} = \sum_{j=1}^{|\mathcal{X}|} \pi(y)f_j(y)f_j\only<5>{(x)} \lambda_j^t$
+    \end{proof}
+  }
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{define}
+    $\lambda_{\star} = \max\{|\lambda| : \mbox{$\lambda$ is an eigenvalue of $P$, $\lambda \not= 1$}\}$ \\
+    $\gamma_\star = 1 - \lambda_\star$ is called the \textbf{absolute spectral gap}. 
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    Sort all the eigenvalues of $P$ in order:
+    $1 = \lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_{|\mathcal{X}|} \geq -1$. \\
+    $\gamma = 1 - \lambda_2$ is called \textbf{spectral gap}.
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    \textbf{relaxation time}: $t_{\mathrm{tel}} = \frac{1}{\gamma_\star}$
+  \end{define}
+  \only<2>{
+    \begin{example}[lazy chain]
+      The lazy version of $P$ is $(I + P)/2$. If the chain is lazy, then $\gamma_\star = \gamma$.
+    \end{example}
+  }
+  \only<3->{
+    \begin{fac}
+      \centering $\Var_\pi(P^tf) \leq (1 - \gamma_\star)^{2t}\Var_\pi(f)$
+    \end{fac}
+    \only<4>{
+      \begin{example}
+        For $A \subseteq \mathcal{X}$, let
+        $f(x) = \left\{
+          \begin{array}{ll}
+            1 & x\in A \\
+            0 & x\not\in A
+          \end{array}
+        \right.$. \\
+        \begin{columns}
+          \begin{column}{0.6\textwidth}
+            \centering
+            $ \begin{array}{ll}
+                \Var_\pi(P^tf) &= \E_\pi[(P^tf(x) - \E_\pi[P^tf])^2]\\
+                               &= \E_\pi[(P^tf(x) - \pi P^tf)^2]  \\
+                               &=  \E_\pi[(P^tf(x) - \pi f)^2] \\
+                               &= \E_\pi[(P^t(x, A) - \pi(A))^2] \geq 0
+              \end{array} $
+            \end{column}
+            \vrule
+            \begin{column}{0.4\textwidth}
+              \centering $\Var_\pi(f) \leq 1$
+            \end{column}
+          \end{columns}
+          So, $\Var_\pi(P^tf)$ could be used to measure the distance between $P^t(x, \cdot)$ and $\pi$.
+        \end{example}
+      }
+    \only<5>{
+      \begin{proof}
+        Recall that $\Var_\pi(X + c) = \Var_\pi(X)$,
+        \vspace{1mm}
+        \hrule
+        \vspace{1mm}
+        Let $a_i = \<f, f_i\>_\pi$, then \\
+        \centering $ \Var_\pi(P^tf)
+           = \Var_\pi(\sum_{i=1}^{|\mathcal{X}|} a_if_i\lambda_i^t) = \Var_\pi(\sum_{i=2}^{|\mathcal{X}|}a_if_i\lambda_i^t) $. \\
+      \end{proof}
+    }
+  }  
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{thm}
+    Let $P$ be the transition matrix of a reversible, irreducible Markov chain with state space $\mathcal{X}$, and let $\pi_{\min} := \min_{x\in\mathcal{X}} \pi(x)$. Then \\
+    \centering $t_{\mathrm{mix}}^{(\infty)}(\varepsilon) \leq \lceil t_{\mathrm{rel}}\log(\frac{1}{\varepsilon\pi_{\min}}) \rceil$  \\
+    \centering $t_{\mathrm{mix}} (\varepsilon) \leq \lceil t_{\mathrm{rel}} (\frac{1}{2}\log(\frac{1}{\pi_{\min}}) + \log(\frac{1}{2\varepsilon}))\rceil$ 
+  \end{thm}
+  \visible<2->{
+    \begin{proof}
+      $|q_t(x, y) - 1|
+      \only<2>{= |\sum_{j=2}^{|\mathcal{X}|}f_j(x)f_j(y)\lambda_j^t|}
+      \only<3>{\leq \sum_{j=2}^{|\mathcal{X}|}|f_j(x)f_j(y)\lambda_j^t|}
+      \only<4->{\leq \lambda_\star^t\sum_{j=2}^{|\mathcal{X}|}|f_j(x)||f_j(y)|}
+      \only<5->{\leq \lambda_\star^t\left[\sum_{j=2}^{|\mathcal{X}|}f_j^2(x)\sum_{j=2}^{|\mathcal{X}|}f_j^2(y)\right]^{1/2}}
+      $ \\
+      \only<6>{
+        $\pi(x) = \<\delta_x, \delta_x\>_\pi
+        = \left\<\sum_{j=1}^{|\mathcal{X}|}f_j(x)\pi(x)f_j,\sum_{j=1}^{|\mathcal{X}|}f_j(x)\pi(x)f_j \right\>_\pi
+        = \pi(x)^2\sum_{j=1}^{|\mathcal{X}|}f_j(x)^2
+        $
+      }
+      \only<7>{$\pi(x)^{-1} = \sum_{j=1}^{|\mathcal{X}|}f_j(x)^2$}
+      \only<8->{$\pi(x)^{-1} \geq \sum_{j=2}^{|\mathcal{X}|}f_j(x)^2$\\}
+      \only<9->{
+        $d^{(\infty)}(t) \leq \max_{x,y}|q_t(x,y) - 1|
+        \leq \frac{\lambda_\star^t}{\sqrt{\pi(x)\pi(y)}}
+        \leq \frac{\lambda_\star^t}{\pi_{\min}}
+        = \frac{(1-\gamma_\star)^t}{\pi_{\min}}
+        \leq \frac{e^{-\gamma_\star t}}{\pi_{\min}}
+        $ \\
+      }
+      \only<10>{
+        $d(t) \leq \frac{1}{2}\sqrt{d^{(\infty)}(2t)} \leq \frac{e^{-\gamma_\star t}}{2\sqrt{\pi_{\min}}}$
+      }
+    \end{proof}
+  }
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{thm}
+    Suppose that $\lambda \not= 1$ is an eigenvalue for the transition matrix $P$ of an irreducible and aperiodic Markov chain. Then \\
+    {\centering $t_{\mathrm{mix}}(\varepsilon) \geq (\frac{1}{1 - |\lambda|} - 1)\log(\frac{1}{2\varepsilon}) $ \\}
+    In particular, for reversible chains, \\
+    \centering $t_{\mathrm{mix}}(\varepsilon) \geq (t_{\mathrm{rel}} - 1) \log(\frac{1}{2\varepsilon})$
+  \end{thm}
+  \visible<2->{
+    \begin{proof}
+      First note that $\E_\pi[f_i] = \pi f_i = \pi P f_i = \lambda_i \pi f_i$, so if $\lambda_i \not= 1$, then $\E_\pi[f_i] = 0$. \\
+      $|\lambda^tf(x)| = |P^tf(x)| = \left|\sum_{y\in\mathcal{X}}[P^t(x, y)f(y) - \pi(y)f(y)]\right|
+       \leq \parallel f \parallel_\infty 2d(t)
+      $\\
+      Select proper $x$, which makes $|f(x)| = \parallel f \parallel_\infty$.
+      This makes \only<2>{$|\lambda|^t \leq 2d(t)$}\only<3->{$|\lambda|^{t_{\mathrm{mix}}(\varepsilon)} \leq 2\varepsilon$}. \\
+      \centering $t_{\mathrm{mix}}(\varepsilon)(\frac{1}{|\lambda|} - 1)
+      \geq t_{\mathrm{mix}}(\varepsilon)\log(\frac{1}{|\lambda|})
+      \geq \log(\frac{1}{2\varepsilon}) $  \\
+    \end{proof}
+  }
+\end{frame}
+
+%\section[Product Chain]{Product Chain}
+
+
+\section[Conductance]{Conductance}
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{define}[Dirichlet Form]
+    \centering $\mathcal{E}(f, h) := \<(I - P)f, h\>_\pi$
+  \end{define}
+  \only<2->{
+    \begin{lem}
+      \centering $\mathcal{E}(f) := \frac{1}{2}\sum_{x,y\in\mathcal{X}}[f(x) - f(y)]^2\pi(x)P(x,y) = \mathcal{E}(f, f)$
+    \end{lem}
+  }
+  \only<3-6>{
+    \begin{proof}
+      \only<3>{
+        $ \begin{array}{ll}
+            \mathcal{E}(f)
+            &= \frac{1}{2}\sum_{x,y\in\mathcal{X}}f(x)^2\pi(x)P(x,y) - \sum_{x,y\in\mathcal{X}}f(x)f(y)\pi(x)P(x,y) \\
+            &+ \frac{1}{2}\sum_{x,y\in\mathcal{X}}f(y)^2\pi(x)P(x,y)
+          \end{array} $
+        }
+        \only<4>{
+          $ \begin{array}{ll}
+              \mathcal{E}(f)
+              &= \frac{1}{2}\sum_{x\in\mathcal{X}}f(x)^2\pi(x) - \sum_{x,y\in\mathcal{X}}f(x)f(y)\pi(x)P(x,y) \\
+              &+ \frac{1}{2}\sum_{y\in\mathcal{X}}f(y)^2\pi(y)
+            \end{array} $
+          }
+        \only<5-6>{
+          $ \begin{array}{ll}
+              \mathcal{E}(f)
+              &= \sum_{x\in\mathcal{X}}f(x)^2\pi(x) - \sum_{x,y\in\mathcal{X}}f(x)f(y)\pi(x)P(x,y) 
+            \only<6>{\\ &= \<f, f\>_\pi - \<f, Pf\>_\pi}
+            \end{array} $
+          }
+    \end{proof}
+  }
+  \only<7->{
+    \begin{lem}
+      Let $P$ be the transition matrix for a reversible Makrov chain.
+      The spectral gap $\gamma = 1 - \lambda_2$ satisfies \\
+      \centering
+      $\gamma
+      = \min_{\substack{f: \mathcal{X}\to \mathbb{R}\\ f\perp_\pi \mathbb{1}, \parallel f\parallel_2 = 1}} \mathcal{E}(f)
+      = \min_{\substack{f : \mathcal{X}\to \mathbb{R}\\ f\perp_\pi \mathbb{1}, f\not\equiv 0}} \frac{\mathcal{E}(f)}{\parallel f \parallel_2^2}
+      $
+    \end{lem}
+  }
+  \only<8>{
+    \begin{proof}
+      Let $a_j := \<f, f_j\>_\pi$. Since $f \perp_\pi \mathbb{1}$, $f = \sum_{j=2}^{|\mathcal{X}|}a_jf_j$. Assume $ \parallel f \parallel_2^2 = \sum_{j=2}^{|\mathcal{X}|}a_j^2 = 1$. \\
+      $\<(I-P)f, f\>_\pi = \sum_{j=2}^{|\mathcal{X}|}a_j^2(1 - \lambda_j) \geq 1 - \lambda_2$
+    \end{proof}
+  }
+  \only<9-10>{
+    \begin{example}
+      Observe that $\mathcal{E}(f) = \mathcal{E}(f + c)$.
+      So if $f: \mathcal{X}\to\mathbb{R}$ is a non-constant function, then
+      \centering
+      $ \gamma
+      = \min_{\substack{f: \mathcal{X}\to \mathbb{R}\\ f\perp_\pi \mathbb{1}, f\not\equiv 0}} \frac{\mathcal{E}(f - \E_\pi[f])}{\parallel f - \E_\pi[f]\parallel_2^2}
+      = \min_{\substack{f: \mathcal{X}\to \mathbb{R}\\ \only<9>{f\perp_\pi \mathbb{1}} \only<10>{\E_\pi[f] = 0}, f\not\equiv 0}} \frac{\mathcal{E}(f)}{\Var_\pi(f)}
+      $
+    \end{example}
+  }
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \begin{define}[edge measure]
+    \centering $Q(x, y) := \pi(x)P(x,y), \hspace{0.5cm} Q(A, B) := \sum_{x\in A, y\in B}Q(x, y)$
+  \end{define}
+  \begin{define}[conductance]
+    \centering $\Phi(S) := \frac{Q(S, S^c)}{\pi(S)}, \hspace{0.5cm} \Phi_\star := \min_{S: \pi(S)\leq \frac{1}{2}} \Phi(S)$
+  \end{define}
+  \begin{example}
+    
+  \end{example}
+\end{frame}
+
+\begin{frame}[t]
+  \scriptsize
+  \frametitle{Conductance}
+  \begin{thm}
+    Let $\lambda_2$ be the second largest eigenvalue of a reversible transition matrix $P$, and let $\gamma = 1 - \lambda_2$. Then \\
+    \centering  $\frac{\Phi_\star^2}{2} \leq \gamma \leq 2\Phi_\star$
+  \end{thm}
+  \only<2>{
+    \begin{proof}[Proof of $\gamma \leq 2\Phi_\star$]
+      {\centering $\gamma
+      = \min_{\E_\pi[f] = 0, f\not\equiv 0}\frac{\mathcal{E}(f)}{\Var_\pi(f)}
+      = \min_{\E_\pi[f] = 0, f\not\equiv 0} \frac{\sum_{x,y\in\mathcal{X}}\pi(x)P(x,y)[f(x) - f(y)]^2}{\sum_{x,y\in\mathcal{X}}\pi(x)\pi(y)[f(x) - f(y)]^2} $  \\}
+      For any $S$ with $\pi(S)\leq\frac{1}{2}$ define the function \\
+      {\centering $f_S(x) = \left\{
+        \begin{array}{ll}
+          -\pi(S^c) & x\in S \\
+          \pi(S) & x\not\in S
+        \end{array}
+      \right.$ \\}
+    Then\\
+    \centering $ \gamma
+    \leq \frac{2Q(S, S^c)}{2\pi(S)\pi(S^c)} \leq \frac{2Q(S,S^c)}{\pi(S)} \leq 2\Phi(S) $ \\
+    \end{proof} 
+  }
+  \only<3>{
+    \begin{proof}[Proof of $\Phi_\star^2\leq 2\gamma$]
+      
+    \end{proof}
+  } 
+\end{frame}
+
+\section[Compare MCs]{Simple Comparison of Markov Chains}
+
+%product chain
+\begin{frame}[t]
+  \scriptsize
+  \frametitle{Product Chain}
+  Consider $d$ Markov chains, the $j$-th of them is $(P_j, \pi_j, \mathcal{X}_j)$. How to merge them? \\
+  {\centering $(f^{(1)}\otimes f^{(2)}\otimes\cdots\otimes f^{(d)})(x_1, \cdots,  x_d) := f^{(1)}(x_1)f^{(2)}(x_2)\cdots f^{(d)}(x_d)$\\}
+  Consider this transition function: \\
+  {\centering $\tilde{P}(\mathbb{x}, \mathbb{y}) = \sum_{j=1}^d w_jP_j(x_j, y_j) \prod_{i:i\not=j}[x_i = y_i], \hspace{0.5cm}\mathbb{x} = (x_1, x_2, \cdots, x_d)$ \\}
+  This product chain has the following properties: \\
+  Suppose that for each $j = 1, 2, \cdots , d$, the transition matrix $P_j$
+  on state space $\mathcal{X}_j$ has eigenfunction $\varphi^{(j)}$ with eigenvalue $\lambda^{(j)}$ .
+  Let w be a probability distribution on $\{1, \cdots , d\}$, then: \\
+  \vspace{1mm}
+  \hrule
+  \vspace{1mm}
+  \only<2>{
+  $\tilde{\varphi} := \varphi^{(1)}\otimes\cdots\otimes\varphi^{(d)}$ is an eigenfunction with eigenvalue $\sum_{j=1}^dw_j\lambda^{(j)}$
+  \begin{proof}
+    Let $\tilde{P}_j(\mathbb{x}, \mathbb{y}) = P_j(x_j, y_j)\prod_{i:i\not=j}[x_i = y_i]$,
+    then \\
+    $
+    \begin{array}{ll}
+      \tilde{P}_j\tilde{\varphi}(\mathbb{x})
+      &= \sum_{\mathbb{y}} \tilde{P}_j(\mathbb{x}, \mathbb{y})\tilde{\varphi}(\mathbb{y}) 
+      = \sum_{\mathbb{x}_j'} \tilde{P}_j(\mathbb{x}, \mathbb{x}_j')\tilde{\varphi}(\mathbb{x}_j') \\
+      &= \sum_{x_j'} P_j(x_j, x_j')\varphi^{(j)}(x_j')\prod_{i\not=j}\varphi^{(i)}(x_i)
+      = \lambda^{(j)}\varphi^{(j)}(x_j)\sum_{i\not=j}\varphi^{(i)}(x_i) \\
+      &= \lambda^{(j)}\tilde{\varphi}(\mathbb{x})
+    \end{array} $ \\
+  \end{proof}
+  }
+  \only<3>{
+    If $P_j$ has an eigenbasis for all $j$, then $\tilde{P}$ has an eigenbasis.
+    \begin{proof}
+      Suppose $a_1, a_2 \in \mathbb{R}^{\mathcal{X}_a}, b_1, b_2\in \mathbb{R}^{\mathcal{X}_b}$.
+      Then \\
+      $ \begin{array}{ll}
+          \<a_1 \otimes b_1, a_2 \otimes b_2\>_{\pi_a\otimes\pi_b}
+          &= \sum_{x\in \mathcal{X}_a, y\in\mathcal{X}_b}a_1(x)a_2(x)\pi_a(x) b_1(y)b_2(y)\pi_b(y) \\
+          &= \left(\sum_{x\in\mathcal{X}_a}a_1(x)a_2(x)\pi_a(x)\right)\left(\sum_{y\in\mathcal{X}_b}b_1(y)b_2(y)\pi_b(y)\right)\\
+          &= \<a_1, a_2\>_{\pi_a} \cdot \<b_1, b_2\>_{\pi_b}
+        \end{array} $ \\
+    \end{proof}
+  }
+\end{frame}
+
+% induced chain
+\begin{frame}[t]
+  \scriptsize
+  \frametitle{Induced Chain}
+  \begin{thm}
+    Let $(X_t)$ be a reversible Markov chain on $\mathcal{X}$ with stationary measure $\pi$ and spectral gap $\gamma$.
+    Let $A\subset \mathcal{X}$ be non-empty and let $\gamma_A$ be the spectral gap for the chain induced on $A$.
+    Then $\gamma_A \geq \gamma$. ($P_A(x,y) = \Pr_x[X_{\tau_A^+} = y], \pi_A = \frac{\pi}{\pi(A)}$)
+  \end{thm}
+  \begin{proof}<2->
+    $\pi(x)P_A(x,y) = \pi(y)P_A(y, x)$, so $P_A$ is reversible. \\
+    So, $\exists \varphi : A \to \mathbb{R}$, such that $\gamma_A = \frac{\mathcal{E}(\varphi)}{\Var_{\pi_A}(\varphi)}$ and $\E_{\pi_A}(\varphi) = 0$. \\
+    Extend $\varphi$ to $\phi : \mathcal{X} \to \mathbb{R}$ by $\phi(x) := \E_x[\varphi(X_{\tau_A})].$ \\
+    For $x\in A$: $P\phi(x) = \sum_{y\in\mathcal{X}}P(x,y)\E_y[\varphi(X_{\tau_A})] = \E_x[\varphi(X_{\tau_A^+})] = P_A\varphi(x)$ \\
+    For $x\not\in A$: $(I-P)\phi(x) = 0$. Since $\E_x[\varphi(X_{\tau_A})] = \E_x[\varphi(X_{\tau_A^+})], \hspace{0.5cm} \forall x\not\in A$ \\
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    $ \begin{array}{ll}
+      \mathcal{E}(\phi) = \<(I - P)\phi, \phi\>_\pi
+      \only<2>{= \sum_{x\in A} [(I - P)\phi(x)]\phi(x)\pi(x)}
+      \only<3>{= \sum_{x\in A} [(I - P_A)\varphi(x)]\phi(x)\pi(x)}
+      \only<4>{= \sum_{x\in A} [(I - P_A)\varphi(x)]\varphi(x)\pi(x)} = \pi(A)\mathcal{E}_A(\varphi)
+    \end{array} $ \\
+    $\Var_\pi(\phi) \geq \sum_{x\in A}[\varphi(x) - \E_\pi[\phi]]^2\pi(x) \geq \pi(A) \sum_{x\in A}\varphi^2(x)\pi_A(x)
+    = \pi(A)\Var_{\pi_A}(\varphi)$ \\
+    $\gamma \leq \frac{\mathcal{E}(\phi)}{\Var_\pi(\phi)} \leq \frac{\pi(A)\mathcal{E}_A(\varphi)}{\pi(A)\Var_{\pi_A}(\varphi)} \leq \gamma_A$
+  \end{proof}
+\end{frame}
+
+% compare dirichlet form
+\begin{frame}
+  \scriptsize
+  \frametitle{Comapre Dirichlet Form}
+  \begin{thm}
+    Let $P$ and $\tilde{P}$ be reversible transition matrices with stationary distributions $\pi$ and $\tilde{\pi}$, respectively. If $\tilde{\mathcal{E}}(f) \leq \alpha\mathcal{E}(f)$ for all $f$, then\\
+    \centering $\tilde{\gamma} \leq \left[\max_{x\in\mathcal{X}}\frac{\pi(x)}{\tilde{\pi}(x)}\right]\alpha\gamma$
+  \end{thm}
+  \begin{proof}<2->
+    Target: $\frac{1}{\Var_{\tilde{\pi}}(f)} \leq c \cdot \frac{1}{\Var_\pi(f)}$ \\
+    \vspace{1mm}
+    \hrule
+    \vspace{1mm}
+    $\Var_\pi(f) \leq \E_\pi[(f - \E_{\tilde{\pi}}(f))^2]
+    = \sum_{x\in\mathcal{X}}[f(x) - \E_{\tilde{\pi}}(f)]^2\pi(x)
+    \leq c \cdot \underbrace{\sum_{x\in\mathcal{X}}[f(x) - \E_{\tilde{\pi}}(f)]^2\tilde{\pi}(x)}_{\Var_{\tilde{\pi}}(f)}
+    $ \\
+  \end{proof}
+\end{frame}
+
+%path method
+\begin{frame}[t]
+  \scriptsize
+  \vspace{-3mm}
+  \frametitle{\tiny Path Method}
+  Let $(P, \pi), (\tilde{P}, \tilde{\pi})$ be two reversible chain.
+  Let $E := \{(x, y): P(x, y) > 0\}$.\\
+  For each $(x, y) \in \tilde{E}$, choose a path $\Gamma_{xy} = \{(x, x_1), (x_1, x_2),\cdots,(x_{k-1}, y)\}$ from $E$.
+  \begin{define}[Congestion ratio]
+    \centering \only<1-5>{$B := \max_{e\in E}\left(\frac{1}{Q(e)}\sum_{\substack{x, y\\ \Gamma_{xy} \ni e}}\tilde{Q}(x, y)|\Gamma_{xy}|\right)$}
+    \only<6->{$B := \max_{e\in E}\left(\frac{1}{Q(e)}\sum_{\substack{x, y\\ \Gamma_{xy} \ni e}}\tilde{Q}(x, y)\sum_{\Gamma:e\in\Gamma\in\mathcal{P}_{xy}}\nu_{xy}(\Gamma)|\Gamma|\right)$}
+  \end{define}
+  \begin{thm}<2->
+    \centering $\tilde{\mathcal{E}}(f) \leq B\mathcal{E}(f)$
+  \end{thm}
+  \begin{proof}<3->
+    Let $\nabla f(e = \{z, w\}) := f(w) - f(z)$  \hfill (directed)\\
+    \vspace{1mm} \hrule \vspace{1mm}
+    \only<3-5>{
+      $ \begin{array}{ll}
+          2\tilde{\mathcal{E}}(f)
+          &= \sum_{(x, y)\in \tilde{E}}\tilde{Q}(x,y)[f(x) - f(y)]^2
+            = \sum_{(x, y)\in \tilde{E}}\tilde{Q}(x,y)\left[\sum_{e\in\Gamma_{xy}}\nabla f(e)\right]^2 \\
+          &\leq \sum_{x,y}\tilde{Q}(x,y)|\Gamma_{xy}|\sum_{e\in\Gamma_{xy}}[\nabla f(e)]^2\hfill\mbox{(Cauchy-Schwarz)} \\
+          &= \sum_{e\in E}\left[\only<4->{\frac{1}{Q(e)}}\sum_{\Gamma_{xy}\ni e} \tilde{Q}(x,y)|\Gamma_{xy}|\right]\only<4->{Q(e)}[\nabla f(e)]^2
+            \only<5->{\leq 2B\mathcal{E}(f)}
+        \end{array} $\\
+      }
+      \only<6->{
+        $ \begin{array}{ll}
+            2\tilde{\mathcal{E}}(f)
+            &= \sum_{(x, y)\in \tilde{E}}\tilde{Q}(x,y)[f(x) - f(y)]^2
+              = \sum_{(x, y)\in \tilde{E}}\tilde{Q}(x,y)\left[\sum_{\Gamma\in\mathcal{P}_{xy}} \nu_{xy}(\Gamma) (f(x) - f(y))\right]^2 \\
+            &\leq \sum_{(x,y)\in \tilde{E}} \tilde{Q}(x,y) \sum_{\Gamma\in\mathcal{P}_{xy}} \nu_{xy}(\Gamma)(f(x) - f(y))^2 \\
+            &= \sum_{(x,y)\in \tilde{E}} \tilde{Q}(x,y) \sum_{\Gamma\in\mathcal{P}_{xy}} \nu_{xy}(\Gamma)\left[\sum_{e\in\Gamma}\nabla f(e)\right]^2 \\
+          \end{array} $\\
+        }
+  \end{proof}
+\end{frame}
+
+%\section*{Q\&A}
+%\begin{frame}
+%\Huge{\centerline{Q\&A}}
+%\end{frame}
+%
+%\section{Reference}
+%------------------------------------------------
+
+%\begin{frame}[t, allowframebreaks]
+%\frametitle{References}
+%\footnotesize{
+%  \bibliographystyle{alpha}
+%  \bibliography{cite}
+%}
+%\end{frame}
+
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

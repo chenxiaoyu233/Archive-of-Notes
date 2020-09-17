@@ -1,0 +1,29 @@
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-bigblow.setup
+#+TITLE: Archive of Notes (Xiaoyu Chen)
+
+* Archive of Notes
+  This repository hosts many of my notes that came from the books or the papers that I have read.
+  It is mainly focus on classifying the techniques came from the books and papers.
+
+* Sampling
+** Recent Tech
+*** Rapid Mixing On Matroid Bases
+    - High dimential expander
+    - local-to-global argument
+    - [[file:Small%20Topics/rapid-mixing-on-matroid-basis/note.pdf][Notes for rapid mixing on matroid basis]]
+** Tech from Book
+*** Inner Product and Self-Adjoint Operator
+    For reversible Markov chain, we could use spectrum decomposition to analysis its second largest eigenvalue. Here is a breif introduction about how to use technique.
+    - [[file:Small%20Topics/inner-products/note.pdf][Notes on Inner Product and Self-Adjoint Operator]]
+    - [[file:Small%20Topics/inner-products/lecture-adjoint-operators.pdf][Travis Schedler's note on self-adjoint operator]]
+
+*** Eigenvalues and Mixing Time
+    For reversible Markov chain, give an upper bound for its mixing time is sometimes equivalent to give an upper bound for its second largest eigenvalue. Here are some slids of mine that is focusing on this topic.
+    - [[file:Small%20Topics/Eigenvalues%20and%20mixing%20time/Eigenvalues%20and%20mixing%20time.pdf][Eigenvalues and Mixing Time (Slides)]]
+*** Continuous Time Markov Chain (CTMC)
+    - [[file:Small%20Topics/CTMC(countinuous-time-MC)/note.pdf][construction of countinuous time Markov chain]]
+    The advantage of CTMC is that the spectral gap or log-sobolev constant of it is easy to obtain by simply derivation.
+** [[file:Jerrum%20Book/]]
+* MISC
+** [[file:MISC/]] (Old Misc)
+** [[file:Small%20Topics/point-count-problem/point-count-problem.pdf][Point Count Problem]]
