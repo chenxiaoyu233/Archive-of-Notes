@@ -23,7 +23,21 @@
 *** Continuous Time Markov Chain (CTMC)
     - [[file:Small%20Topics/CTMC(countinuous-time-MC)/note.pdf][construction of countinuous time Markov chain]]
     The advantage of CTMC is that the spectral gap or log-sobolev constant of it is easy to obtain by simply derivation.
-** [[file:Jerrum%20Book/]]
+** Jerrum Book
+   You could access the full contents of Jerrum Book at [[http://www.maths.qmul.ac.uk/~mj/pubs.html][here]].
+   The full name of this book is "Counting, sampling and integrating: algorithms and complexity"
+   - Chapter 1 [ [[file:Jerrum%20Book/chapter1/exercise/exercise.pdf][exercise]] ]
+   - Chapter 2 [ [[file:Jerrum%20Book/chapter2/exercise/exercise.pdf][exercise]] ]
+   - Chapter 3 [ [[file:Jerrum%20Book/chapter3/exercise/exercise.pdf][exercise]] ] [ [[file:Jerrum%20Book/chapter3/note/note.pdf][note]] ]
+   - Chapter 4 [ [[file:Jerrum%20Book/chapter4/exercise/exercise.pdf][exercise]] ]
+   - Chapter 5 [ [[file:Jerrum%20Book/chapter5/exercise/exercise%5BC5%5D.pdf][exercise]] ] [ [[file:Jerrum%20Book/chapter5/exercise/exercise%20%5BC5%5D%20rst.pdf][exercise rest part]] ]
+   - Chapter 6 [ [[file:Jerrum%20Book/chapter6/exercise/exercise%5BC6%5D.pdf][exercise]] ]
+   - Chapter 7 [ [[file:Jerrum%20Book/chapter7/exercise/exercise.pdf][exercise]] ] [ [[file:Jerrum%20Book/chapter7/reference/n19.pdf][ref]] ]
+   - Chapter 8 [ [[file:Jerrum%20Book/chapter8/exercise/exercise.pdf][exercise]] ] 
+   - Chapter 9 [ [[file:Jerrum%20Book/chapter9/exercise/exercise%20%5BC9%5D.pdf][exercise]] ]
+*** notebook for Jerrum Book
+    Here is a note book for the topics appeared in Jerrum Book.
+    - [[file:Jerrum%20Book/notebook/notebook.pdf][notebook]]
 * MISC
 ** [[file:MISC/]] (Old Misc)
 ** [[file:Small%20Topics/point-count-problem/point-count-problem.pdf][Point Count Problem]]
