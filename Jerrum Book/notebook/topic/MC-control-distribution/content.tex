@@ -1,0 +1,24 @@
+\section{How to Use Markov Chain to Simulate a Specific Distribution}
+\paragraph{} Suppose we have a specific distribution $\pi$, and we want to simulate it using a Markov Chain $\mathcal{M}$. It seems like a pretty hard job, but actually we only need to make sure that:
+\[
+  P(X_0, X_1) = c\min\{1, \pi(X_1)/\pi(X_0)\}
+\] and
+\[
+  P(X_1, X_0) = c\min\{1, \pi(X_0)/\pi(X_1)\}
+\]
+where $c$ is some constant less than 1.
+\marginnote[-1.5cm]{
+  Here, $c$ refers to the same constant in these 2 expression.
+}
+\marginnote{
+  By symmetry, we only need to consider the case $\pi(X_0)\leq\pi(X_1)$.
+}
+Suppose $\pi(X_0)\leq\pi(X_1)$, it easy to find:
+$P(X_0, X_1) = c$ and $P(X_1, X_0) = c\pi(X_0)/\pi(X_1)$. And thus:
+\[
+  \pi(X_0)P(X_0,X_1) = c\pi(X_0) = \pi(X_1)P(X_1,X_0)
+\] which infers that $\pi$ is a stationary distribution of $\mathcal{M}$.
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

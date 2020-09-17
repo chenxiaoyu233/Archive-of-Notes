@@ -1,0 +1,43 @@
+
+* motivation
+* measure of density
+** edge density  
+   $d(S) = \frac{2|E(S)|}{|S|}$
+** edge ratio
+   $\delta(S) = \frac{|E(S, S)|}{\left(\begin{array}{c} |S| \\ 2 \end{array}\right)}$
+** triangle density
+   $t(S) = \frac{|T(S)|}{|S|}$
+** triangle ratio
+   $\tau(S) = \frac{|T(S)|}{\left(\begin{array}{c} |S| \\ 3 \end{array}\right)}$
+** k-core
+   every vertex in $S$ is connected to at least $k$ other vertices in $S$.
+** \alpha-quasiclique
+   $E(S) \geq \alpha\left(\begin{array}{c} |S| \\ 2\end{array}\right)$
+** k-clique
+   subset of vertices with pairwise distances at most k
+   - distances defined using intermediaries, outside the set
+   - not well connected
+** k-club
+   a subgraph of diameter $\leq k$
+** k-plex
+   a subgraph $S$ in which each vertex is connected to at least $|S|-k$ other verteces.
+   - 1-plex is clique
+
+* Densest Subgraph
+** Undirected Graph
+*** Goldberg's Algorithm
+    consider: is there a subgraph $S$ with $d(S) \geq c$ ?
+    \begin{align}
+        \frac{2|E(S,S)|}{|S|} \geq& c \\
+        2|E(S,S)| \geq& c \\
+        \sum_{u\in S} \mbox{deg}(u) - |E(S,\bar{S})| \geq& c \\
+        \sum_{u\in S} \mbox{deg}(u) + \sum_{u\in\bar{S}} \mbox{deg}(u) - \sum_{u\in\bar{S}} \mbox{deg}(u) - |E(S,\bar{S})| \geq& c \\
+        \sum_{u\in\bar{S}}\mbox{deg}(u) + |E(S,\bar{S})| + c|S| \leq& 2|E|
+    \end{align}
+    transform this constraint to min-cut problem:
+    [[file:img/transform-to-cut.png][how to transform]]
+*** Greedy Algorithm
+    [[file:img/greedy-for-denest-subgraph-1.pdf][Algorithm]]
+    [[file:img/greedy-for-denest-subgraph-2.pdf][Proof1]]
+    [[file:img/greedy-for-denest-subgraph-3.pdf][Proof2]]
+

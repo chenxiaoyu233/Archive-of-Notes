@@ -1,0 +1,56 @@
+\section{Proportion Inequality Between Two Distribution}
+Actually, I do not know if this should be called proportion inequality.
+I Just find that it is derived by the proportion of two distributions and it is really interesting.
+I stuck at the first time when I met it.
+\begin{lemma}[Proportion Inequality]
+  \index{proportion inequality}
+  For two distribution $\pi$ and $\mu$ which have the same ground set $\Omega$,
+  let
+  \[Z = \{x\in \Omega | \pi(x)/\mu(x) \geq \varrho\}, \hspace{0.5cm} 0 \leq \varrho \leq 1\]
+  Then
+  \[\pi(Z) \geq 1 - \varrho\]
+\end{lemma}
+\begin{proof}
+  Consider $\overline{Z}$.
+  It is clear that $\pi(\overline{Z}) < \varrho$, since
+  \[\pi(\overline{Z})  \leq \sum_{x\in\Omega} \varrho\mu(x) < \varrho\]
+  Thus, we have
+  \[\pi(Z) \geq 1 - \varrho \qedhere\]
+\end{proof}
+
+\begin{lemma}[Total Variation Distance of a Proportion Set]
+  For two distribution $\pi$ and $\mu$ which have the same ground set $\Omega$,
+  and
+  \[||\pi - \mu||_{TV}\leq \varepsilon, \hspace{0.5cm} 0\leq \varepsilon \leq 1\].
+  Let
+  \[Z = \{x\in\Omega | \pi(x)/\mu(x) \geq \varrho\}, \hspace{0.5cm} 0\leq \varrho \leq 1\]
+  Then
+  \[\pi(Z) \geq \frac{1 - \varrho - \varepsilon\varrho}{1 - \varrho}\]
+  and
+  \[\mu(Z) \geq \frac{1 - \varrho - \varepsilon}{1 - \varrho}\]
+\end{lemma}
+\begin{remark}
+  Actually if we conbine the above two lemma, we have:
+  %\[1 - \varrho \leq \pi(Z) \leq \frac{1 - \varrho - \epsilon\varrho}{1 - \varrho}\]
+  \[\pi(Z) \geq \max\{1 - \varrho, \frac{1 - \varrho - \varepsilon\varrho}{1 - \varrho}\}\]
+\end{remark}
+\begin{proof}
+  First we have:
+  \begin{align*}
+    \sum_{x\in \overline{Z}} \mu(x) - \pi(x) &> \sum_{x\in \overline{Z}} ( \frac{1}{\varrho} - 1)\pi(x) \\
+    \varepsilon &> (\frac{1}{\varrho} - 1)\pi(\overline{Z}) \\
+    \pi(\overline{Z}) &< \frac{\varrho\varepsilon}{1 - \varrho} \\
+    \pi(Z) &\geq \frac{1 - \varrho - \varrho\varepsilon}{1 - \varrho}
+  \end{align*}
+  Second we have:
+  \begin{align*}
+    \sum_{x\in\overline{Z}} \mu(x) - \pi(x) &> \sum_{x\in\overline{Z}} (1 - \varrho)\mu(x) \\
+    \varepsilon &> (1 - \varrho) \mu(\overline{Z}) \\
+    \mu(\overline{Z}) &< \frac{\varepsilon}{1 - \varrho} \\
+    \mu(Z) &\geq \frac{1 - \varrho - \varepsilon}{1 - \varrho} \qedhere
+  \end{align*}
+\end{proof}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

@@ -1,0 +1,66 @@
+\section{Useful Properties for Expectation and Variance}
+% definetion for expectation
+\begin{define}[Expectation]
+  \index{expectation}
+  For some function $f: \Omega\to \mathbb{R}$, and some distribution $\pi$, we could define the expection of $f$ on $\pi$ as: \[\mathbb{E}_\pi f = \sum_{x\in\Omega} \pi(x)f(x)\].
+\end{define}
+After we have the concept of expectation, we could define the variance:
+
+% definition for variance
+\begin{define}[Variance]
+  \index{variance}
+  \[\mathrm{Var}_\pi f = \mathbb{E}_\pi (f - \mathbb{E}_\pi f)^2 = \sum_{x\in\Omega}\pi(x)(f(x)-\mathbb{E}_\pi f)^2\]
+\end{define}
+Actually, besides the definition for the variance, there are many other equal ways for calculating the variance.
+
+% yet another way to calculate variance (1)
+\begin{proposition}[
+  Yet Another Way to Calculate Variance
+  \label{prop:variance-flow}
+]
+  \[\mathrm{Var}_\pi f = \mathbb{E}_\pi f^2 - (\mathbb{E}_\pi f)^2\]
+\end{proposition}
+\begin{proof}
+  \begin{align*}
+    \mathrm{Var}_\pi f
+    &= \mathbb{E}_\pi (f - \mathbb{E}_\pi f)^2 \\
+    &= \sum_{x\in\Omega} \pi(x)(f(x) - \mathbb{E}_\pi f)^2 \\
+    &= \sum_{x\in\Omega} \pi(x)(f(x)^2 - 2f(x)\mathbb{E}\pi f + (\mathbb{E}_\pi f)^2) \\
+    &= \sum_{x\in\Omega} \pi(x) f(x)^2 - \sum_{x\in\Omega} \pi(x)2f(x)\mathbb{E}_\pi f + \sum_{x\in\Omega} (\mathbb{E}_\pi f)^2 \\
+    &= \mathbb{E}_\pi f^2 - (\mathbb{E}_\pi f)^2 + (\mathbb{E}_\pi f)^2 \\
+    &= \mathbb{E}_\pi f^2 - (\mathbb{E}_\pi f)^2
+  \end{align*}
+\end{proof}
+Since $\mathrm{Var}_\pi f \geq 0$ from its definition, we have:
+\begin{corollary}
+  \[(\mathbb{E}_\pi f)^2 \leq \mathbb{E}_\pi f^2\]
+\end{corollary}
+
+% yet another way to colculate variance (2)
+\clearpage
+\begin{proposition}[Yet Another Way to Calculate Variance]
+  \[
+    \mathrm{Var}_\pi f = \frac{1}{2} \sum_{x,y\in\Omega} \pi(x)\pi(y)(f(x)-f(y))^2
+  \]
+\end{proposition}
+\begin{proof}
+    \marginnote[5.4cm]{Here, the mark for \MK{19/8/7/1}{$x$ and $y$} does not affect the result of the answer}
+  \begin{align*}
+    &\frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)(f(x)-f(y))^2 \\
+    & = \frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)[f(x)^2 + f(y)^2 - 2f(x)f(y)] \\
+    & = \frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)^2 + \frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)f(y)^2 - \sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)f(y) \\
+    & = \frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)^2 + \frac{1}{2}\sum_{x,y\in\Omega}\pi(x)\pi(y)f(\MKM{19/8/7/2}{x})^2 - \sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)f(y) \\
+  \tikz [remember picture, overlay] \draw [->, very thick, blue] (19/8/7/1) to [in = -40, out = 150]  (19/8/7/2);
+    & = \sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)^2 + \sum_{x,y\in\Omega}\pi(x)\pi(y)f(x)f(y) \\
+    & = \sum_{x,y\in\Omega}[\pi(x)\pi(y)f(x)^2 + \pi(x)\pi(y)f(x)f(y)] \\
+    & = \sum_{x\in\Omega} \pi(x)f(x)^2\sum_{y\in\Omega}\pi(y) - \sum_{x\in\Omega} \pi(x)f(x)\sum_{y\in\Omega}\pi(y)f(y) \\
+    & = \sum_{x\in\Omega} \pi(x)f(x)^2 - (\mathbb{E}_\pi f)^2 \\
+    & = \mathrm{Var}_\pi f \qedhere
+  \end{align*}
+\end{proof}
+
+%\MKM{ss1}{1} and \MKM{ss2}{2}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

@@ -1,0 +1,91 @@
+% Created 2019-05-24 Fri 15:57
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{陈小羽}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={陈小羽},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{motivation}
+\label{sec:org4d8f60c}
+\section{measure of density}
+\label{sec:orgac8d646}
+\subsection{edge density}
+\label{sec:orgc230dc3}
+\(d(S) = \frac{2|E(S)|}{|S|}\)
+\subsection{edge ratio}
+\label{sec:orgda19fb3}
+\(\delta(S) = \frac{|E(S, S)|}{\left(\begin{array}{c} |S| \\ 2 \end{array}\right)}\)
+\subsection{triangle density}
+\label{sec:orga5ed7f5}
+\(t(S) = \frac{|T(S)|}{|S|}\)
+\subsection{triangle ratio}
+\label{sec:orgaa34820}
+\(\tau(S) = \frac{|T(S)|}{\left(\begin{array}{c} |S| \\ 3 \end{array}\right)}\)
+\subsection{k-core}
+\label{sec:orgb833e44}
+every vertex in \(S\) is connected to at least \(k\) other vertices in \(S\).
+\subsection{\(\alpha\)-quasiclique}
+\label{sec:org3d5fa9d}
+\(E(S) \geq \alpha\left(\begin{array}{c} |S| \\ 2\end{array}\right)\)
+\subsection{k-clique}
+\label{sec:org164ef76}
+subset of vertices with pairwise distances at most k
+\begin{itemize}
+\item distances defined using intermediaries, outside the set
+\item not well connected
+\end{itemize}
+\subsection{k-club}
+\label{sec:org1bc274e}
+a subgraph of diameter \(\leq k\)
+\subsection{k-plex}
+\label{sec:orgd23db00}
+a subgraph \(S\) in which each vertex is connected to at least \(|S|-k\) other verteces.
+\begin{itemize}
+\item 1-plex is clique
+\end{itemize}
+
+\section{Densest Subgraph}
+\label{sec:org6dd0348}
+\subsection{Undirected Graph}
+\label{sec:orga68a195}
+\subsubsection{Goldberg's Algorithm}
+\label{sec:orga472e32}
+consider: is there a subgraph \(S\) with \(d(S) \geq c\) ?
+\begin{align}
+    \frac{2|E(S,S)|}{|S|} \geq& c \\
+    2|E(S,S)| \geq& c \\
+    \sum_{u\in S} \mbox{deg}(u) - |E(S,\bar{S})| \geq& c \\
+    \sum_{u\in S} \mbox{deg}(u) + \sum_{u\in\bar{S}} \mbox{deg}(u) - \sum_{u\in\bar{S}} \mbox{deg}(u) - |E(S,\bar{S})| \geq& c \\
+    \sum_{u\in\bar{S}}\mbox{deg}(u) + |E(S,\bar{S})| + c|S| \leq& 2|E|
+\end{align}
+transform this constraint to min-cut problem:
+\href{img/transform-to-cut.png}{how to transform}
+\subsubsection{Greedy Algorithm}
+\label{sec:orga49a616}
+\href{img/greedy-for-denest-subgraph-1.pdf}{Algorithm}
+\href{img/greedy-for-denest-subgraph-2.pdf}{Proof1}
+\href{img/greedy-for-denest-subgraph-3.pdf}{Proof2}
+\end{document}

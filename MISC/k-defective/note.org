@@ -1,0 +1,18 @@
+* preliminary
+** definition
+   给出一个函数 $f$ 和一个图 $G$, 现在希望能够在图 $G$ 中找到一个最大的子图 $S$,
+   使得 $|E(S)| \geq f(|S|)$.
+** some requirements
+   通常人们喜欢研究一些具有特殊性质的函数 $f$:
+   \[|E(S)| < f(|S|) \Rightarrow (\forall S') S\subseteq S'\to |E(S')| < f(|S'|)\]
+   我们称满足这种要求的函数具有 =遗传性= .
+   
+* Some Results
+** 满足遗传性的充分条件
+   $(\forall v\in G, v\not\in S)\mbox{deg}_{S}(v) \leq f(|S+1|) - f(|S|)$
+** 满足遗传性的必要条件
+   考虑是否存在某个函数 $f$ 不满足遗传性的充分条件, 但是却具有遗传性.
+   不妨 $|E(S)| < f(|S|)$.
+   因为 $f$ 具有遗传性, 所以将任意点集加入 $S$, 都不能反转这种情况.
+   所以我们可以得到: $(\forall C\subseteq V, C\cap S = \emptyset), |E(S)|+|E(C)|+|E(S,C)| < f(|S|+|C|)$
+

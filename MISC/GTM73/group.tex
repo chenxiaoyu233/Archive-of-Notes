@@ -1,0 +1,468 @@
+% Created 2019-03-28 Thu 21:54
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{陈小羽}
+\date{\today}
+\title{Group}
+\hypersetup{
+ pdfauthor={陈小羽},
+ pdftitle={Group},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.9)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Semigroups, Monoids And Groups}
+\label{sec:org4701788}
+\subsection{Exercise 7 (P29)}
+\label{sec:org7a8adbf}
+it is easy to see that \((\forall \bar{a}, \bar{b} \in Z_p - \bar{0})\to \bar{a}\bar{b}\in Z_p - \bar{0}\).
+And \((\forall \bar{a} \not= 0) \to (a, p) = 1\). so \((\exists x, y \in Z)\land xa + yp = 1\), i.e. \(xa = y^{'}p + 1\).
+which means that \(a^{-1} = x\) exists.
+\subsection{Exercise 11 (P30)}
+\label{sec:org87d9076}
+if \((ab)^n = a^nb^n\) for three consequtive integers \(n\).
+then, \((ab)^{n-1} = a^{n-1}b^{n-1}\), \((ab)^n = a^nb^n\), \((ab)^{n+1} = a^{n+1}b^{n+1}\).
+split \((ab)^{n+1}\), we get:
+\begin{align}
+     & (ab)^{n+1}         = a^{n+1}b^{n+1} \\
+    =& (ab)(ab)^n         = (ab)a^nb^b \\
+    =& (ab)^n(ab)         = a^nb^n(ab) \\
+    =& (ab)(ab)^{n-1}(ab) = (ab)a^{n-1}b^{n-1}(ab) \\
+    =& (ab)^2(ab)^{n-1}   = (ab)^2a^{n-1}b^{n-1} \\
+    =& (ab)^{n-1}(ab)^2   = a^{n-1}b^{n-1}(ab)^2
+\end{align}
+from (1) and (3) we could get:
+\begin{align}
+     a^nb^n(ab) =& a^{n+1}b^{n+1} \\
+         b^nab  =& ab^{n+1} \\
+           b^na =& ab^n
+\end{align}
+from (1) and (2) we could get:
+\begin{align}
+     (ab)a^nb^n =& a^{n+1}b^{n+1} \\
+     ba^n       =& a^nb
+\end{align}
+from (1) and (4) we could get:
+\begin{align}
+     (ab)(ab)^{n-1}(ab) =& a^{n+1}b^{n+1} \\
+     (ab)a^{n-1}b^{n-1}(ab) =& a^{n+1}b^{n+1} \\
+       ba^{n-1}b^{n-1}a =& a^nb^n \\
+       ba^na^{-1}b^{-1}b^na =& a^nb^b
+\end{align}
+from (9), (11) and (15) we could get:
+\begin{align}
+     a^nba^{-1}b^{-1}ab^n =& a^nb^n \\
+        ba^{-1}b^{-1}a    =& e \\
+         a^{-1}b^{-1}     =& b^{-1}a^{-1}
+\end{align}
+\subsection{Exercise 15 (P30)}
+\label{sec:org47714cb}
+for all \(a\in G\), we could define \(G' = \{ab| \forall b\in G\}\).
+because \((\forall a, b, c \in G) ab = ac \to b = c\), we could define a injection function
+\(f: G\to G'\) by leting \(f(x) = ax\). It is easy to verify that \(\mbox{Img } f = G'\).
+so \(f\) is a bijection and \(G = G'\).
+we could look the \(f(x)\) as an edge from \(x\) to \(f(x)\). then we could get
+a graph, such that all the verteces in the graph are in a cycle.
+so we could get a circle like this: \(aa = f, af = c, ac = \cdots ax = a\).
+and we could get \(a^k = a\) from this circle. so \((\forall b\in G) a^kb = ab \to a^{k-1}b = b\).
+so we could let \(a^{k-1} = e\) to be the left unit of \(G\).
+and by knowing that \((\forall x\in G)(\exists y\in G)\land xy = e\).
+we've proved that all the elements in \(G\) has a inverse.
+\section{Homomorphism And Subgroups}
+\label{sec:orgee29e08}
+\subsection{Exercise 1 (P33)}
+\label{sec:orgca0baab}
+construct a monoid \(G\) as follow:
+\begin{center}
+\begin{tabular}{llll}
+ & a & b & e\\
+a & a & a & a\\
+b & b & b & b\\
+e & a & b & e\\
+\end{tabular}
+\end{center}
+it is easy to find that \(G\) is a monoid.
+And we construct a homomorphism \(f: G\to G\) as follow:
+\(f(a) = a, f(b) = a, f(e) = a\).
+\subsection{Exercise 2 (P33)}
+\label{sec:org9825f9f}
+\(f(x)f(y) = x^{-1}y^{-1} = (yx)^{-1} \not= (xy)^{-1} = f(xy)\)
+\subsection{Exercise 3 (P33)}
+\label{sec:org98b28d0}
+\subsubsection{non-abelian}
+\label{sec:org7409d46}
+\(AB = \left(\begin{array}{cc} i & 0 \\ 0 & -i \end{array}\right)\)
+
+\(BA = \left(\begin{array}{cc} -i & 0 \\ 0 & i \end{array} \right)\)
+so, \(Q_8\) is not abelian.
+\subsubsection{it is a group}
+\label{sec:orge4cdea0}
+And we know that \(A^4 = B^4 = I\).
+Because jBB\((\forall i,j \in Z) A^iB^jB^{4-j}A^{4-i} = I \Rightarrow (A^iB^j)^{-1} = B^{4-j}A^{4-i}\), we claim that all the elements
+in this set have a inverse.
+\subsubsection{why order 8}
+\label{sec:org74c66e6}
+you could write a program to check this.
+\begin{verbatim}
+template <class Type>
+struct Matrix {
+#define FOR(i, l, r) for (int (i) = (l); (i) <= (r); (i)++)
+    int row, col;
+    complex<Type> w[maxn][maxn];
+    Matrix (int row, int col):row(row), col(col) {
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = 0; // initalize
+    }
+    Matrix (const Matrix &other) {
+        row = other.row, col = other.col;
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = other.w[i][j];
+    }
+    friend Matrix operator * (const Matrix &a, const Matrix &b) {
+        assert(a.col == b.row);
+        Matrix c(a.row, b.col);
+        FOR(i, 1, a.row) FOR(j, 1, b.col) {
+            c.w[i][j] = 0;
+            FOR(k, 1, a.col) c.w[i][j] += a.w[i][k] * b.w[k][j];
+        }
+        return c;
+    }
+    friend bool operator < (const Matrix &a, const Matrix &b) {
+        assert(a.row == b.row);
+        assert(a.col == b.col);
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) {
+                if (a.w[i][j].real() == b.w[i][j].real()) 
+                    return a.w[i][j].imag() < b.w[i][j].imag();
+                return a.w[i][j].real() < b.w[i][j].real();
+            }
+        }
+        return false;
+    }
+    friend bool operator == (const Matrix &a, const Matrix &b) {
+        if (a.row != b.row || a.col != b.col) return false;
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) return false;
+        }
+        return true;
+    }
+    void Log() {
+        FOR(i, 1, row) {
+            FOR(j, 1, col) {
+                printf("%d + %di ", w[i][j].real(), w[i][j].imag());
+            } printf("\n");
+        }
+    }
+#undef FOR
+};
+\end{verbatim}
+
+\begin{verbatim}
+void search() {
+    initI(); initA(); initB();
+    set<Matrix<int> > st; st.clear();
+    queue<Matrix<int> > q;
+    q.push(I);
+    st.insert(I);
+    while(!q.empty()) {
+        Matrix<int> tt = q.front(); q.pop();
+        tt.Log(); puts("");
+        Matrix<int> ta = tt * A;
+        Matrix<int> tb = tt * B;
+        Matrix<int> at = A * tt;
+        Matrix<int> bt = B * tt;
+        if (!st.count(ta)) {
+            st.insert(ta);
+            q.push(ta);
+        }
+        if (!st.count(tb)) {
+            st.insert(tb);
+            q.push(tb);
+        }
+        if (!st.count(at)) {
+            st.insert(at);
+            q.push(at);
+        }
+        if (!st.count(bt)) {
+            st.insert(bt);
+            q.push(bt);
+        }
+    }
+    cout << st.size() << endl;
+}
+\end{verbatim}
+
+\begin{verbatim}
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <complex>
+#include <map>
+#include <set>
+#include <queue>
+using namespace std;
+
+const int maxn = 10;
+
+// load the Matrix Class
+template <class Type>
+struct Matrix {
+#define FOR(i, l, r) for (int (i) = (l); (i) <= (r); (i)++)
+    int row, col;
+    complex<Type> w[maxn][maxn];
+    Matrix (int row, int col):row(row), col(col) {
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = 0; // initalize
+    }
+    Matrix (const Matrix &other) {
+        row = other.row, col = other.col;
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = other.w[i][j];
+    }
+    friend Matrix operator * (const Matrix &a, const Matrix &b) {
+        assert(a.col == b.row);
+        Matrix c(a.row, b.col);
+        FOR(i, 1, a.row) FOR(j, 1, b.col) {
+            c.w[i][j] = 0;
+            FOR(k, 1, a.col) c.w[i][j] += a.w[i][k] * b.w[k][j];
+        }
+        return c;
+    }
+    friend bool operator < (const Matrix &a, const Matrix &b) {
+        assert(a.row == b.row);
+        assert(a.col == b.col);
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) {
+                if (a.w[i][j].real() == b.w[i][j].real()) 
+                    return a.w[i][j].imag() < b.w[i][j].imag();
+                return a.w[i][j].real() < b.w[i][j].real();
+            }
+        }
+        return false;
+    }
+    friend bool operator == (const Matrix &a, const Matrix &b) {
+        if (a.row != b.row || a.col != b.col) return false;
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) return false;
+        }
+        return true;
+    }
+    void Log() {
+        FOR(i, 1, row) {
+            FOR(j, 1, col) {
+                printf("%d + %di ", w[i][j].real(), w[i][j].imag());
+            } printf("\n");
+        }
+    }
+#undef FOR
+};
+
+Matrix<int> I(2, 2), A(2, 2), B(2, 2);
+void initI() {
+    I.w[1][1] = 1;
+    I.w[2][2] = 1;
+}
+void initA() {
+    A.w[1][2] = 1;
+    A.w[2][1] = -1;
+}
+void initB() {
+    B.w[1][2] = complex<int>(0, 1);
+    B.w[2][1] = complex<int>(0, 1);
+}
+
+void search() {
+    initI(); initA(); initB();
+    set<Matrix<int> > st; st.clear();
+    queue<Matrix<int> > q;
+    q.push(I);
+    st.insert(I);
+    while(!q.empty()) {
+        Matrix<int> tt = q.front(); q.pop();
+        tt.Log(); puts("");
+        Matrix<int> ta = tt * A;
+        Matrix<int> tb = tt * B;
+        Matrix<int> at = A * tt;
+        Matrix<int> bt = B * tt;
+        if (!st.count(ta)) {
+            st.insert(ta);
+            q.push(ta);
+        }
+        if (!st.count(tb)) {
+            st.insert(tb);
+            q.push(tb);
+        }
+        if (!st.count(at)) {
+            st.insert(at);
+            q.push(at);
+        }
+        if (!st.count(bt)) {
+            st.insert(bt);
+            q.push(bt);
+        }
+    }
+    cout << st.size() << endl;
+}
+
+int main() {
+    search();
+    return 0;
+}
+\end{verbatim}
+
+\subsection{Exercise 4 (P33)}
+\label{sec:org0f200e3}
+就感觉做这种题非常浪费时间
+\begin{verbatim}
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <complex>
+#include <map>
+#include <set>
+#include <queue>
+using namespace std;
+
+const int maxn = 10;
+
+// load the Matrix Class
+template <class Type>
+struct Matrix {
+#define FOR(i, l, r) for (int (i) = (l); (i) <= (r); (i)++)
+    int row, col;
+    complex<Type> w[maxn][maxn];
+    Matrix (int row, int col):row(row), col(col) {
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = 0; // initalize
+    }
+    Matrix (const Matrix &other) {
+        row = other.row, col = other.col;
+        FOR(i, 1, row) FOR(j, 1, col) w[i][j] = other.w[i][j];
+    }
+    friend Matrix operator * (const Matrix &a, const Matrix &b) {
+        assert(a.col == b.row);
+        Matrix c(a.row, b.col);
+        FOR(i, 1, a.row) FOR(j, 1, b.col) {
+            c.w[i][j] = 0;
+            FOR(k, 1, a.col) c.w[i][j] += a.w[i][k] * b.w[k][j];
+        }
+        return c;
+    }
+    friend bool operator < (const Matrix &a, const Matrix &b) {
+        assert(a.row == b.row);
+        assert(a.col == b.col);
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) {
+                if (a.w[i][j].real() == b.w[i][j].real()) 
+                    return a.w[i][j].imag() < b.w[i][j].imag();
+                return a.w[i][j].real() < b.w[i][j].real();
+            }
+        }
+        return false;
+    }
+    friend bool operator == (const Matrix &a, const Matrix &b) {
+        if (a.row != b.row || a.col != b.col) return false;
+        FOR(i, 1, a.row) FOR(j, 1, a.col) {
+            if (a.w[i][j] != b.w[i][j]) return false;
+        }
+        return true;
+    }
+    void Log() {
+        FOR(i, 1, row) {
+            FOR(j, 1, col) {
+                printf("%d + %di ", w[i][j].real(), w[i][j].imag());
+            } printf("\n");
+        }
+    }
+#undef FOR
+};
+
+Matrix<int> I(2, 2), A(2, 2), B(2, 2);
+void initI() {
+    I.w[1][1] = 1;
+    I.w[2][2] = 1;
+}
+void initA() {
+    A.w[1][2] = 1;
+    A.w[2][1] = -1;
+}
+void initB() {
+    B.w[1][2] = complex<int>(1, 0);
+    B.w[2][1] = complex<int>(1, 0);
+}
+
+void search() {
+    initI(); initA(); initB();
+    set<Matrix<int> > st; st.clear();
+    queue<Matrix<int> > q;
+    q.push(I);
+    st.insert(I);
+    while(!q.empty()) {
+        Matrix<int> tt = q.front(); q.pop();
+        tt.Log(); puts("");
+        Matrix<int> ta = tt * A;
+        Matrix<int> tb = tt * B;
+        Matrix<int> at = A * tt;
+        Matrix<int> bt = B * tt;
+        if (!st.count(ta)) {
+            st.insert(ta);
+            q.push(ta);
+        }
+        if (!st.count(tb)) {
+            st.insert(tb);
+            q.push(tb);
+        }
+        if (!st.count(at)) {
+            st.insert(at);
+            q.push(at);
+        }
+        if (!st.count(bt)) {
+            st.insert(bt);
+            q.push(bt);
+        }
+    }
+    cout << st.size() << endl;
+}
+
+int main() {
+    search();
+    return 0;
+}
+\end{verbatim}
+\subsection{Exercise 5 (P33)}
+\label{sec:org93b6be4}
+Reflexivity: \(aa^{-1}\in S \Leftrightarrow e\in S\).
+Symmetry: \(ab^{-1}\in S \to ba^{-1}\in S \Leftrightarrow\) every elements in \(S\) has an inverse.
+Transitivity: \(ab^{-1} \in S \land bc^{-1}\in S \to ac^{-1}\in S \Leftrightarrow\) operation on \(S\) is close.
+\subsection{Exercise 6 (P34)}
+\label{sec:org116c354}
+name the subset as \(S\).
+\(\forall a\in S\), let \(S_a = \{a^n | n\in Z\} \subset S\).
+then we could find that \((\exists n, m \in Z) a^n = a^m\) (because of finite).
+we could use this infomation to construct \(e\) and the inverse.
+\subsection{Exercise 7 (P34)}
+\label{sec:orgdf065c8}
+let \(S = \{kn | k \in Z\}\).
+construct a homomorphism \(f: S \to Z\) by letting \(f(x) = x/n\).
+\(f(xnyn) = \frac{xn}{n}\frac{yn}{n} = f(xn)f(yn)\).
+\begin{enumerate}
+\item \(f\) is a surjection.
+\item \(f(x) = f(y) \Rightarrow x/n = y/n \Rightarrow x = y\), so \(f\) is a injectoin.
+\end{enumerate}
+so \(f\) is a bijection.
+so \(S\cong Z\).
+\end{document}

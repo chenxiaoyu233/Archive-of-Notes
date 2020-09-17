@@ -1,0 +1,50 @@
+\section{Time Reversible Markov Chain}
+\marginnote[5mm]{
+  Recall that we usuall denote a Markov Chain by $\mathcal{M} = (\Omega, P)$.
+}
+\begin{define}[Reversed Markov Chain]
+  \index{reversed markov chain}
+  A reversed MC $\mathcal{M}^R: (\Omega, Q)$ is induced by the following rule:
+  \[
+    Q(i, j) = \Pr[X_m=j|X_{m+1}=i]
+  \]
+\end{define}
+Then we have:
+\begin{align*}
+    Q(i, j) &= \Pr[X_m=j|X_{m+1}=i] \\
+    &= \frac{\Pr[X_m=j\land X_{m+1}=i]}{\Pr[X_{m+1}=i]} \\
+    &= \frac{\Pr[X_m = j] P(j, i)}{\Pr[X_{m+1} = i]} \\
+    &= \frac{\pi(j)P(j,i)}{\pi(i)}
+\end{align*}
+
+\begin{define}[time-reversible Markov Chain]
+  \index{time-reversible markov chain}
+  A MC $\mathcal{M}: (\Omega, P)$ is time-reversible, if it equals to its reversed MC $\mathcal{M}^R: (\Omega, Q)$, i.e. $P = Q$.
+\end{define}
+Note that, this definition equals to saying:
+\[
+  \pi(i)P(i, j) = \pi(j)P(j,i),\hspace{0.5cm} \forall i, j\in\Omega
+\] 
+Moreover, if \[\sum_{\omega\in\Omega}\pi(\omega) = 1\], then we could infer that $\pi$ is a stationary distribution of $\mathcal{M}$.
+
+\begin{lemma}
+  Once we have
+  \[\pi(x) P(x, y) = \pi(y) P(y, x)\]
+  we have
+  \[\pi(x) P^t(x, y) = \pi(y) P^t(y, x)\]
+\end{lemma}
+\begin{proof}
+  We prove this by induction, assume that
+  \[\pi(x) P^t(x, y) = \pi(y) P^t(y, x)\]
+  Then
+  \begin{align*}
+    \pi(x) P^{t+1}(x, y) &= \sum_{z} \pi(x) P^t(x, z) P(z, y) \\
+                         &= \sum_{z} \pi(z) P^t(z, x) P(z, y) \\
+                         &= \sum_z \pi(y) P(y, z) P^t(z, x) \\
+                         &= \pi(y) P^{t+1}(y, x) \qedhere
+  \end{align*}
+\end{proof}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

@@ -1,0 +1,107 @@
+\section{Understand Path Coupling}
+When I am focusing on a exercise of chapter 7 of Jerrum Book,
+I find that I have nearly forgot all the details about coupling.
+To avoid this kind of things in the future, I tend to write this note.
+
+First, what is coupling?
+\begin{define}[Coupling]
+  \index{coupling}
+  \label{define:coupling}
+  Suppose we have a MC $Z_t$ with state space $\Omega$.
+  Then, a coupling for $Z_t$ is an MC $(X_t, Y_t)$ on $\Omega\times\Omega$,
+  with transition probabilities defined by:
+  \begin{align*}
+    \Pr[X_1 = x'|X_0 = x, Y_0 = y] &= P(x, x') \\
+    \Pr[Y_1 = y'|X_0 = x, Y_0 = y] &= P(y, y')
+  \end{align*}
+\end{define}
+Which means $X_t$ and $Y_t$ seems independent in their own perspective.
+
+Here is the main intuition that we could use coupling.
+\begin{lemma}[Coupling Lemma]
+  Let $(X_t, Y_t)$ be any coupling based on $Z_t$,
+  satisfying Definition \ref{define:coupling}.
+  Suppose $t:[0,1]\to\mathbb{N}$ is a function satisfying the condition:
+  for all $x,y\in\Omega$, and all $\epsilon > 0$:
+  \[\Pr[X_{t(\epsilon)} \not= Y_{t(\epsilon)} | X_0 = x, Y_0 = y] \leq \epsilon\]
+  Then the mixing time of $Z_t$ is bounded by $t(\epsilon)$.
+\end{lemma}
+\marginnote[-3cm]{
+  Note that this condition should be satisfied for any $x,y\in\Omega$.
+  It is not easy to reach these requirements.
+}
+\begin{proof}
+  For any $x\in\Omega$ and any $A\subseteq\Omega$, we have
+  \begin{align*}
+    P^t(x, A) &= \Pr[x_t\in A] \\
+    &\geq \Pr[X_t = Y_t \land Y_t\in A] \\
+    &= 1 - \Pr[X_t\not= Y_t \lor Y_t\not\in A] \\
+    &\geq 1 - (\Pr[X_t\not= Y_t] + \Pr[Y_t\not\in A]) \\
+    &\geq \Pr[Y_t\in A] - \epsilon \\
+    &= \pi(A) - \epsilon \qedhere
+   \end{align*}
+\end{proof}
+
+\begin{define}[Adjacent States]
+  Suppose we have a MC $Z_t$.
+  Then, two state $x, y\in\Omega$ are adjacent if
+  \[P(x, y) > 0\]
+  Which means state $x$ could be translate to state $y$ within one iteration of $Zt$.
+\end{define}
+
+Here, \textbf{Path Coupling} allows us to design coupling only between adjacent pairs.
+\begin{lemma}[Neighbor to Global]
+  Suppose we have a coupling $(X_t, Y_t)$ based on $Z_t$ for adjacent pairs.
+  And for each adjacet state $X_0$ and $Y_0$ in $Z_t$,
+  \begin{equation}
+  \mathbb{E}[d(X_1, Y_1)|X_0, Y_0] \leq \varrho d(X_0, Y_0)\label{ineq:local}
+  \end{equation}
+  Then, the Inequality \ref{ineq:local} could be extended to all pairs of states.
+\end{lemma}
+\begin{proof}
+  Suppose we have two states $x_0, y_0\in\Omega$ arbitary.
+  We extend our \textbf{local coupling} $(X_t, Y_t)$ to a \textbf{global coupling} like this:
+  \clearpage
+  \SetKwRepeat{Do}{do}{until}
+  \begin{algorithm}
+    $GC(x_0, y_0)$ \Begin{
+      \tcc{find a shortest path from $x_0$ to $y_0$ where\\ $x_0=z^{(0)}, z^{(1)},\cdots, z^{(l)}=y_0$} 
+      $Z^{(0)}\gets Z_t\{z^{(0)}\}$ \tcp{$Z_t$ is the original MC}
+      \For{$i = 1\to l$} {
+        \Do{$Z^*= \MKM{2019/8/19/1}{Z^{(i-1)}}$}{
+          $(Z^*, Z^{(i)})\gets (X_t, Y_t)\{z^{(i-1)}, z^{(i)}\}$ 
+        }
+        \tcc{restrict the first element to be $\MKM{2019/8/19/2}{Z^{(i-1)}}$}
+      }
+      \Return{$(x_1\gets Z^{(0)}, y_1\gets Z^{(l)})$}
+    }
+  \tikz [remember picture, overlay] \draw [->, very thick, color = blue] (2019/8/19/2) to [out=170, in=0] (2019/8/19/1);
+  \end{algorithm}
+  Then we only need to show that
+  our \textbf{global coupling} $GC$ works as we expected.
+  First note that $Z^{(0)}$ is select from the distribution $P(x_0, \cdot)$.
+  And moreover
+  \begin{align*}
+    P(Z^{(1)}) &= \sum_{Z^{(0)}\in\Omega} \Pr(z^{(0)}, Z^{(0)})\Pr[(z^{(0)},z^{(1)})\mapsto (Z^{(0)}, Z^{(1)})|z^{(0)}\mapsto Z^{(0)})] \\
+    &= \sum_{Z^{(0)}\in\Omega} P(z^{(0)}, Z^{(0)})\frac{\Pr[(z^{(0)}, z^{(1)})\mapsto (Z^{(0)}, Z^{(1)})]}{\sum_{Z\in\Omega} \Pr[(z^{(0)}, z^{(1)})\mapsto(Z^{(0)}, Z^{(1)})]} \\
+    &= \sum_{Z^{(0)}\in\Omega} P(z^{(0)}, Z^{(0)})\frac{\Pr[(z^{(0)}, z^{(1)})\mapsto (Z^{(0)}, Z^{(1)})]}{P(z^{(0)}, Z^{(0)})}, \hspace{0.5cm} \mbox{from the definition of a coupling} \\
+    &= \sum_{Z^{(0)}\in\Omega} \Pr[(z^{(0)}, z^{(1)})\mapsto (Z^{(0)}, Z^{(1)})] \\
+    &= P(z^{(1)}, Z^{(1)}), \hspace{0.5cm} \mbox{from the definition of a coupling}
+  \end{align*}
+  Then, by induction, we know that $Z^{(i)}$ was chose from the distribution 
+  \[P(z^{(i)}, \cdot)\]
+  So we know that $GC$ is a coupling.
+  And by the linearity of expectation, we have
+  \begin{align*}
+    \mathbb{E}[d(x_1, y_1)|x_0, y_0] &\leq \sum_{i=0}^{l-1} \mathbb{E}d(Z^{(i)}, Z^{(i+1)}) \\
+    &\leq \varrho\sum_{i=0}^{l-1} d(z^{(i)}, z^{(i+1)}) \\
+    &= \varrho d(x_0, y_0), \hspace{0.5cm} \mbox{since we choose a shortest path}
+  \end{align*}
+  The reason why that we could calcuate each pairs expected distance by the expression above is not so trivial.
+  It turns out that we could treat each edge $(Z^{(i)}, Z^{(i+1)})$ as it is chose by our \textbf{local coupling}. And it has no side effects with other edges. So its expected length could bound by Inequality \ref{ineq:local}.
+\end{proof}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../notebook"
+%%% End:

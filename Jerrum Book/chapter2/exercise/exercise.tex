@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{pgf, tikz}
+\usepackage{tcolorbox}
+\usepackage{pgffor}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+
+\title{Exercise of Chapter 2}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Exercise 2.5}
+(This exercise is mainly directed to readers with some exposure to computational complexity.) Garey and Johnson [36, §7.3] note Fact 2.4 without proof. Since I am not aware of any published proof, we should maybe pause to provide one. Garey and Johnson’s reduction [36, §3.1.2] from 3Sat (the restriction of Sat to formulas with three literals per clause) to Exact3Cover (actually a special case of Exact3Cover called “3-dimensional matching”) is almost parsimonious. The “truth setting component” is fine (each truth assignment corresponds to exactly one pattern of triples). The “garbage collection component” is also fine (it is not strictly parsimonious, but the number of patterns of triples is independent of the truth assignment, which is just as good). The “satisfaction testing component” needs some attention, as the number of patterns of triples depends on the truth assignment. However, with a slight modification, this defect may be corrected. Finally, to do a thorough job, we really ought to modify Garey and Johnson’s reduction [36, §3.1.1] from Sat to 3Sat to make it parsimonious too.
+\subsection{solution}
+\subsubsection{\#Sat $\leq_p$ \#3SAT}
+Suppose  $E = e_1\land e_2\land \cdots \land e_k$. We want to replace each clause $e_i$ to create a new expression $F$ in 3SAT from. Here are some rules for doing this.
+\begin{tcolorbox}[title = {Add 3 aux variables $a, b, c$ and add 7 clauses to $F$}]
+  \[
+    (a + b + c)(a + b + \overline{c})(a + \overline{b} + c)(a + \overline{b} + \overline{c})(\overline{a} + b + c)(\overline{a} + b + \overline{c})(\overline{a} + \overline{b} + c)
+  \]
+  \tcblower
+  This ensures $a = 1, b = 1, c = 1$ in any solution.
+\end{tcolorbox}
+\begin{tcolorbox}[title = {$|e_i| = 1$, i.e. $e_i = (x)$ or $e_i = (\overline{x})$}]
+  \[
+    (x + \overline{a} + \overline{b})
+  \]
+\end{tcolorbox}
+\begin{tcolorbox}[title = {$|e_i| = 2$, i.e. $e_i = (x + y)$}]
+  \[
+    (x + y + \overline{c})
+  \]
+\end{tcolorbox}
+\begin{tcolorbox}[title = {$|e_i| > 3$, i.e. $e_i = (x_1 + x_2 + x_3 +\cdots + x_m)$}]
+  \[
+    (x_1+x_2+y)(x_1+x_2+\overline{y})(x_1+\overline{x_2}+y)(\overline{x_1}+x_2 + y)(y + x_3 + \cdots + x_m)
+  \]
+  \tcblower
+  Here $y = x_1 + x_2$ in any solution. This could be verified by a truth table.
+\end{tcolorbox}
+\subsubsection{\#3SAT $\leq_p$ \#3DM}
+\definecolor{qqzzqq}{rgb}{0.,0.6,0.}
+\definecolor{A}{rgb}{0.,0.6,0.}
+\definecolor{ffzztt}{rgb}{1.,0.6,0.2}
+\definecolor{B}{rgb}{1.,0.6,0.2}
+\definecolor{qqzzff}{rgb}{0.,0.6,1.}
+\definecolor{C}{rgb}{0.,0.6,1.}
+\newcommand{\cnode}[1]{
+  \tikz[baseline] \node [anchor = base, shape=circle, inner sep = 0mm, minimum size = 5pt, color = #1, fill] {a};
+}
+Suppose there are three groups: \cnode{A}, \cnode{B}, \cnode{C}. Now we want to transfrom a 3SAT CNF $E$ into a graph $G$.
+
+\begin{tcolorbox}[title = {truth setting component}]
+  For each variable $x$, if it appears $k$ times in $E$, then we construct a truth setting component with $2k$ triangles.
+  \tcblower
+  \begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+%\clip(-3.7819783910108344,-4.013541037211239) rectangle (8.084316612581366,5.539298574433927);
+\fill[line width=0.8pt,fill=white,fill opacity=1.0] (0.,0.) -- (1.,0.) -- (1.5,0.8660254037844387) -- (1.,1.7320508075688776) -- (0.,1.7320508075688779) -- (-0.5,0.8660254037844395) -- cycle;
+\draw [line width=0.8pt] (0.,0.)-- (1.,0.);
+\draw [line width=0.8pt] (1.,0.)-- (1.5,0.8660254037844387);
+\draw [line width=0.8pt] (1.5,0.8660254037844387)-- (1.,1.7320508075688776);
+\draw [line width=0.8pt] (1.,1.7320508075688776)-- (0.,1.7320508075688779);
+\draw [line width=0.8pt] (0.,1.7320508075688779)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (-0.5,0.8660254037844395)-- (0.,0.);
+\draw [line width=0.8pt] (0.,1.7320508075688779)-- (0.5,2.598076211353316);
+\draw [line width=0.8pt] (0.5,2.598076211353316)-- (1.,1.7320508075688776);
+\draw [line width=0.8pt] (1.5,0.8660254037844387)-- (2.,0.);
+\draw [line width=0.8pt] (2.,0.)-- (1.,0.);
+\draw [line width=0.8pt] (0.,0.)-- (-1.,0.);
+\draw [line width=0.8pt] (-1.,0.)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (-1.,1.732050807568878)-- (0.,1.7320508075688779);
+\draw [line width=0.8pt] (-1.,1.732050807568878)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (0.,0.)-- (0.5,-0.8660254037844392);
+\draw [line width=0.8pt] (0.5,-0.8660254037844392)-- (1.,0.);
+\draw [line width=0.8pt] (1.,1.7320508075688776)-- (2.,1.7320508075688774);
+\draw [line width=0.8pt] (2.,1.7320508075688774)-- (1.5,0.8660254037844387);
+\begin{scriptsize}
+\draw [fill=qqzzff] (0.,0.) circle (2.5pt);
+\draw[color=qqzzff] (0.026567220221675632,0.3222205987166741) node {};
+\draw [fill=ffzztt] (1.,0.) circle (2.5pt);
+\draw[color=ffzztt] (0.9393591435749219,0.3379583904986266) node {};
+\draw [fill=qqzzff] (1.5,0.8660254037844387) circle (2.5pt);
+\draw[color=qqzzff] (1.61608419019888,1.1563235631601565) node {};
+\draw [fill=ffzztt] (1.,1.7320508075688776) circle (2.5pt);
+\draw[color=ffzztt] (1.1124748531763995,2.0219021111675435) node {};
+\draw [fill=qqzzff] (0.,1.7320508075688779) circle (2.5pt);
+\draw[color=qqzzff] (-0.13081069759784958,2.0848532782953537) node {};
+\draw [fill=ffzztt] (-0.5,0.8660254037844395) circle (2.5pt);
+\draw[color=ffzztt] (-0.6029444510564252,1.235012522069919) node {};
+\draw [fill=qqzzqq] (0.5,2.598076211353316) circle (2.0pt);
+\draw[color=qqzzqq] (0.6088655161539189,2.856005075611026) node {$x$};
+\draw [fill=qqzzqq] (2.,0.) circle (2.0pt);
+\draw[color=qqzzqq] (2.1039557354394085,0.25926943158886406) node {$x$};
+\draw [fill=qqzzqq] (-1.,0.) circle (2.0pt);
+\draw[color=qqzzqq] (-1.0593404127330484,0.3379583904986266) node {$x$};
+\draw [fill=qqzzqq] (-1.,1.732050807568878) circle (2.0pt);
+\draw[color=qqzzqq] (-0.8862247031315706,1.9904265276036388) node {$\overline{x}$};
+\draw [fill=qqzzqq] (0.5,-0.8660254037844392) circle (2.0pt);
+\draw[color=qqzzqq] (0.8088655161539189,-0.8063091164185233) node {$\overline{x}$};
+\draw [fill=qqzzqq] (2.,1.7320508075688774) circle (2.0pt);
+\draw[color=qqzzqq] (2.1039557354394085,1.9904265276036388) node {$\overline{x}$};
+\end{scriptsize}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+If there is a clause $e = (x + y + z)$ in $E$, then we could convert $e$
+in to another form:
+\[
+  xyz + xy\overline{z} + x\overline{y}z + x\overline{y}\overline{z} + \overline{x}yz + \overline{x}y\overline{z} + \overline{x}\overline{y}z
+\]
+So, $x, y, z$ should choose an assignment from one of these cases. We construct our satisfaction testing component as follow:
+\begin{tcolorbox}[title = {satisfaction testing component}]
+  For a single case, e.g. $x\overline{y}z$, we may construct a graph as follow
+  \begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+%\clip(-3.7819783910108344,-4.013541037211239) rectangle (8.084316612581366,5.539298574433927);
+\fill[line width=0.8pt,fill=white,fill opacity=1.0] (0.,0.) -- (1.,0.) -- (1.5,0.8660254037844387) -- (1.,1.7320508075688776) -- (0.,1.7320508075688779) -- (-0.5,0.8660254037844395) -- cycle;
+\draw [line width=0.8pt] (0.,0.)-- (1.,0.);
+\draw [line width=0.8pt] (1.,0.)-- (1.5,0.8660254037844387);
+\draw [line width=0.8pt] (1.5,0.8660254037844387)-- (1.,1.7320508075688776);
+\draw [line width=0.8pt] (1.,1.7320508075688776)-- (0.,1.7320508075688779);
+\draw [line width=0.8pt] (0.,1.7320508075688779)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (-0.5,0.8660254037844395)-- (0.,0.);
+\draw [line width=0.8pt] (0.,1.7320508075688779)-- (0.5,2.598076211353316);
+\draw [line width=0.8pt] (0.5,2.598076211353316)-- (1.,1.7320508075688776);
+\draw [line width=0.8pt] (1.5,0.8660254037844387)-- (2.,0.);
+\draw [line width=0.8pt] (2.,0.)-- (1.,0.);
+\draw [line width=0.8pt] (0.,0.)-- (-1.,0.);
+\draw [line width=0.8pt] (-1.,0.)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (-1.,1.732050807568878)-- (0.,1.7320508075688779);
+\draw [line width=0.8pt] (-1.,1.732050807568878)-- (-0.5,0.8660254037844395);
+\draw [line width=0.8pt] (0.,0.)-- (0.5,-0.8660254037844392);
+\draw [line width=0.8pt] (0.5,-0.8660254037844392)-- (1.,0.);
+\draw [line width=0.8pt] (1.,1.7320508075688776)-- (2.,1.7320508075688774);
+\draw [line width=0.8pt] (2.,1.7320508075688774)-- (1.5,0.8660254037844387);
+\begin{scriptsize}
+\draw [fill=qqzzff] (0.,0.) circle (2.5pt) {}; 
+\draw[color=qqzzff] (0.026567220221675632,0.3222205987166741) node {};
+\draw [fill=ffzztt] (1.,0.) circle (2.5pt);
+\draw[color=ffzztt] (0.9393591435749219,0.3379583904986266) node {};
+\draw [fill=qqzzff] (1.5,0.8660254037844387) circle (2.5pt);
+\draw[color=qqzzff] (1.61608419019888,1.1563235631601565) node {};
+\draw [fill=ffzztt] (1.,1.7320508075688776) circle (2.5pt);
+\draw[color=ffzztt] (1.1124748531763995,2.0219021111675435) node {};
+\draw [fill=qqzzff] (0.,1.7320508075688779) circle (2.5pt);
+\draw[color=qqzzff] (-0.13081069759784958,2.0848532782953537) node {};
+\draw [fill=ffzztt] (-0.5,0.8660254037844395) circle (2.5pt);
+\draw[color=ffzztt] (-0.6029444510564252,1.235012522069919) node {};
+\node at (0.5,2.598076211353316)  {\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}};
+\draw[color=qqzzqq] (0.6088655161539189,2.856005075611026) node {};
+\node [rotate=60] at (2.,0.)  {\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}};
+\draw[color=qqzzqq] (2.1039557354394085,0.25926943158886406) node {};
+\node [rotate=120] at (-1.,0.) {\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}\cnode{A}};
+\draw[color=qqzzqq] (-1.0593404127330484,0.3379583904986266) node {};
+\draw [fill=qqzzqq] (-1.,1.732050807568878) circle (2.0pt);
+\draw[color=qqzzqq] (-0.8862247031315706,1.9904265276036388) node {$x$};
+\draw [fill=qqzzqq] (0.5,-0.8660254037844392) circle (2.0pt);
+\draw[color=qqzzqq] (0.8088655161539189,-0.8063091164185233) node {$\overline{y}$};
+\draw [fill=qqzzqq] (2.,1.7320508075688774) circle (2.0pt);
+\draw[color=qqzzqq] (2.1039557354394085,1.9904265276036388) node {$z$};
+\end{scriptsize}
+\end{tikzpicture}
+\end{center}
+  \tcblower
+  All the labeled vertices here are actually some vertices on truth setting component. And if a cases are both contain $x$, e.g. $xyz$ and $x\overline{y}z$, they should use the same vertex which represent $x$ in the truth setting component. Note that except $x, \overline{y}, \mbox{and} z$, we have another 3 intervals. We connect each of these interval to 6 \cnode{A} vertices. In each direction, these 6 vertices are shared by all the 7 cases, this ensures that there must be one case matches the verteces in truth setting component. Since the order of these non-labeled \cnode{A} vertices does not make sense to 3SAT, so there is a factor of $(6!)^3$ in our answer.
+\end{tcolorbox}
+\begin{tcolorbox}[title = {garbage collection component}]
+  Note that in the above 2 kinds of component the number of \cnode{A}, \cnode{B} and \cnode{C} are not the same. Precisely, we have $|\cnode{A}| > |\cnode{B}| + |\cnode{C}|$, while $|\cnode{B}| = |\cnode{C}|$ To fix this, we need to introduce $|\cnode{A}| - |\cnode{B}|$ pairs of \cnode{B} and \cnode{C}. Then, for each pair of \cnode{B} and \cnode{C}, use them to construct triangles with all the \cnode{A} in \underline{truth setting component}. Since the order of these non-labeled \cnode{A} vertices does not make sense to 3SAT, so there is a factor of $(|\cnode{A}| - |\cnode{B}|)!$ in our answer.
+\end{tcolorbox}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
