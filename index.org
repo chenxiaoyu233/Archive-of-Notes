@@ -1,26 +1,34 @@
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-bigblow.setup
 #+TITLE: Archive of Notes (Xiaoyu Chen)
+#+OPTIONS: num:nil
+#+OPTIONS: toc:2
+#+OPTIONS: p:t
 
 * Archive of Notes
-  This repository hosts many of my notes that came from the books or the papers that I have read.
-  It is mainly focus on classifying the techniques came from the books and papers.
+** As An Archive of My Notes
+   This repository hosts many of my notes that came from the books or the papers that I have read.
+   It is mainly focus on classifying the techniques came from the books and papers.
+** A Good Way to Find Out What Is Worth to Be Read
+   In this repository, I list the topics (and related papers) that I am interested in. 
+   So, it is easy to find a paper to read when I feel boring.
+   Anyway, it is worth to be openminded.
 
 * Sampling
 ** Recent Tech
-*** Rapid Mixing On Matroid Bases
+*** Rapid Mixing On Matroid Bases                             :localToGlobal:
     - High dimential expander
     - local-to-global argument
     - [[file:Small%20Topics/rapid-mixing-on-matroid-basis/note.pdf][Notes for rapid mixing on matroid basis]]
 ** Tech from Book
-*** Inner Product and Self-Adjoint Operator
+*** Inner Product and Self-Adjoint Operator :linearAlgebra:functionalAnalysis:
     For reversible Markov chain, we could use spectrum decomposition to analysis its second largest eigenvalue. Here is a breif introduction about how to use technique.
     - [[file:Small%20Topics/inner-products/note.pdf][Notes on Inner Product and Self-Adjoint Operator]]
     - [[file:Small%20Topics/inner-products/lecture-adjoint-operators.pdf][Travis Schedler's note on self-adjoint operator]]
 
-*** Eigenvalues and Mixing Time
+*** Eigenvalues and Mixing Time                                 :spectralGap:
     For reversible Markov chain, give an upper bound for its mixing time is sometimes equivalent to give an upper bound for its second largest eigenvalue. Here are some slids of mine that is focusing on this topic.
     - [[file:Small%20Topics/Eigenvalues%20and%20mixing%20time/Eigenvalues%20and%20mixing%20time.pdf][Eigenvalues and Mixing Time (Slides)]]
-*** Continuous Time Markov Chain (CTMC)
+*** Continuous Time Markov Chain (CTMC)                                :CTMC:
     - [[file:Small%20Topics/CTMC(countinuous-time-MC)/note.pdf][construction of countinuous time Markov chain]]
     The advantage of CTMC is that the spectral gap or log-sobolev constant of it is easy to obtain by simply derivation.
 ** Jerrum Book
@@ -38,6 +46,59 @@
 *** notebook for Jerrum Book
     Here is a note book for the topics appeared in Jerrum Book.
     - [[file:Jerrum%20Book/notebook/notebook.pdf][notebook]]
+* Reading List
+** Coupling                                                       :cencering:
+   - [ ] [[https://arxiv.org/abs/1112.0603][Can extra updates delay mixing?]]
+     - Yuval Peres, Peter Winkler.
+   - [X] [[https://arxiv.org/abs/0903.2906][Exact thresholds for Ising-Gibbs samplers on general graphs]]
+     - Elchanan Mossel, Allan Sly.
+** Perfect Sampling                     :partialRejectionSampling:localLemma:
+   - [ ] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]]
+     - Robin A. Moser, Gábor Tardos.
+   - [ ] [[https://arxiv.org/abs/1611.01647][Uniform Sampling through the Lovász Local Lemma]]
+     - Heng Guo, Mark Jerrum, Jingcheng Liu.
+   - [ ] [[https://arxiv.org/abs/1807.01680][Tight bounds for popping algorithms]]
+     - Heng Guo, Kun He.
+** Dynamic Sampling                   :partialRejectionSampling:filterMethod:
+   - [X] [[https://arxiv.org/abs/1807.06481][Dynamic Sampling from Graphical Models]]
+     - Weiming Feng, Nisheeth K. Vishnoi, Yitong Yin
+   - [ ] [[https://arxiv.org/abs/1904.11807][Dynamic MCMC Sampling]]
+     - Weiming Feng, Kun He, Xiaoming Sun, Yitong Yin
+   - [ ] [[https://arxiv.org/abs/1907.06033][Perfect sampling from spatial mixing]]
+     - Weiming Feng, Heng Guo, Yitong Yin
+** Local-to-Global Argument                       :spectralGap:localToGlobal:
+   - [X] [[https://arxiv.org/abs/1811.01816][Log-Concave Polynomials II: High-Dimensional Walks and an FPRAS for Counting Bases of a Matroid]]
+     - Nima Anari, Kuikui Liu, Shayan Oveis Gharan, Cynthia Vinzant. 
+   - [ ] [[https://arxiv.org/abs/1811.01600][Log-Concave Polynomials III: Mason's Ultra-Log-Concavity Conjecture for Independent Sets of Matroids]]
+     - Nima Anari, Kuikui Liu, Shayan Oveis Gharan, Cynthia Vinzant.
+   - [ ] [[https://arxiv.org/abs/2004.07220][Log-Concave Polynomials IV: Exchange Properties, Tight Mixing Times, and Faster Sampling of Spanning Trees]]
+     - Nima Anari, Kuikui Liu, Shayan Oveis Gharan, Cynthia Vinzant.
+   - [X] [[https://arxiv.org/abs/1903.06081][Modified log-Sobolev inequalities for strongly log-concave distributions]]
+     - Mary Cryan, Heng Guo, Giorgos Mousa.
+   - [X] [[https://arxiv.org/abs/2001.02827][Improved Analysis of Higher Order Random Walks and Applications]]
+     - Vedat Levi Alev, Lap Chi Lau.
+   - [X] [[https://arxiv.org/abs/2001.00303][Spectral Independence in High-Dimensional Expanders and Applications to the Hardcore Model]]
+     - Nima Anari, Kuikui Liu, Shayan Oveis Gharan.
+   - [X] [[https://arxiv.org/abs/2004.09083][Rapid Mixing of Glauber Dynamics up to Uniqueness via Contraction]]
+     - Zongchen Chen, Kuikui Liu, Eric Vigoda.
+   - [ ] [[https://arxiv.org/abs/2007.08058][Rapid Mixing for Colorings via Spectral Independence]]
+     - Zongchen Chen, Andreas Galanis, Daniel Štefankovič, Eric Vigoda.
+   - [X] [[https://arxiv.org/abs/2007.08091][Rapid mixing from spectral independence beyond the Boolean domain]]
+     - Weiming Feng, Heng Guo, Yitong Yin, Chihao Zhang.
+   - [ ] [[https://arxiv.org/abs/1605.00139][Random cluster dynamics for the Ising model is rapidly mixing]]
+     - Heng Guo, Mark Jerrum.
+** 2-spin Systems                                :uniqueness:potentialMethod:
+   - [X] [[https://web.stanford.edu/~montanar/TEACHING/Stat375/papers/weitz2.pdf][Counting Independent Sets up to the Tree Threshold]]
+     - D Weitz. 
+   - [X] [[https://arxiv.org/abs/1111.7064][Correlation Decay up to Uniqueness in Spin Systems]]
+     - Liang Li, Pinyan Lu, Yitong Yin. 
+** Sampling By Local Lemma                     :localLemma:connectiveBarrier:
+   - [ ] [[https://arxiv.org/abs/1610.04317][Approximate Counting, the Lovasz Local Lemma and Inference in Graphical Models]]
+     - Ankur Moitra
+   - [ ] [[https://arxiv.org/abs/1911.01319][Fast sampling and counting k-SAT solutions in the local lemma regime]]
+     - Weiming Feng, Heng Guo, Yitong Yin, Chihao Zhang
+   - [ ] [[https://arxiv.org/abs/1911.07020][Counting solutions to random CNF formulas]]
+     -  Andreas Galanis, Leslie Ann Goldberg, Heng Guo, Kuan Yang
 * MISC
 ** [[file:MISC/]] (Old Misc)
 ** [[file:Small%20Topics/point-count-problem/point-count-problem.pdf][Point Count Problem]]
