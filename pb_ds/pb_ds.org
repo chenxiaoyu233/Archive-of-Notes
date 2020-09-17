@@ -1,4 +1,0 @@
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
-#+TITLE: Learning Gnu's Policy-Based Data Structures
-
-
