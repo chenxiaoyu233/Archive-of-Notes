@@ -55,6 +55,8 @@
 ** Perfect Sampling                     :partialRejectionSampling:localLemma:
    - [ ] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]]
      - Robin A. Moser, Gábor Tardos.
+   - [ ] [[https://dl.acm.org/doi/10.1145/1993636.1993669][Moser and tardos meet Lovász]]
+     - Kashyap Babu Rao Kolipaka, Mario Szegedy
    - [ ] [[https://arxiv.org/abs/1611.01647][Uniform Sampling through the Lovász Local Lemma]]
      - Heng Guo, Mark Jerrum, Jingcheng Liu.
    - [ ] [[https://arxiv.org/abs/1807.01680][Tight bounds for popping algorithms]]
