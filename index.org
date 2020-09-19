@@ -53,7 +53,7 @@
    - [X] [[https://arxiv.org/abs/0903.2906][Exact thresholds for Ising-Gibbs samplers on general graphs]]
      - Elchanan Mossel, Allan Sly.
 ** Perfect Sampling                     :partialRejectionSampling:localLemma:
-   - [ ] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]]
+   - [X] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]] [sequential ver] [parallel ver]
      - Robin A. Moser, Gábor Tardos.
    - [ ] [[https://dl.acm.org/doi/10.1145/1993636.1993669][Moser and tardos meet Lovász]]
      - Kashyap Babu Rao Kolipaka, Mario Szegedy
