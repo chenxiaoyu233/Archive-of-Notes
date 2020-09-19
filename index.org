@@ -55,6 +55,7 @@
 ** Perfect Sampling                     :partialRejectionSampling:localLemma:
    - [X] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]] [sequential ver] [parallel ver] <2020-09-19 Sat>
      - Robin A. Moser, Gábor Tardos.
+     - _TODO_: Lopsided Local Lemma
    - [ ] [[https://dl.acm.org/doi/10.1145/1993636.1993669][Moser and tardos meet Lovász]]
      - Kashyap Babu Rao Kolipaka, Mario Szegedy
    - [ ] [[https://arxiv.org/abs/1611.01647][Uniform Sampling through the Lovász Local Lemma]]
