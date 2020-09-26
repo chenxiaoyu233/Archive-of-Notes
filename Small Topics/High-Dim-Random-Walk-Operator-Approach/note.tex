@@ -1,0 +1,196 @@
+\documentclass{article}
+\usepackage[usenames]{color}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{theorem}{Theorem}[section]
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+% \Op{#1}{#2} --expand--> [#1 <--> #2]
+\def\Op#1#2{\left[#1 \leftrightarrow #2\right]}
+%%
+\def\<{\left\langle}
+\def\>{\right\rangle}
+
+\title{High Dimensional Random Walk: Inner Products And Operators}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\abstract{
+  A very intresting point to note is that if we write the down-up walk in the operator form, we will gain a lot of benefits in the analysis.
+  In this note, we collect useful properties of operators from \cite{cryan2019modified} and \cite{alev2020improved}.
+  And we could use these properies to reimplement the result in \cite{alev2020improved} by using the ``level-by-level decay approach'' discovered by \cite{cryan2019modified}.
+}
+
+
+\section{The Operators}
+We will use the definition appears in \cite{cryan2019modified} first.
+And we will show that they are equivalent to the definition appears in \cite{alev2020improved}.
+\begin{define}
+  \[\Op{X_k}{X_{k+1}}(I, J) \triangleq \left\{
+      \begin{array}{ll}
+        0 & I \not\subset J \\
+        1 & I \subset J
+      \end{array}
+    \right.\]
+  \[\Op{X_{k+1}}{X_k} \triangleq \Op{X_k}{X_{k+1}}^T\]
+\end{define}
+\begin{define}[Operators]
+  \[\Op{\pi_k}{\pi_{k+1}} \triangleq \frac{1}{k+1}\mathrm{diag}(\pi_k)^{-1} \Op{X_k}{X_{k+1}} \mathrm{diag}(\pi_{k+1}) \]
+  \[\Op{\pi_{k+1}}{\pi_k} \triangleq \frac{1}{k+1} \Op{X_{k+1}}{X_k}\]
+  Note that $\Op{\pi_k}{\pi_{k+1}}$ and $\Op{\pi_{k+1}}{\pi_k}$ are denoted as $P_k^{\uparrow}$ and $P_{k+1}^{\downarrow}$ in \cite{cryan2019modified}, respectively.
+\end{define}
+\begin{fact}[Equivalence to \cite{alev2020improved}]
+  For any function $f: X(k+1) \to \mathbb{R}$ and $g: X(k)\to \mathbb{R}$, we have
+  \[\Op{\pi_k}{\pi_{k+1}}\mathbf{f}\;(\alpha) = \sum_{\beta\supset\alpha} \frac{\pi_{k+1}(\beta)}{(k+1)\pi_k(\alpha)} \cdot f(\beta) = \E_{\beta\supset\alpha}f(\beta)\],
+  and
+  \[\Op{\pi_{k+1}}{\pi_k}\mathbf{g}\;(\beta) = \sum_{\alpha \subset \beta} \frac{1}{k+1} \cdot g(\alpha) = \E_{\alpha\subset \beta} g(\alpha)\].
+  Note that $\Op{\pi_k}{\pi_{k+1}}$ and $\Op{\pi_{k+1}}{\pi_k}$ are also denoted as $D_{k+1}$ and $U_k$ in \cite{alev2020improved}, respectively.
+\end{fact}
+
+Using these operators, we could define the down-up walk and up-down walk on level $k$.
+\begin{define}[down-up walk, up-down walk]
+  
+  Down-up walk:
+  \[P_{\pi_k}^{\bigtriangleup} \triangleq \Op{\pi_k}{\pi_{k-1}} \Op{\pi_{k-1}}{\pi_k}\]
+
+  Up-down walk:
+  \[P_{\pi_k}^{\bigtriangledown} \triangleq \Op{\pi_k}{\pi_{k+1}} \Op{\pi_{k+1}}{\pi_k}\]
+
+  And, we denote the non-lazy version of $P_{\pi_k}^\bigtriangleup, P_{\pi_k}^\bigtriangledown$ as $P_{\pi_k}^\land, P_{\pi_k}^\lor$, respectively.
+\end{define}
+
+\begin{define}[Inner Product on $\pi_k$]
+  For $f, g: X(k) \to \mathbb{R}$, let
+  \[\< f, g \>_{\pi_k} \triangleq \sum_{\alpha\in X(k)}\pi(\alpha) f(\alpha) g(\alpha)\]
+\end{define}
+
+\begin{theorem}[Adjointness of Operators, \cite{alev2020improved}]
+  For $f: X(k) \to \mathbb{R}$ and $g: X(k+1) \to \mathbb{R}$, then we have
+  \[\< g, \Op{\pi_{k+1}}{\pi_k} f\>_{\pi_{k+1}} = \<\Op{\pi_k}{\pi_{k+1}} g, f\>_{\pi_k}\]
+\end{theorem}
+\begin{proof}
+  Here, we give a high level proof of this. You could verify it by brute force.
+
+  \begin{align*}
+    \<g, \Op{\pi_{k+1}}{\pi_k} f\>_{\pi_{k+1}}
+    &= \E_{\beta\sim \pi_{k+1}}[\mathbf{g}(\beta) \cdot \Op{\pi_{k+1}}{\pi_k}f(\beta)] \\
+    &= \E_{\beta\sim \pi_{k+1}}[\mathbf{g}(\beta) \E_{\alpha\subset \beta} [f(\alpha)]] \\
+    &= \E_{\substack{(\beta, \alpha)\sim (\pi_{k+1}, \pi_k)\\ \alpha\subset\beta}}[g(\beta)f(\alpha)]
+  \end{align*} 
+
+  \begin{align*}
+    \<\Op{\pi_k}{\pi_{k+1}} g, f\>
+    &= \E_{\alpha\sim\pi_k}[\Op{\pi_k}{\pi_{k+1}}g(\alpha)f(\alpha)] \\
+    &= \E_{\alpha\sim\pi_k}[\E_{\beta\supset\alpha}[g(\beta)]f(\alpha)] \\
+    &= \E_{\substack{(\beta, \alpha)\sim (\pi_{k+1}, \pi_k)\\ \alpha\subset\beta}}[g(\beta)f(\alpha)]
+  \end{align*}
+
+  So, we can conclude that $\<g, \Op{\pi_{k+1}}{\pi_k}f\>_{\pi_{k+1}}$ and $\<\Op{\pi_k}{\pi_{k+1}}g, f\>_{\pi_k}$ gives us the same joint distribution $(\pi_{k+1}, \pi_k)$ and thus they are equal.
+\end{proof}
+
+\begin{define}[map $f$ to $f^{\mathbf{1}}$]
+  Suppose we have a distribution $\pi$ and a function $f: \mathrm{supp}(\pi) \to \mathbb{R}$, then we define:
+  $J_\pi f \triangleq f^{\mathbf{1}} = \<f, \mathbf{1}\>_\pi \cdot \mathbf{1}$. It turns out that $J_\pi = \mathbf{1}\pi^T$. \textcolor{blue}{Note that $f = f^{\mathbf{1}} + f^{\perp \mathbf{1}}$.}
+\end{define}
+
+\section{Reimplement \cite{alev2020improved}}
+
+See \href{run:../rapid-mixing-on-matroid-basis/note.pdf}{Notes for level-by-level-decay approach}.
+
+\begin{define}
+  \[a_k = \E_{\pi_k} \left[\left(\frac{\mu_k}{\pi_k}\right)^2\right]\]
+\end{define}
+
+First, we have the following fact.
+\begin{fact}
+  \begin{align*}
+    a_{k+1} &= \sum_{\gamma\in X(k-1)} \pi_{k-1}(\gamma) (\frac{\mu_{k-1}(\gamma)}{\pi_{k-1}(\gamma)})^2\cdot \sum_{\{x,y\}\in X_\gamma(2)} \pi_2^\gamma (\{x,y\}) (\frac{\mu_2^\gamma(\{x,y\})}{\pi_2^\gamma(\{x,y\})})^2 \\
+    a_{k} &= \sum_{\gamma\in X(k-1)} \pi_{k-1}(\gamma) (\frac{\mu_{k-1}(\gamma)}{\pi_{k-1}(\gamma)})^2\cdot \sum_{\{x\}\in X_\gamma(1)} \pi_1^\gamma (\{x\}) (\frac{\mu_1^\gamma(\{x\})}{\pi_1^\gamma(\{x\})})^2 \\
+    a_{k} &= \sum_{\gamma\in X(k-1)} \pi_{k-1}(\gamma) (\frac{\mu_{k-1}(\gamma)}{\pi_{k-1}(\gamma)})^2 \cdot 1
+  \end{align*}
+\end{fact}
+
+\begin{define}
+  \begin{align*}
+    b_{k+1} &= \sum_{\{x,y\}\in X_\gamma(2)} \pi_2^\gamma (\{x,y\}) (\frac{\mu_2^\gamma(\{x,y\})}{\pi_2^\gamma(\{x,y\})})^2 = \<\frac{\mu_2^\gamma}{\pi_2^\gamma}, \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma}\\
+    b_k &= \sum_{\{x\}\in X_\gamma(1)} \pi_1^\gamma (\{x\}) (\frac{\mu_1^\gamma(\{x\})}{\pi_1^\gamma(\{x\})})^2 = \<\frac{\mu_1^\gamma}{\pi_1^\gamma}, \frac{\mu_1^\gamma}{\pi_1^\gamma}\>_{\pi_1^\gamma} \\
+    b_{k-1} &= 1
+  \end{align*}
+\end{define}
+
+\begin{fact}
+  \begin{align*}
+    b_{k-1}
+    &= \<\frac{\mu_1^\gamma}{\pi_1^\gamma}, J_{\pi_1^\gamma}\; \frac{\mu_1^\gamma}{\pi_1^\gamma}\>_{\pi_1^\gamma}
+     = \<\frac{\mu_2^\gamma}{\pi_2^\gamma}, J_{\pi_2^\gamma}\; \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma}
+  \end{align*}
+\end{fact}
+
+\begin{fact}
+  \[\frac{\mu_1^\gamma}{\pi_1^\gamma} = \Op{\pi_1^\gamma}{\pi_2^\gamma} \frac{\mu_2^\gamma}{\pi_2^\gamma}\]
+\end{fact}
+\begin{proof}
+  \begin{align*}
+    \Op{\pi_1^\gamma}{\pi_2^\gamma} \frac{\mu_2^\gamma}{\pi_2^\gamma} (x)
+    &= \sum_{\{x,y\}\in X_2^\gamma} \frac{\pi_2^\gamma(\{x, y\})}{2\pi_1^\gamma(\{x\})} \cdot \frac{\mu_2^\gamma(\{x,y\})}{\pi_2^\gamma(\{x,y\})}\\
+    &= \sum_{\{x,y\}\in X_2^\gamma} \frac{\mu_2^\gamma(\{x, y\})}{2\pi_1^\gamma(\{x\})} \\
+    &= \frac{\mu_1^\gamma}{\pi_1^\gamma}(\{x\}) \qedhere
+  \end{align*}
+\end{proof}
+\begin{fact}
+  \begin{align*}
+    b_k
+    &= \< \Op{\pi_1^\gamma}{\pi_2^\gamma} \frac{\mu_2^\gamma}{\pi_2^\gamma}, \Op{\pi_1^\gamma}{\pi_2^\gamma} \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_1^\gamma} \\
+    &= \< \frac{\mu_2^\gamma}{\pi_2^\gamma}, \Op{\pi_2^\gamma}{\pi_1^\gamma} \Op{\pi_1^\gamma}{\pi_2^\gamma} \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma} \\
+    &= \< \frac{\mu_2^\gamma}{\pi_2^\gamma}, P_{\pi_2^\gamma}^{\bigtriangledown}\; \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma}
+  \end{align*}
+\end{fact}
+
+Having these facts in hand, we could have the following argument (similar to \cite{alev2020improved}).
+
+\begin{align*}
+  b_{k} - b_{k-1}
+  &= \<\frac{\mu_2^\gamma}{\pi_2^\gamma}, (P_{\pi_2^\gamma}^{\bigtriangledown} - J_{\pi_2^\gamma})\frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma} \\
+  &= \<(\frac{\mu_2^\gamma}{\pi_2^\gamma})^{\perp \mathbf{1}}, (P_{\pi_2^\gamma}^{\bigtriangledown} - J_{\pi_2^\gamma})(\frac{\mu_2^\gamma}{\pi_2^\gamma})^{\perp \mathbf{1}}\>_{\pi_2^\gamma} \\
+  &\leq \lambda_2(P_{\pi_2}^\bigtriangledown)\<(\frac{\mu_2^\gamma}{\pi_2^\gamma})^{\perp \mathbf{1}}, (\frac{\mu_2^\gamma}{\pi_2^\gamma})^{\perp \mathbf{1}}\>_{\pi_2^\gamma} \\
+  &\leq \lambda_2(P_{\pi_2}^\bigtriangledown)\<\frac{\mu_2^\gamma}{\pi_2^\gamma}, (I - J_{\pi_2^\gamma}) \frac{\mu_2^\gamma}{\pi_2^\gamma}\>_{\pi_2^\gamma} \\
+  &= \lambda_2(P_{\pi_2}^\bigtriangledown) (b_{k+1} - b_{k-1}) \\
+  &= \lambda_2(P_{\pi_1}^\bigtriangleup) (b_{k+1} - b_{k-1}) \\
+  &= \frac{1}{2}(\lambda_2(P_{\pi_1}^\land) + 1) (b_{k+1} - b_{k-1}) \\
+  &\leq \frac{1}{2}(\gamma_{k-1} + 1) (b_{k+1} - b_{k-1})
+\end{align*}
+Note that the $\gamma_{k-1}$ we use here is defined in \cite{alev2020improved} and should not be confused with $\gamma$.
+
+So, we also have
+\[a_k - a_{k-1} \leq \frac{1}{2}(\gamma_{k-1} + 1) (a_{k+1} - a_{k-1})\]
+
+\clearpage
+\bibliographystyle{alpha}
+\bibliography{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
