@@ -187,8 +187,8 @@ So, in the worst case, we have
 \begin{align*}
   A_n
   &\geq \frac{1 - \gamma_{n-2}}{1 + \gamma_{n-2}} A_{n-1} \\
-  &\geq \prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) A_1 \\
-  A_n &\geq \frac{1}{n}\prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) \left(\sum_{i=1}^n A_i\right)
+  &\geq \prod_{i=0}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) A_1 \\
+  A_n &\geq \frac{1}{n}\prod_{i=0}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) \left(\sum_{i=1}^n A_i\right)
 \end{align*}
 So, we have
 \[
@@ -196,6 +196,14 @@ So, we have
   \leq 
   \left(1 - \frac{1}{n}\prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right)\right)\mathrm{Var}_{\pi_n} \left[\left(\frac{\mu_n}{\pi_n}\right)^2\right]
 \]
+
+All in all, this reimplementation gives us a deeper understanding of down-up walk on simplicial complex:
+
+\textcolor{blue}{\it{
+    There is a level-by-level decay of $f$-divergence on the simplicial complex and thus the random walk convergences rapidly.
+    So, we think that the spectral method on the random walk $P$ is actually equivalent to analysis the decay of $f$-divergence.
+}}
+
 \clearpage
 \bibliographystyle{alpha}
 \bibliography{note}
