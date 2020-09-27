@@ -177,8 +177,25 @@ Having these facts in hand, we could have the following argument (similar to \ci
 Note that the $\gamma_{k-1}$ we use here is defined in \cite{alev2020improved} and should not be confused with $\gamma$.
 
 So, we also have
-\[a_k - a_{k-1} \leq \frac{1}{2}(\gamma_{k-1} + 1) (a_{k+1} - a_{k-1})\]
+\begin{align*}
+  a_k - a_{k-1} &\leq \frac{1}{2}(\gamma_{k-1} + 1) (a_{k+1} - a_{k-1}) \\
+  \frac{1 - \gamma_{k-1}}{1 + \gamma_{k-1}} (a_k - a_{k-1}) &\leq a_{k+1} - a_k \\
+  \frac{1 - \gamma_{k-1}}{1 + \gamma_{k-1}} A_k & \leq A_{k+1}
+\end{align*}
 
+So, in the worst case, we have
+\begin{align*}
+  A_n
+  &\geq \frac{1 - \gamma_{n-2}}{1 + \gamma_{n-2}} A_{n-1} \\
+  &\geq \prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) A_1 \\
+  A_n &\geq \frac{1}{n}\prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right) \left(\sum_{i=1}^n A_i\right)
+\end{align*}
+So, we have
+\[
+  \mathrm{Var}_{\pi_n} \left[\left(\frac{P_n^{\bigtriangledown}\mu_n}{\pi_n}\right)^2\right]
+  \leq 
+  \left(1 - \frac{1}{n}\prod_{i=1}^{n-2} \left(\frac{1 - \gamma_i}{1 + \gamma_i}\right)\right)\mathrm{Var}_{\pi_n} \left[\left(\frac{\mu_n}{\pi_n}\right)^2\right]
+\]
 \clearpage
 \bibliographystyle{alpha}
 \bibliography{note}
