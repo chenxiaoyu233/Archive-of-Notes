@@ -52,16 +52,20 @@
      - Yuval Peres, Peter Winkler.
    - [X] [[https://arxiv.org/abs/0903.2906][Exact thresholds for Ising-Gibbs samplers on general graphs]]
      - Elchanan Mossel, Allan Sly.
-** Perfect Sampling                     :partialRejectionSampling:localLemma:
+** Perfect Sampling (LLL/conditional gibbs) :partialRejectionSampling:localLemma:
    - [X] [[https://arxiv.org/abs/0903.0544][A constructive proof of the general Lovasz Local Lemma]] [sequential ver] [parallel ver] <2020-09-19 Sat>
      - Robin A. Moser, Gábor Tardos.
-     - _TODO_: Lopsided Local Lemma
    - [X] [[https://dl.acm.org/doi/10.1145/1993636.1993669][Moser and tardos meet Lovász]]
      - Kashyap Babu Rao Kolipaka, Mario Szegedy
    - [X] [[https://dl.acm.org/doi/10.1145/3310131][Uniform Sampling through the Lovász Local Lemma]]
      - Heng Guo, Mark Jerrum, Jingcheng Liu.
    - [ ] [[https://arxiv.org/abs/1807.01680][Tight bounds for popping algorithms]]
      - Heng Guo, Kun He.
+** Perfect Sampling (CFTP + Bounding Chains)            :CFTP:boundingChains:
+   - [ ] [[https://arxiv.org/abs/math/0405284][Perfect Sampling Using Bounding Chains]]
+     - Mark Huber
+   - [ ] [[https://arxiv.org/abs/1909.10323][Improved Bounds for Perfect Sampling of k-Colorings in Graphs]]
+     - Siddharth Bhandari, Sayantan Chakraborty
 ** Dynamic Sampling                   :partialRejectionSampling:filterMethod:
    - [X] [[https://arxiv.org/abs/1807.06481][Dynamic Sampling from Graphical Models]]
      - Weiming Feng, Nisheeth K. Vishnoi, Yitong Yin
