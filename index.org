@@ -32,6 +32,15 @@
     - [[file:Small%20Topics/CTMC(countinuous-time-MC)/note.pdf][construction of countinuous time Markov chain]]
     The advantage of CTMC is that the spectral gap or log-sobolev constant of it is easy to obtain by simply derivation.
     - [[file:Small%20Topics/CTMC-mixing-time/note.pdf][Mixing Time of Continuous Time Markov Chain]]
+*** Estimate $\mathbb{E}[f]$ Using Markov Chain                    :simulate:
+    - [[file:Small%20Topics/sample-averages-for-reversible-markov-chain/note.pdf][Sample Averages for Reversible Markov Chains]]
+    Sometimes, we want to estimate $\mathbb{E}[f]$ over some distribution $\pi$.
+    The naive approach to do this, is to sample i.i.d. $X_1, X_2, \cdots, X_n$ w.r.t. $\pi$.
+    And then estimate $\mathbb{E}[f]$ as $\hat{f} := \frac{1}{n} \sum_{i=1}^n f(X_i)$.
+    This notes shows how to get a little better result than the naive approach.
+    
+    The main consideration of this question is that we want $\mathrm{Var} \hat{f}$ to be small,
+    so that we could have concentraton bound such as Chebyshev inequality.
 ** Jerrum Book
    You could access the full contents of Jerrum Book at [[http://www.maths.qmul.ac.uk/~mj/pubs.html][here]].
    The full name of this book is "Counting, sampling and integrating: algorithms and complexity"
