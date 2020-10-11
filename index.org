@@ -31,6 +31,7 @@
 *** Continuous Time Markov Chain (CTMC)                                :CTMC:
     - [[file:Small%20Topics/CTMC(countinuous-time-MC)/note.pdf][construction of countinuous time Markov chain]]
     The advantage of CTMC is that the spectral gap or log-sobolev constant of it is easy to obtain by simply derivation.
+    - [[file:Small%20Topics/CTMC-mixing-time/note.pdf][Mixing Time of Continuous Time Markov Chain]]
 ** Jerrum Book
    You could access the full contents of Jerrum Book at [[http://www.maths.qmul.ac.uk/~mj/pubs.html][here]].
    The full name of this book is "Counting, sampling and integrating: algorithms and complexity"

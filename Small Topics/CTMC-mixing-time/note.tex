@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage[usenames]{color}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+
+\title{Mixing Time of Continuous Time Markov Chain}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Background}
+For the background of constructing CTMC, please refer to a previous note\footnote{\href{file://../CTMC(countinuous-time-MC)/note.pdf}{Notes for Continuous Time Markov Chains}} for details.
+The rest of this article mainly comes from \cite{montenegro2006mathematical}.
+
+\section{Measures and Mixing Times}
+
+\begin{define}[$\ell^p$ distance]
+  For any function $f:\Omega \to \mathbb{R}$, we have:
+  \[\parallel f \parallel_{p, \pi} := \left(\sum_{x\in\Omega}\pi(x) |f(x)|^p\right)^{1/p}\]
+\end{define}
+
+\begin{define}[An Entropy-like Measure]
+  \[\mathrm{Ent}_\pi(f) := \mathbb{E}_\pi[f \log f] - (\mathbb{E}_\pi f) \log \mathbb{E}_\pi f\]
+  Note that, if $\mathbb{E}_\pi f = 1$, we have
+  \[\mathrm{Ent}_\pi(f) = \mathbb{E}_\pi[f \log f]\]
+\end{define}
+
+There are many ways to measure the distance between $P^t(x, \cdot)$ and $\pi$.
+
+\begin{define}
+  For a discrete Markov chain $P$, let $k^x_t(y) := P^t(x,y)/\pi(y)$.
+\end{define}
+
+Since $k^x_t \to \mathbf{1}$ as $t \to \infty$, so many important measures of mixing are defined as the $\ell^p$ distance (norm) of $k^x_t - \mathbf{1}$.
+An interesting counterexample of this is $\mathrm{Ent}_\pi(k^x_t)$, it is defined as the relative entropy between $P^t(x, \cdot)$ and $\pi$.
+
+\begin{fact}
+  \[\parallel P^t(x, \cdot) - \pi \parallel_{TV} = \frac{1}{2}\parallel k^x_t - 1 \parallel_{1,\pi}\]
+\end{fact}
+
+\begin{fact}
+  \[\mathrm{Var}_\pi(k^x_t) = \parallel k^x_t - 1 \parallel_{2, \pi}\]
+\end{fact}
+
+\begin{fact}
+  \[D(P^t(x, \cdot) \parallel \pi) =\sum_{y\in \Omega}\pi(y)\frac{P^t(x, y)}{\pi(y)}\log \frac{P^t(x,y)}{\pi(y)} = \mathrm{Ent}_\pi (k^x_t)\]
+\end{fact}
+
+Having these measures in hand, we could define their mixing time respectively.
+
+\begin{define}[Some Mixing Times]
+  \begin{align*}
+    \tau(\varepsilon) &= \min\{n: \forall x\in \Omega, \parallel p^n(x,\cdot) - \pi \parallel_{TV} \leq \varepsilon\} \\
+    \tau_D(\varepsilon) &= \min\{n: \forall x\in \Omega, D(p^n(x,\cdot) \parallel \pi) \leq \varepsilon\} \\
+    \tau_2(\varepsilon) &= \min\{n: \forall x\in \Omega, \parallel p^n(x,\cdot) - \pi \parallel_{2, \pi} \leq \varepsilon\} 
+  \end{align*}
+\end{define}
+
+\section{Continuous Time Markov Chain Mixing}
+See a clip\footnote{\href{file://./[Clip] Mathematical Aspects of Mixing Times in Markov Chains.pdf}{[Clip] Mathematical Aspects of Mixing Times in Markov Chains.pdf}} from \cite{montenegro2006mathematical} for details.
+
+\clearpage
+\bibliographystyle{alpha}
+\bibliography{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
