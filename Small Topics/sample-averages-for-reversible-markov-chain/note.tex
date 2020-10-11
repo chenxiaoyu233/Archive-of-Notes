@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage[usenames]{color}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\def\NoteLink#1{
+  [\href{file://../#1}{local link}]
+  [\href{https://chenxiaoyu233.github.io/Archive-of-Notes/Small\%20Topics/#1}{online link}]
+}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}{Remark}[section]
+\def\<{\langle}
+\def\>{\rangle}
+
+\title{Sample Averages for Reversible Markov Chains}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+This article is a simple rewrite of the results that appear in \cite{aldous1987markov} in a language that I am familiar with.
+The main purpose is to estimate $\mathbb{E}[f]$ by sampling while showing that our estimate is concentrated on $\mathbb{E}[f]$.
+
+\section{Estimate the Expectation of A Function}
+Given a distribution $\pi$ over $\Omega$, and a function $f: \Omega \to \mathbb{R}$, we would like to estimate $\bar{f} := \mathbb{E}[f]$ using independent experiments.
+
+The most naive method to achieve this is to sample i.i.d. random variables $X_1, X_2, \cdots, X_n$ according to $\pi$.
+Then, let $\hat{f} := \frac{1}{n}\sum_i f(X_i)$ as our estimation for $\bar{f}$.
+
+We have the following facts.
+
+\begin{fact}
+  \[\mathbb{E}[\hat{f}] = \mathbb{E}[\frac{1}{n}\sum_i f(X_i)] = \frac{1}{n}\sum_i \mathbb{E}[f] = \mathbb{E}[f] = \bar{f}\]
+\end{fact}
+
+\begin{fact}
+  \begin{align*}
+    \mathrm{Var} \hat{f}
+    &= \mathrm{Var} (\frac{1}{n} \sum_i f(X_i)) \\
+    &= \frac{1}{n^2} \mathrm{Var} (\sum_i f(X_i)) \\
+    &= \frac{1}{n^2} \sum_i \mathrm{Var} f(X_i) \hspace{0.5cm} \mbox{by independence}\\
+    &= \frac{1}{n} \mathrm{Var}_\pi f
+  \end{align*}
+\end{fact}
+
+So, from Chebyshev inequality, we have
+\[\Pr[|\hat{f} - \bar{f}| > t] \leq \frac{\frac{1}{n} \mathrm{Var}_\pi f}{t^2}\]
+In many cases, by setting an apropriate $t$, we may conclude the event which we want to happen really happens with high probability.
+
+\section{Estimate $\mathbb{E}[f]$ by A Reversible Markov Chain}
+Suppose we have an reversible Markov chain $P$ with its unique stationary $\pi$ and we want to estimate $\mathbb{E}[f]$.
+Surprisingly, it was shown in \cite{aldous1987markov} that, instead of sampling independent $X_i$ according to $\pi$ using $P$, we could run $P$ from stationary for $n$ steps and get $X_1, X_2, \cdots, X_n$ to estimate $\mathbb{E}[f]$ with a quite good result.
+
+\begin{theorem} \label{thm:start-with-pi}
+  Suppose we runs $P$ for $N$ steps from stationary distribution (i.e. $X_0 \sim \pi$) and get $X_1, X_2, \cdots, X_N$, then we have
+  \begin{itemize}
+  \item $\mathbb{E}[\hat{f}] = \bar{f}$ 
+  \item $\mathrm{Var} [\hat{f}] \leq \alpha\left(\gamma N\right)$, where $\alpha(x) = \frac{2}{x^2} (e^{-x} + x) = \frac{2}{x}(xe^{-x} + 1)$
+  \end{itemize}
+  , where $\gamma := 1 - \lambda_2$.
+\end{theorem}
+\begin{proof}
+  $\mathbb{E}[\hat{f}] = \bar{f}$ is trivial, so we only prove the second part here.
+  For convenience, we assume that $\bar{f} = 0$, which means $\< f, \mathbf{1}\>_\pi = 0$ (i.e. $f \perp_\pi \mathbf{1}$).
+  Then, Note that
+  \begin{align*}
+    \mathbb{E}[f(X_0)f(X_t)]
+    &= \sum_{x\in \Omega} \sum_{y\in \Omega} \pi(x) f(x) P^t(x, y) f(y) \\
+    &= \sum_{x\in\Omega} \pi(x) f(x) \sum_{y\in \Omega} P^t(x, y) f(y) \\
+    &= \sum_{x\in\Omega} \pi(x) f(x) P^tf(x) \\
+    &= \<f, P^tf\>_\pi
+  \end{align*}
+  Since $P$ is time reversible, it is also a self-adjoint operator accroding to $\< \cdot, \cdot \>_\pi$ (see \cite{SomeNotesForInnerProducts@Xiaoyu} for example). And, moreover, $P$ has an eigenbasis according to $\<\cdot, \cdot\>_\pi$. And we denote its eigenbasis as $f_1 = \mathbf{1}, f_2, \cdots, f_n$.
+  So, we have
+  \begin{align*}
+    \mathbb{E}[f(X_0)f(X_t)]
+    &= \alpha_1^2 \<f_1, P^t f_1\>_\pi + \alpha_2^2 \<f_2, P^tf_2\>_\pi + \cdots \alpha_n^2 \<f_n, P^t f_n\>_\pi \\
+    &\ \ \ \mbox{(let $\alpha_i = \<f_i, f\>_\pi$)} \\
+    &= \sum_i \alpha_i^2\lambda_i^t \< f_i, f_i\>_\pi = \sum_i \alpha_i^2\lambda_i^t
+  \end{align*}
+  Let $S_N = \sum_{i=1}^N f(X_i) = n\hat{f}$, then we have
+  \begin{align*}
+    \mathrm{Var}(S_N)
+    &= \mathbb{E} S_N^2 \\
+    &= \sum_i \sum_j \mathbb{E}[f(X_i) f(X_j)] \hspace{0.5cm} \mbox{since we assume that $\bar{f} = 0$} \\
+    &= \sum_i \sum_j \left( \sum_x \sum_y \pi(x) f(x) P^{|j - i|}(x, y) f(y) \right)\\
+    &= \sum_i \sum_j \mathbb{E}[f(X_0)f(X_{|j-i|})] \\
+    &= N\mathbb{E}[f^2(X_0)] + \sum_{t=1}^{N-1} 2(N-i) \mathbb{E}[f(X_0)f(X_t)] \\
+    &= N\mathrm{Var}_\pi f + \sum_{t=1}^{N-1} 2(N - t) \sum_{i=1}^n \alpha_i^2 \lambda_i^t
+  \end{align*}
+  Then, it is easy to see that $\sum_{i=1}^n \alpha_i^2 = \<f, f\>_\pi = \mathrm{Var}_\pi f$.
+  Also, we have $f\perp_\pi \mathbf{1}$ and thus $\alpha_1 = 0$.
+  So, we have
+  \begin{align*}
+    \mathrm{Var}(S_N)
+    &\leq N\mathrm{Var}_\pi f + \sum_{t=1}^{N-1} 2(N-t) \lambda_2^t \mathrm{Var}_\pi f \\
+    &= \left(N + \sum_{t=1}^{N-1} 2(N-t) \lambda_2^t\right) \mathrm{Var}_\pi f \\
+  \end{align*}
+  We know that
+  \begin{align*}
+    N &+ \sum_{t=1}^{N-1} 2(N-t) \lambda_2^t \\
+      &= \sum_{t=0}^{N-1} 2(N-t) \lambda_2^t - N \\
+      &= \frac{2}{(1 - \lambda_2)^2}(\lambda_2^{N+1} - (N+1)\lambda_2 + N) - N \hspace{0.5cm} \mbox{by a lot of calc} \\
+      &\leq \frac{2}{(1 - \lambda_2)^2}((1 - (1-\lambda_2))^{N+1} + N(1-\lambda_2) - \lambda_2) \\
+      &\leq \frac{2}{(1 - \lambda_2)^2}((1 - (1-\lambda_2))^{N+1} + N(1-\lambda_2)) \\
+      &\leq \frac{2}{(1 - \lambda_2)^2} (e^{-N(1-\lambda_2)} + N(1 - \lambda_2)) \\
+      &= \frac{2}{\gamma^2}(e^{-N\gamma} + N\gamma)
+  \end{align*}
+  Since $\mathrm{Var} \hat{f} = \frac{1}{N^2} \mathrm{Var}(S_N)$, so we have
+  \[\mathrm{Var} \hat{f} \leq \frac{2}{(N\gamma)^2} (e^{-N\gamma} + N\gamma) \mathrm{Var}_\pi f \qedhere\]
+\end{proof}
+
+\begin{remark}
+  Note that when $x$ is small, we have $\alpha(x) \simeq \frac{2}{x}$, then we have
+  \[\mathrm{Var}\hat{f} \leq \frac{2}{N}\cdot \frac{1}{1 - \lambda_2} \mathrm{Var}_\pi f\].
+  So, by setting $N' = 2N (1 - \lambda_2)^{-1}$, we get
+  \[\mathrm{Var} \hat{f} \leq \frac{1}{N} \mathrm{Var}_\pi f\]
+  , which is the same effect as we sample $X_1, X_2, \cdots X_N$ i.i.d. variables.
+\end{remark}
+
+\begin{define}
+  Let $h_t^x$ be a vector, such that $h_t^x(y) = \frac{P^t(x,y)}{\pi(y)}$
+\end{define}
+
+\begin{define}[spectral gap]
+  We let $\gamma = 1 - \lambda_2$ as \textbf{spectral gap}.
+  And we let $\gamma_* = 1 - \max\{\lambda_2, |\lambda_n|\}$ as the \textbf{absolute spectral gap}.
+\end{define}
+
+\begin{fact} \label{fact:var-decay}
+  For any $f: \Omega\to \mathbb{R}$, and time reversible $P$ with stationary distribution $\pi$, we have
+  \[\mathrm{Var}_\pi (P^tf) \leq (1 - \gamma_\star)^{2t} \mathrm{Var}_\pi f\]
+\end{fact}
+\begin{proof}
+  Recall that $\mathrm{Var}_\pi (X + c) = \mathrm{Var}_\pi(X)$, so we assume $\mathbb{E}[f] = 0$ for convenience.
+  Let $\alpha_i = \<f, f_i\>_\pi$, then
+  \begin{align*}
+    \mathrm{Var}_\pi(P^tf)
+    &= \mathrm{Var}_\pi (\sum_{i=1}^n \alpha_i f_i \lambda_i^t) \\
+    &= \mathrm{Var}_\pi (\sum_{i=2}^n \alpha_i f_i \lambda_i^t) \\
+    &\leq \mathrm{Var}_\pi ((1 - \gamma_\star) \sum_{i=2}^n \alpha_i f_i) \\
+    &= (1 - \gamma_\star)^{2t} \mathrm{Var}_\pi f \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  If we first run $P$ for $N_0$ steps (\textbf{from any distribution}), then run $P$ for $N_1$ steps to generates $X_{1+N_0}, X_{2+N_0}, \cdots, X_{N_1+N_0}$ to estimate $\bar{f}$. Then we have
+  \[\mathbb{E}(\hat{f} - \bar{f})^2 \leq (1 + \frac{1}{\pi_{\min}} e^{-N_0\gamma_\star}) \alpha(N_1\gamma)\mathrm{Var}_\pi f\]
+  Note that, currently, we may not have $\mathbb{E}[\hat{f}] = \bar{f}$.
+\end{theorem}
+\begin{proof}
+  Let $\rho(N) = \max_{x,y} \frac{P^N(x,y)}{\pi(y)}$ and
+  \[b_x = \mathbb{E}\left[(\frac{1}{N_1}\sum_{i=1}^{N_1}f(X_{i+N_0}) - \bar{f})^2 | X_{N_0} = x\right]\]
+  Then we have
+  \begin{align*}
+    \mathbb{E}[(\hat{f} - \bar{f})^2 | X_0 = x]
+    &= \sum_y P^{N_0}(x, y) b_y \\
+    &\leq \rho(N_0) \sum_y \pi(y)b_y \hspace{0.5cm} \mbox{recall the definition of $\rho$} \\
+    &\leq \rho(N_0) \alpha(N_1\gamma)\mathrm{Var}_\pi f \hspace{0.5cm} \mbox{refer to Theorem \ref{thm:start-with-pi}}
+  \end{align*}
+  So, it is suffice to prove that $\rho(N) \leq 1 + \frac{1}{\pi_{\min}} e^{-N\gamma_\star}$
+  Recall Fact \ref{fact:var-decay}, for any $x$ we have
+  \begin{align*}
+    \mathrm{Var}_\pi h_t^x = \mathrm{Var}_\pi(P^th_0^x) 
+    &\leq (1 - \gamma_\star)^{2t}\mathrm{Var}_\pi h_0^x \\
+    &\leq (1 - \gamma_\star)^{2t} \frac{1 - \pi_{\min}}{\pi_{\min}} \\
+    &\leq (1 - \gamma_\star)^{2t} \frac{1}{\pi_{\min}}
+  \end{align*}
+  Moreover, since $\mathbb{E}[h_t^x] = 1$, we have
+  \begin{align*}
+    \pi(y)(\frac{P^t(x, y)}{\pi(y)} - 1)^2
+    &\leq \sum_y \pi(y) (\frac{P^t(x, y)}{\pi(y)} - 1)^2 \\
+    &= \mathrm{Var}_\pi h_t^x
+  \end{align*}
+  Finllay, we have for any $x, y$:
+  \begin{align*}
+    \pi(y)(\frac{P^t(x, y)}{\pi(y)} - 1)^2
+    &\leq (1 - \gamma_\star)^{2t}\frac{1}{\pi_{\min}} \\
+    \pi^{1/2}(y) (\frac{P^t(x, y)}{\pi(y)} - 1) &\leq (1 - \gamma_\star)^t \pi^{-1/2}_{\min} \\
+    \frac{P^t(x, y)}{\pi(y)}
+    &\leq (1 - \gamma_\star)^t \pi^{-1/2}(y)\pi^{-1/2}_{\min} + 1 \\
+    &\leq (1 - \gamma_\star)^t \pi^{-1}_{\min} + 1 \\
+    &\leq e^{-t\gamma_\star} \pi^{-1}_{\min} + 1 \qedhere
+  \end{align*}
+\end{proof}
+
+\clearpage
+\bibliographystyle{alpha}
+\bibliography{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
