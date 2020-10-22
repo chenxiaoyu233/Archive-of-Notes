@@ -60,7 +60,7 @@ So, from Chebyshev inequality, we have
 In many cases, by setting an apropriate $t$, we may conclude the event which we want to happen really happens with high probability.
 
 \section{Estimate $\mathbb{E}[f]$ by A Reversible Markov Chain}
-Suppose we have an reversible Markov chain $P$ with its unique stationary $\pi$ and we want to estimate $\mathbb{E}[f]$.
+ Suppose we have an reversible Markov chain $P$ with its unique stationary $\pi$ and we want to estimate $\mathbb{E}[f]$.
 Surprisingly, it was shown in \cite{aldous1987markov} that, instead of sampling independent $X_i$ according to $\pi$ using $P$, we could run $P$ from stationary for $n$ steps and get $X_1, X_2, \cdots, X_n$ to estimate $\mathbb{E}[f]$ with a quite good result.
 
 \begin{theorem} \label{thm:start-with-pi}
@@ -128,6 +128,14 @@ Surprisingly, it was shown in \cite{aldous1987markov} that, instead of sampling 
   So, by setting $N' = 2N (1 - \lambda_2)^{-1}$, we get
   \[\mathrm{Var} \hat{f} \leq \frac{1}{N} \mathrm{Var}_\pi f\]
   , which is the same effect as we sample $X_1, X_2, \cdots X_N$ i.i.d. variables.
+
+  On the other hand, it turns out that we have
+  \[\tau(\varepsilon) \leq \frac{1}{1 - \lambda_2} \log \left(\frac{1}{\varepsilon \pi_{\min}}\right)\]
+  Then, for example, if $\pi$ is the uniform distribution on the basis of a matroid, then we could only
+  upperbound $\frac{1}{\pi_{\min}}$ by $n^r$, and thus
+  \[\tau(\varepsilon) \leq (1-\lambda_2)^{-1}(r\log n + \log \frac{1}{\varepsilon})\]
+  So, if $N$ and $r$ are at a same level, then the running time of our simulation is bounded by the mixing time.
+  More generally, if $N$ and $\log \frac{1}{\pi_{\min}}$ are at a same level, then the running time of our simulation is bounded by the mixing time of the chain.
 \end{remark}
 
 \begin{define}

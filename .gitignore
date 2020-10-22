@@ -15,5 +15,7 @@
 !*.pdf
 !*.docx
 !.gitignore
+!*.pages
+!*.key
 
 _region_.tex
