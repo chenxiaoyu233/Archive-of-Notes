@@ -1,0 +1,226 @@
+\documentclass[utf8]{article}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Colorllary}[section]
+
+\title{Refined Understanding: Spectrum, Coupling and $\ell^p$-distance}
+\author{Xiaoyu Chen}
+\date{}
+
+\def\<{\langle}
+\def\>{\rangle}
+
+\begin{document}
+\maketitle
+\section{Preliminaries}
+Let $P$ be a \textcolor{cyan}{time reversible} Markov chain defined on the state space $\Omega$ with its stationary distribution $\pi$.
+\begin{define}
+  For any $f, g \in \mathbb{R}^\Omega$, let:
+  \[\<f, g\>_\pi \triangleq \sum_{x\in\Omega}\pi(x)f(x)g(x)\]
+\end{define}
+\begin{define}[$\ell_p$-norm]
+  For any $f: \Omega \to \mathbb{R}$, we have:
+  \[\parallel f \parallel_{\pi, p} \triangleq \left\{
+      \begin{array}{ll}
+        (\sum_{x\in\Omega} \pi(x) |f(x)|^p)^{1/p} & 1 \leq p < \infty \\
+        \max_x |f(x)| & \mbox{o.w.}
+      \end{array}
+    \right.\]
+\end{define}
+\begin{fact}\label{fact:lp-norm-monotone}
+  For any $f: \Omega\to \mathbb{R}$ we have
+  \[\parallel f \parallel_{\pi,1} \leq \parallel f \parallel_{\pi, 2} \leq \cdots \leq \parallel f \parallel_{\pi, \infty}\]
+\end{fact}
+\begin{proof}
+  Recall that we have Jenson's Inequality for concave function $g$, such that
+  \[\mathbb{E}[g(x)] \leq g(\mathbb{E}[x])\]
+  Then for any $p < r$, note that $x \mapsto x^{\frac{p}{r}}$ is a concave function, we have
+  \[\parallel f \parallel_{\pi, p} = (\mathbb{E}_{x\sim\pi}[|f(x)|^p])^{1/p}
+    = (\mathbb{E}_{x\sim\pi}[(|f(x)|^r)^{\frac{p}{r}}])^{1/p}
+    \leq ((\mathbb{E}_{x\sim\pi}[|f(x)|^r])^{\frac{p}{r}})^{1/p}
+    = (\mathbb{E}_{x\sim\pi}[|f(x)|^r])^{1/r}
+    = \parallel f \parallel_{\pi, r}\]
+\end{proof}
+
+\begin{fact}
+  For $c \geq 0$, we have $\parallel c\cdot f \parallel_{\pi, p} = c \parallel f \parallel_{\pi, p}$
+\end{fact}
+
+\begin{define}[self-adjoint operator]
+  We say $P$ is a self-adjoint operator over $\<\cdot, \cdot\>_\pi$ if for $\forall f, g:\Omega \to \mathbb{R}$, we have $\<f, Pg\>_\pi = \<Pf, g\>_\pi$.
+\end{define}
+
+\begin{define}
+  \[D \triangleq \mathrm{diag}(\pi)\]
+\end{define}
+
+\begin{define}
+  For any $x\in\Omega$ we have its indicator function $\delta_x:\Omega \to \{0,1\}$ defined as:
+  \[\delta_x (y) \triangleq \left\{
+      \begin{array}{ll}
+        1 & y = x \\
+        0 & y\not= x
+      \end{array}
+    \right.\]
+\end{define}
+
+\begin{define}
+  $q_t \in \mathbb{R}^{\Omega\times\Omega}$ is a matrix that is widely used in measure the distance between the current distribution with the stationary distribution, which is defined as $q_t \triangleq P^tD^{-1}$ and thus:
+  \[q_t(x, y) = \frac{P^t(x,y)}{\pi(y)}\]
+  Moreover, let $q_t^x \triangleq q_t(x, \cdot)$ be the $x$-th row of $q_t$.
+\end{define}
+
+\section{Spectral Decomposition}
+\begin{fact}
+  $P$ is a self-adjoint operator of $\<\cdot, \cdot\>_\pi$ \textcolor{blue}{iff} $P$ is time reversible.
+\end{fact}
+\begin{proof}
+  \textcolor{orange}{$\Rightarrow:$} If $P$ is a self-adjoint operator of $\<\cdot, \cdot\>_\pi$, then for any $x, y\in\Omega$, we have \[\<\delta_x, P\delta_y\>_\pi = \<P\delta_x, \delta_y\>_\pi = \<\delta_y, P\delta_x\>_\pi\].
+  So, we have $\pi(x)P(x,y) = \pi(y)P(y, x)$.
+  
+  \textcolor{orange}{$\Leftarrow:$} Could be verified by simple calculation.
+\end{proof}
+\begin{theorem}
+  $P$ is a self-adjoint operator of $\<\cdot, \cdot\>_\pi$ \textcolor{blue}{iff} $P$ has eigenbasis $\{f_i\}_{i=1}^{|\Omega|}$ on the inner product space $(\mathbb{R}^\Omega, \<\cdot, \cdot\>_\pi)$.
+\end{theorem}
+\begin{proof}
+  \textcolor{orange}{$\Rightarrow:$} Since $\pi(x)P(x,y) = \pi(y)P(y,x)$, we have $\pi^{1/2}(x)P(x,y)\pi^{-1/2}(y) = \pi^{1/2}P(y,x)\pi^{-1/2}(x)$. And it turns out that if $D\triangleq \mathrm{diag}(\pi)$ then:
+  \[D^{1/2} P D^{-1/2} \mbox{ is a symmetric matrix}\]
+  So, $D^{1/2} P D^{-1/2}$ have eigenbasis $\{g_i\}_{i=1}^{|\Omega|}$ over $(\mathbb{R}^\Omega, \<\cdot, \cdot\>)$.
+  And it is suffice to show that $\{D^{-1/2}g_i\}_{i=1}^{|\Omega|}$ are eigenfunctions of $P$ and they are orthogonal according to $\<\cdot, \cdot\>_\pi$. Just note that
+  \begin{itemize}
+  \item (eigenfunciton) $D^{1/2} P D^{-1/2} g_i = \lambda_i g_i \Rightarrow p D^{-1/2} g_i = \lambda_i D^{-1/2} g_i$.
+  \item (orghognoal) for $i\not= j$, $\<D^{-1/2}g_i, D^{-1/2}g_j\>_\pi = \<g_i, g_j\> = 0$
+  \end{itemize}
+  (\textcolor{orange}{$\Leftarrow:$} Omit, may be added in the future.)
+\end{proof}
+
+\begin{theorem}
+  If $P$ has eigenbasis $\{f_i\}_{i=1}^{|\Omega|}$ on the inner product space $(\mathbb{R}^{\Omega}, \<\cdot, \cdot\>_\pi)$, then $P = \sum_{i=1}^{|\Omega|} \lambda_i f_i f_i^{T}D$
+\end{theorem}
+\begin{proof}
+  Its suffice to prove that $P(x, y) = \sum_{i=1}^{|\Omega|} \lambda_i f_i(x)f_i(y)\pi(y)$.
+  Note that $P\delta_y (x) = P(x, y)$.
+  And we have $\delta_y = \sum_{i=1}^{|\Omega|} \<f_i, \delta_y\>_\pi f_i = \sum_{i=1}^{|\Omega|} \pi(y)f_i(y) f_i$.
+  So, $P\delta_y = \sum_{i=1}^{|\Omega|}\lambda_i\pi(y)f_i(y)f_i$.
+  So we have
+  \[P(x, y) = P\delta_y (x) = \sum_{i=1}^{|\Omega|}\lambda_i f_i(x) f_i(y) \pi(y) \qedhere\]
+\end{proof}
+\begin{corollary}
+  If $P$ has eigenbasis $\{f_i\}_{i=1}^{|\Omega|}$ on the inner product space $(\mathbb{R}^{\Omega}, \<\cdot, \cdot\>_\pi)$, then $P^t = \sum_{i=1}^{|\Omega|} \lambda_i^t f_i f_i^{T}D$ and thus $q_t = P^t D^{-1} = \sum_{i=1}^{|\Omega|}\lambda_i^tf_if_i^T$.
+\end{corollary}
+
+\section{Distances}
+\begin{define}
+  \[d(t) \triangleq \max_{x\in\Omega} \parallel P^t(x, \cdot) - \pi \parallel_{TV}\]
+\end{define}
+\begin{define}[$\ell^p$-distances]
+  \[d^{(p)}(t) \triangleq \max_{x\in\Omega} \parallel q_t^x - 1 \parallel_{\pi, p}\]
+\end{define}
+\begin{corollary}[from Fact \ref{fact:lp-norm-monotone}]
+  $2d(t) = d^{(1)}(t) \leq d^{(2)}(t) \leq \cdots \leq d^{(\infty)}(t)$
+\end{corollary}
+\begin{fact}
+  $d^{(\infty)}(2t) = \left[d^{(2)}(t)\right]^2 = \max_{x\in\Omega} q_{2t}(x, x) - 1 = \max_{x\in\Omega}\<q_t^x - 1, q_t^x - 1\>_\pi$
+\end{fact}
+\begin{proof}
+  \textcolor{orange}{Background}: 
+  $\<q_t^x, q_t^y\>_\pi = \sum_{z\in\Omega} \pi(z) \frac{P^t(x, z)}{\pi(z)} \frac{P^t(y, z)}{\pi(z)}
+  = \sum_{z\in\Omega} \frac{P^t(x, z)P^t(z, y)}{\pi(y)}
+  = \frac{P^{2t}(x, y)}{\pi(y)} = q_{2t}(x,y)$
+  And thus we have $\<q_t^x - 1, q_t^y - 1\>_\pi = q_{2t}(x, y) - 1$.
+  
+  \textcolor{orange}{($d^{(\infty)}(2t) = \max_{x\in\Omega} |q_{2t}(x, x) - 1|$)}:
+  By Cauchy-Schwarz Inequality, we have
+  \[\<q_t^x - 1, q_t^y - 1\>_\pi\leq\sqrt{\<q_t^x - 1, q_t^x - 1\>_\pi\<q_t^y - 1, q_t^y - 1\>_\pi} \leq \max_{\theta\in\{x,y\}} \<q_t^\theta - 1, q_t^\theta - 1\>_\pi\]
+  Thus, $d^{(\infty)}(2t) = \max_{x, y\in \Omega} q_{2t}(x, y) - 1 = \max_{x, y\in\Omega}\<q_t^x - 1, q_t^y - 1\>_\pi = \max_{x\in\Omega}\<q_t^x - 1, q_t^x - 1\>_\pi$
+
+  \textcolor{orange}{($\left[d^{(2)}(t)\right]^2 = \max_{x\in\Omega} |q_{2t}(x, x) - 1|$)}:
+  $[d^{(2)}(t)]^2 = \max_{x\in\Omega}\parallel q_t^x - 1 \parallel_{\pi, 2}^2 = \max_{x\in\Omega}\<q_t^x - 1, q_t^x - 1\>_\pi$
+\end{proof}
+
+\begin{fact}[submultiplicative]
+  $d^{(p)}(s+t) \leq d^{(p)}(s)d^{(p)}(t)$
+\end{fact}
+
+\section{The Relationship Between Distances and Spectrum}
+
+\begin{fact}
+  Since $\lambda_1 = 1$ and $f_1 = \mathbb{1}$, we have:
+  \[d^{(p)}(t) = \max_{x\in\Omega} \parallel q_t^x - \mathbb{1}^T \parallel_{\pi, p} = \max_{x\in\Omega} \parallel \sum_{i=1}^{|\Omega|} \lambda_i^t f_i(x) f_i^T - \mathbb{1}^T \parallel_{\pi, p} = \max_{x\in\Omega} \parallel \sum_{i=2}^{|\Omega|} \lambda_i^t f_i(x) f_i^T \parallel_{\pi, p}\]
+\end{fact}
+
+\begin{define}
+  Let $\lambda_\star \triangleq \{|\lambda|: \mbox{ $\lambda$ is an eigenvalue of $P$ but $\lambda \not= 1$}\}$.
+  \textbf{absolute spectral gap} is defined as $\gamma_\star \triangleq 1 - \lambda_\star$.
+  
+  If we sort all the eigenvalues in the order $1 = \lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_{|\Omega|} \geq -1$.
+  \textbf{spectral gap} is defined as $\gamma \triangleq 1 - \gamma_2$.
+
+  Moreover, the \textbf{relaxation time} is defined as $\frac{1}{\gamma_\star}$
+\end{define}
+\begin{fact}
+  $d^{(p)}(t) \leq \lambda_\star^{t-1} d^{(p)}(1)$
+\end{fact}
+\begin{proof}
+  $d^{(p)}(t) =  \max_{x\in\Omega} \parallel \sum_{i=2}^{|\Omega|} \lambda_i^t f_i(x) f_i^T \parallel_{\pi, p}  \leq \lambda_\star^{t-1}\max_{x\in\Omega} \parallel \sum_{i=2}^{|\Omega|} \lambda_i f_i(x) f_i^T \parallel_{\pi, p} =\lambda_\star^{t-1} d^{(p)}(1)$
+\end{proof}
+\begin{fact}
+  $\lambda_\star^t \leq d^{(1)}(t)$
+\end{fact}
+\begin{proof}
+  Let $f$ be any eigenfunctions of $P$ that satisfies $f\perp_\pi \mathbb{1}$, and $\lambda$ be its corresponding eigenvalue and thus we have $\<f, \mathbb{1}\>_\pi = \mathbb{E}[f] = 0$
+  Then for $\forall x\in \Omega$:
+  \[|\lambda^t f(x)| = |P^tf (x)| = |\sum_{y\in\Omega} P(x, y)f(y)| = |\sum_{y\in\Omega} P(x, y)f(y) - \pi(y)f(y)| \leq \parallel f \parallel_\infty d^{(1)}(t)\]
+  Let $x_\star \triangleq \mathrm{argmax}_{x} |f(x)|$, then we have
+  \[|\lambda^t| |f(x_\star)| \leq |f(x_\star)| d^{(1)}(t) \Rightarrow |\lambda|^t \leq d^{(1)}(t) \Rightarrow \lambda_\star^t \leq d^{(1)}(t) \qedhere\]
+\end{proof}
+\begin{theorem}
+  $\lim_{t\to\infty} \left[d^{(p)}(t)\right]^{1/t} = \lambda_\star$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \lambda^t_\star \leq d^{(p)}(t) &\leq \lambda_\star^{t-1} d^{(p)}(1) \\
+    \lambda_\star \leq d^{(p)}(t)^{1/t} &\leq \lambda_\star^{\frac{t-1}{t}} d^{(p)}(1)^{1/t} \\
+    \lim_{t\to\infty} \lambda_\star \leq \lim_{t\to\infty} d^{(p)}(t)^{1/t} &\leq \lim_{t\to\infty}\lambda_\star^{\frac{t-1}{t}} \cdot \lim_{t\to\infty} d^{(p)}(1)^{1/t} \\
+    \lambda_\star \leq \lim_{t\to\infty} d^{(p)}(t)^{1/t} &\leq \lambda_\star \qedhere
+  \end{align*}
+\end{proof}
+
+\section{The Relationship Between Coupling and Spectrum}
+\textcolor{red}{TODO:} [M. F. Chen (98)] and its extension.
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

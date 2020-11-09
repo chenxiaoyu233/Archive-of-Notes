@@ -1,9 +1,13 @@
 \documentclass{article}
-\usepackage[usenames]{color}
-\usepackage{amsmath, amssymb, amsthm}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
 \usepackage[utf8]{inputenc}
 \usepackage{algorithm2e}
-\usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{hyperref}
 \hypersetup{
@@ -11,6 +15,15 @@
   linkcolor=blue,
   filecolor=magenta,
   urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
 }
 
 \newtheorem{define}{Definition}[section]

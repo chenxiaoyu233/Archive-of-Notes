@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[range=\setminus]{Asana-Math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+\title{The Notion of Approximate Tensorization}
+\author{Xiaoyu Chen}
+\date{}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{fact}{Fact}[section]
+
+\def\<{\langle}
+\def\>{\rangle}
+\def\Var{\mathrm{Var}}
+\def\E{\mathbb{E}}
+
+\begin{document}
+\maketitle
+\section{Background}
+Recently, a novel notation called \textbf{Approximate Tensorization} was used to build the rapid mixing of Glauber dynamics for general spin systems in the uniqueness region\cite{CLV20-1}.
+They use this notation to establish a (constant factor) connection between the modified log-sobolev constant of the block dynamics and the single site dynamics on general spin systems.
+
+For spin system, it turns out that this notation is equivalant to the well-known poincar{\'e} inequality and log-sobolev inequality, while it contains more intuition for spin systems such that one could use the inner properties of spin systems more easily.
+
+For more information of this notation, one could refer to \cite{caputo2015approximate, caputo2020block}.
+
+\section{Approximate Tensorization of Variance}
+Lets start this notation from the easier part, namely, variance and the corresponding constant i.e. spectra gap $1 - \lambda_2$.
+
+\begin{fact}[Variance]
+  For $\forall f: \Omega \to \mathbb{R}$, we have
+  \[\Var_\mu f = \frac{1}{2}\sum_{\sigma,\tau\in\Omega} \mu(\sigma)\mu(\tau)\left(f(\sigma) - f(\tau)\right)^2\]
+\end{fact}
+
+\begin{fact}[Dirichlet Form]
+  For $\forall f: \Omega \to \mathbb{R}$, we have
+  \[\<f, (I - P) f\>_\mu = \frac{1}{2} \sum_{\sigma, \tau\in\Omega}\mu(\sigma)P(\sigma, \tau)\left(f(\sigma) - f(\tau)\right)^2\]
+\end{fact}
+
+\subsection{Single Site Dynamics}
+The equivalance between approximate tensorization and the poincar{\'e} inequality relies on a careful manipulation on Dirichlet form, which is stated as follows.
+
+\begin{align*}
+  \<f, (I - P)f\>_\mu
+  &= \frac{1}{2} \sum_{\sigma, \tau \in\Omega} \mu(\sigma)P(\sigma, \tau)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{2} \sum_{\sigma\in\Omega} \mu(\sigma) \left(\sum_{u\in V} \sum_{\substack{\tau_u\in\Omega^{\sigma_{V\setminus u}}_u \\ \tau_{V\setminus u} = \sigma_{V\setminus u}}} \frac{1}{n} \mu^{\sigma_{V\setminus u}}_u(\tau_u)\right)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{n} \sum_{u\in V} \sum_{\gamma\in \Omega_{V\setminus u}} \mu_{V\setminus u} (\gamma) \cdot \frac{1}{2} \sum_{x\in \Omega^{\gamma}_u} \mu^\gamma_u(x) \sum_{y\in\Omega^\gamma_u}\mu^\gamma_u(y) (f_\gamma(x) - f_\gamma(y))^2 \\
+  &= \frac{1}{n}\sum_{u\in V} \sum_{\gamma\in\Omega_{V\setminus u}} \mu_{V\setminus u}(\gamma) \cdot \Var_{\mu^\gamma_u} (f_\gamma) \\
+  &= \frac{1}{n} \sum_{u\in V} \mu\left[\Var_u(f)\right]
+\end{align*}
+
+\begin{fact}[Equivalence for Single Site Dynamics]
+  Recall that the poincar{\'e} inequality is
+  \[\forall f, (1 - \lambda_2) \cdot \Var_\mu (f) \leq \<f, (I - P)f\>_\mu\]
+  And we could restate it as follows
+  \[\forall f, (1 - \lambda_2) \cdot \Var_\mu (f) \leq \frac{1}{n}\sum_{u} \mu [\Var_u (f)]\]
+\end{fact}
+
+\subsection{Block  Dynamics}
+Let $P^\lor_{n, n - \ell}$ denote the block dynamics where we choose $\ell$ vertices uniformly at random, and then sample a configuration on this $\ell$ vertices according to the conditional distribution.
+
+Note that the above approach for single site dynamics could also be applied to block dynamics.
+
+\begin{align*}
+  \<f, (I - P^{\lor}_{n,n-\ell})f\>_\mu
+  &= \frac{1}{2} \sum_{\sigma, \tau \in\Omega} \mu(\sigma)P^\lor_{n,n-\ell}(\sigma, \tau)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{2} \sum_{\sigma\in\Omega} \mu(\sigma) \left(\sum_{S \in \binom{V}{\ell}} \sum_{\substack{\tau_S\in\Omega^{\sigma_{V\setminus S}}_u \\ \tau_{V\setminus S} = \sigma_{V\setminus S}}} \frac{1}{\binom{n}{\ell}} \mu^{\sigma_{V\setminus S}}_S(\tau_S)\right)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{\binom{n}{\ell}} \sum_{S\in \binom{V}{\ell}} \sum_{\gamma\in \Omega_{V\setminus S}} \mu_{V\setminus S} (\gamma) \cdot \frac{1}{2} \sum_{\alpha\in \Omega^{\gamma}_S} \mu^\gamma_S(\alpha) \sum_{\beta\in\Omega^\gamma_S}\mu^\gamma_S(\beta) (f_\gamma(\alpha) - f_\gamma(\beta))^2 \\
+  &= \frac{1}{\binom{n}{\ell}}\sum_{S\in \binom{V}{\ell}} \sum_{\gamma\in\Omega_{V\setminus S}} \mu_{V\setminus S}(\gamma) \cdot \Var_{\mu^\gamma_S} (f_\gamma) \\
+  &= \frac{1}{\binom{n}{\ell}} \sum_{S\in \binom{V}{\ell}} \mu\left[\Var_S(f)\right]
+\end{align*}
+
+\begin{fact}[Equivalence for Block Dynamics]
+  Recall that the poincar{\'e} inequality for the block dynamics is
+  \[\forall f, (1 - \lambda_2) \Var_\mu f \leq \<f, (I - P^\lor_{n,n-\ell})f\>_\mu\]
+  And we could restate it as follows
+  \[\forall f, (1 - \lambda_2) \Var_\mu f \leq \frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \mu[\Var_S(f)]\]
+\end{fact}
+
+In the block case, the \textbf{Approximate Tensorization} is some times called \textbf{Uniform Block Factorization} (see \cite{CLV20-1}) and it is a special case of \textbf{Block Factorization} given in \cite{caputo2020block}.
+
+\subsection{Connection with Local-to-Global Argument}
+
+\begin{define}
+  For any function $f^{(s)}: X_s \to \mathbb{R}$, and $r < s$, we could define another function as
+  $f^{(r)} \triangleq P_r^\uparrow P_{r+1}^\uparrow\cdots P_{s-1}^\uparrow f^{(s)}$
+  Which could also be denoted as
+  \[f^{(r)} = [\pi_r \leftrightarrow \pi_{r+1}] \cdots [\pi_{s-1} \leftrightarrow \pi_s]f^{(s)}\]
+\end{define}
+\begin{fact}
+  $\pi_s f^{(s)} = \pi_r f^{(r)}$
+\end{fact}
+
+\begin{define}
+  Let $f^{(s)}$ be a function defined on $X_s$.
+  Let $\gamma \in X_r$, $\alpha \in X^\gamma_{s-r}$, then we denote $f^{(s)}(\gamma\cup \alpha)$ as $f^{(s - r)}_\gamma(\alpha)$
+\end{define}
+
+\begin{fact}
+  $\E_{\pi^\gamma_\ell}[f^{(\ell)}_\gamma] = f^{(\ell)}(\gamma)$
+\end{fact}
+
+\begin{fact}
+  \[\frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \mu[\Var_S(f)] = \Var_{\pi_n}(f^{(n)}) - \Var_{\pi_{n-\ell}}(f^{(n-\ell)})\]
+\end{fact}
+
+\clearpage
+\bibliographystyle{alpha}
+\bibliography{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

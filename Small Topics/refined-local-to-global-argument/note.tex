@@ -1,0 +1,458 @@
+\documentclass{article}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[range=\setminus]{Asana-Math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+\newtheorem{define}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{theorem}{Theorem}[section]
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+% \Op{#1}{#2} --expand--> [#1 <--> #2]
+\def\Op#1#2{\left[#1 \leftrightarrow #2\right]}
+\def\Var{\mathrm{Var}}
+%%
+\def\<{\left\langle}
+\def\>{\right\rangle}
+
+\title{Refined Understanding: Local to Global Argument}
+\author{Xiaoyu Chen}
+\date{}
+
+\begin{document}
+\maketitle
+\section{The Operators}
+
+\begin{define}
+  Ground set $[n]$.
+\end{define}
+
+\begin{define}
+  A simplcial complex $X \subset 2^{[n]}$ is a downclose set family, i.e.
+  \[\beta \in X \land \alpha \subset \beta \Rightarrow \alpha\in X\]
+\end{define}
+
+\begin{define}
+  $X$ could be partited in $n+1$ disjoint parts $X_0, X_1, X_2, \cdots, X_n$, such that
+  $X_i = \{\alpha\in X |\; |\alpha| = i\}$
+\end{define}
+
+\begin{define}
+  There is a distribution $\pi = \pi_n$ that we are interested in.
+  Its support set is $X_n$.
+\end{define}
+
+\begin{define}
+  The distribution on $X_n$ could imply nature distributions on $X_k$ where $k < n$, that is:
+  \[\forall \alpha\in X_k \;.\; \pi_k(\alpha) \propto \sum_{\substack{\beta\in X_n \\ \beta\supset \alpha}} \pi_n(\beta)\]
+  One can easily see that we could normalize the summation using the factor $1/\binom{n}{k}$.
+\end{define}
+
+\begin{fact}
+  \[\forall \alpha\in X_k, k \leq \ell\leq n \;.\; \pi_k(\alpha) \propto \sum_{\substack{\beta\in X_\ell\\ \beta\supset \alpha}} \pi_\ell(\beta)\]
+\end{fact}
+
+\begin{fact}
+  For any $\gamma \in X$, the link of $\gamma$ is another simplcial complex defined as
+  \[X^\gamma \triangleq \{\beta\setminus \gamma \;|\; \beta\in X, \beta\supset \gamma\}\]
+\end{fact}
+
+\begin{define}
+  From the distribuiton on $X$, there is a nature distribution on $X^\gamma$ which is defined as
+  \[\forall \alpha \in X^\gamma_k \;.\; \pi^\gamma_k(\alpha) \propto \pi_{|\gamma|+k}(\alpha \cup \gamma)\]
+  It is easy to see that the normalize factor of this distribution is
+  \[\sum_{\substack{\beta\in X_{|\gamma| + k} \\ \beta \supset \gamma}} \pi_{|\gamma|+k}(\beta) = \pi_{|\gamma|}(\gamma) \cdot \binom{|\gamma| + k}{|\gamma|}\]
+  And it easy to notice that
+  \[\pi^\gamma_k(\underbrace{\beta\setminus\gamma}_{\alpha}) = \Pr[\beta\sim \pi_{|\gamma| + k} \;|\; \beta \supset \gamma]\]
+\end{define}
+
+\begin{define} The Down-Operator and Up-Operator is defined as follows
+  \begin{itemize}
+  \item$\mathbb{R}^{X_k \times X_{k+1}}$, $\Op{\pi_k}{\pi_{k+1}}(\alpha, \beta)  \triangleq \Pr[\beta\sim \pi_{k+1} \;|\; \beta\supset\alpha] = \pi^\alpha_1(\beta\setminus\alpha)$
+  \item$\mathbb{R}^{X_k \times X_{\ell}}, k < \ell$, $\Op{\pi_k}{\pi_\ell}(\alpha, \beta) \triangleq \Pr[\beta\sim\pi_{\ell} \;|\; \beta\supset\alpha] = \pi^\alpha_{\ell-k}(\beta\setminus \alpha)$
+  \item$\mathbb{R}^{X_{k+1} \times X_{k}}$,$\Op{\pi_{k+1}}{\pi_k}(\beta, \alpha) \triangleq \frac{1}{k+1} \mathbb{1}[\beta\supset\alpha]$
+  \item$\mathbb{R}^{X_\ell \times X_k}, k < \ell$, $\Op{\pi_\ell}{\pi_k}(\beta, \alpha) \triangleq \frac{1}{\binom{\ell}{k}}\mathbb{1}[\beta\supset\alpha]$
+  \end{itemize}
+\end{define}
+
+\begin{fact}
+  For $k < \ell$, we have
+  \[\Op{\pi_k}{\pi_\ell} = \Op{\pi_k}{\pi_{k+1}}\Op{\pi_{k+1}}{\pi_{k+2}}\cdots\Op{\pi_{\ell-1}}{\pi_\ell}\]
+\end{fact}
+\begin{proof}
+  Intuition:
+  \[\pi_k\Op{\pi_k}{\pi_{k+1}}\Op{\pi_{k+1}}{\pi_{k+2}}\cdots\Op{\pi_{\ell-1}}{\pi_\ell} = \pi_\ell\]
+  Verification:
+  Note that we have
+  \[\Op{\pi_k}{\pi_{k+1}} = \mathrm{diag}^{-1}(\pi_k) A_k \mathrm{diag}(\pi_{k+1}) \frac{1}{k+1}\]
+  where $A_k \in \mathbb{R}^{X_k\times X_{k+1}}$ and
+  $A_k(\alpha, \beta) = \left\{
+    \begin{array}{ll}
+      0 & \alpha \not\subset \beta \\
+      1 & \alpha \subset \beta
+    \end{array}
+  \right.$
+  So, we have
+  \begin{align*}
+    \prod_{i=k}^{\ell-1}\Op{\pi_i}{\pi_{i+1}} 
+    &= \prod_{i=k}^{\ell-1}\mathrm{diag}^{-1}(\pi_i)A_i\mathrm{diag}(\pi_{i+1})\frac{1}{i+1}\\
+    &= \prod_{i=k}^{\ell-1}\frac{1}{i+1} \cdot \mathrm{diag}^{-1}(\pi_k) A_{k,\ell} \mathrm{diag}(\pi_\ell)
+  \end{align*}
+  Where, 
+  \[A_{k,\ell}(\alpha, \beta) = \left\{
+    \begin{array}{ll}
+      0 & \alpha\not\subset\beta \\
+      (\ell - k)! & \alpha \subset\beta
+    \end{array}
+  \right.\]
+  So, 
+  \[\prod_{i=k}^{\ell-1}\Op{\pi_i}{\pi_{i+1}} = \frac{1}{\binom{\ell}{k}} \mathrm{diag}^{-1}(\pi_k) A'_{k,\ell} \mathrm{diag}(\pi_\ell) = \Op{\pi_k}{\pi_\ell} \qedhere\]
+\end{proof}
+
+\begin{define}
+  Suppose there is a function $f^{(\ell)} = f : X_n \to \mathbb{R}$ that we are interested in. Then it will naturally imply function $f^{(k)}$ on $X_k$ for $k < \ell$ such that
+  \[f^{(k)} \triangleq \Op{\pi_k}{\pi_\ell}f^{(\ell)}\]
+\end{define}
+
+\begin{define}
+  For $f^{(\ell)}$ and $\gamma\in X_k$, we have $f^{(\ell-k)}_\gamma(\alpha) = f^{(\ell)}(\gamma\cup\alpha)$
+\end{define}
+
+\begin{fact}
+  $f^{(k)}(\alpha) = \sum_{\beta} \Op{\pi_k}{\pi_\ell}(\alpha, \beta) \cdot f^{(\ell)}(\beta) = \sum_\beta \pi^\alpha_{\ell-k}(\beta\setminus\alpha) \cdot f^{(n)}(\beta) = \mathbb{E}_{\pi^\alpha_{\ell-k}}[f_\alpha^{(\ell-k)}]$
+\end{fact}
+
+\begin{fact}\label{fact:f-consistent}
+  $f^{(|\gamma|+k)} = \Op{\pi_{|\gamma|+k}}{\pi_{|\gamma|+\ell}} f^{(|\gamma| + \ell)} \Rightarrow f^{(k)}_\gamma = \Op{\pi^\gamma_k}{\pi^\gamma_\ell} f^{(\ell)}_\gamma$
+\end{fact}
+\begin{proof}
+  \[\Op{\pi_{|\gamma| + k}}{\pi_{|\gamma| + \ell}}(\alpha\cup\gamma, \beta\cup\gamma) \propto \frac{\pi_{|\gamma|+\ell}(\beta)}{\pi_{|\gamma|+k}(\alpha)} \propto \Op{\pi_k^\gamma}{\pi_\ell^\gamma}(\alpha, \beta)\qedhere\]
+\end{proof}
+
+\begin{fact}
+  For any function $f: X_{k+1}\to\mathbb{R}, g: X_k \to \mathbb{R}$, we have
+  \[\<g, \Op{\pi_k}{\pi_{k+1}} f\>_{\pi_k} = \<\Op{\pi_{k+1}}{\pi_k} g, f\>_{\pi_{k+1}}\]
+\end{fact}
+\begin{proof}
+  \begin{align*}
+    \mathrm{LHS} &= \sum_{\alpha\in X_k} \pi_k(\alpha) g(\alpha) \sum_{\substack{\beta\in X_{k+1} \\ \beta \supset \alpha}} \frac{\pi_{k+1}(\beta)}{(k+1)\pi_k(\alpha)} f(\beta) \\
+    &= \sum_{\alpha\in X_k}\sum_{\substack{\beta\in X_{k+1}\\\beta\supset\alpha}} \frac{1}{k+1} \pi_{k+1}(\beta) \cdot g(\alpha) f(\beta)
+  \end{align*}
+  \begin{align*}
+    \mathrm{RHS} &= \sum_{\beta\in X_{k+1}} \pi_{k+1}(\beta) f(\beta) \sum_{\substack{\alpha \in X_k \\ \alpha \subset \beta}} g(\alpha) \frac{1}{k+1} \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{define}[map $f$ to $f^{\mathbf{1}}$]
+  Suppose we have a distribution $\pi$ and a function $f: \mathrm{supp}(\pi) \to \mathbb{R}$, then we define:
+  $J_\pi f \triangleq f^{\mathbf{1}} = \<f, \mathbf{1}\>_\pi \cdot \mathbf{1}$. It turns out that $J_\pi = \mathbf{1}\pi^T$. \textcolor{blue}{Note that $f = f^{\mathbf{1}} + f^{\perp \mathbf{1}}$.}
+\end{define}
+
+\section{Reimplement \cite{alev2020improved}}
+
+See \href{run:../rapid-mixing-on-matroid-basis/note.pdf}{Notes for level-by-level-decay approach}.
+
+\begin{define}
+  \[a_k = \E_{\pi_k} \left[\left(f^{(k)}\right)^2\right]\]
+\end{define}
+
+First, we have the following fact.
+\begin{fact}
+  \begin{align*}
+    a_{k+1} &= \sum_{\gamma\in X_{k-1}}\pi_{k-1}(\gamma)\sum_{\{x,y\}\in X^\gamma_2} \pi^\gamma_2(\{x,y\}) \left(f^{(2)}_\gamma(\{x,y\})\right)^2 \\
+    a_{k} &= \sum_{\gamma\in X_{k-1}}\pi_{k-1}(\gamma)\sum_{\{x\}\in X^\gamma_1} \pi^\gamma_1(\{x\}) \left(f^{(1)}_\gamma(\{x\})\right)^2 \\
+    a_{k-1} &= \sum_{\gamma\in X_{k-1}}\pi_{k-1}(\gamma) \left(f^{(0)}_\gamma\right)^2
+  \end{align*}
+\end{fact}
+
+\begin{define}
+  \begin{align*}
+    b_{k+1} &= \sum_{\{x,y\}\in X_\gamma(2)} \pi_2^\gamma (\{x,y\}) (f^{(2)}_\gamma)^2 = \<f^{(2)}_\gamma, f^{(2)}_\gamma\>_{\pi_2^\gamma}\\
+    b_k &= \sum_{\{x\}\in X_\gamma(1)} \pi_1^\gamma (\{x\}) (f^{(1)}_\gamma)^2 = \<f^{(1)}_\gamma, f^{(1)}_\gamma\>_{\pi_1^\gamma} \\
+    b_{k-1} &= (f^{(0)}_\gamma)^2
+  \end{align*}
+\end{define}
+
+\begin{fact}
+  \begin{align*}
+    b_{k-1}
+    &= \<f^{(1)}_\gamma, J_{\pi_1^\gamma}\; f^{(1)}_\gamma\>_{\pi_1^\gamma}
+     = \<f^{(2)}_\gamma, J_{\pi_2^\gamma}\; f^{(2)}_\gamma\>_{\pi_2^\gamma}
+  \end{align*}
+\end{fact}
+
+\begin{fact}[see Fact \ref{fact:f-consistent}]
+  \[f^{(1)}_\gamma = \Op{\pi_1^\gamma}{\pi_2^\gamma} f^{(2)}_\gamma\]
+\end{fact}
+\begin{fact}
+  \begin{align*}
+    b_k
+    &= \< \Op{\pi_1^\gamma}{\pi_2^\gamma} f^{(2)}_\gamma, \Op{\pi_1^\gamma}{\pi_2^\gamma} f^{(2)}_\gamma\>_{\pi_1^\gamma} \\
+    &= \< f^{(2)}_\gamma, \Op{\pi_2^\gamma}{\pi_1^\gamma} \Op{\pi_1^\gamma}{\pi_2^\gamma} f^{(2)}_\gamma\>_{\pi_2^\gamma} \\
+    &= \< f^{(2)}_\gamma, P_{\pi_2^\gamma}^{\bigtriangledown}\; f^{(2)}_\gamma\>_{\pi_2^\gamma}
+  \end{align*}
+\end{fact}
+
+Having these facts in hand, we could have the following argument (similar to \cite{alev2020improved}).
+
+\begin{align*}
+  b_{k} - b_{k-1}
+  &= \<f^{(2)}_\gamma, (P_{\pi_2^\gamma}^{\bigtriangledown} - J_{\pi_2^\gamma})f^{(2)}_\gamma\>_{\pi_2^\gamma} \\
+  &= \<(f^{(2)}_\gamma)^{\perp \mathbf{1}}, (P_{\pi_2^\gamma}^{\bigtriangledown} - J_{\pi_2^\gamma})(f^{(2)}_\gamma)^{\perp \mathbf{1}}\>_{\pi_2^\gamma} \\
+  &\leq \lambda_2(P_{\pi_2}^\bigtriangledown)\<(f^{(2)}_\gamma)^{\perp \mathbf{1}}, (f^{(2)}_\gamma)^{\perp \mathbf{1}}\>_{\pi_2^\gamma} \\
+  &= \lambda_2(P_{\pi_2}^\bigtriangledown)\<f^{(2)}_\gamma, (I - J_{\pi_2^\gamma}) f^{(2)}_\gamma\>_{\pi_2^\gamma} \\
+  &= \lambda_2(P_{\pi_2}^\bigtriangledown) (b_{k+1} - b_{k-1}) \\
+  &= \lambda_2(P_{\pi_1}^\bigtriangleup) (b_{k+1} - b_{k-1}) \\
+  &= \frac{1}{2}(\lambda_2(P_{\pi_1}^\land) + 1) (b_{k+1} - b_{k-1}) \\
+  &\leq \frac{1}{2}(\gamma_{k-1} + 1) (b_{k+1} - b_{k-1})
+\end{align*}
+Note that the $\gamma_{k-1}$ we use here is defined in \cite{alev2020improved} and should not be confused with $\gamma$.
+
+So, we also have
+\begin{align*}
+  a_k - a_{k-1} &\leq \frac{1}{2}(\gamma_{k-1} + 1) (a_{k+1} - a_{k-1}) \\
+  \frac{1 - \gamma_{k-1}}{1 + \gamma_{k-1}} (a_k - a_{k-1}) &\leq a_{k+1} - a_k \\
+  \frac{1 - \gamma_{k-1}}{1 + \gamma_{k-1}} A_k & \leq A_{k+1}
+\end{align*}
+
+To analysis block dynamics let $\beta_{k-1} = \frac{1 - \gamma_{k-1}}{1 + \gamma_{k-1}}$.
+We have
+\begin{align*}
+  \forall k \;.\; a_{k+1} &\geq (1 + \beta_{k-1})a_k - \beta_{k-1}a_{k-1} \\
+\end{align*}
+
+\begin{fact}[\cite{CLV20-1}, Theorem 5.4] \label{fact:decay}
+  \[a_{k+1} \geq \frac{\sum_{i=0}^k \Gamma_i}{\sum_{i=0}^{k-1}\Gamma_i} a_k\]
+  Where $\Gamma_i = \prod_{j=0}^{i-1} \beta_j$ and $\Gamma_0 = 1$
+\end{fact}
+\begin{proof}
+  (Base case): $a_2 \geq (1 - \beta_0) a_1$ \\
+  (Induction): Assume that we have $a_{k+1} \geq \frac{\sum_{i=0}^k \Gamma_i}{\sum_{i=0}^{k-1}\Gamma_i} a_k$, then
+  \begin{align*}
+    a_{k+2}
+    &\geq (1 + \beta_k)a_{k+1} - \beta_ka_k \\
+    &\geq a_{k+1} + \beta_k(1 - \frac{\sum_{i=0}^{k-1}\Gamma_i}{\sum_{i=0}^{k}\Gamma_i})a_{k+1} \\
+    &= a_{k+1} + \beta_k(\frac{\Gamma_k}{\sum_{i=0}^{k}\Gamma_i})a_{k+1} \\
+    &= (1 + \frac{\Gamma_{k+1}}{\sum_{i=0}^k \Gamma_i})a_{k+1} \\
+    &= \frac{\sum_{i=0}^{k+1}\Gamma_i}{\sum_{i=0}^k\Gamma_i}a_{k+1} \qedhere
+  \end{align*}
+\end{proof}
+
+\section{Analysis of The Block Dynamics \cite{CLV20-1}}
+
+By Fact \ref{fact:decay}, we know that
+\begin{align*}
+  a_n
+  &\geq \frac{\sum_{i=0}^{n-1}\Gamma_i}{\sum_{i=0}^{n-2}\Gamma_i} a_{n-1} 
+  \geq \frac{\sum_{i=0}^{n-1}\Gamma_i}{\sum_{i=0}^{n-2}\Gamma_i} \frac{\sum_{i=0}^{n-2}\Gamma_i}{\sum_{i=0}^{n-3}\Gamma_i} a_{n-2} 
+  \geq \frac{\sum_{i=0}^{n-1}\Gamma_i}{\sum_{i=0}^{n-\ell-1}\Gamma_i} a_{n-\ell}
+\end{align*}
+
+So, we have
+\[a_{n-\ell} \leq \frac{\sum_{i=0}^{n-\ell-1}\Gamma_i}{\sum_{i=0}^{n-1}\Gamma_i}a_n \]
+Then,
+\begin{align*}
+  a_n - a_{n-\ell} &\geq (1 - \frac{\sum_{i=0}^{n-\ell-1}\Gamma_i}{\sum_{i=0}^{n-1}\Gamma_i})a_n 
+  = \frac{\sum_{i=n-\ell}^{n-1}\Gamma_i}{\sum_{i=0}^{n-1}\Gamma_i} a_n\triangleq \textcolor{blue}{\kappa} a_n
+\end{align*}
+
+Then, we give a lowerbound for $\frac{\sum_{i=n-\ell}^{n-1}\Gamma_i}{\sum_{i=0}^{n-1}\Gamma_i}$.
+
+First, recall that $\beta_k = \frac{1 - \gamma_k}{1 + \gamma_k}$.
+And we assume that $\gamma_k \leq \frac{\eta}{n - k - 1}$.
+So, we have
+\[\beta_k \geq \frac{(n - k - 1) - \eta}{(n - k - 1) + \eta} = 1 - \frac{2\eta}{(n - k - 1) + \eta} \geq 1 - \frac{\lceil2\eta\rceil}{n - k - 1} \triangleq \frac{n - k - 1 - \textcolor{blue}{R}}{n - k - 1}\]
+
+\begin{fact}
+  \[\forall k \;.\; \frac{\partial \kappa}{\partial \beta_k} \geq 0\]
+\end{fact}
+\begin{proof}
+  The numerator of $\frac{\partial \kappa}{\partial \beta_k}$ is
+  \begin{align*}
+    &\frac{\partial (\sum_{i=n-\ell}^{n-1} \Gamma_i)}{\partial \beta_k} (\sum_{i=0}^{n-1}\Gamma_i) - (\sum_{i=n-\ell}^{n-1}\Gamma_i)\frac{\partial (\sum_{i=0}^{n-1}\Gamma_i)}{\partial \beta_k}\\
+    &= \frac{\sum_{i=\max\{n-\ell,k+1\}}^{n-1} \Gamma_i}{\beta_k} (\sum_{i=0}^{n-1}\Gamma_i) - (\sum_{i=n-\ell}^{n-1}\Gamma_i)\frac{\sum_{i=k+1}^{n-1}\Gamma_i}{\beta_k}\\
+  \end{align*}
+  And we ened the proof by
+   \[(\sum_{i=\max\{n-\ell,k+1\}}^{n-1} \Gamma_i) (\sum_{i=0}^{n-1}\Gamma_i) \geq (\sum_{i=n-\ell}^{n-1}\Gamma_i)(\sum_{i=k+1}^{n-1}\Gamma_i) \qedhere\]
+\end{proof}
+
+So, to give a lowerbound for $\kappa$, we could let $\beta_k$ meets its lowerbound $\max\{\frac{n - k - 1 - R}{n - k - 1}, 0\}$, that is, we assume $\beta_k = \max\{\frac{n - k - 1 - 2\eta}{n - k - 1}, 0\}$ in the rest of the article.
+Then we have the following for $n - k - R > 0$:
+\begin{align*}
+  \Gamma_k
+  &= \prod_{i=0}^{k-1}\beta_i  = \prod_{i=0}^{k-1}\frac{n - i - 1 - R}{n - k - 1}\\
+\end{align*}
+Note that the numerator occupys the interval $[n - k - R, n - 1 - R]$, and the donominator occupys the interval $[n - k, n-1]$.
+So,
+\[\Gamma_k = \frac{\prod_{i=n-k-R}^{n-k-1} i}{\prod_{j=n-R}^{n-1}j}\]
+Note that when $n - k - R \leq 0$, we have $\Gamma_k = 0$.
+So, the above fomula also works for the case $n - k - R \leq 0$.
+This formula is good, since its denominator does not contains $k$.
+
+Then, we know that
+\begin{align*}
+  \kappa &\geq \frac{\sum_{i=n-\ell}^{n-1}\Gamma_i}{\sum_{i=0}^{n-1}\Gamma_i} = \frac{\sum_{i=n-\ell}^{n-1}(n-i-R)(n-i-R+1)\cdots(n-i-1)}{\sum_{i=0}^{n-1}(n-i-R)(n-i-R+1)\cdots(n-i-1)} \\
+         &= \frac{\sum_{i=0}^{\ell-1}i(i-1)\cdots(i-R+1)}{\sum_{i=0}^{n-1}i(i-1)\cdots(i-R+1)}, \hspace{0.5cm} i\gets n - i - 1 \\
+         &= \frac{\binom{R}{R} + \binom{R+1}{R} + \binom{R+2}{R} + \cdots + \binom{\ell-1}{R}}{\binom{R}{R} + \binom{R+1}{R} + \binom{R+2}{R} + \cdots + \binom{n-1}{R}} ,\hspace{0.5cm} \mbox{ divid $R!$ in numerator and denominator} \\
+         &= \frac{\binom{R+1}{R+1} + \binom{R+1}{R} + \binom{R+2}{R} + \cdots + \binom{\ell-1}{R}}{\binom{R+1}{R+1} + \binom{R+1}{R} + \binom{R+2}{R} + \cdots + \binom{n-1}{R}} \\
+         &=\frac{\binom{\ell}{R+1}}{\binom{n}{R+1}} \\
+         &=\frac{\ell(\ell-1)\cdots(\ell-R)}{n(n-1)\cdots(n-R)} \\
+%  &\geq \left(\frac{\ell-R}{n-R}\right)^{R+1}
+\end{align*}
+
+\section{Block Factorization}
+
+Let $P^{\bigtriangledown}_{n,n-\ell} = \Op{\pi_n}{\pi_{n-\ell}}\Op{\pi_{n-\ell}}{\pi_n}$ be the nature block dynamics where we choose a set $S$ of size $\ell$ u.a.r. and then we resample the configuration in $S$ by the correct conditional distribution.
+\cite{CLV20-1} use a suitable representation of dirichlet form.
+\begin{align*}
+  \<f, (I - P^{\bigtriangledown}_{n,n-\ell})f\>_\mu
+  &= \frac{1}{2} \sum_{\sigma, \tau \in\Omega} \mu(\sigma)P^\bigtriangledown_{n,n-\ell}(\sigma, \tau)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{2} \sum_{\sigma\in\Omega} \mu(\sigma) \left(\sum_{S \in \binom{V}{\ell}} \sum_{\substack{\tau_S\in\Omega^{\sigma_{V\setminus S}}_u \\ \tau_{V\setminus S} = \sigma_{V\setminus S}}} \frac{1}{\binom{n}{\ell}} \mu^{\sigma_{V\setminus S}}_S(\tau_S)\right)\left(f(\sigma) - f(\tau)\right)^2 \\
+  &= \frac{1}{\binom{n}{\ell}} \sum_{S\in \binom{V}{\ell}} \sum_{\gamma\in \Omega_{V\setminus S}} \mu_{V\setminus S} (\gamma) \cdot \frac{1}{2} \sum_{\alpha\in \Omega^{\gamma}_S} \mu^\gamma_S(\alpha) \sum_{\beta\in\Omega^\gamma_S}\mu^\gamma_S(\beta) (f_\gamma(\alpha) - f_\gamma(\beta))^2 \\
+  &= \frac{1}{\binom{n}{\ell}}\sum_{S\in \binom{V}{\ell}} \sum_{\gamma\in\Omega_{V\setminus S}} \mu_{V\setminus S}(\gamma) \cdot \Var_{\mu^\gamma_S} (f_\gamma) \\
+  &= \frac{1}{\binom{n}{\ell}} \sum_{S\in \binom{V}{\ell}} \mu\left[\Var_S(f)\right]
+\end{align*}
+
+\begin{fact}[Equivalence for Block Dynamics]
+  Recall that the poincar{\'e} inequality for the block dynamics is
+  \[\forall f, (1 - \lambda_2) \Var_\mu f \leq \<f, (I - P^\bigtriangledown_{n,n-\ell})f\>_\mu\]
+  And we could restate it as follows
+  \[\forall f, (1 - \lambda_2) \Var_\mu f \leq \frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \mu[\Var_S(f)]\]
+\end{fact}
+
+Moreover, we could establish the connection between the notation of \textbf{block fractorization} and the \textbf{decay of down-up walk}.
+
+\begin{align*}
+  a_n &= \sum_{\gamma\in X_{n-\ell}} \pi_{n-\ell}(\gamma) \sum_{\alpha \in X^\gamma_\ell} \pi^\gamma_{\ell}(\alpha) (f^{(\ell)}_\gamma(\alpha))^2 \\
+  a_{n-\ell} &= \sum_{\gamma\in X_{n-\ell}} \pi_{n-\ell}(\gamma) (f^{(n-\ell)}(\gamma))^2 \\
+\end{align*}
+
+It is easy to see that $f^{(n-\ell)}(\gamma) = \mathbb{E}_{\pi^\gamma_\ell} [f^{(\ell)}_\gamma(\alpha)]$
+
+So, we have
+\begin{align*}
+  a_n - a_{n-\ell}
+  &= \sum_{\gamma\in X_{n-\ell}} \pi_{n-\ell}(\gamma) \Var_{\pi^\gamma_\ell}(f^{(\ell)}_\gamma) \\
+  &= \sum_{(U,\sigma)\in X_{n-\ell}} \pi_{n-\ell}(U, \sigma) \Var_{\pi^{(U,\sigma)}_\ell}(f^{(\ell)}_\gamma) \\
+  &= \sum_{U\in\binom{V}{n-\ell}}\sum_{\sigma\in \Omega_U} \pi_{n-\ell}(U, \sigma) \Var_{\pi^{(U,\sigma)}_\ell}(f^{(\ell)}_\gamma) \\
+  &= \sum_{U\in\binom{V}{n-\ell}}\sum_{\sigma_U\in \Omega_U} \frac{1}{\binom{n}{\ell}}\mu_U(\sigma) \Var_{\mu^\sigma_{V\setminus U}}(f^{(\ell)}_\sigma) \\
+  &= \frac{1}{\binom{n}{\ell}}\sum_{S\in\binom{V}{\ell}}\sum_{\sigma\in\Omega_{V\setminus S}} \mu_{V\setminus S}(\sigma)\Var_{\mu^\sigma_S}(f^{(\ell)}_\sigma) \\
+  &= \frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \mu [\Var_S(f)]
+\end{align*}
+
+\section{Break Blocks into Single Vertices}
+
+Now, we want to build the connection between
+\[\frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}}\mu[\Var_S(f)] \mbox{ and } \frac{1}{n}\sum_{v\in V} \mu[\Var_v(f)]\]
+
+\begin{fact}
+  For $S\subset V$, let $\mathcal{P}(S)$ be any partition of $S$, and if 
+  \[\forall \sigma \in \Omega_{V\setminus S} \;.\; \Var_S^\sigma(f) \leq C \cdot \sum_{U\in \mathcal{P}(S)} \mu^\sigma_S[\Var_U(f)]\] for some constant $C$ (does not effect by $\sigma$).
+  Then we have for $S\subset V$:
+  \[\mu[\Var_S(f)] \leq C\cdot \sum_{U\in\mathcal{P}(S)} \mu[\Var_U(f)]\]
+\end{fact}
+
+\begin{proof}
+  \begin{align*}
+    \mu[\Var_S(f)]
+    &= \sum_{\sigma\in\Omega_{V\setminus S}}\mu_{V\setminus S}(\sigma) \Var_{\mu^\sigma_S}(f) \\
+    &\leq \sum_{\sigma\in\Omega_{V\setminus S}}\mu_{V\setminus S}(\sigma)\  C\cdot \sum_{U\in\mathcal{P}(S)} \mu^\sigma_S[\Var_U(f)] \\
+    &\leq C\cdot \sum_{\sigma\in\Omega_{V\setminus S}}\mu_{V\setminus S}(\sigma) \sum_{U\in\mathcal{P}(S)} \sum_{\gamma\in\Omega^\sigma_{S\setminus U}}\mu^\sigma_{S\setminus U}(\gamma) \Var_{\mu^{\sigma\cup\gamma}_U}(f) \\
+    &= C\cdot \sum_{U\in\mathcal{P}(S)} \sum_{\sigma\cup\gamma\in \Omega_{S\setminus U}} \mu_{V\setminus U} (\sigma\cup\gamma) \Var_{\mu^{\sigma\cup\gamma}_U}(f) \\
+    &= C\cdot \sum_{U\in\mathcal{P}(S)} \mu[\Var_U(f)] \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{fact}[\cite{CLV20-1}]
+  Let $\mathcal{C}(S)$ be the set of all disconnected parts of $S$, then we have
+  \[\forall \sigma\in \Omega_{V\setminus S} \;.\; \Var_S^\sigma (f) \leq \sum_{U\in\mathcal{C}(S)} \mu^\sigma_S[\Var_U(f)]\]
+\end{fact}
+
+\begin{fact}[\cite{CLV20-1}]
+  For $S$ of size $k$ be a connect subgraph, we have
+  \[\Var^\gamma_S(f) \leq \frac{k}{2b^{2k+2}}\sum_{v\in V} \mu^\gamma_S[\Var_v(f)]\]
+\end{fact}
+\begin{proof}[Proof Sketch]
+  Fix any configuration $\gamma$ on $V\setminus S$.
+  Let $\sigma$ and $\tau$ be two configrations on $S$.
+  \[\mu^\gamma(\sigma)P^\gamma(\sigma, \tau) \geq b^k\cdot\frac{b}{k}\]
+  So, $\Phi \geq \frac{2b^{k+1}}{k}$.
+  And recall that we have $1 - \lambda_2 \geq \frac{\Phi^2}{2} = \frac{2b^{2k+2}}{k^2}$.
+
+  So we have 
+  \begin{align*}
+    \frac{2b^{2k+2}}{k^2}\Var_S^\gamma (f) &\leq (1 - \lambda_2)\Var_S^\gamma(f) \leq \frac{1}{k} \sum_{v\in V} \mu^\gamma_S[\Var_v(f)] \\
+    \Var^\gamma_S(f) &\leq \frac{k}{2b^{2k+2}}\sum_{v\in V} \mu^\gamma_S[\Var_v(f)] \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{fact}[\cite{CLV20-1}]
+  Let $G = (V, E)$ be an $n$-vertex graph of maximum degree at most $\Delta$.
+  Then for every $K\in \mathbb{N}^+$ we have
+  \[\mathbb{P}_S(|S_v| = k) \leq \frac{\ell}{n} \cdot (2e\Delta\theta)^{k-1}\]
+  where the probability $\mathbb{P}$ is taken over a uniform random subset $S\subset V$ of size $\ell = \lceil\theta n\rceil$. ($S_v$ a the connected component in $S$ which contains $v$)
+\end{fact}
+
+Then, we have
+\begin{align*}
+  a_n &\leq \frac{1}{\kappa} (a_n - a_{n-\ell}) \\
+  \Var(f) &\leq \frac{1}{\kappa} \frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \mu[\Var_S(f)] \\
+      &\leq \frac{1}{\kappa}\frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \sum_{U\in\mathcal{C}(S)}\mu[\Var_U(f)] \\
+      &\leq \frac{1}{\kappa}\frac{1}{\binom{n}{\ell}} \sum_{S\in\binom{V}{\ell}} \sum_{U\in\mathcal{C}(S)} \frac{|U|}{2b^{2|U|+2}}\sum_{v\in U} \mu[\Var_v(f)] \\
+      &= \frac{1}{\kappa} \sum_{v\in V} \mu[\Var_v(f)] \sum_{k=1}^\ell \mathbb{P}_S(|S_v| = k) \cdot \frac{k}{2b^{2k + 2}} \\
+  &\leq \frac{1}{\kappa} \sum_{v\in V} \mu[\Var_v(f)] \sum_{k=1}^\ell\frac{\ell}{n}\cdot (2e\Delta\theta)^{k-1} \cdot \frac{k}{2b^{2k+2}}  \\
+  &= \frac{1}{\kappa}\frac{\ell}{n}\frac{1}{2b^4} \sum_{v\in V} \mu[\Var_v(f)] \sum_{k=1}^\ell\cdot (\frac{2e\Delta\theta}{b^2})^{k-1} \cdot k  \\
+  &\leq \frac{1}{\kappa}\frac{\ell}{n}\frac{1}{2b^4} \sum_{v\in V} \mu[\Var_v(f)] \sum_{k=1}^\ell\cdot (1/2)^{k-1} \cdot k  ,\hspace{0.5cm} \mbox{let $\theta < \frac{b^2}{4e\Delta}$}\\
+  &\leq \frac{1}{\kappa}\frac{\ell}{n}\frac{1}{2b^4} \sum_{v\in V} \mu[\Var_v(f)] \cdot 12 ,\hspace{0.5cm} \mbox{see \cite{CLV20-1}} \\
+  &\leq \frac{1}{\kappa}\frac{\ell}{n}\frac{6}{b^4} \sum_{v\in V} \mu[\Var_v(f)] \\
+      &\leq \frac{n(n-1)\cdots(n-R)}{\ell(\ell-1)\cdots(\ell-R)} \cdot \frac{\ell}{n}\frac{6}{b^4}\sum_{v\in V}\mu[\Var_v(f)] \\
+  &\leq (\frac{n-R}{\ell-R})^R \cdot \frac{6}{b^4}\sum_{v\in V}\mu[\Var_v(f)] \\
+  &\leq (\frac{n-\lceil 2\eta\rceil}{\ell-\lceil 2\eta \rceil})^{\lceil 2\eta\rceil} \cdot \frac{6}{b^4}\sum_{v\in V}\mu[\Var_v(f)] \\
+  &\ \ \  \mbox{(Since $2R\leq \ell \Rightarrow \frac{2Rn}{n + R} \leq \ell \Rightarrow \frac{n-R}{\ell-R} \leq \frac{2n}{\ell}$)} \\
+  &\leq (\frac{2n}{\ell})^R \cdot \frac{6}{b^4}\sum_{v\in V}\mu[\Var_v(f)] ,\hspace{0.5cm} \mbox{ let $\ell = \lceil\theta n\rceil \geq 2R$}\\
+  &\leq (\frac{2}{\theta})^{2\eta + 1}\cdot \frac{6}{b^4}\sum_{v\in V}\mu[\Var_v(f)] \\
+\end{align*}
+
+Moreover, note that $\theta$ should satisfies
+\[\lceil 2\theta\rceil \geq 2\lceil 2\eta \rceil \mbox{ and } \theta < \frac{b^2}{4e\Delta}\]
+,which equivalants to
+\[\frac{4\eta + 2}{n} \leq \theta < \frac{b^2}{4e\Delta}\].
+Finally, note that as $n\to\infty$, the lowerbound could be omitted.
+And it is easy to give a lowerbound for $b$ using the tree recursion (see \cite{CLV20-1})
+
+
+
+\clearpage
+\bibliographystyle{alpha}
+\bibliography{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
