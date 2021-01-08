@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[range=\setminus]{Asana-Math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+\title{Adjoint Walks on Disjoint State Spaces}
+\author{Xiaoyu Chen}
+\date{}
+
+\newtheorem{define}{Definition}
+\newtheorem{fact}{Fact}
+\def\<{\langle}
+\def\>{\rangle}
+
+\begin{document}
+\maketitle
+
+Let $\Omega_1$ and $\Omega_2$ be two disjoint state spaces.
+Let $\pi_1$ and $\pi_2$ be two distribution on $\Omega_1$ and $\Omega_2$, respectively.
+Let $P_{12} \in \mathbb{R}^{\Omega_1 \times \Omega_2}$ and $P_{21} \in \mathbb{R}^{\Omega_2 \times \Omega_1}$ be two stochastic matrices.
+
+\begin{define}
+  If for any $x\in \Omega_1$ and $y \in \Omega_2$, we have $\pi_1(x)P_{12}(x, y) = \pi_2(y)P_{21}(y, x)$, then we say $P_{12}$ and $P_{21}$ are \emph{adjoint random walk} over $\pi_1$ and $\pi_2$.
+\end{define}
+
+\begin{fact}
+  $P_{12}$ and $P_{21}$ are \emph{adjoint random walk} over $\pi_1$ and $\pi_2$ iff
+  \[ \forall f: \Omega_1 \to \mathbb{R}, \forall g: \Omega_2 \to \mathbb{R} \;,\; \<f, P_{12}g\>_{\pi_1} = \< P_{21}f, g \>_{\pi_2}.  \]
+\end{fact}
+\begin{proof}
+  $\Rightarrow$:
+  \begin{align*}
+    \< f, P_{12} g\>_{\pi_1}
+    = \sum_{x\in\Omega_1} \pi_1(x) f(x) \left[P_{12}g\right](x)
+    = \sum_{x\in\Omega_1}\sum_{y\in\Omega_2} \pi_1(x)&P_{12}(x, y) f(x) g(y) \\
+    &\|\\
+    \< P_{21}f, g \>_{\pi_2}
+    = \sum_{y\in\Omega_2} \pi_2(y) \left[P_{21}f\right](y) g(y)
+    = \sum_{x\in\Omega_1}\sum_{y\in\Omega_2} \pi_2(y)&P_{21}(y, x) f(x) g(y)
+  \end{align*}
+  $\Leftarrow$: Let $x \in \Omega_1$ and $y \in \Omega_2$ be arbitrary elements in $\Omega_1$ and $\Omega_2$, respectively.
+  Let $\delta_x : \Omega_1 \to \{0, 1\}$ and $\delta_y : \Omega_2 \to \{0, 1\}$, be the indicator function of $x$ and $y$, respectively.
+  Then,
+  \begin{align*}
+    \<\delta_x, P_{12}\delta_y\>_{\pi_1} &= \<P_{21}\delta_x, \delta_y\>_{\pi_2} \Rightarrow \pi_1(x)P_{12}(x, y) = \pi_2(y)P_{21}(y, x) \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{fact}
+  If $P_{12}$ and $P_{21}$ are \emph{adjoint random walk} over $\pi_1$ and $\pi_2$, then
+  \[\pi_1P_{12} = \pi_2 \mbox{ and } \pi_2P_{21} = \pi_1\]
+\end{fact}
+
+\begin{fact}
+  Let $P_{12}$ and $P_{21}$ be \emph{adjoint random walk} over $\pi_1$ and $\pi_2$.
+  Then for any distribution $\nu_1$ over $\Omega_1$, we have,
+  \begin{align} \label{eq:1->2}
+    \frac{\nu_1 P_{12}}{\pi_1 P_{12}} = P_{21} \frac{\nu_1}{\pi_1}.
+  \end{align}
+  Symmetrically, for any distribution $\nu_2$ over $\Omega_2$, we have,
+  \begin{align}
+    \frac{\nu_2 P_{21}}{\pi_2 P_{21}} = P_{12} \frac{\nu_2}{\pi_2}.
+  \end{align}
+\end{fact}
+\begin{proof}
+  We only proof \eqref{eq:1->2}.
+  For any $y \in \Omega_2$, we have
+  \begin{align*}
+    \frac{\nu_1 P_{12}}{\pi_1 P_{12}} (y) = \frac{\left[\nu_1P_{12}\right](y)}{\pi_2(y)}
+  \end{align*}
+  On the other hand, we have
+  \begin{align*}
+    P_{21}\frac{\nu_1}{\pi_1} (y)
+    &= \sum_{x\in\Omega_1} P_{21}(y, x) \frac{\nu_1(x)}{\pi_1(x)} \\
+    &= \sum_{x\in\Omega_1} \pi_2(y)P_{21}(y, x) \frac{\nu_1(x)}{\pi_2(y)\pi_1(x)} \\
+    &= \sum_{x\in\Omega_1} \pi_1(x)P_{12}(x, y) \frac{\nu_1(x)}{\pi_2(y)\pi_1(x)} \\
+    &= \sum_{x\in\Omega_1} \pi_1(x)P_{12}(x, y) \frac{\nu_1(x)}{\pi_2(y)\pi_1(x)} \\
+    &= \frac{\left[\nu_1P_{12}\right](y)}{\pi_2(y)} \qedhere
+  \end{align*}
+\end{proof}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -134,7 +134,7 @@
 \end{proof}
 
 \begin{define}
-  Suppose there is a function $f^{(\ell)} = f : X_n \to \mathbb{R}$ that we are interested in. Then it will naturally imply function $f^{(k)}$ on $X_k$ for $k < \ell$ such that
+  Suppose there is a function $f^{(\ell)} = f : X_\ell \to \mathbb{R}$ that we are interested in. Then it will naturally imply function $f^{(k)}$ on $X_k$ for $k < \ell$ such that
   \[f^{(k)} \triangleq \Op{\pi_k}{\pi_\ell}f^{(\ell)}\]
 \end{define}
 
@@ -143,14 +143,14 @@
 \end{define}
 
 \begin{fact}
-  $f^{(k)}(\alpha) = \sum_{\beta} \Op{\pi_k}{\pi_\ell}(\alpha, \beta) \cdot f^{(\ell)}(\beta) = \sum_\beta \pi^\alpha_{\ell-k}(\beta\setminus\alpha) \cdot f^{(n)}(\beta) = \mathbb{E}_{\pi^\alpha_{\ell-k}}[f_\alpha^{(\ell-k)}]$
+  $f^{(k)}(\alpha) = \sum_{\beta} \Op{\pi_k}{\pi_\ell}(\alpha, \beta) \cdot f^{(\ell)}(\beta) = \sum_\beta \pi^\alpha_{\ell-k}(\beta\setminus\alpha) \cdot f^{(\ell)}(\beta) = \mathbb{E}_{\pi^\alpha_{\ell-k}}[f_\alpha^{(\ell-k)}]$
 \end{fact}
 
 \begin{fact}\label{fact:f-consistent}
   $f^{(|\gamma|+k)} = \Op{\pi_{|\gamma|+k}}{\pi_{|\gamma|+\ell}} f^{(|\gamma| + \ell)} \Rightarrow f^{(k)}_\gamma = \Op{\pi^\gamma_k}{\pi^\gamma_\ell} f^{(\ell)}_\gamma$
 \end{fact}
 \begin{proof}
-  \[\Op{\pi_{|\gamma| + k}}{\pi_{|\gamma| + \ell}}(\alpha\cup\gamma, \beta\cup\gamma) \propto \frac{\pi_{|\gamma|+\ell}(\beta)}{\pi_{|\gamma|+k}(\alpha)} \propto \Op{\pi_k^\gamma}{\pi_\ell^\gamma}(\alpha, \beta)\qedhere\]
+  \[\Op{\pi_{|\gamma| + k}}{\pi_{|\gamma| + \ell}}(\alpha\cup\gamma, \beta\cup\gamma) \propto \frac{\pi_{|\gamma|+\ell}(\beta\cup\gamma)}{\pi_{|\gamma|+k}(\alpha\cup\gamma)} \propto \Op{\pi_k^\gamma}{\pi_\ell^\gamma}(\alpha, \beta)\qedhere\]
 \end{proof}
 
 \begin{fact}
@@ -324,6 +324,17 @@ Then, we know that
 %  &\geq \left(\frac{\ell-R}{n-R}\right)^{R+1}
 \end{align*}
 
+\subsection{Mixing time of block dynamics}
+Note that $2R \leq \ell \Rightarrow \frac{2Rn}{n + R} \leq \ell \Rightarrow \frac{n-R}{\ell - R} \leq \frac{2n}{\ell}$.
+\begin{align*}
+  \frac{1}{\kappa}
+  &\leq \frac{n(n-1)\cdots (n - R)}{\ell(\ell-1)\cdots(\ell-R)} \\
+  &\leq (\frac{n-R}{\ell-R})^{R+1} \\
+  &\leq (\frac{2n}{\ell})^{R+1} \hspace{0.5cm} \mbox{let $2R \leq \ell$}\\
+  &\leq (\frac{2}{\theta})^{\lceil 2\eta \rceil + 1}
+\end{align*}
+By $2R \leq \ell$, we have $\lceil n\theta \rceil \geq 2\lceil 2\eta \rceil \Rightarrow \theta \geq \frac{4\eta + 2}{n}$
+
 \section{Block Factorization}
 
 Let $P^{\bigtriangledown}_{n,n-\ell} = \Op{\pi_n}{\pi_{n-\ell}}\Op{\pi_{n-\ell}}{\pi_n}$ be the nature block dynamics where we choose a set $S$ of size $\ell$ u.a.r. and then we resample the configuration in $S$ by the correct conditional distribution.
@@ -438,7 +449,7 @@ Then, we have
 \end{align*}
 
 Moreover, note that $\theta$ should satisfies
-\[\lceil 2\theta\rceil \geq 2\lceil 2\eta \rceil \mbox{ and } \theta < \frac{b^2}{4e\Delta}\]
+\[\lceil n\theta\rceil \geq 2\lceil 2\eta \rceil \mbox{ and } \theta < \frac{b^2}{4e\Delta}\]
 ,which equivalants to
 \[\frac{4\eta + 2}{n} \leq \theta < \frac{b^2}{4e\Delta}\].
 Finally, note that as $n\to\infty$, the lowerbound could be omitted.
