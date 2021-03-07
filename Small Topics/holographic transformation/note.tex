@@ -1,0 +1,178 @@
+\documentclass{article}
+\usepackage[usenames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm, unicode-math}
+\usepackage{fontspec, tgpagella, tgheros, tgcursor}
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[range=\setminus]{Asana-Math.otf}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+}
+\usepackage[letterpaper]{geometry}
+\newgeometry{
+  textheight=9in,
+  textwidth=6.5in,
+  top=1in,
+  headheight=14pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+\title{Introduction to the Holographic Transformation}
+\author{Xiaoyu Chen}
+\date{}
+
+\newtheorem{definition}{Definitin}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{theorem}{Theorem}[section]
+
+\def\<{\left\langle}
+\def\>{\right\rangle}
+
+\begin{document}
+\maketitle
+
+\section{Background for Kronecker Products}
+\begin{definition}
+  Let $A \in \mathbb{R}^{m\times n}$, $B \in \mathbb{R}^{p\times q}$,
+  the \textbf{Kronecker Product} of $A$ and $B$ is defined as
+  \begin{align*}
+    A \otimes B \triangleq \left[
+    \begin{array}{ccc}
+      a_{11}B & \cdots & a_{1n}B \\
+      \vdots & \ddots & \vdots \\
+      a_{m1}B & \cdots & a_{mn}B
+    \end{array}
+    \right] \in \mathbb{R}^{mp \times nq}
+  \end{align*}
+\end{definition}
+
+\begin{fact}
+  Some basic properties:
+  \begin{itemize}
+  \item $A\otimes (B + C) = A\otimes B + A\otimes C$
+  \item $(B+C)\otimes A = B\otimes A + C\otimes A$
+  \item $(kA)\otimes B = A\otimes (kB) = k(A\otimes B)$
+  \item $(A\otimes B)\otimes C = A \otimes (B\otimes C)$
+  \item $A\otimes 0 = 0\otimes A = 0$
+  \end{itemize}
+\end{fact}
+
+For convenience, sometimes people use the following notation.
+\begin{definition}
+  Let $A \in \mathbb{R}^{m\times n}$.
+  For any $k \in \mathbb{Z}^+$, let $A^{\otimes k} \triangleq \underbrace{A\otimes A \otimes \cdots \otimes A}_{k} \in \mathbb{R}^{m^k \times n^k}$.
+\end{definition}
+
+\begin{fact}
+  $(A\otimes B)^T = A^T \otimes B^T$.
+\end{fact}
+
+\begin{fact}
+  Let $A \in \mathbb{R}^{m \times n}$, $B \in \mathbb{R}^{r\times s}$, $C \in \mathbb{R}^{n\times p}$, $D\in\mathbb{R}^{s\times t}$, then
+  \[(A\otimes B)(C\otimes D) = AC\otimes BD (\in \mathbb{R}^{mr \times pt})\]
+\end{fact}
+\begin{proof}
+  One could verify this by:
+  \begin{align*}
+    (A\otimes B)(C\otimes D)
+    &= \left[
+      \begin{array}{ccc}
+        a_{11}B & \cdots & a_{1n}B \\
+        \vdots & \ddots & \vdots \\
+        a_{m1}B & \cdots & a_{mn}B
+      \end{array} \right] 
+      \left[
+      \begin{array}{ccc}
+          c_{11}D & \cdots & c_{1p}D \\
+          \vdots & \ddots & \vdots \\
+          c_{n1}D & \cdots & c_{np}D
+      \end{array} \right]  \\
+    &= \left[
+      \begin{array}{ccc}
+        \sum_{k=1}^n a_{1k}c_{k1}BD & \cdots & \sum_{k=1}^na_{1k}c_{kp}BD \\
+        \vdots & \ddots & \vdots \\
+        \sum_{k=1}^n a_{mk}c_{k1}BD & \cdots & \sum_{k=1}^n a_{mk}c_{kp}BD
+      \end{array}
+      \right] \\
+    &= AC \otimes BD . \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{corollary}
+  If $A$ and $B$ are non-singular, then $(A\otimes B)^{-1} = A^{-1}\otimes B^{-1}$.
+\end{corollary}
+\begin{proof}
+  $(A\otimes B)(A^{-1}\otimes B^{-1}) = I\otimes I = I$.
+\end{proof}
+
+\begin{corollary}
+  Let $A \in \mathbb{R}^{m\times n}$, $B \in \mathbb{R}^{p\times q}$ and $k \in \mathbb{Z}^+$ be any number, then $A^{\otimes k} B^{\otimes k} = (AB)^{\otimes k}$.
+\end{corollary}
+\begin{proof}
+  When $k = 1$ , $AB = AB$ holds trivially.
+  When $k > 1$ , we could use the induction:
+  \begin{align*}
+    A^{\otimes k}B^{\otimes k} &= (A \otimes A^{\otimes k-1})(B \otimes B^{\otimes k-1}) \\
+    &= AB \otimes A^{\otimes k-1}B^{\otimes k-1}. \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{corollary}
+  If $A$ is non-singular, then for any $k \in \mathbb{Z}^+$, we have $\left(A^{\otimes k}\right)^{-1} = \left(A^{-1}\right)^{\otimes k}$.
+\end{corollary}
+
+\section{Holant Problem and Holographic Transformation}
+Let $G = (V, E)$ be any graph.
+The incident graph $B = ((V, E), H)$ of $G$ is a bipartite graph, where for any $v\in V, e \in E$, there is an edge (in $H$) between them iff $v$ is an end-point of $e$ in $G$.
+The Holant problem is defined on the incident graph $B$.
+
+\begin{definition}[Holant Problem]
+  Let $B = ((V, E), H)$ be a bipartite graph.
+  For any vertex $x \in V\cup E$, there is a function $f_x: \{0, 1\}^{d(x)} \to \mathbb{R}$, where $d(x)$ is the degree of $x$.
+  Then, the Holant problem is to calculate the following formula:
+  \begin{align*}
+    \mathrm{Holant}_B
+    &\triangleq \<\bigoplus_{v\in V}f_v, \bigoplus_{e\in E} f_e\>_{\sigma \in \{0, 1\}^H} \\
+    &= \sum_{\sigma \in \{0, 1\}^H} \left(\prod_{v\in V}f_v(\sigma |_{H(v)})\right) \left(\prod_{e\in E}f_e(\sigma |_{H(e)})\right),
+  \end{align*}
+  where $\sigma |_{H(v)}$ and $\sigma |_{H(e)}$ are generated by restricting the configuration $\sigma$ into $H(v)$ and $H(e)$, respectively.
+  Here, we note that $H(v)$ and $H(e)$ are the edges incident to $v$ and $e$ in $H$, respectively.
+\end{definition}
+
+\begin{remark}
+  In the bipartite graph $B$, any edge $h \in H$ is actually a half edge in the original graph $G$.
+  And obviously, for any $u, v\in V$, we have $H(u) \cap H(v) = \emptyset$.
+  Similarlly, for any $e, f \in E$, we have $H(e) \cap H(f) = \emptyset$.
+  Finally, using the fact that $\bigcup_{v\in V}H(v) = H$ and $\bigcup_{e\in E}H(e) = H$, we know that $\bigotimes_{v\in V}f_v$ and $\bigotimes_{e\in E}f_e$ are functions defined on $\{0, 1\}^H$.
+\end{remark}
+
+Here is an example of holographic transformation.
+Let $M \in \mathbb{R}^{2\times 2}$ be a non-singular matrix.
+Then 
+\begin{align*}
+  \mathrm{Holant}_B
+  &= \left(\bigotimes_{v\in V} f_v\right)^T\left(\bigotimes_{e\in E} f_e\right) \\
+  &= \left(\bigotimes_{v\in V} f_v^T\right) M^{\otimes |H|} (M^{-1})^{\otimes |H|}\left(\bigotimes_{e\in E} f_e\right) \\
+  &= \left(\bigotimes_{v \in V} f_v^T M^{\otimes d(v)}\right) \left(\bigotimes_{e\in E} (M^{-1})^{\otimes d(e)}f_e\right)
+\end{align*}
+So, the Holant problem $\<\bigotimes_{v\in V}f_v, \bigotimes_{e\in E} f_e\>$ is equivalent to the Holant problem $\<\bigotimes_{v\in V} (M^T)^{\otimes d(v)}f_v, \bigotimes_{e\in E} (M^{-1})^{\otimes d(e)} f_e\>$.
+This kind of transformation is called holographic transformation, they really do nothing but create equivalent problems.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

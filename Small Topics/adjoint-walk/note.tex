@@ -27,7 +27,7 @@
   footskip=30pt
 }
 
-\title{Adjoint Walks on Disjoint State Spaces}
+\title{Adjoint Walks}
 \author{Xiaoyu Chen}
 \date{}
 
@@ -35,9 +35,13 @@
 \newtheorem{fact}{Fact}
 \def\<{\langle}
 \def\>{\rangle}
+\def\Var{\mathrm{Var}}
+\def\E{\mathbb{E}}
 
 \begin{document}
 \maketitle
+
+\section{Adjoint walk on two disjoint spaces}
 
 Let $\Omega_1$ and $\Omega_2$ be two disjoint state spaces.
 Let $\pi_1$ and $\pi_2$ be two distribution on $\Omega_1$ and $\Omega_2$, respectively.
@@ -103,6 +107,29 @@ Let $P_{12} \in \mathbb{R}^{\Omega_1 \times \Omega_2}$ and $P_{21} \in \mathbb{R
   \end{align*}
 \end{proof}
 
+\section{Understand variance and Dirichlet form}
+For any distribution $\pi: \Omega \to \mathbb{R}$, and any function $f: \Omega \to \mathbb{R}$, the variance is defined as
+\[\Var_\pi[f] \triangleq \E_\pi[f^2] - \E_\pi[f]^2.\]
+We could represent the variance in a more general way:
+\[\Var_\pi[f] = \< f - \pi(f), f - \pi(f)\>_\pi,\]
+where, for conveniene, we use $\pi(f)$ to stand for $\pi^T f$, which is equivalent to $\E_\pi[f]$.
+
+Then, we define the projection operator as follows.
+\begin{define}
+  We define $J_\pi \triangleq \mathbb{1}\pi^T$, which is a matrix with each row equals to $\pi^T$.
+\end{define}
+\begin{fact}
+  For any $f: \Omega \to \mathbb{R}$, it is easy to verify that $J_\pi f = \<f, \mathbb{1}\>_\pi\mathbb{1}$.
+  So, $J_\pi$ is a projection matrix that maps $f$ to $f^{\mathbb{1}}$.
+\end{fact}
+Then, for the variance, we have
+\begin{align*}
+  \Var_\pi[f]
+  &= \<f - J_\pi f, f - J_\pi f\>_\pi \\
+  &= \<f^{\perp_\pi \mathbb{1}}, f^{\perp_\pi \mathbb{1}}\>_\pi \\
+  &= \<f, (I - J_\pi) f\>_\pi \\
+  &= \mathcal{E}_{J_\pi}(f, f)
+\end{align*}
 \end{document}
 
 %%% Local Variables:
