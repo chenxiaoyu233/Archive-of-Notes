@@ -1,4 +1,4 @@
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-bigblow.setup
+#+SETUPFILE: ./themes/org-html-themes/org/theme-bigblow.setup
 #+TITLE: Archive of Notes (Xiaoyu Chen)
 #+OPTIONS: num:nil
 #+OPTIONS: toc:2

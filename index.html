@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-10-11 Sun 23:18 -->
+<!-- 2021-04-29 Thu 20:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Archive of Notes (Xiaoyu Chen)</title>
@@ -40,7 +40,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -52,7 +52,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -180,62 +193,38 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
-<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/bigblow_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/bigblow_theme/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/bigblow_theme/css/hideshow.css"/>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/bigblow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/bigblow_theme/js/hideshow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -267,56 +256,56 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge6ca8a0">Archive of Notes</a>
+<li><a href="#org04f75bb">Archive of Notes</a>
 <ul>
-<li><a href="#orgb47a05c">As An Archive of My Notes</a></li>
-<li><a href="#org8db14d9">A Good Way to Find Out What Is Worth to Be Read</a></li>
+<li><a href="#orgb8d63f8">As An Archive of My Notes</a></li>
+<li><a href="#org975ef2e">A Good Way to Find Out What Is Worth to Be Read</a></li>
 </ul>
 </li>
-<li><a href="#org32868f8">Sampling</a>
+<li><a href="#org4b56a64">Sampling</a>
 <ul>
-<li><a href="#org2f2d108">Recent Tech</a></li>
-<li><a href="#org01026c0">Tech from Book</a></li>
-<li><a href="#org205e573">Jerrum Book</a></li>
+<li><a href="#org93086d8">Recent Tech</a></li>
+<li><a href="#orgde56a36">Tech from Book</a></li>
+<li><a href="#org4eb2bac">Jerrum Book</a></li>
 </ul>
 </li>
-<li><a href="#org29f01c1">Reading List</a>
+<li><a href="#orgcd5729e">Reading List</a>
 <ul>
-<li><a href="#org467a4b0">Coupling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cencering">cencering</span></span></a></li>
-<li><a href="#org28f82ca">Perfect Sampling (LLL/conditional gibbs)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="localLemma">localLemma</span></span></a></li>
-<li><a href="#org667bee5">Perfect Sampling (CFTP + Bounding Chains)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CFTP">CFTP</span>&#xa0;<span class="boundingChains">boundingChains</span></span></a></li>
-<li><a href="#orgb0a91b7">Dynamic Sampling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="filterMethod">filterMethod</span></span></a></li>
-<li><a href="#orge774e4a">Local-to-Global Argument&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span>&#xa0;<span class="localToGlobal">localToGlobal</span></span></a></li>
-<li><a href="#orge8529ba">2-spin Systems&#xa0;&#xa0;&#xa0;<span class="tag"><span class="uniqueness">uniqueness</span>&#xa0;<span class="potentialMethod">potentialMethod</span></span></a></li>
-<li><a href="#orgf58359b">Sampling By Local Lemma&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localLemma">localLemma</span>&#xa0;<span class="connectiveBarrier">connectiveBarrier</span></span></a></li>
+<li><a href="#org0abfd87">Coupling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cencering">cencering</span></span></a></li>
+<li><a href="#org3f6c07d">Perfect Sampling (LLL/conditional gibbs)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="localLemma">localLemma</span></span></a></li>
+<li><a href="#org797f28d">Perfect Sampling (CFTP + Bounding Chains)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CFTP">CFTP</span>&#xa0;<span class="boundingChains">boundingChains</span></span></a></li>
+<li><a href="#orgc69d214">Dynamic Sampling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="filterMethod">filterMethod</span></span></a></li>
+<li><a href="#orgdd9d27e">Local-to-Global Argument&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span>&#xa0;<span class="localToGlobal">localToGlobal</span></span></a></li>
+<li><a href="#orgf712ff9">2-spin Systems&#xa0;&#xa0;&#xa0;<span class="tag"><span class="uniqueness">uniqueness</span>&#xa0;<span class="potentialMethod">potentialMethod</span></span></a></li>
+<li><a href="#org2f5ac20">Sampling By Local Lemma&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localLemma">localLemma</span>&#xa0;<span class="connectiveBarrier">connectiveBarrier</span></span></a></li>
 </ul>
 </li>
-<li><a href="#orgb892575">MISC</a>
+<li><a href="#org0dea513">MISC</a>
 <ul>
-<li><a href="#orgea3db4d">file:MISC/ (Old Misc)</a></li>
-<li><a href="#orgbff604e">Point Count Problem</a></li>
+<li><a href="#orgf4c01ab">file:MISC/ (Old Misc)</a></li>
+<li><a href="#org1e0566f">Point Count Problem</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge6ca8a0" class="outline-2">
-<h2 id="orge6ca8a0">Archive of Notes</h2>
-<div class="outline-text-2" id="text-orge6ca8a0">
+<div id="outline-container-org04f75bb" class="outline-2">
+<h2 id="org04f75bb">Archive of Notes</h2>
+<div class="outline-text-2" id="text-org04f75bb">
 </div>
-<div id="outline-container-orgb47a05c" class="outline-3">
-<h3 id="orgb47a05c">As An Archive of My Notes</h3>
-<div class="outline-text-3" id="text-orgb47a05c">
+<div id="outline-container-orgb8d63f8" class="outline-3">
+<h3 id="orgb8d63f8">As An Archive of My Notes</h3>
+<div class="outline-text-3" id="text-orgb8d63f8">
 <p>
 This repository hosts many of my notes that came from the books or the papers that I have read.
 It is mainly focus on classifying the techniques came from the books and papers.
 </p>
 </div>
 </div>
-<div id="outline-container-org8db14d9" class="outline-3">
-<h3 id="org8db14d9">A Good Way to Find Out What Is Worth to Be Read</h3>
-<div class="outline-text-3" id="text-org8db14d9">
+<div id="outline-container-org975ef2e" class="outline-3">
+<h3 id="org975ef2e">A Good Way to Find Out What Is Worth to Be Read</h3>
+<div class="outline-text-3" id="text-org975ef2e">
 <p>
 In this repository, I list the topics (and related papers) that I am interested in. 
 So, it is easy to find a paper to read when I feel boring.
@@ -326,17 +315,17 @@ Anyway, it is worth to be openminded.
 </div>
 </div>
 
-<div id="outline-container-org32868f8" class="outline-2">
-<h2 id="org32868f8">Sampling</h2>
-<div class="outline-text-2" id="text-org32868f8">
+<div id="outline-container-org4b56a64" class="outline-2">
+<h2 id="org4b56a64">Sampling</h2>
+<div class="outline-text-2" id="text-org4b56a64">
 </div>
-<div id="outline-container-org2f2d108" class="outline-3">
-<h3 id="org2f2d108">Recent Tech</h3>
-<div class="outline-text-3" id="text-org2f2d108">
+<div id="outline-container-org93086d8" class="outline-3">
+<h3 id="org93086d8">Recent Tech</h3>
+<div class="outline-text-3" id="text-org93086d8">
 </div>
-<div id="outline-container-org28ce408" class="outline-4">
-<h4 id="org28ce408">Rapid Mixing On Matroid Bases&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localToGlobal">localToGlobal</span></span></h4>
-<div class="outline-text-4" id="text-org28ce408">
+<div id="outline-container-orge689419" class="outline-4">
+<h4 id="orge689419">Rapid Mixing On Matroid Bases&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localToGlobal">localToGlobal</span></span></h4>
+<div class="outline-text-4" id="text-orge689419">
 <ul class="org-ul">
 <li>High dimential expander</li>
 <li>local-to-global argument</li>
@@ -345,13 +334,13 @@ Anyway, it is worth to be openminded.
 </div>
 </div>
 </div>
-<div id="outline-container-org01026c0" class="outline-3">
-<h3 id="org01026c0">Tech from Book</h3>
-<div class="outline-text-3" id="text-org01026c0">
+<div id="outline-container-orgde56a36" class="outline-3">
+<h3 id="orgde56a36">Tech from Book</h3>
+<div class="outline-text-3" id="text-orgde56a36">
 </div>
-<div id="outline-container-org88afe06" class="outline-4">
-<h4 id="org88afe06">Inner Product and Self-Adjoint Operator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="linearAlgebra">linearAlgebra</span>&#xa0;<span class="functionalAnalysis">functionalAnalysis</span></span></h4>
-<div class="outline-text-4" id="text-org88afe06">
+<div id="outline-container-org21cfbc9" class="outline-4">
+<h4 id="org21cfbc9">Inner Product and Self-Adjoint Operator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="linearAlgebra">linearAlgebra</span>&#xa0;<span class="functionalAnalysis">functionalAnalysis</span></span></h4>
+<div class="outline-text-4" id="text-org21cfbc9">
 <p>
 For reversible Markov chain, we could use spectrum decomposition to analysis its second largest eigenvalue. Here is a breif introduction about how to use technique.
 </p>
@@ -362,9 +351,9 @@ For reversible Markov chain, we could use spectrum decomposition to analysis its
 </div>
 </div>
 
-<div id="outline-container-org826d9c5" class="outline-4">
-<h4 id="org826d9c5">Eigenvalues and Mixing Time&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span></span></h4>
-<div class="outline-text-4" id="text-org826d9c5">
+<div id="outline-container-org6532728" class="outline-4">
+<h4 id="org6532728">Eigenvalues and Mixing Time&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span></span></h4>
+<div class="outline-text-4" id="text-org6532728">
 <p>
 For reversible Markov chain, give an upper bound for its mixing time is sometimes equivalent to give an upper bound for its second largest eigenvalue. Here are some slids of mine that is focusing on this topic.
 </p>
@@ -373,9 +362,9 @@ For reversible Markov chain, give an upper bound for its mixing time is sometime
 </ul>
 </div>
 </div>
-<div id="outline-container-org5535dee" class="outline-4">
-<h4 id="org5535dee">Continuous Time Markov Chain (CTMC)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CTMC">CTMC</span></span></h4>
-<div class="outline-text-4" id="text-org5535dee">
+<div id="outline-container-org85d30f4" class="outline-4">
+<h4 id="org85d30f4">Continuous Time Markov Chain (CTMC)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CTMC">CTMC</span></span></h4>
+<div class="outline-text-4" id="text-org85d30f4">
 <ul class="org-ul">
 <li><a href="Small%20Topics/CTMC(countinuous-time-MC)/note.pdf">construction of countinuous time Markov chain</a></li>
 </ul>
@@ -387,9 +376,9 @@ The advantage of CTMC is that the spectral gap or log-sobolev constant of it is 
 </ul>
 </div>
 </div>
-<div id="outline-container-org4d47ec2" class="outline-4">
-<h4 id="org4d47ec2">Estimate \(\mathbb{E}[f]\) Using Markov Chain&#xa0;&#xa0;&#xa0;<span class="tag"><span class="simulate">simulate</span></span></h4>
-<div class="outline-text-4" id="text-org4d47ec2">
+<div id="outline-container-org92adee8" class="outline-4">
+<h4 id="org92adee8">Estimate \(\mathbb{E}[f]\) Using Markov Chain&#xa0;&#xa0;&#xa0;<span class="tag"><span class="simulate">simulate</span></span></h4>
+<div class="outline-text-4" id="text-org92adee8">
 <ul class="org-ul">
 <li><a href="Small%20Topics/sample-averages-for-reversible-markov-chain/note.pdf">Sample Averages for Reversible Markov Chains</a></li>
 </ul>
@@ -407,9 +396,9 @@ so that we could have concentraton bound such as Chebyshev inequality.
 </div>
 </div>
 </div>
-<div id="outline-container-org205e573" class="outline-3">
-<h3 id="org205e573">Jerrum Book</h3>
-<div class="outline-text-3" id="text-org205e573">
+<div id="outline-container-org4eb2bac" class="outline-3">
+<h3 id="org4eb2bac">Jerrum Book</h3>
+<div class="outline-text-3" id="text-org4eb2bac">
 <p>
 You could access the full contents of Jerrum Book at <a href="http://www.maths.qmul.ac.uk/~mj/pubs.html">here</a>.
 The full name of this book is "Counting, sampling and integrating: algorithms and complexity"
@@ -426,9 +415,9 @@ The full name of this book is "Counting, sampling and integrating: algorithms an
 <li>Chapter 9 [ <a href="Jerrum%20Book/chapter9/exercise/exercise%20%5BC9%5D.pdf">exercise</a> ]</li>
 </ul>
 </div>
-<div id="outline-container-orgabf1d49" class="outline-4">
-<h4 id="orgabf1d49">notebook for Jerrum Book</h4>
-<div class="outline-text-4" id="text-orgabf1d49">
+<div id="outline-container-orgea58ace" class="outline-4">
+<h4 id="orgea58ace">notebook for Jerrum Book</h4>
+<div class="outline-text-4" id="text-orgea58ace">
 <p>
 Here is a note book for the topics appeared in Jerrum Book.
 </p>
@@ -439,13 +428,13 @@ Here is a note book for the topics appeared in Jerrum Book.
 </div>
 </div>
 </div>
-<div id="outline-container-org29f01c1" class="outline-2">
-<h2 id="org29f01c1">Reading List</h2>
-<div class="outline-text-2" id="text-org29f01c1">
+<div id="outline-container-orgcd5729e" class="outline-2">
+<h2 id="orgcd5729e">Reading List</h2>
+<div class="outline-text-2" id="text-orgcd5729e">
 </div>
-<div id="outline-container-org467a4b0" class="outline-3">
-<h3 id="org467a4b0">Coupling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cencering">cencering</span></span></h3>
-<div class="outline-text-3" id="text-org467a4b0">
+<div id="outline-container-org0abfd87" class="outline-3">
+<h3 id="org0abfd87">Coupling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="cencering">cencering</span></span></h3>
+<div class="outline-text-3" id="text-org0abfd87">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> <a href="https://arxiv.org/abs/1112.0603">Can extra updates delay mixing?</a>
 <ul class="org-ul">
@@ -458,9 +447,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-org28f82ca" class="outline-3">
-<h3 id="org28f82ca">Perfect Sampling (LLL/conditional gibbs)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="localLemma">localLemma</span></span></h3>
-<div class="outline-text-3" id="text-org28f82ca">
+<div id="outline-container-org3f6c07d" class="outline-3">
+<h3 id="org3f6c07d">Perfect Sampling (LLL/conditional gibbs)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="localLemma">localLemma</span></span></h3>
+<div class="outline-text-3" id="text-org3f6c07d">
 <ul class="org-ul">
 <li class="on"><code>[X]</code> <a href="https://arxiv.org/abs/0903.0544">A constructive proof of the general Lovasz Local Lemma</a> [sequential ver] [parallel ver] <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-09-19 Sat&gt;</span></span>
 <ul class="org-ul">
@@ -481,9 +470,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-org667bee5" class="outline-3">
-<h3 id="org667bee5">Perfect Sampling (CFTP + Bounding Chains)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CFTP">CFTP</span>&#xa0;<span class="boundingChains">boundingChains</span></span></h3>
-<div class="outline-text-3" id="text-org667bee5">
+<div id="outline-container-org797f28d" class="outline-3">
+<h3 id="org797f28d">Perfect Sampling (CFTP + Bounding Chains)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CFTP">CFTP</span>&#xa0;<span class="boundingChains">boundingChains</span></span></h3>
+<div class="outline-text-3" id="text-org797f28d">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> <a href="https://arxiv.org/abs/math/0405284">Perfect Sampling Using Bounding Chains</a>
 <ul class="org-ul">
@@ -496,9 +485,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb0a91b7" class="outline-3">
-<h3 id="orgb0a91b7">Dynamic Sampling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="filterMethod">filterMethod</span></span></h3>
-<div class="outline-text-3" id="text-orgb0a91b7">
+<div id="outline-container-orgc69d214" class="outline-3">
+<h3 id="orgc69d214">Dynamic Sampling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="partialRejectionSampling">partialRejectionSampling</span>&#xa0;<span class="filterMethod">filterMethod</span></span></h3>
+<div class="outline-text-3" id="text-orgc69d214">
 <ul class="org-ul">
 <li class="on"><code>[X]</code> <a href="https://arxiv.org/abs/1807.06481">Dynamic Sampling from Graphical Models</a>
 <ul class="org-ul">
@@ -515,9 +504,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-orge774e4a" class="outline-3">
-<h3 id="orge774e4a">Local-to-Global Argument&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span>&#xa0;<span class="localToGlobal">localToGlobal</span></span></h3>
-<div class="outline-text-3" id="text-orge774e4a">
+<div id="outline-container-orgdd9d27e" class="outline-3">
+<h3 id="orgdd9d27e">Local-to-Global Argument&#xa0;&#xa0;&#xa0;<span class="tag"><span class="spectralGap">spectralGap</span>&#xa0;<span class="localToGlobal">localToGlobal</span></span></h3>
+<div class="outline-text-3" id="text-orgdd9d27e">
 <ul class="org-ul">
 <li class="on"><code>[X]</code> <a href="https://arxiv.org/abs/1811.01816">Log-Concave Polynomials II: High-Dimensional Walks and an FPRAS for Counting Bases of a Matroid</a>
 <ul class="org-ul">
@@ -562,9 +551,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-orge8529ba" class="outline-3">
-<h3 id="orge8529ba">2-spin Systems&#xa0;&#xa0;&#xa0;<span class="tag"><span class="uniqueness">uniqueness</span>&#xa0;<span class="potentialMethod">potentialMethod</span></span></h3>
-<div class="outline-text-3" id="text-orge8529ba">
+<div id="outline-container-orgf712ff9" class="outline-3">
+<h3 id="orgf712ff9">2-spin Systems&#xa0;&#xa0;&#xa0;<span class="tag"><span class="uniqueness">uniqueness</span>&#xa0;<span class="potentialMethod">potentialMethod</span></span></h3>
+<div class="outline-text-3" id="text-orgf712ff9">
 <ul class="org-ul">
 <li class="on"><code>[X]</code> <a href="https://web.stanford.edu/~montanar/TEACHING/Stat375/papers/weitz2.pdf">Counting Independent Sets up to the Tree Threshold</a>
 <ul class="org-ul">
@@ -577,9 +566,9 @@ Here is a note book for the topics appeared in Jerrum Book.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf58359b" class="outline-3">
-<h3 id="orgf58359b">Sampling By Local Lemma&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localLemma">localLemma</span>&#xa0;<span class="connectiveBarrier">connectiveBarrier</span></span></h3>
-<div class="outline-text-3" id="text-orgf58359b">
+<div id="outline-container-org2f5ac20" class="outline-3">
+<h3 id="org2f5ac20">Sampling By Local Lemma&#xa0;&#xa0;&#xa0;<span class="tag"><span class="localLemma">localLemma</span>&#xa0;<span class="connectiveBarrier">connectiveBarrier</span></span></h3>
+<div class="outline-text-3" id="text-org2f5ac20">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> <a href="https://arxiv.org/abs/1610.04317">Approximate Counting, the Lovasz Local Lemma and Inference in Graphical Models</a>
 <ul class="org-ul">
@@ -597,22 +586,22 @@ Here is a note book for the topics appeared in Jerrum Book.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb892575" class="outline-2">
-<h2 id="orgb892575">MISC</h2>
-<div class="outline-text-2" id="text-orgb892575">
+<div id="outline-container-org0dea513" class="outline-2">
+<h2 id="org0dea513">MISC</h2>
+<div class="outline-text-2" id="text-org0dea513">
 </div>
-<div id="outline-container-orgea3db4d" class="outline-3">
-<h3 id="orgea3db4d"><a href="MISC/">MISC/</a> (Old Misc)</h3>
+<div id="outline-container-orgf4c01ab" class="outline-3">
+<h3 id="orgf4c01ab"><a href="MISC/">MISC/</a> (Old Misc)</h3>
 </div>
-<div id="outline-container-orgbff604e" class="outline-3">
-<h3 id="orgbff604e"><a href="Small%20Topics/point-count-problem/point-count-problem.pdf">Point Count Problem</a></h3>
+<div id="outline-container-org1e0566f" class="outline-3">
+<h3 id="org1e0566f"><a href="Small%20Topics/point-count-problem/point-count-problem.pdf">Point Count Problem</a></h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: 陈小羽</p>
-<p class="date">Created: 2020-10-11 Sun 23:18</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2021-04-29 Thu 20:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
