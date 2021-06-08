@@ -1,0 +1,411 @@
+\documentclass[11pt]{amsart}
+\usepackage[foot]{amsaddr}
+\usepackage{ifxetex}
+\ifxetex
+\usepackage[no-math]{fontspec}
+\else
+\fi
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+% \usepackage{cleveref}
+% \usepackage{geometry}
+% \usepackage{microtype}
+% \usepackage{charter}
+\usepackage[lining,semibold,type1]{libertine} % a bit lighter than Times--no osf in math
+\usepackage[T1]{fontenc} % best for Western European languages
+\usepackage{textcomp} % required to get special symbols
+\usepackage[varqu,varl]{inconsolata}% a typewriter font must be defined
+\usepackage[libertine,vvarbb]{newtxmath}
+\usepackage[scr=rsfso]{mathalfa}
+\usepackage{bm}
+
+\usepackage{listings}
+\lstset{
+  frame=tb,
+  language=Mathematica,
+  % aboveskip=3mm,
+  % belowskip=3mm,
+  % showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{hyperref, color}
+\hypersetup{colorlinks=true,citecolor=blue, linkcolor=blue, urlcolor=blue}
+\usepackage[linesnumbered,boxed,ruled,vlined]{algorithm2e}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage[numbers]{natbib}
+\usepackage{xcolor}
+\usepackage{enumerate} 
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{cleveref}
+\usepackage{mathrsfs}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\renewcommand\arraystretch{1.5}  
+\usepackage{makecell}
+
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+
+\newcommand{\Sat}{\#\textsc{Sat}}
+\newcommand{\activeset}{\mathcal{A}}
+\newcommand{\LLM}{\emph{ll-Metropolis}}
+\newcommand{\DTV}[2]{d_{\mathrm{TV}}\left({#1},{#2}\right)}
+% \newcommand{\E}[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand{\dist}{\mathrm{dist}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ID}{\mathsf{ID}}
+\newcommand{\rbit}{\mathsf{Rbit}}
+\newcommand{\fix}{\mathsf{Fix}}
+\newcommand{\nothit}{\mathsf{Nhit}}
+\newcommand{\vtx}{\mathsf{vtx}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\grow}{\mathsf{Expand}}
+% \newcommand{\MR}{\mathfrak{M}_{\mathsf{Re}}}
+\newcommand{\Expand}{\mathsf{Expand}}
+\newcommand{\MExp}{\MC{M}_{\mathsf{Exp}}}
+\newcommand{\Lin}{\mathrm{Lin}}
+\newcommand{\Vcol}{V_{\mathrm{set}}}
+\newcommand{\ecol}{e_{\mathrm{set}}}
+\newcommand{\pup}{p_{\mathrm{up}}}
+\newcommand{\plow}{p_{\mathrm{low}}}
+\newcommand{\Xid}{X_{\mathsf{idl}}}
+\newcommand{\Yid}{Y_{\mathsf{idl}}}
+\newcommand{\Yalg}{Y_{\mathsf{alg}}}
+\newcommand{\Xalg}{X_{\mathsf{alg}}}
+
+\newcommand{\coin}{\mathsf{coin}}
+\newcommand{\SLOCAL}{\textsf{SLOCAL}}
+\newcommand{\LOCAL}{\textsf{LOCAL}}
+\newcommand{\pre}{\mathsf{pre}}
+\newcommand{\alg}[1]{\hat{#1}}
+\newcommand{\oracle}{T}
+\newcommand{\vbl}[1]{\mathsf{vbl}\left(#1\right)}
+\newcommand{\Index}[2]{{#1}_{#2}}
+\newcommand{\trtable}[1]{M_{#1}}
+\newcommand{\bijection}[2]{#1 \sim #2}
+\newcommand{\dpc}{\mathcal{S}}
+\newcommand{\pfailed}{p_{\mathsf{failed}}}
+
+\newcommand{\mgn}[1]{\tilde{{#1}}}
+\newcommand{\MC}[1]{\mathfrak{{#1}}}
+\newcommand{\sample}{\textnormal{\textsf{Sample}}}
+\newcommand{\GeneralResample}{\textsf{General-Resample}}
+\newcommand{\GenResample}{\textsf{GenResample}}
+\newcommand{\LRes}{\mathsf{Res}}
+\newcommand{\GRes}{\mathsf{GR}}
+\newcommand{\MLRes}{\MC{M}_{\mathsf{Res}}}
+\newcommand{\HLRes}{H}
+\newcommand{\HHC}{H_{\mathsf{HC}}}
+% \newcommand{\Mark}{\mathcal{M}}
+\newcommand{\XP}{X_{\mathrm{P}}}
+\newcommand{\YP}{Y_{\mathrm{P}}}
+\newcommand{\edge}{\mathcal{E}}
+\newcommand{\sampleideal}{\mathsf{Sample\_Ideal}}
+\newcommand{\Tmix}{\left\lceil 2n \log \frac{4n}{\epsilon} \right\rceil}
+
+\newcommand{\tmix}{T_{\textsf{mix}}}
+\newcommand{\Glauber}{P_{\textsf{Glauber}}}
+\newcommand{\Xvtx}{X^{\textsf{vtx}}}
+\newcommand{\Xcol}{X^{\textsf{val}}}
+\newcommand{\Yvtx}{Y^{\textsf{vtx}}}
+\newcommand{\Ycol}{Y^{\textsf{val}}}
+% \renewcommand{\todo}[1]{\typeout{TODO: \the\inputlineno: #1}\textbf{{\color{red}[[[ #1 ]]]}}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{claim*}{Claim}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{Condition}{Condition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem{assumption}{Assumption}
+\newcommand{\evnt}[1]{\mathsf{evnt}\left(#1\right)}
+\newcommand{\toolarge}{dk\log\frac{n}{\delta}}
+\newcommand{\repeattime}{\left\lceil\left( \frac{n}{\delta} \right)^{\frac{\eta}{10}} \log \frac{n}{\delta} \right\rceil }
+\newcommand{\Rejection}{\textsf{RejectionSampling}}
+
+\def\Pr{\mathop{\mathbf{Pr}}\nolimits}
+
+%% Chihao's Macros %%
+
+% \DeclareRobustCommand\nobreakspace{\leavevmode\nobreak\ }
+
+% \usepackage{showkeys}
+
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\set}[1]{\left{#1\right}}
+\newcommand{\tuple}[1]{\left(#1\right)} \newcommand{\eps}{\varepsilon}
+\newcommand{\inner}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\tp}{\tuple}
+% \renewcommand{\mid}{\;\middle\vert\;}
+\newcommand{\cmid}{\,:\,}
+\newcommand{\pin}{\mathsf{Pin}}
+\newcommand{\numP}{\#\mathbf{P}} \renewcommand{\P}{\mathbf{P}}
+\newcommand{\defeq}{\triangleq}
+\renewcommand{\d}{\,\-d}
+\newcommand{\ol}{\overline}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\ctp}[1]{\left\lceil#1\right\rceil}
+\newcommand{\ftp}[1]{\left\lfloor#1\right\rfloor}
+
+
+
+\def\*#1{\boldsymbol{#1}} % Use \*A for \mathbf{A}
+\def\+#1{\mathcal{#1}} % Use \+A for \mathcal{A}
+\def\-#1{\mathrm{#1}} % Use \-A for \mathrm{A}
+\def\^#1{\mathscr{#1}} % Use \^A for \mathscr{A}
+
+
+\usepackage{todonotes}
+\newcommand{\ctodo}[1]{\todo[color=green]{\textbf{Chihao:}#1}}
+\newcommand{\wtodo}[1]{\todo[color=green]{\textbf{Weiming:}#1}}
+\newcommand{\ytodo}[1]{\todo[color=yellow]{\textbf{Yitong:}#1}}
+\newcommand{\xytodo}[1]{\todo[color=yellow]{\textbf{Xiaoyu:}#1}}
+\usepackage{xifthen}
+
+\renewcommand{\Pr}[2][]{ \ifthenelse{\isempty{#1}}
+  {\mathbf{Pr}\left[#2\right]} {\mathbf{Pr}_{#1}\left[#2\right]} } % Use \Pr[a]{b} for \mathbf{Pr}_a[b], \Pr{b} for  \mathbf{Pr}[b]
+\newcommand{\E}[2][]{ \ifthenelse{\isempty{#1}}
+  {\mathbf{\mathbb{E}}\left[#2\right]}
+  {\mathbf{\mathbb{E}}_{#1}\left[#2\right]} }
+\newcommand{\Var}[2][]{ \ifthenelse{\isempty{#1}}
+  {\mathbf{\mathbf{Var}}\left[#2\right]}
+  {\mathbf{\mathbf{Var}}_{#1}\left[#2\right]} }
+
+%% End of Chihao's Macros %%
+
+\newcommand{\one}[1]{\textbf{1}\left[#1\right]}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Pnew}{P_{\mathrm{lazy}}}
+\newcommand{\newgap}{\gamma_{\mathrm{new}}}
+
+% \def\Rd{\mathsf{Trans}}
+\newcommand{\Rd}{\mathsf{Trans}}
+% \def\relaxT#1{t_{\mathrm{rel}}(#1)}
+\newcommand{\relaxT}[2][]{
+  \ifthenelse{\isempty{#2}}
+  {t_{\mathrm{rel}}^{\mathrm{#1}}}
+  {t_{\mathrm{rel}}^{\mathrm{#1}}(#2)}
+}
+
+% \usepackage{tikzit}
+% \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+% \input{hardcore.tikzstyles}
+% \usepackage{tcolorbox}
+
+\title{Stein's method for Markov chain}
+\author{Xiaoyu Chen}
+\date{}
+
+\renewcommand{\dist}[3]{d_{#1}\left(#2, #3\right)}
+
+\begin{document}
+\maketitle
+\section{The motivation}
+Recall the \emph{total variation distance} between two distribution $\mu, \nu$ on the same support $\Omega$ is defined as
+\[\DTV{\mu}{\nu} \triangleq \sup_{S \subseteq \Omega} \abs{\mu(S) - \nu(S)}.\]
+Now, consider a nature generalization of $\DTV{\cdot}{\cdot}$.
+Let $\+H$ be a family of functions in $\Omega \to \mathbb{R}$, then define
+\[\dist{\+H}{\mu}{\nu} \triangleq \sup_{f \in \+H}\abs{\E[\mu]{f} - \E[\nu]{f}}.\]
+To see why $\DTV{\cdot}{\cdot}$ is a generalization of $\dist{\+H}{\cdot}{\cdot}$, let $\+H = \{\*1_S \mid S\subseteq \Omega\}$, where if $x \in S$, then $\*1_S(x) = 1$; otherwise $\*1_S(x) = 0$.
+Then, $\E[\mu]{\*1_S} = \mu(S), \E[\nu]{\*1_S} = \nu(S)$, and in this case $\DTV{\cdot}{\cdot} = \dist{\+H}{\cdot}{\cdot}$.
+
+\begin{proposition}
+  When $\+H \not= \emptyset$, there are some properties of $\dist{\+H}{\cdot}{\cdot}$:
+  \begin{itemize}
+  \item $\dist{\+H}{\mu}{\nu} \geq 0$;
+  \item $\dist{\+H}{\mu}{\nu} = \dist{\+H}{\nu}{\mu}$;
+  \item $\dist{\+H}{\mu}{\nu} \leq \dist{\+H}{\mu}{\pi} + \dist{\+H}{\pi}{\nu}$.
+  \end{itemize}
+  So, when $\+H$ is ``non-trivial'' such that it always holds that $\dist{\+H}{\mu}{\nu} = 0$ iff $\mu = \nu$, we could conclude that $\dist{\+H}{\cdot}{\cdot}$ is a \textbf{metric} between distributions with support $\Omega$.
+\end{proposition}
+
+In Markov chain mixing time community, there are some metrics that are of special interests.
+\begin{itemize}
+\item when $\+H = \{\*1_S \mid S \subseteq \Omega\}$, $\dist{\+H}{\cdot}{\cdot}$ is the total variation distance;
+\item when $\+H$ is the family of all the $1$-Lipschitz functions with respect to a metric $d(\cdot, \cdot)$ over $\Omega$ (i.e. $\abs{f(x) - f(y)} \leq d(x, y)$ for all $x, y \in \Omega$), then $\dist{\+H}{\cdot}{\cdot}$ is the \emph{$1$-Wasserstein distance} w.r.t. $d(\cdot, \cdot)$;
+\end{itemize}
+
+\begin{remark}
+  People even interested in the quantity $\abs{\E[\mu]{f} - \E[\nu]{f}}$ directly.
+  Consider a $q$-spin system with Gibbs distribution $\pi$, where $\Omega$ be the set of all the feasible configurations.
+  Let $\Lambda \subset V$, $\sigma_\Lambda \in \Omega(\pi_\Lambda)$, and $v \in V \setminus \Lambda$.
+  Then, for $c_0, c_1 \in [q]$, let $\mu = \pi^{\sigma_\Lambda, x \gets c_0}, \nu = \pi^{\sigma_\Lambda, x \gets c_1}$, and let $\+H = \{\*1_{[v, c]} | v \in V, c \in [q]\}$, where for any $v \in V$ and $c \in [q]$, $\*1_{[v, c]} (\sigma)$ evaluates $1$ when $\sigma_v = c$; and $0$ otherwise.
+  Then, it holds that
+  \[ \abs{\E[\mu]{\*1_{[v, c]}} - \E[\nu]{\*1_{[v,c]}}} = \abs{\pi^{\sigma_\Lambda, x \gets c_0}_v(c) - \pi^{\sigma_\Lambda, x \gets c_1}_v(c)}, \]
+  which is crutial when proving the spectral independence.
+\end{remark}
+
+\clearpage
+\section{Stein's framework}
+Stein's method is a framework for upper bounding the quantity $\abs{\E[\mu]{f} - \E[\nu]{f}}$.
+
+First, we need to find the Stein operator $\+A: \mathbb{R}^\Omega \to \mathbb{R}^{\Omega}$, such that given any function $f: \Omega \to \mathbb{R}$ there is a function $h = h(f)$, that satisfy the \emph{Stein equation}:
+\begin{align} \label{eq:stein}
+  \+Ah &= f - \E[\mu]{f}.
+\end{align}
+Then, we have $\E[\nu]{\+Ah} = \E[\nu]{f} - \E[\mu]{f}$ and as a special case $\E[\mu]{\+Af} = \E[\mu]{f} - \E[\mu]{f} = 0$.
+It is easy to note that $\abs{\E[\nu]{\+Ah}}$ could be used as an upper bound of $\abs{\E[\nu]{f} - \E[\mu]{f}}$.
+In practice, people often use
+\begin{align} \label{eq:characterizing-operator}
+  \E[\mu]{\+Af} &= 0,
+\end{align}
+as a guidance for choosing $\+A$.
+These kind of operator are often refered as \emph{characterizing operator}.
+
+It is quite amazing that using such a ``trivial'' method, sometimes people could obtain bounds that could not be established using any other method.
+
+\clearpage
+\section{Application: Markov chain and spectral independence}
+Let $P_\mu$ and $P_\nu$ denote Markov chains with stationary $\mu$ and $\nu$, respectively.
+In this case people often choose the Laplacian matrix
+\[\+A = I - P_\mu\]
+to be the Stein operator.
+Currently, the Stein equation is also called the \emph{Possion equation}:
+\begin{align} \label{eq:possion}
+  h - P_\mu h = f - \E[\mu]{f}.
+\end{align}
+Possion equation has a \emph{canonical solution} $h = h(f)$ defined as:
+\begin{align} \label{eq:possion-eq-solution-1}
+  h(f) &= \sum_{t = 0}^\infty \left( P^t_\mu f - \E[\mu]{f} \right),
+\end{align}
+where $\E[\mu]{f}$ could be interpreted as $\E[\mu]{f} \cdot \mathbb{1}$.
+
+On the one hand, it is easy to verify that \eqref{eq:possion-eq-solution-1} is a solution of possion equation since,
+\begin{align*}
+  h - P_\mu h
+  &= \sum_{t = 0}^\infty \left( P^t_\mu f - \E[\mu]{f} \right) - P_\mu \cdot \sum_{t = 0}^\infty \left( P^t_\mu f - \E[\mu]{f} \right) \\
+  &= \sum_{t = 0}^\infty \left( P^t_\mu f - \E[\mu]{f} \right) - \sum_{t = 1}^\infty \left( P^t_\mu f - \E[\mu]{f} \right) \\
+  &= f - \E[\mu]{f}.
+\end{align*}
+
+On the other hand, for any $x \in \Omega$, $h(x)$ could be written explicitly as
+\begin{align} \label{eq:possion-eq-solution-2}
+  h(x) &= \sum_{t = 0}^\infty \E{f(X_t) - \E[\mu]{f} \mid X_0 = x},
+\end{align}
+where $(X_t)_{t \geq 0}$ is the Markov chain represented by $P_\mu$.
+
+Take expectation at both side of the Possion equation \eqref{eq:possion}, we have
+\begin{align*}
+  \E[\nu]{(P_\nu - P_\mu)h} &= \E[\nu]{f} - \E[\mu]{f}.
+\end{align*}
+Given $x \in \Omega$, we have
+\begin{align*}
+  (P_\nu - P_\mu)h(x)
+  &= \sum_{y \in \Omega}(P_\nu(x, y) - P_\mu(x, y))h(y) \\
+  &= \sum_{y \not= x}(P_\nu(x, y) - P_\mu(x, y))h(y) + (P_v(x, x) - P_\mu(x,x))h(x) \\
+  &= \sum_{y \not= x}(P_\nu(x, y) - P_\mu(x, y))(h(y) - h(x)).
+\end{align*}
+Recall \eqref{eq:possion-eq-solution-2}, it holds that
+\begin{align*}
+  h(y) - h(x) &= \sum_{t = 0}^\infty \E{f(X_t) - f(Y_t) \left|\; \substack{X_0 = x \\ Y_0 = y}\right.},
+\end{align*}
+where $(X_t)_{t\geq 0}$ and $(Y_t)_{t\geq 0}$ are Markov chains generated according to $P_\mu$.
+
+So, it holds that
+\begin{align*}
+  (P_\nu - P_\mu)h(x)
+  &= \sum_{y \not= x}(P_\nu(x, y) - P_\mu(x, y)) \cdot \sum_{t = 0}^\infty \E{f(X_t) - f(Y_t) \left|\; \substack{X_0 = x \\ Y_0 = y}\right.} \\
+  \E[\nu]{(P_\nu - P_\mu)h(x)} &= \E[x\sim\nu]{\sum_{y \not= x}(P_\nu(x, y) - P_\mu(x, y)) \cdot \sum_{t = 0}^\infty \E{f(X_t) - f(Y_t) \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}} \\
+  &= \E[\nu]{f} - \E[\mu]{f}.
+\end{align*}
+Take the absolute value at both side, it holds that
+\begin{align*}
+  \abs{\E[\nu]{f} - \E[\mu]{f}}
+  &\leq \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\abs{f(X_t) - f(Y_t)} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}}.
+\end{align*}
+
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+
+\noindent \textbf{Case (1)}: If $f$ is $1$-Lipschitz, then
+\begin{align*}
+  \abs{\E[\nu]{f} - \E[\mu]{f}}
+  &\leq \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\dist{H}{X_t}{Y_t} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}},
+\end{align*}
+where $\dist{H}{\cdot}{\cdot}$ is the hamming distance over $\Omega$.
+
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+
+\noindent \textbf{Case (2)}: If $x \in \Omega$ is a $0/1$-vector of size $n$.
+For $i \in [n]$, let $\*f_i(x) \triangleq \*1[x_i = 1]$, then, as a special case,
+\begin{align*}
+  \sum_{i=1}^n \abs{\E[\nu]{f_i} - \E[\mu]{f_i}}
+  &\leq \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\sum_{i=1}^n \abs{f_i(x) - f_i(y)} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}} \\
+  &= \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\dist{H}{X_t}{Y_t} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}}.
+\end{align*}
+And we could conclude that
+\begin{align} \label{eq:SI}
+  \sum_{i=1}^n \abs{\nu_i(1) - \mu_i(1)} &\leq \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\dist{H}{X_t}{Y_t} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}}.
+\end{align}
+Note that when $\nu = \pi^{\sigma_\Lambda, x \gets 0}, \mu = \pi^{\sigma_\Lambda, x \gets 1}$, then \eqref{eq:SI} gives an upper bound of the total influence.
+
+This argument also support weighted total influence and weighted hamming distance.
+
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+
+If we further assume that:
+\begin{enumerate}
+\item $P_\nu$ and $P_\mu$ are \emph{$L$-local} ($\forall x \in \Omega$ and $y \in \mathrm{supp}(P(x, \cdot))$, it holds that $\dist{H}{x}{y} \leq L_x$);
+\item $P_\mu$ has a \emph{$\alpha$-contractive} coupling: $\forall x, y \in \Omega$, there is a joint distribution $\+C(P(x, \cdot), P(y, \cdot))$ that
+  \[\E[(X, Y) \sim \+C]{\dist{H}{X}{Y}} \leq \alpha \cdot \dist{H}{x}{y}.\]
+  (Note that, the step-wise decay coupling could be replaced by a weaker condition by assuming 
+  \[\sum_{t = 0}^\infty \E{\dist{H}{X_t}{Y_t} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.} \leq \frac{\dist{H}{x}{y}}{1 - \alpha}, \quad \forall x, y \in \Omega,\]
+  directly.)
+\end{enumerate}
+Then, it holds that
+\begin{align*}
+  \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)} \cdot \sum_{t = 0}^\infty \E{\dist{H}{X_t}{Y_t} \left|\; \substack{X_0 = x \\ Y_0 = y}\right.}}
+  &\leq \frac{\E[x\sim\nu]{L_x}}{1 - \alpha} \cdot \E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)}}.
+\end{align*}
+Finally, we note that in practice,
+\[\E[x\sim\nu]{\sum_{y \not= x}\abs{P_\nu(x, y) - P_\mu(x, y)}},\]
+usually could be bounded by brute force calculation.
+
+This method is used by \cite{blanca2021mixing, liu2021coupling} to establish spectral independence of proper $q$-coloring when $q \geq (\frac{11}{6} - \varepsilon)\Delta$.
+
+\clearpage
+\section{Application: others}
+Other applications of Stein's method could be found on \cite{ross2011}.
+
+\clearpage
+\bibliography{note}
+\bibliographystyle{alpha}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
