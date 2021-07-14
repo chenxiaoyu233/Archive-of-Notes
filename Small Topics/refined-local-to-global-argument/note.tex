@@ -30,6 +30,7 @@
 \newtheorem{define}{Definition}[section]
 \newtheorem{fact}{Fact}[section]
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}{Remark}[section]
 \DeclareMathOperator*{\E}{\mathbb{E}}
 
 % \Op{#1}{#2} --expand--> [#1 <--> #2]
@@ -45,7 +46,7 @@
 
 \begin{document}
 \maketitle
-\section{The Operators}
+\section{Basic Notations}
 
 \begin{define}
   Ground set $[n]$.
@@ -98,6 +99,23 @@
   \item$\mathbb{R}^{X_\ell \times X_k}, k < \ell$, $\Op{\pi_\ell}{\pi_k}(\beta, \alpha) \triangleq \frac{1}{\binom{\ell}{k}}\mathbb{1}[\beta\supset\alpha]$
   \end{itemize}
 \end{define}
+
+\begin{fact}
+  For any $k \not= \ell$, it holds that $\Op{\pi_k}{\pi_\ell}$ and $\Op{\pi_\ell}{\pi_k}$ are adjoint operators w.r.t. distribution $\pi_k$ and $\pi_\ell$, that is for all $\alpha \in X_k, \beta \in X_\ell$, it holds that
+  \[\pi_k(\alpha) \Op{\pi_k}{\pi_\ell}(\alpha, \beta) = \pi_\ell(\beta)\Op{\pi_\ell}{\pi_k}(\beta,\alpha),\]
+  and thus, it holds that
+  \[\pi_k \Op{\pi_k}{\pi_\ell} = \pi_\ell \quad \text{and} \quad \pi_\ell \Op{\pi_\ell}{\pi_k} = \pi_k.\]
+\end{fact}
+\begin{remark}
+  When $k < \ell$, $\pi_k(\alpha) \Op{\pi_k}{\pi_\ell}(\alpha, \beta) = \pi_\ell(\beta)\Op{\pi_\ell}{\pi_k}(\beta,\alpha)$, 
+  also implies 
+  \begin{align*}
+    \pi_k(\alpha) \pi^{\alpha}_{\ell-k}(\beta\setminus \alpha)
+    &= \pi_k(\alpha) \Op{\pi_k}{\pi_\ell}(\alpha, \beta) \\
+    &= \pi_\ell(\beta)\Op{\pi_\ell}{\pi_k}(\beta,\alpha)
+    = \pi_\ell(\beta) \cdot \frac{1}{\binom{\ell}{k}}.
+  \end{align*}
+\end{remark}
 
 \begin{fact}
   For $k < \ell$, we have
@@ -172,7 +190,7 @@
   $J_\pi f \triangleq f^{\mathbf{1}} = \<f, \mathbf{1}\>_\pi \cdot \mathbf{1}$. It turns out that $J_\pi = \mathbf{1}\pi^T$. \textcolor{blue}{Note that $f = f^{\mathbf{1}} + f^{\perp \mathbf{1}}$.}
 \end{define}
 
-\section{Reimplement \cite{alev2020improved}}
+\section{Variance Decay (Reimplement \cite{alev2020improved})}
 
 See \href{run:../rapid-mixing-on-matroid-basis/note.pdf}{Notes for level-by-level-decay approach}.
 
